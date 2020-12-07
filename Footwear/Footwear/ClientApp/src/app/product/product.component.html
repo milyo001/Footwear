@@ -1,0 +1,49 @@
+<p *ngIf="!products"><em>Loading...</em></p>
+
+<nav class="product-filter">
+  <h1>All products</h1>
+  <div class="sort">
+    <div class="collection-sort">
+      <label>Filter by:</label>
+      <select>
+        <option value="/">All</option>
+        <option value="/">For man</option>
+        <option value="/">For woman</option>
+        <option value="/">For children</option>
+      </select>
+    </div>
+
+    <div class="collection-sort">
+      <label>Sort by:</label>
+      <select (change)="sortingChangeHandler($event)">
+        <option value="default">Default</option>
+        <option value="ascending">Alphabetically, A-Z</option>
+        <option value="descending">Alphabetically, Z-A</option>
+        <option value="descendingPrice">Price, high to low</option>
+        <option value="ascendingPrice">Price, low to high</option>
+      </select>
+    </div>
+  </div>
+</nav>
+<section class="products" *ngIf="products">
+  <div class="product-card" *ngFor="let product of products | paginate:{itemsPerPage: 6, currentPage:pageIndex}" [routerLink]="['/products/', product.id]">
+    <div class="product-image">
+      <img src="{{product.imageUrl}}">
+    </div>
+    <div class="product-info">
+      <h5>{{ product.name }}</h5>
+      <h6>{{ product.price}} $</h6>
+      <h6>{{ product.details }}</h6>
+    </div>
+  </div>
+  <div id="pagination">
+    <pagination-controls (pageChange)="pageIndex = $event"
+                         previousLabel=""
+                         nextLabel=""></pagination-controls>
+  </div>
+</section>
+
+
+
+
+

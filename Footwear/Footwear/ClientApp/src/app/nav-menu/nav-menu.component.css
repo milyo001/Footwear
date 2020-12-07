@@ -1,0 +1,38 @@
+
+@font-face {
+  font-family: Merriweather;
+  src: url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Oswald:wght@200;700&family=Roboto+Condensed:ital,wght@1,700&family=Roboto+Mono:wght@700&family=Roboto+Slab:wght@700&family=Roboto:wght@400;500;900&family=Skranji:wght@700&family=UnifrakturCook:wght@700&display=swap");
+}
+
+header {
+    font-family: Merriweather;
+    font-size: 20px;
+}
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+    background-color: #2c343c;
+  }
+}
+.navbar {
+  background-color: rgb(204, 229, 255) !important;
+
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+.nav-link  {
+    color: black !important;
+}
+
