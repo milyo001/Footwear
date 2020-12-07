@@ -15,19 +15,24 @@
             <h3 class="product-title">{{selectedProduct.name}}</h3>
             <p class="product-description">{{selectedProduct.details}}</p>
             <h4 class="price">Price: <span>{{selectedProduct.price | currency}}</span></h4>
-            <h5 class="sizes">
-              sizes:
-              <span class="size" data-toggle="tooltip" title="small">s</span>
-              <span class="size" data-toggle="tooltip" title="medium">m</span>
-              <span class="size" data-toggle="tooltip" title="large">l</span>
-              <span class="size" data-toggle="tooltip" title="xtra large">xl</span>
-            </h5>
-            <h5 class="colors">
-              colors:
-              <span class="color orange not-available" data-toggle="tooltip" title="Not In store"></span>
-              <span class="color green"></span>
-              <span class="color blue"></span>
-            </h5>
+            <div class="btn-group">
+              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Select size
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">36</button>
+                <button class="dropdown-item" type="button">37</button>
+                <button class="dropdown-item" type="button">38</button>
+                <button class="dropdown-item" type="button">39</button>
+                <button class="dropdown-item" type="button">40</button>
+                <button class="dropdown-item" type="button">41</button>
+                <button class="dropdown-item" type="button">42</button>
+                <button class="dropdown-item" type="button">43</button>
+                <button class="dropdown-item" type="button">44</button>
+                <button class="dropdown-item" type="button">45</button>
+                <button class="dropdown-item" type="button">46</button>
+              </div>
+            </div>
             <div class="action">
               <button class="add-to-cart btn btn-default" (click)="addToCart(selectedProduct)">Add to cart</button>
             </div>

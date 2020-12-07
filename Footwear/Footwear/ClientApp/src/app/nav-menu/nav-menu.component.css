@@ -4,6 +4,10 @@
   src: url("https://fonts.googleapis.com/css2?family=Merriweather:wght@900&family=Oswald:wght@200;700&family=Roboto+Condensed:ital,wght@1,700&family=Roboto+Mono:wght@700&family=Roboto+Slab:wght@700&family=Roboto:wght@400;500;900&family=Skranji:wght@700&family=UnifrakturCook:wght@700&display=swap");
 }
 
+.active {
+    color: green;
+}
+
 header {
     font-family: Merriweather;
     font-size: 20px;
