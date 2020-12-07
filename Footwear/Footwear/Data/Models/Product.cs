@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Data.Models
 {
+    using Footwear.Data.Models.Enums;
     using System;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
@@ -23,6 +24,12 @@
 
         public ProductImage ProductImage { get; set; }
 
-        public int Size { get; set; }
+        public int? Size { get; set; }
+
+        //Used to filter results by type
+        public Gender Gender { get; set; }
+
+        //Used to filter results by product type
+        public ProductType ProductType { get; set; }
     }
 }
