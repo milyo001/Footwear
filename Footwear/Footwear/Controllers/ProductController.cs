@@ -28,12 +28,15 @@
                 Name = p.Name,
                 Price = p.Price,
                 Details = p.Details,
-                ImageUrl = p.ProductImage.ImageUrl
+                ImageUrl = p.ProductImage.ImageUrl,
+                Gender = p.Gender.ToString(),
+                ProductType = p.ProductType.ToString()
             })
                .ToArray();
 
             return products;
         }
+
 
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(int id)
