@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ProductService } from '../services/product.service';
+import { ProductService } from '../../services/product.service';
 import { ActivatedRoute } from '@angular/router';
-import { IProduct } from '../interfaces';
-import { CartService } from '../services/cart.service';
+import { IProduct } from '../../interfaces/product';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-select',

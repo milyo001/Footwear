@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { ProductService } from '../services/product.service';
-import { IProduct } from '../interfaces/product';
-import { SortingOptions } from './sortingOptions';
+import { ProductService } from '../../services/product.service';
+import { IProduct } from '../../interfaces/product';
+import { SortingOptions } from '../sortingOptions';
 
 @Component({
   selector: 'app-product-data',
