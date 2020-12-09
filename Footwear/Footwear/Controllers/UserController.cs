@@ -26,6 +26,7 @@
         }
 
         [HttpPost]
+        [Route("register")]
         public async Task<Object> RegisterUser(UserViewModel model)
         {
             var user = new User()
