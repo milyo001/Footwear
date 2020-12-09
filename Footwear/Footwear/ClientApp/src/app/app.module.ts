@@ -16,6 +16,8 @@ import { ProductSelectComponent } from './product/product-select/product-select.
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { UserService } from './services/user.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import { RegisterComponent } from './user/register/register.component';
     ProductSelectComponent,
     CartComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,
@@ -40,14 +43,14 @@ import { RegisterComponent } from './user/register/register.component';
       { path: 'products/:id', component: ProductSelectComponent }, //Product Details
       { path: 'about', component: AboutComponent },
       { path: 'cart', component: CartComponent },
-      { path: 'login', component: LoginComponent },
-      { path: 'register', component: RegisterComponent }
+      { path: 'user/login', component: LoginComponent },
+      { path: 'user/register', component: RegisterComponent }
     ]),
     BrowserAnimationsModule,
     NgbModule,
     NgxPaginationModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

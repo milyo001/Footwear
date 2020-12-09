@@ -8,6 +8,7 @@ namespace Footwear
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Footwear.Data;
+    using Footwear.Data.Models;
 
     public class Startup
     {
@@ -42,9 +43,17 @@ namespace Footwear
                                   });
             });
 
-            //Connection strings located in appsettings.json
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDefaultIdentity<User>(options => {
+                options.Password.RequiredLength = 6;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +77,7 @@ namespace Footwear
                 app.UseSpaStaticFiles();
             }
 
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

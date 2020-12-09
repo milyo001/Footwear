@@ -9,7 +9,7 @@
         <input formControlName="lastName" type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="Last Name">
         <input formControlName="phone" type="text" id="phone" class="fadeIn third" name="phone" placeholder="Phone Number">
         <input formControlName="address" type="text" id="address" class="fadeIn third" name="address" placeholder="Address">
-        <input type="submit" class="fadeIn fourth" value="Create An Account">
+        <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Create An Account">
 
         <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.required">* Email is required!</div>
         <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.email">* Email is invalid!</div>

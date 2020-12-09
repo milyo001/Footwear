@@ -2,23 +2,22 @@
 
 namespace Footwear.Migrations
 {
-    public partial class AddPasswordPropertyToUserModel : Migration
+    public partial class RemovePasswordFromUserModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.DropColumn(
                 name: "Password",
-                table: "Users",
-                type: "nvarchar(max)",
-                nullable: false,
-                defaultValue: "");
+                table: "AspNetUsers");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            migrationBuilder.AddColumn<string>(
                 name: "Password",
-                table: "Users");
+                table: "AspNetUsers",
+                type: "nvarchar(max)",
+                nullable: true);
         }
     }
 }

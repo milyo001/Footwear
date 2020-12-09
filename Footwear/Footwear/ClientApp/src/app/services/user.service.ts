@@ -25,7 +25,7 @@ export class UserService {
   }
 
   login(data: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/users/login`, data, { withCredentials: true }).pipe(
+    return this.http.post(`${this.baseUrl}/user/login`, data, { withCredentials: true }).pipe(
       tap((user: IUser) => this.currentUser = user)
     );
   }
