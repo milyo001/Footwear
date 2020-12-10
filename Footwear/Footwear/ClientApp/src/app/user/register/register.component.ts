@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +11,8 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
-    
 
-  constructor(private fb: FormBuilder, public userService: UserService) {
+  constructor(private fb: FormBuilder, public userService: UserService, private toastr: ToastrService) {
 
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(100)], []],
@@ -25,15 +25,46 @@ export class RegisterComponent implements OnInit {
       phone: ['', [Validators.required, Validators.maxLength(20)], []],
       address: ['', [Validators.required, Validators.maxLength(100)], []]
     });
-  };
+  }
 
   ngOnInit(): void {
-  }
+    this.form.reset();
+    }
+;
 
+  onSubmit(formData) {
+    
+    this.userService.register(formData).subscribe(
+      (response: any) => {
+        if (response.succeeded) {
+          this.form.reset();
+          this.toastr.success("New user created!", 'Registration successful.');
+        }
+        else {
+          response.errors.forEach(element => {
+            switch (element.code) {
+              case 'DuplicateUserName':
+                this.toastr.error('Username already taken!', 'Registration failed.');
+              break;  
+              default:
+                this.toastr.error(element.description, 'Registration failed.');
+              break;
+            }
+          })
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+  }
+  
   registerHandler() {
-
+    
   }
 
+  //Validate the two password input fields
   confirmPasswords(group: FormGroup) {
     let confirmPassword = group.get('confirmPassword');
 

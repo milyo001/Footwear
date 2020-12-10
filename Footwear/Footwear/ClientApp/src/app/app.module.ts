@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -47,8 +48,10 @@ import { UserService } from './services/user.service';
       { path: 'user/register', component: RegisterComponent }
     ]),
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     NgbModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    
   ],
   providers: [UserService],
   bootstrap: [AppComponent]
