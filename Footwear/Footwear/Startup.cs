@@ -103,9 +103,11 @@ namespace Footwear
             {
                 app.UseSpaStaticFiles();
             }
+            
+            app.UseRouting();
 
             app.UseAuthentication();
-            app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
