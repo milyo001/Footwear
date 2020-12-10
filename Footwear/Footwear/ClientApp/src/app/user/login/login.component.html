@@ -1,15 +1,15 @@
 <div class="wrapper fadeInDown">
   
   <div id="formContent">
-    <form #f="ngForm" (ngSubmit)="loginHandler(f.value)">
+    <form #form="ngForm" (ngSubmit)="loginHandler(form.value)">
       <h2>Login</h2>
       <input #emailInput="ngModel" type="text" id="email" class="fadeIn second" name="email" placeholder="Email" ngModel required email>
+          <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.required">* Email is required!</div>
+          <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.email">* Email is invalid!</div>
       <input #passwordInput="ngModel" type="password" id="password" class="fadeIn third" name="login" placeholder="Password" ngModel required minlength="6">
-      <input [disabled]="f.invalid" type="submit" class="fadeIn fourth" value="Log In">
-      <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.required">* Email is required!</div>
-      <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.email">* Email is invalid!</div>
-      <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.required">* Password is required!</div>
-      <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">* Password cannot be less than 6 symbols!</div>
+          <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.required">* Password is required!</div>
+          <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">* Password cannot be less than 6 symbols!</div>
+      <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Log In">
     </form>
   </div>
 </div>

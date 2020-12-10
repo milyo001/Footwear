@@ -7,6 +7,11 @@
     using Footwear.Data.Dto;
     using System.Threading.Tasks;
     using System;
+    using Microsoft.IdentityModel.Tokens;
+    using System.Security.Claims;
+    using System.Text;
+    using System.IdentityModel.Tokens.Jwt;
+    using Microsoft.Extensions.Options;
 
     [ApiController]
     [Route("[controller]")]
@@ -16,18 +21,20 @@
 
         private UserManager<User> _userManager;
         private SignInManager<User> _signInManager;
+        private readonly ApplicationSettings _appSettings;
 
 
-        public UserController(ApplicationDbContext db, UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserController(ApplicationDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, IOptions<ApplicationSettings> appSettings)
         {
             this._db = db;
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._appSettings = appSettings.Value;
         }
 
         [HttpPost]
         [Route("register")]
-        public async Task<Object> RegisterUser(UserViewModel model)
+        public async Task<Object> RegisterUser(RegisterViewModel model)
         {
             var user = new User()
             {
@@ -36,7 +43,7 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Phone = model.Phone,
-                Address = model.Address,
+                Address = model.Address
             };
 
             try
@@ -50,6 +57,35 @@
             }
         }
 
+        [HttpPost]
+        [Route("login")]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            var user = await _userManager.FindByNameAsync(model.Email);
+            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            {
+                var tokenDescriptor = new SecurityTokenDescriptor
+                {
+                    Subject = new ClaimsIdentity(new Claim[]
+                    {
+                        new Claim("UserId", user.Id.ToString())
+                    }),
+                    Expires = DateTime.UtcNow.AddMinutes(1), 
+
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(this._appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                };
+
+                var tokenHandler = new JwtSecurityTokenHandler();
+                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                var token = tokenHandler.WriteToken(securityToken);
+                return Ok(new { token });
+            }
+            else
+            {
+                return BadRequest(new { message = "Username or password is incorrect." });
+            }
+        }
 
        
     

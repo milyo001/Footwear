@@ -4,7 +4,7 @@ namespace Footwear.Data.Dto
     using Footwear.Data.Models;
     using System.Collections.Generic;
 
-    public class UserViewModel
+    public class RegisterViewModel
     {
         public int Id { get; set; }
 

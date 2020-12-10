@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  isLoading = false;
-
   constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
@@ -18,16 +16,5 @@ export class LoginComponent implements OnInit {
 
   loginHandler(formValue: { email: string, password: string }) {
 
-    this.isLoading = true;
-
-    //this.userService.login(formValue).subscribe({
-    //  next: (data) => {
-    //    this.isLoading = false;
-    //    this.router.navigate(['/']);
-    //  },
-    //  error: (err) => {
-    //    this.isLoading = false;
-    //  }
-    //});
   }
 }
