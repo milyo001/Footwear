@@ -20,14 +20,14 @@ export class LoginComponent implements OnInit {
 
     this.isLoading = true;
 
-    this.userService.login(formValue).subscribe({
-      next: (data) => {
-        this.isLoading = false;
-        this.router.navigate(['/']);
-      },
-      error: (err) => {
-        this.isLoading = false;
-      }
-    });
+    //this.userService.login(formValue).subscribe({
+    //  next: (data) => {
+    //    this.isLoading = false;
+    //    this.router.navigate(['/']);
+    //  },
+    //  error: (err) => {
+    //    this.isLoading = false;
+    //  }
+    //});
   }
 }

@@ -25,7 +25,7 @@
     </div>
   </div>
 </nav>
-<section class="products" *ngIf="products">
+<section class="products" *ngIf="products?.length">
   <div class="product-card" *ngFor="let product of products | paginate:{itemsPerPage: 6, currentPage:pageIndex}" [routerLink]="['/products/', product.id]">
     <div class="product-image">
       <img src="{{product.imageUrl}}">
@@ -42,6 +42,7 @@
                          nextLabel=""></pagination-controls>
   </div>
 </section>
+<div *ngIf="!products?.length">Sorry, no products found!</div>
 
 
 

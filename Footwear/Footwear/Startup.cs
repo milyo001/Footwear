@@ -9,6 +9,7 @@ namespace Footwear
     using Microsoft.Extensions.Hosting;
     using Footwear.Data;
     using Footwear.Data.Models;
+    using Microsoft.AspNetCore.Identity;
 
     public class Startup
     {
@@ -45,14 +46,17 @@ namespace Footwear
 
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<User>(options => {
+            services.AddDefaultIdentity<User>()
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequiredLength = 6;
                 options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireDigit = false;
-            })
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            });
 
         }
 
