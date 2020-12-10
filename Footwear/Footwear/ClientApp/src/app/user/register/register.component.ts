@@ -45,9 +45,11 @@ export class RegisterComponent implements OnInit {
             switch (element.code) {
               case 'DuplicateUserName':
                 this.toastr.error('Username already taken!', 'Registration failed.');
+                this.form.reset();
               break;  
               default:
                 this.toastr.error(element.description, 'Registration failed.');
+                this.form.reset();
               break;
             }
           })
@@ -59,12 +61,8 @@ export class RegisterComponent implements OnInit {
     );
 
   }
-  
-  registerHandler() {
-    
-  }
 
-  //Validate the two password input fields
+  //Validate the two password in the form input fields
   confirmPasswords(group: FormGroup) {
     let confirmPassword = group.get('confirmPassword');
 

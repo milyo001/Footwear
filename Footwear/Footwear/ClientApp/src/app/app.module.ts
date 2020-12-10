@@ -48,7 +48,10 @@ import { UserService } from './services/user.service';
       { path: 'user/register', component: RegisterComponent }
     ]),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      progressBar: true,
+      positionClass: 'toast-top-center'
+    }),
     NgbModule,
     NgxPaginationModule,
     
