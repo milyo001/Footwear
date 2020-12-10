@@ -10,6 +10,7 @@ import { UserService } from '../../services/user.service';
 export class RegisterComponent implements OnInit {
 
   form: FormGroup;
+    
 
   constructor(private fb: FormBuilder, public userService: UserService) {
 
@@ -18,12 +19,12 @@ export class RegisterComponent implements OnInit {
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
         confirmPassword: ['', [Validators.required], []]
-      }),
+      }, { validator: this.confirmPasswords }),
       firstName: ['', [Validators.required, Validators.maxLength(100)], []],
       lastName: ['', [Validators.required, Validators.maxLength(100)], []],
       phone: ['', [Validators.required, Validators.maxLength(20)], []],
       address: ['', [Validators.required, Validators.maxLength(100)], []]
-    })
+    });
   };
 
   ngOnInit(): void {
@@ -33,5 +34,17 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  confirmPasswords(group: FormGroup) {
+    let confirmPassword = group.get('confirmPassword');
+
+    if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
+      if (group.get('password').value != confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true })
+      }
+      else {
+        confirmPassword.setErrors(null);
+      }
+    }
+  }
  
 }

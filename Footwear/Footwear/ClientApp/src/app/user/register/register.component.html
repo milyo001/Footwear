@@ -8,14 +8,15 @@
             <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.email">* Email is invalid!</div>
             <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.maxlength">* Email is too long!</div>
 
-        <div formGroupName="passwords">
-          <input formControlName="password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+            <div formGroupName="passwords">
+              <input formControlName="password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
               <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.required">* Password is required!</div>
               <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.minlength">* Password cannot be less than 6 symbols!</div>
               <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.maxlength">* Password cannot be more than 100 symbols!</div>
-          <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
+              <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
               <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.required">* Please confirm password!</div>
-        </div>
+              <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords don't match!</div>
+            </div>
 
         <input formControlName="firstName" type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="First Name">
             <div class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</div>
@@ -34,17 +35,6 @@
             <div class="validation-error" *ngIf="form.get('address').touched && form.get('address').errors?.maxlength">* Address cannot be more than 100 symbols</div>
 
         <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Create an Account">
-
-        <!--Validations-->
-
-
-
-
-
-
-
-
-
       </form>
     </div>
   </div>
