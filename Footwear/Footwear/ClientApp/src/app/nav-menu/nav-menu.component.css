@@ -6,7 +6,7 @@
 
 header {
     font-family: Merriweather;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 a.navbar-brand {
@@ -16,7 +16,7 @@ a.navbar-brand {
 }
 
 html {
-  font-size: 14px;
+  font-size: 16px;
 }
 @media (min-width: 768px) {
   html {
@@ -34,6 +34,10 @@ html {
 }
 .nav-link  {
     color: wheat !important;
+    cursor: pointer !important;
+}
+.nav-link:hover {
+  color: white !important;
 }
 .navbar-brand {
     color: wheat;
