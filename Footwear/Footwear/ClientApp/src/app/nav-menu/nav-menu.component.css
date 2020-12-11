@@ -28,15 +28,23 @@ html {
     background-color: #2c343c;
   }
 }
-.navbar {
+/*.navbar {
   background-color: rgb(204, 229, 255) !important;
 
-}
+}*/
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
 }
 .nav-link  {
-    color: black !important;
+    color: wheat !important;
+}
+.navbar-brand {
+    color: wheat;
 }
 
+.btn-danger {
+  border-radius: 10%;
+  padding: 10px;
+  margin: 5px;
+}

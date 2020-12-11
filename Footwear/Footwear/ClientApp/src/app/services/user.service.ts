@@ -22,8 +22,11 @@ export class UserService {
       Phone: formData.phone,
       Address: formData.address
     };
-    console.log(body);
     return this.http.post(this.baseUrl + 'user/register', body);
+  }
+
+  login(formData) {
+    return this.http.post(this.baseUrl + 'user/login', formData);
   }
   
 }

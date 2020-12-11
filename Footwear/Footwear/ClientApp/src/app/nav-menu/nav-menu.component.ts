@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { IProduct } from '../interfaces';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -10,8 +11,8 @@ import { IProduct } from '../interfaces';
 export class NavMenuComponent {
   isExpanded = false;
 
-  
-  constructor(private cartService: CartService) { }
+
+  constructor(private cartService: CartService, private router: Router) { }
 
   cartItems: IProduct[] = this.cartService.getItems();
 
@@ -21,5 +22,10 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  onLogout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/user/login']);
   }
 }

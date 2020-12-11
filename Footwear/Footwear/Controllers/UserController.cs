@@ -62,33 +62,30 @@
         public async Task<IActionResult> Login(LoginViewModel model)
         {
             var user = await _userManager.FindByNameAsync(model.Email);
-            if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
+            var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
+
+            if (user != null && passwordMatch)
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserId", user.Id.ToString())
+                        new Claim("UserId",user.Id.ToString())
                     }),
-                    Expires = DateTime.UtcNow.AddDays(7), 
-
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(
-                        Encoding.UTF8.GetBytes(this._appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    Expires = DateTime.UtcNow.AddDays(1),
+                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
-
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
                 return Ok(new { token });
             }
             else
-            {
                 return BadRequest(new { message = "Username or password is incorrect." });
-            }
         }
 
-       
-    
+
+
 
 
 
