@@ -46,7 +46,6 @@ export class NavMenuComponent implements OnInit{
     localStorage.removeItem('token');
     localStorage.setItem('userName', '');
     this.userService.userName = '';
-    this.userDetails = null;
     this.router.navigate(['/user/login']);
   }
 

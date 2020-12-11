@@ -20,7 +20,7 @@ export class AuthInterceptor implements HttpInterceptor {
         tap(
           succ => { },
           err => {
-            if (err.status == 401) {
+            if (err.status == 401) { //Send error if user is not logged in, check web api controller
               localStorage.removeItem('token');
               this.router.navigateByUrl('/user/login');
             }
