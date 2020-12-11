@@ -10,12 +10,14 @@ import { SortingOptions } from '../sortingOptions';
 })
 export class ProductComponent {
 
-  //All products array used for data transfer from the web API
+  //Array used for sorting and filtering all the products
   public products: IProduct[] = [];
 
+  //All products in their original state
+  public untouchedProducts: IProduct[] = [];
 
   //A declaration for the index for the ngx pagination package(used to render the first page of the list
-  //when one of the sorting methods are applied)
+  //when one of the sorting/filter methods are applied)
   public pageIndex: number; 
 
   constructor(private productService: ProductService, private sortingOptions: SortingOptions) {
@@ -25,7 +27,8 @@ export class ProductComponent {
 
   ngOnInit() {
     this.productService.getAllProducts().subscribe(productsList => {
-      this.products = productsList
+      this.products = productsList,
+      this.untouchedProducts = productsList
     });
 
     //The default number of pagination page is 1
@@ -33,12 +36,13 @@ export class ProductComponent {
   };
 
   //Sorting methods:
-  sortingChangeHandler(event: any): void {
+  sortingAdvanced(event: any): void {
 
     const target = event.target.value;
 
     if (target == "ascending") {
       this.products = this.sortingOptions.sortProductsAscending(this.products);
+      console.log(this.products);
     }
     else if (target == "descending") {
       this.products = this.sortingOptions.sortProductsDescending(this.products);
@@ -49,7 +53,27 @@ export class ProductComponent {
     else if (target == "descendingPrice") {
       this.products = this.sortingOptions.sortProductsByPriceDescending(this.products)
     }
-    //Once items are sorted the user will be redirected to the default(first) page
+    else {
+      this.products = [];
+      //Make a copy of the original array
+      this.products = this.untouchedProducts.filter(() => true);
+    }
+    this.pageIndex = 1;
+  }
+
+  //Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
+  filterProducts(event: any): void {
+    const dropdownValue = event.target.value;
+
+    if (dropdownValue === 'Default') {
+      this.products = [];
+      //Make a copy of the original array
+      this.products = this.untouchedProducts.filter(() => true);
+    }
+    else {
+      const result = this.untouchedProducts.filter(product => product.gender.includes(dropdownValue));
+      this.products = result;
+    }
     this.pageIndex = 1;
   }
 

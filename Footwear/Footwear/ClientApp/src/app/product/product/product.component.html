@@ -5,17 +5,17 @@
   <div class="sort">
     <div class="collection-sort">
       <label>Filter by:</label>
-      <select>
-        <option value="default">All</option>
-        <option value="man">For man</option>
-        <option value="woman">For woman</option>
-        <option value="children">For children</option>
+      <select (change)="filterProducts($event)">
+        <option value="Default">All</option>
+        <option value="Men">For men</option>
+        <option value="Woman">For woman</option>
+        <option value="Kids">For children</option>
       </select>
     </div>
 
     <div class="collection-sort">
       <label>Sort by:</label>
-      <select (change)="sortingChangeHandler($event)">
+      <select (change)="sortingAdvanced($event)">
         <option value="default">Default</option>
         <option value="ascending">Alphabetically, A-Z</option>
         <option value="descending">Alphabetically, Z-A</option>

@@ -61,4 +61,5 @@ export class SortingOptions {
     var sortedProducts: IProduct[] = products.sort((a, b) => a.id - b.id);
     return sortedProducts;
   }
+
 }
