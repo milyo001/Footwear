@@ -19,6 +19,7 @@ import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { UserService } from './services/user.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,7 @@ import { UserService } from './services/user.service';
       { path: 'products', component: ProductComponent }, //All products
       { path: 'products/:id', component: ProductSelectComponent }, //Product Details
       { path: 'about', component: AboutComponent },
-      { path: 'cart', component: CartComponent },
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
       { path: 'user/login', component: LoginComponent },
       { path: 'user/register', component: RegisterComponent }
     ]),
