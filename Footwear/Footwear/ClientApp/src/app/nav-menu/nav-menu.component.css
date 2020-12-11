@@ -46,5 +46,8 @@ html {
 
 .logout-link {
     color: firebrick !important;
-    cursor: pointer;
+    cursor: pointer !important;
+}
+.overline-link {
+  text-decoration: overline !important;
 }

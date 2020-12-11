@@ -22,6 +22,8 @@ export class NavMenuComponent implements OnInit{
     public userService: UserService) { }
 
   ngOnInit(): void {
+    this.userService.userName = this.userService.initUserName();
+
     this.userService.getUserProfile().subscribe(
       response => {
         this.userDetails = response;

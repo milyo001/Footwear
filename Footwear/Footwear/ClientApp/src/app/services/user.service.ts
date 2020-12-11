@@ -35,8 +35,12 @@ export class UserService {
   }
 
   getUserProfile() {
-    var tokenHeader = new HttpHeaders({ 'Authorization': 'Bearer ' + localStorage.getItem('token') })
-    return this.http.get(this.baseUrl + 'userprofile', { headers: tokenHeader });
+    return this.http.get(this.baseUrl + 'userprofile');
+  }
+
+  
+  initUserName(): string {
+    return this.userName = localStorage.getItem('userName');
   }
   
 }
