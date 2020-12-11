@@ -41,10 +41,10 @@ html {
 }
 .navbar-brand {
     color: wheat;
+    font-weight:600;
 }
 
-.btn-danger {
-  border-radius: 10%;
-  padding: 10px;
-  margin: 5px;
+.logout-link {
+    color: firebrick !important;
+    cursor: pointer;
 }

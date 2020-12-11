@@ -37,18 +37,22 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['/cart']">Cart</a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/register']">
               Register
             </a>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
+          <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/login']">
               Login
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link btn btn-danger my-2 my-sm-0" (click)="onLogout()">
+          <li *ngIf="isAuthenticated()" class="nav-item">
+            <a class="nav-link">
+              Welcome, {{ userService.userName  }}!
+            </a>
+          <li *ngIf="isAuthenticated()" class="nav-item">
+            <a  class="logout-link nav-link" (click)="onLogout()">
               Logout
             </a>
         </ul>
