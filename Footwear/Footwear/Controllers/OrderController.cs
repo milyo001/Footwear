@@ -30,22 +30,26 @@
             var order = new Order()
             {
                 Id = model.Id,
-                Name = model.Name,
+                Name = "Test",
                 OrderStatus = "Pending",
                 CreatedOn = model.CreatedOn,
-                Address = model.Address,
-                Products = null
+                Address = model.Address
             };
-            return null;
-            //try
-            //{
-            //    var result = await this._db.Orders.AddAsync(order);
-            //    return Ok(result);
-            //}
-            //catch (Exception ex)
-            //{
-            //    throw ex;
-            //}
+
+            foreach (var product in model.Products)
+            {
+
+            }
+
+            try
+            {
+                var result = await this._db.Orders.AddAsync(order);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
     }
