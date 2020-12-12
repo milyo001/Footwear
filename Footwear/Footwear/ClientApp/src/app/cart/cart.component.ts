@@ -21,8 +21,23 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartProducts = this.cartService.getItems();
-    this.totalAmount = this.cartService.getTotalAmount();
+    this.refreshData();
   }
 
+  deleteCartProduct(cartId) {
+    this.cartService.deleteCartProduct(this.cartProducts, cartId);
+    this.totalAmount = this.getTotalAmount();
+
+    //An item in the cart service is deleted so updating the information is mandatory
+    this.refreshData(); 
+  }
+
+  getTotalAmount(): number {
+    return this.cartService.getTotalAmount();
+  }
+
+  refreshData() {
+    this.cartProducts = this.cartService.getItems();
+    this.totalAmount = this.getTotalAmount();
+  }
 }

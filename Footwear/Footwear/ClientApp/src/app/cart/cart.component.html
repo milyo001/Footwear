@@ -7,7 +7,7 @@
 <div *ngIf="cartProducts?.length" class="container mb-4">
   <div class="row">
     <div class="col-12">
-      <div class="table-responsive">
+      <div class="table-responsive text-center">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -20,13 +20,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let product of cartProducts">
+            <tr *ngFor="let product of cartProducts" class="text-center">
               <td><img class="image-resize"src="{{product.imageUrl}}" /> </td>
               <td>{{product.name}}</td>
               <td>{{product.size}}</td>
               <td>{{product.details}}</td>
               <td>{{product.price | currency}}</td>
-              <td class="text-right"><button class="btn btn-sm btn-danger"><fa-icon [icon]="faTrashAlt"></fa-icon></button> </td>
+              <td><button class="btn btn-sm btn-danger" (click)="deleteCartProduct(product.cartId)"><fa-icon [icon]="faTrashAlt"></fa-icon></button> </td>
             </tr>
             <tr>
               <td></td>

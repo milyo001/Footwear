@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faMapMarkedAlt, faEnvelope, faPhoneSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-about',
@@ -7,6 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
+  //FontAwesomeIcons
+  faMapMarkedAlt = faMapMarkedAlt;
+  faEnvelope = faEnvelope;
+  faPhoneSquare = faPhoneSquare;
   constructor() { }
 
   ngOnInit() {
