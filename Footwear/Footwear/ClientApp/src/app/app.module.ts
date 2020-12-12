@@ -17,7 +17,6 @@ import { ProductSelectComponent } from './product/product-select/product-select.
 import { CartComponent } from './cart/cart.component';
 import { LoginComponent } from './user/login/login.component';
 import { RegisterComponent } from './user/register/register.component';
-import { LoaderComponent } from './shared/loader/loader.component';
 import { UserService } from './services/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor ';
@@ -34,7 +33,6 @@ import { FooterComponent } from './footer/footer.component';
     CartComponent,
     LoginComponent,
     RegisterComponent,
-    LoaderComponent,
     FooterComponent
   ],
   imports: [

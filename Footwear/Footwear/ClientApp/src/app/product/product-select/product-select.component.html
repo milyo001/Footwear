@@ -15,30 +15,32 @@
             <h3 class="product-title">{{selectedProduct.name}}</h3>
             <p class="product-description">{{selectedProduct.details}}</p>
             <h4 class="price">Price: <span>{{selectedProduct.price | currency}}</span></h4>
-            <div class="btn-group">
-              <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select size
-              </button>
-              <div class="dropdown-menu dropdown-menu-right">
-                <button class="dropdown-item" type="button">36</button>
-                <button class="dropdown-item" type="button">37</button>
-                <button class="dropdown-item" type="button">38</button>
-                <button class="dropdown-item" type="button">39</button>
-                <button class="dropdown-item" type="button">40</button>
-                <button class="dropdown-item" type="button">41</button>
-                <button class="dropdown-item" type="button">42</button>
-                <button class="dropdown-item" type="button">43</button>
-                <button class="dropdown-item" type="button">44</button>
-                <button class="dropdown-item" type="button">45</button>
-                <button class="dropdown-item" type="button">46</button>
+            <div class="size">
+              <label>Select size: </label>
+              <select (change)="sizeSelect($event)">
+                <option value="36">35</option>
+                <option value="36">36</option>
+                <option value="36">36</option>
+                <option value="37">37</option>
+                <option value="38">38</option>
+                <option value="39">39</option>
+                <option value="40">40</option>
+                <option value="41">41</option>
+                <option value="42">42</option>
+                <option value="43">43</option>
+                <option value="44">44</option>
+                <option value="44">45</option>
+                <option value="44">45</option>
+                <option value="44">46</option>
+                <option value="44">47</option>
+              </select>
+              <div class="action">
+                <button class="add-to-cart btn btn-default" (click)="addToCart(selectedProduct)">Add to cart</button>
               </div>
-            </div>
-            <div class="action">
-              <button class="add-to-cart btn btn-default" (click)="addToCart(selectedProduct)">Add to cart</button>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </body>

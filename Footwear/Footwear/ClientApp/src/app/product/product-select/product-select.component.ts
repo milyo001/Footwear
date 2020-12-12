@@ -1,8 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
+import { Local } from 'protractor/built/driverProviders';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-select',
@@ -14,10 +16,14 @@ export class ProductSelectComponent {
 
   public selectedProduct: IProduct = null;
 
+  public selectedSize: number;
+
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router,
+    private toastr: ToastrService
   ) { 
 
     let id: number = 0;
@@ -33,6 +39,20 @@ export class ProductSelectComponent {
   }
 
   addToCart(product): void {
-    this.cartService.addToCart(this.selectedProduct);
+    if (localStorage.getItem('token')) {
+      console.log(localStorage.getItem('token'));
+      this.selectedProduct.size = this.selectedSize;
+      this.cartService.addToCart(this.selectedProduct);
+      this.toastr.success('Product successfully added to cart.','Product added.')
+    } else {
+      this.toastr.error('You need to be signed in to add to cart.', 'Please login.');
+      this.router.navigate(['user/login']);
+    }
+
+    
+  }
+
+  sizeSelect(event: any) {
+    this.selectedSize = event.target.value;
   }
 }
