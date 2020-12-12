@@ -3,6 +3,9 @@ import { CartService } from '../services/cart.service';
 import { IProduct } from '../interfaces';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
+import {
+  faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
+  faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-nav-menu',
@@ -13,8 +16,14 @@ export class NavMenuComponent implements OnInit{
 
   isExpanded = false;
   userDetails;
-
   cartItems: IProduct[] = this.cartService.getItems();
+
+  //FontAwesomeIcons:
+  faShoppingCart = faShoppingCart;
+  faSignOutAlt = faSignOutAlt;
+  faSignInAlt = faSignInAlt;
+  faAddressCard = faAddressCard;
+  faDatabase = faDatabase;
 
   constructor(
     private cartService: CartService,

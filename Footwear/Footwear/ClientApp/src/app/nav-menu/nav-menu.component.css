@@ -1,7 +1,9 @@
 
-
+fa-icon{
+    margin-right: 4px;
+}
 .active {
-    color: green;
+  color: green;
 }
 
 header {

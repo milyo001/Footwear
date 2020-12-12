@@ -35,25 +35,25 @@
             <a class="nav-link" [routerLink]="['/about']">About</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/cart']">Cart</a>
+            <a class="nav-link" [routerLink]="['/cart']"><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</a>
           </li>
           <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/register']">
-              Register
+              <fa-icon [icon]="faAddressCard"></fa-icon>Register
             </a>
           </li>
           <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/login']">
-              Login
+              <fa-icon [icon]="faSignInAlt"></fa-icon>Login
             </a>
           </li>
           <li *ngIf="isAuthenticated()" class="nav-item">
             <a class="nav-link underline-link">
-              Welcome, {{ userService.userName  }}!
+              <fa-icon [icon]="faDatabase"></fa-icon>My Orders
             </a>
           <li *ngIf="isAuthenticated()" class="nav-item">
             <a  class="logout-link nav-link" (click)="onLogout()">
-              Logout
+              <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout 
             </a>
         </ul>
       </div>
