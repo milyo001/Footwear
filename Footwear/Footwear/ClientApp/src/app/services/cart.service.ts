@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
 import { IProduct } from '../interfaces';
+import { ICartProduct } from '../interfaces/cartProduct';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  items: IProduct[] = [];
+  items: ICartProduct[] = [];
+  itemStartIndex: number = 1;
 
   addToCart(product): void {
-    this.items.push(product);
+    const cartProduct: ICartProduct = {
+      id: product.id,
+      cartId: this.itemStartIndex, //used to remove the item
+      name: product.name,
+      size: product.size,
+      details: product.details,
+      imageUrl: product.imageUrl,
+      gender: product.gender,
+      productType: product.productType,
+      price: product.price
+    }
+
+    this.itemStartIndex++;
+    this.items.push(cartProduct);
   }
 
-  getItems(): IProduct[] {
+  getItems(): ICartProduct[] {
     return this.items;
   }
 
-  clearCart(): IProduct[] {
+  clearCart(): ICartProduct[] {
     this.items = [];
     return this.items;
   }
@@ -28,4 +43,7 @@ export class CartService {
     return sum;
   }
 
+  removeCartProduct(cartId) {
+
+  }
 }

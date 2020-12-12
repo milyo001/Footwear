@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { IProduct } from '../interfaces';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { ICartProduct } from '../interfaces/cartProduct';
 
 @Component({
   selector: 'app-cart',
@@ -10,7 +10,7 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 })
 export class CartComponent implements OnInit {
 
-  cartProducts: IProduct[];
+  cartProducts: ICartProduct[];
   totalAmount: number;
 
   //FontAwesome Icons:

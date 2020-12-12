@@ -40,7 +40,6 @@ export class ProductSelectComponent {
 
   addToCart(product): void {
     if (localStorage.getItem('token')) {
-      console.log(localStorage.getItem('token'));
       this.selectedProduct.size = this.selectedSize;
       this.cartService.addToCart(this.selectedProduct);
       this.toastr.success('Product successfully added to cart.','Product added.')
