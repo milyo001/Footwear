@@ -10,7 +10,8 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 })
 export class CartComponent implements OnInit {
 
-  products: IProduct[];
+  cartProducts: IProduct[];
+  totalAmount: number;
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
@@ -20,7 +21,8 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.products = this.cartService.getItems();
+    this.cartProducts = this.cartService.getItems();
+    this.totalAmount = this.cartService.getTotalAmount();
   }
 
 }

@@ -21,4 +21,11 @@ export class CartService {
     return this.items;
   }
 
+  getTotalAmount() {
+    const sum = this.items
+      .map(item => item.price)
+      .reduce((prev, curr) => prev + curr, 0);
+    return sum;
+  }
+
 }
