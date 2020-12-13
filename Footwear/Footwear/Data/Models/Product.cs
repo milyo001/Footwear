@@ -22,7 +22,7 @@
         [Required, ForeignKey(nameof(ProductImage))]
         public int ImageId { get; set; }
 
-        public ProductImage ProductImage { get; set; }
+        public ProductImage ProductImage { get; set; } = new ProductImage();
 
         public int? Size { get; set; }
 

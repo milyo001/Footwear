@@ -43,6 +43,10 @@ export class CartService {
     return sum;
   }
 
+  checkOut() {
+    this.items = [];
+  }
+
   deleteCartProduct(items: ICartProduct[], cartId: number): void {
     this.items = items.filter(product => product.cartId !== cartId);
   }

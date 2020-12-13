@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -17,7 +18,8 @@ export class CartComponent implements OnInit {
   faTrashAlt = faTrashAlt;
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -34,6 +36,13 @@ export class CartComponent implements OnInit {
 
   getTotalAmount(): number {
     return this.cartService.getTotalAmount();
+  }
+  onCheckOut(): void {
+    this.toastr.success('Successfully created an order', 'Await delivery!')
+    this.cartProducts = [];
+    this.totalAmount = 0;
+    this.cartService.checkOut();
+
   }
 
   refreshData() {

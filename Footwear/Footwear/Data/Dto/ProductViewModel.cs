@@ -15,5 +15,7 @@
         public string ProductType { get; set; }
 
         public string Gender { get; set; }
+
+        public string Size { get; set; }
     }
 }
