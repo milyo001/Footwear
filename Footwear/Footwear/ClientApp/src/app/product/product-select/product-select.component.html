@@ -16,27 +16,25 @@
             <p class="product-description">{{selectedProduct.details}}</p>
             <h4 class="price">Price: <span>{{selectedProduct.price | currency}}</span></h4>
             <div class="size">
-              <label>Select size: </label>
-              <select (change)="sizeSelect($event)">
-                <option value="36">35</option>
-                <option value="36">36</option>
-                <option value="36">36</option>
-                <option value="37">37</option>
-                <option value="38">38</option>
-                <option value="39">39</option>
-                <option value="40">40</option>
-                <option value="41">41</option>
-                <option value="42">42</option>
-                <option value="43">43</option>
-                <option value="44">44</option>
-                <option value="44">45</option>
-                <option value="44">45</option>
-                <option value="44">46</option>
-                <option value="44">47</option>
-              </select>
-              <div class="action">
-                <button class="add-to-cart btn btn-default" (click)="addToCart(selectedProduct)">Add to cart</button>
-              </div>
+                <label>Select size: </label>
+                <select (change)="sizeSelect($event)" required>
+                  <option value="36">36</option>
+                  <option value="37">37</option>
+                  <option value="38">38</option>
+                  <option value="39">39</option>
+                  <option value="40">40</option>
+                  <option value="41" selected>41</option>
+                  <option value="42">42</option>
+                  <option value="43">43</option>
+                  <option value="44">44</option>
+                  <option value="44">45</option>
+                  <option value="44">45</option>
+                  <option value="44">46</option>
+                  <option value="44">47</option>
+                </select>
+                <div class="action">
+                  <button class="add-to-cart btn btn-default" (click)="addToCart(selectedProduct)">Add to cart</button>
+                </div>
             </div>
           </div>
         </div>

@@ -23,7 +23,7 @@ import { UserService } from './services/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true,
-      positionClass: 'toast-top-center'
+      positionClass: 'toast-top-left'
     }),
     NgbModule,
     NgxPaginationModule,

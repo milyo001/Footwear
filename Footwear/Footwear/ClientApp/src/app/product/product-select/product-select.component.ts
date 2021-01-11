@@ -18,6 +18,8 @@ export class ProductSelectComponent {
 
   public selectedSize: number;
 
+  private defaultSize: number = 41;
+
   constructor(
     private productService: ProductService,
     private activatedRoute: ActivatedRoute,
@@ -36,6 +38,8 @@ export class ProductSelectComponent {
     productService.getProductById(id).subscribe(product => {
       this.selectedProduct = product;
     });
+    this.selectedSize = this.defaultSize;
+    
   }
 
   addToCart(product): void {
@@ -47,8 +51,6 @@ export class ProductSelectComponent {
       this.toastr.error('You need to be signed in to add to cart.', 'Please login.');
       this.router.navigate(['user/login']);
     }
-
-    
   }
 
   sizeSelect(event: any) {
