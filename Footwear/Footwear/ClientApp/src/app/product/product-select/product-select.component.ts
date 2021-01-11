@@ -13,12 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class ProductSelectComponent {
 
-
   public selectedProduct: IProduct = null;
-
-  public selectedSize: number;
-
-  private defaultSize: number = 41;
 
   constructor(
     private productService: ProductService,
@@ -38,22 +33,18 @@ export class ProductSelectComponent {
     productService.getProductById(id).subscribe(product => {
       this.selectedProduct = product;
     });
-    this.selectedSize = this.defaultSize;
     
   }
 
   addToCart(product): void {
     if (localStorage.getItem('token')) {
-      this.selectedProduct.size = this.selectedSize;
+      let size = document.getElementById('size').value;
+      this.selectedProduct.size = size;
       this.cartService.addToCart(this.selectedProduct);
-      this.toastr.success('Product successfully added to cart.','Product added.')
+      this.toastr.success('Product successfully added to cart.', 'Product added.')
     } else {
       this.toastr.error('You need to be signed in to add to cart.', 'Please login.');
       this.router.navigate(['user/login']);
     }
-  }
-
-  sizeSelect(event: any) {
-    this.selectedSize = event.target.value;
   }
 }
