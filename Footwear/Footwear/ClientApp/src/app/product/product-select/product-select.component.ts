@@ -3,7 +3,6 @@ import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
-import { Local } from 'protractor/built/driverProviders';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -38,7 +37,7 @@ export class ProductSelectComponent {
 
   addToCart(product): void {
     if (localStorage.getItem('token')) {
-      let size = document.getElementById('size').value;
+      let size: number = +((document.getElementById('size') as HTMLInputElement).value);
       this.selectedProduct.size = size;
       this.cartService.addToCart(this.selectedProduct);
       this.toastr.success('Product successfully added to cart.', 'Product added.')

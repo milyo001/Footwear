@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,7 +23,7 @@ import { UserService } from './services/user.service';
 import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -34,8 +34,6 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
     AboutComponent,
     ProductSelectComponent,
     CartComponent,
-    LoginComponent,
-    RegisterComponent,
     FooterComponent
   ],
   imports: [
@@ -60,7 +58,8 @@ import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
     NgxPaginationModule,
     FontAwesomeModule,
-    NgbModule
+    NgbModule,
+    UserModule
   ],
   providers: [UserService, {
     provide: HTTP_INTERCEPTORS,

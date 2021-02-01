@@ -26,7 +26,6 @@ export class LoginComponent implements OnInit {
       (response: any) => {
         localStorage.setItem('token', response.token);
         localStorage.setItem('userName', form.value.email);
-        console.log('UserName in local Storage: ' + form.value.email);
         this.router.navigateByUrl('/');
       },
       error => {
