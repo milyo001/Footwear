@@ -1,6 +1,5 @@
-/*------------------------------------*\
-    RESET
-\*------------------------------------*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
+
 /* https://meyerweb.com/eric/tools/css/reset/ 
     v2.0b1 | 201101 
     NOTE:WORK IN PROGRESS
@@ -68,11 +67,6 @@ table {
   border-spacing: 0;
 }
 
-/*------------------------------------*\
-    $MAIN
-\*------------------------------------*/
-
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,300,500);
 
 body {
   margin: 0 auto;

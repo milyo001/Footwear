@@ -5,7 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     public class User : IdentityUser
     {
-        
+
         [Required]
         public string FirstName { get; set; }
 
@@ -19,6 +19,8 @@
         public string Address { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
+
+        public Cart Cart {get; set;}
 
 
     }

@@ -28,7 +28,9 @@ export class CartService {
   }
 
   getItems(): ICartProduct[] {
-    return this.items;
+    let products = JSON.parse(localStorage.getItem('products'));
+
+    return products;
   }
 
   clearCart(): ICartProduct[] {

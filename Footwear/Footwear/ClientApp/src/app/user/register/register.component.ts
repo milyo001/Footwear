@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public userService: UserService, private toastr: ToastrService) {
+  constructor(private fb: FormBuilder, public userService: UserService, private toastr: ToastrService,
+    private router: Router) {
 
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(100)], []],
@@ -39,6 +41,7 @@ export class RegisterComponent implements OnInit {
         if (response.succeeded) {
           this.form.reset();
           this.toastr.success("New user created!", 'Registration successful.');
+          this.router.navigate(['/user/login']);
         }
         else {
           response.errors.forEach(element => {

@@ -21,7 +21,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let product of cartProducts" class="text-center">
-              <td><img class="image-resize"src="{{product.imageUrl}}" /> </td>
+              <td><img class="image-resize"src="{{product?.imageUrl}}" /> </td>
               <td>{{product.name}}</td>
               <td>{{product.size}}</td>
               <td>{{product.details}}</td>

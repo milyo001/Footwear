@@ -4,78 +4,22 @@ using Footwear.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210203103608_AddCarItemsToUser")]
+    partial class AddCarItemsToUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
-
-            modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cart");
-                });
-
-            modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ProductType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Size")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("CartProducts");
-                });
 
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
                 {
@@ -140,11 +84,16 @@ namespace Footwear.Migrations
                     b.Property<int?>("Size")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ImageId");
 
                     b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Products");
                 });
@@ -378,9 +327,6 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -393,24 +339,7 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CartId");
-
                     b.HasDiscriminator().HasValue("User");
-                });
-
-            modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
-                {
-                    b.HasOne("Footwear.Data.Models.Cart", null)
-                        .WithMany("CartProducts")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductImage");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
@@ -431,6 +360,10 @@ namespace Footwear.Migrations
                     b.HasOne("Footwear.Data.Models.Order", null)
                         .WithMany("Products")
                         .HasForeignKey("OrderId");
+
+                    b.HasOne("Footwear.Data.Models.User", null)
+                        .WithMany("CartItems")
+                        .HasForeignKey("UserId");
 
                     b.Navigation("ProductImage");
                 });
@@ -486,20 +419,6 @@ namespace Footwear.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Footwear.Data.Models.User", b =>
-                {
-                    b.HasOne("Footwear.Data.Models.Cart", "Cart")
-                        .WithMany()
-                        .HasForeignKey("CartId");
-
-                    b.Navigation("Cart");
-                });
-
-            modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
-                {
-                    b.Navigation("CartProducts");
-                });
-
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
                 {
                     b.Navigation("Products");
@@ -507,6 +426,8 @@ namespace Footwear.Migrations
 
             modelBuilder.Entity("Footwear.Data.Models.User", b =>
                 {
+                    b.Navigation("CartItems");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

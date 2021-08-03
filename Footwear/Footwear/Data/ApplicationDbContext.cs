@@ -10,7 +10,12 @@
 
         public DbSet<Product> Products { get; set; }
         public DbSet<Order> Orders { get; set; }
+
+        public DbSet<Cart> Cart { get; set; }
+
+        public DbSet<CartProduct> CartProducts { get; set; }
         public DbSet<User> Users { get; set; }
+
         public DbSet<ProductImage> ProductsImage { get; set; }
 
         public ApplicationDbContext(DbContextOptions options)

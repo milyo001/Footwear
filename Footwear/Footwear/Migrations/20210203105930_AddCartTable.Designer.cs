@@ -4,14 +4,16 @@ using Footwear.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210203105930_AddCartTable")]
+    partial class AddCartTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,52 +31,6 @@ namespace Footwear.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cart");
-                });
-
-            modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("CartId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Details")
-                        .IsRequired()
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
-
-                    b.Property<int>("ProductType")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Size")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ImageId");
-
-                    b.ToTable("CartProducts");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
@@ -113,6 +69,9 @@ namespace Footwear.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Details")
                         .IsRequired()
                         .HasMaxLength(500)
@@ -141,6 +100,8 @@ namespace Footwear.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CartId");
 
                     b.HasIndex("ImageId");
 
@@ -398,21 +359,6 @@ namespace Footwear.Migrations
                     b.HasDiscriminator().HasValue("User");
                 });
 
-            modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
-                {
-                    b.HasOne("Footwear.Data.Models.Cart", null)
-                        .WithMany("CartProducts")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ProductImage");
-                });
-
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
                 {
                     b.HasOne("Footwear.Data.Models.User", null)
@@ -422,6 +368,10 @@ namespace Footwear.Migrations
 
             modelBuilder.Entity("Footwear.Data.Models.Product", b =>
                 {
+                    b.HasOne("Footwear.Data.Models.Cart", null)
+                        .WithMany("CartProducts")
+                        .HasForeignKey("CartId");
+
                     b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
                         .WithMany()
                         .HasForeignKey("ImageId")
