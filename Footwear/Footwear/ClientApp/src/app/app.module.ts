@@ -56,7 +56,6 @@ import { UserModule } from './user/user.module';
     NgbModule,
     NgxPaginationModule,
     FontAwesomeModule,
-    NgbModule,
     UserModule
   ],
   providers: [UserService, {

@@ -34,5 +34,7 @@
 
         public int Quantity { get; set; }
 
+        public DateTime CreatedOn { get; set; }
+
     }
 }

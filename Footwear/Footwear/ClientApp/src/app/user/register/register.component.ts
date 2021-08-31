@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -40,7 +41,7 @@ export class RegisterComponent implements OnInit {
       (response: any) => {
         if (response.succeeded) {
           this.form.reset();
-          this.toastr.success("New user created!", 'Registration successful.');
+          this.toastr.success("Registration successful.", 'Please log in.');
           this.router.navigate(['/user/login']);
         }
         else {
