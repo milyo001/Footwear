@@ -45,12 +45,6 @@ export class ProductSelectComponent {
           if (response.succeeded) {
             this.toastr.success('Product successfully added to cart.', 'Product added.')
           }
-          else {
-            console.log(response.errors);
-            //response.errors.forEach(element => {
-            //  this.toastr.error('Server Error!', 'Contact Administator!')
-            //})
-          }
         },
         err => {
           console.log(err);

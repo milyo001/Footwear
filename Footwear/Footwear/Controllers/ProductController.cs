@@ -99,7 +99,6 @@
                 {
                     UserId = userId
                 };
-
                 await this._db.Cart.AddAsync(newCart);
                 await this._db.SaveChangesAsync();
             }
@@ -107,7 +106,7 @@
             cart.CartProducts.Add(cartProduct);
             await this._db.SaveChangesAsync();
                     
-            return Ok(null);
+            return Ok(new { succeeded = true });
         }
 
     }
