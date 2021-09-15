@@ -35,7 +35,7 @@ export class CartComponent implements OnInit {
   }
 
   getTotalAmount(): number {
-    return this.cartService.getTotalAmount();
+    return 0; /*this.cartService.getTotalAmount();*/
   }
   onCheckOut(): void {
     this.toastr.success('Successfully created an order', 'Await delivery!')

@@ -4,14 +4,16 @@ using Footwear.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210831104815_CartModelsInit")]
+    partial class CartModelsInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,14 +28,10 @@ namespace Footwear.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Cart");
                 });
@@ -59,8 +57,8 @@ namespace Footwear.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -81,6 +79,8 @@ namespace Footwear.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CartId");
+
+                    b.HasIndex("ImageId");
 
                     b.ToTable("CartProducts");
                 });
@@ -386,6 +386,9 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("CartId")
+                        .HasColumnType("int");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -398,16 +401,9 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasDiscriminator().HasValue("User");
-                });
+                    b.HasIndex("CartId");
 
-            modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
-                {
-                    b.HasOne("Footwear.Data.Models.User", null)
-                        .WithOne("Cart")
-                        .HasForeignKey("Footwear.Data.Models.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.HasDiscriminator().HasValue("User");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
@@ -415,6 +411,14 @@ namespace Footwear.Migrations
                     b.HasOne("Footwear.Data.Models.Cart", null)
                         .WithMany("CartProducts")
                         .HasForeignKey("CartId");
+
+                    b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ProductImage");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
@@ -490,6 +494,15 @@ namespace Footwear.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Footwear.Data.Models.User", b =>
+                {
+                    b.HasOne("Footwear.Data.Models.Cart", "Cart")
+                        .WithMany()
+                        .HasForeignKey("CartId");
+
+                    b.Navigation("Cart");
+                });
+
             modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
                 {
                     b.Navigation("CartProducts");
@@ -502,8 +515,6 @@ namespace Footwear.Migrations
 
             modelBuilder.Entity("Footwear.Data.Models.User", b =>
                 {
-                    b.Navigation("Cart");
-
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

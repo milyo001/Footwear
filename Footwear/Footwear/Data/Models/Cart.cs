@@ -9,8 +9,8 @@
         [Key]
         public int Id { get; set; }
 
-        [Required, ForeignKey(nameof(ProductImage))]
-        public int UserId { get; set; }
+        [Required]
+        public string UserId { get; set; }
 
         public virtual ICollection<CartProduct> CartProducts { get; set; } = new List<CartProduct>();
 

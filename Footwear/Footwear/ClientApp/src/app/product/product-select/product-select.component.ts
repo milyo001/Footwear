@@ -39,9 +39,24 @@ export class ProductSelectComponent {
     if (localStorage.getItem('token')) {
       let size: number = +((document.getElementById('size') as HTMLInputElement).value);
       this.selectedProduct.size = size;
-      this.cartService.addToCart(this.selectedProduct);
-      this.addItemToLocal(this.selectedProduct);
-      this.toastr.success('Product successfully added to cart.', 'Product added.')
+
+      this.cartService.addToCart(this.selectedProduct).subscribe(
+        (response: any) => {
+          if (response.succeeded) {
+            this.toastr.success('Product successfully added to cart.', 'Product added.')
+          }
+          else {
+            console.log(response.errors);
+            //response.errors.forEach(element => {
+            //  this.toastr.error('Server Error!', 'Contact Administator!')
+            //})
+          }
+        },
+        err => {
+          console.log(err);
+        }
+      );
+      
     } else {
       this.toastr.error('You need to be signed in to add to cart.', 'Please login.');
       this.router.navigate(['user/login']);
