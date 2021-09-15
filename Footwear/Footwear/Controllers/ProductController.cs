@@ -10,7 +10,6 @@
     using System;
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
-    using System.Security.Claims;
     using Microsoft.AspNetCore.Identity;
 
     [ApiController]
@@ -76,7 +75,6 @@
         {
             var user = this._db.Users.FirstOrDefaultAsync(x => x.UserName == model.UserName).Result;
             var userId = user.Id;
-
             var cartProduct = new CartProduct
             {
                 Name = model.Name,
@@ -88,11 +86,24 @@
                 Price = model.Price,
                 Quantity = model.Quantity,
                 CreatedOn = DateTime.Today
+                
             };
 
-            var cart = this._db.Cart.FirstOrDefaultAsync(x => x.UserId == userId).Result;
+            var cart = this._db.Cart
+                .Where(x => x.UserId == userId)
+                .Include(x => x.CartProducts)
+                .FirstOrDefault();
 
-            //Check if user have an instance of Cart Model, if not create new one
+            await CreateCartInstance(cart, userId);
+            await CheckDupplicateProductQuantityAndName(userId, cartProduct);
+        
+            return Ok(new { succeeded = true });
+        }
+
+
+        //Check if user have an instance of Cart Model, if not create new one
+        private async Task CreateCartInstance(Cart cart,string userId)
+        {
             if (cart == null)
             {
                 var newCart = new Cart
@@ -102,12 +113,29 @@
                 await this._db.Cart.AddAsync(newCart);
                 await this._db.SaveChangesAsync();
             }
-
-            cart.CartProducts.Add(cartProduct);
-            await this._db.SaveChangesAsync();
-                    
-            return Ok(new { succeeded = true });
         }
 
+
+        //Check if the product name is existing and have the same size
+        //in the database and change the quantity of that cartProduct, instead of adding new instance of 
+        //CartProduct
+        private async Task CheckDupplicateProductQuantityAndName(string userId, CartProduct cartProduct)
+        {
+            var cart = this._db.Cart.FirstOrDefault(x => x.UserId == userId);
+            var dupplicateProduct = cart.CartProducts
+                    .Where(x => x.Name == cartProduct.Name)
+                    .Where(x => x.Size == cartProduct.Size)
+                    .FirstOrDefault();
+
+            if (dupplicateProduct != null)
+            {
+                dupplicateProduct.Quantity++;
+            }
+            else
+            {
+                cart.CartProducts.Add(cartProduct);
+            }
+            await this._db.SaveChangesAsync();
+        }
     }
 }

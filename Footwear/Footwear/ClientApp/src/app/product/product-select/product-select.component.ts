@@ -57,8 +57,7 @@ export class ProductSelectComponent {
     }
   }
 
-  //This method will add the selected product into the local storage, this will prevent data loss when
-  //document(web page) is refreshed
+  
   //TODO: IMPLEMENT DATABASE CART
   private addItemToLocal(product): void {
     let localProducts = localStorage.getItem('products');
