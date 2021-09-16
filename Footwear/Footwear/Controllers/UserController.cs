@@ -43,12 +43,14 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Phone = model.Phone,
-                Address = model.Address
+                Address = model.Address,
+                Cart = new Cart { }
             };
 
             try
             {
                 var result = await this._userManager.CreateAsync(user, model.Password);
+
                 return Ok(result);
             }
             catch (Exception ex)

@@ -1,14 +1,13 @@
 ﻿namespace Footwear.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [Route("[controller]")]
     [ApiController]
@@ -24,6 +23,22 @@
             this._db = db;
             this._userManager = userManager;
         }
+
+
+        [HttpGet]
+        public IEnumerable<CartProductViewModel> Get(string userName)
+        {
+            //IEnumerable<CartProductViewModel> cartProducts = 
+            //    this._db.Cart
+            //    .Where(x => x.Id == cartId)
+            //    .Select(c => c.CartProducts)
+            //   .ToArray();
+
+            return null;
+            //return products;
+            //TODO
+        }
+
 
 
     }

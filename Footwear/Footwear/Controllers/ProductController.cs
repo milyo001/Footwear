@@ -94,27 +94,10 @@
                 .Include(x => x.CartProducts)
                 .FirstOrDefault();
 
-            await CreateCartInstance(cart, userId);
             await CheckDupplicateProductQuantityAndName(userId, cartProduct);
         
             return Ok(new { succeeded = true });
         }
-
-
-        //Check if user have an instance of Cart Model, if not create new one
-        private async Task CreateCartInstance(Cart cart,string userId)
-        {
-            if (cart == null)
-            {
-                var newCart = new Cart
-                {
-                    UserId = userId
-                };
-                await this._db.Cart.AddAsync(newCart);
-                await this._db.SaveChangesAsync();
-            }
-        }
-
 
         //Check if the product name is existing and have the same size
         //in the database and change the quantity of that cartProduct, instead of adding new instance of 

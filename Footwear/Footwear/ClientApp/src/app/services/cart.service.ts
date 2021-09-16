@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { IProduct } from '../interfaces';
 import { ICartProduct } from '../interfaces/cartProduct';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Local } from 'protractor/built/driverProviders';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,12 @@ export class CartService {
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
 
-  getItems(): ICartProduct[] {
-    //TODO
-    return;
+  getAllCartProducts(): Observable<ICartProduct[]> {
+
+    let headers = new Headers();
+    headers.append('userName', localStorage.getItem('userName'));
+    
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart");
   }
 
   clearCart(): ICartProduct[] {

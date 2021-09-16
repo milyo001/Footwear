@@ -21,7 +21,7 @@ export class ProductComponent {
   public pageIndex: number; 
 
   constructor(private productService: ProductService, private sortingOptions: SortingOptions) {
-
+    
     this.sortingOptions = new SortingOptions();
   }
 

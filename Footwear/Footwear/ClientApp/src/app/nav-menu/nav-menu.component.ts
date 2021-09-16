@@ -16,7 +16,7 @@ export class NavMenuComponent implements OnInit{
 
   isExpanded = false;
   userDetails;
-  cartItems: IProduct[] = this.cartService.getItems();
+/*  cartItems: IProduct[] = this.cartService.getItems();*/
 
   //FontAwesomeIcons:
   faShoppingCart = faShoppingCart;
