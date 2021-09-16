@@ -31,7 +31,6 @@ export class NavMenuComponent implements OnInit{
     public userService: UserService) { }
 
   ngOnInit(): void {
-    this.userService.userName = this.userService.initUserName();
 
     this.userService.getUserProfile().subscribe(
       response => {
@@ -53,8 +52,7 @@ export class NavMenuComponent implements OnInit{
 
   onLogout() {
     localStorage.removeItem('token');
-    localStorage.setItem('userName', '');
-    this.userService.userName = '';
+    localStorage.removeItem('userName');
     this.router.navigate(['/user/login']);
   }
 

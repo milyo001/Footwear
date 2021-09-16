@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
@@ -28,6 +29,7 @@
         [HttpGet]
         public IEnumerable<CartProductViewModel> Get(string userName)
         {
+            
             //IEnumerable<CartProductViewModel> cartProducts = 
             //    this._db.Cart
             //    .Where(x => x.Id == cartId)
@@ -38,6 +40,8 @@
             //return products;
             //TODO
         }
+
+       
 
 
 

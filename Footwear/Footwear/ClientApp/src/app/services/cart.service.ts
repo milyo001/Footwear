@@ -37,10 +37,6 @@ export class CartService {
   }
 
   getAllCartProducts(): Observable<ICartProduct[]> {
-
-    let headers = new Headers();
-    headers.append('userName', localStorage.getItem('userName'));
-    
     return this.http.get<ICartProduct[]>(this.baseUrl + "cart");
   }
 

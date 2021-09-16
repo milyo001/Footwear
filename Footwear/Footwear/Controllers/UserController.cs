@@ -12,6 +12,7 @@
     using System.Text;
     using System.IdentityModel.Tokens.Jwt;
     using Microsoft.Extensions.Options;
+    using System.Linq;
 
     [ApiController]
     [Route("[controller]")]
@@ -78,10 +79,13 @@
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
 
+                var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
+
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
-                return Ok(new { token });
+
+                return Ok(new { token, cartId });
             }
             else
                 return BadRequest(new { message = "Username or password is incorrect." });
