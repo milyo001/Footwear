@@ -24,7 +24,10 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartService.getAllCartProducts().subscribe(productsList => {
+
+    const cartId = localStorage.getItem('cartId');
+
+    this.cartService.getAllCartProducts(cartId).subscribe(productsList => {
       this.cartProducts = productsList;
     })
   };

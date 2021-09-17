@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import {
   faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
   faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { Local } from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-nav-menu',
@@ -16,7 +17,7 @@ export class NavMenuComponent implements OnInit{
 
   isExpanded = false;
   userDetails;
-/*  cartItems: IProduct[] = this.cartService.getItems();*/
+  cartId: string;
 
   //FontAwesomeIcons:
   faShoppingCart = faShoppingCart;
@@ -31,6 +32,8 @@ export class NavMenuComponent implements OnInit{
     public userService: UserService) { }
 
   ngOnInit(): void {
+
+    this.cartId = localStorage.getItem('cartId');
 
     this.userService.getUserProfile().subscribe(
       response => {
@@ -53,6 +56,7 @@ export class NavMenuComponent implements OnInit{
   onLogout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
+    localStorage.removeItem('cartId');
     this.router.navigate(['/user/login']);
   }
 

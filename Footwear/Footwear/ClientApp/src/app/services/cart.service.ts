@@ -36,8 +36,8 @@ export class CartService {
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
 
-  getAllCartProducts(): Observable<ICartProduct[]> {
-    return this.http.get<ICartProduct[]>(this.baseUrl + "cart");
+  getAllCartProducts(cartId: string): Observable<ICartProduct[]> {
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" +  cartId);
   }
 
   clearCart(): ICartProduct[] {

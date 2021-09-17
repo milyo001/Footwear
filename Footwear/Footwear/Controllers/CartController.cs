@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -26,19 +27,37 @@
         }
 
 
-        [HttpGet]
-        public IEnumerable<CartProductViewModel> Get(string userName)
+        [HttpGet("{id}")]
+        public IEnumerable<CartProductViewModel> Get(string id)
         {
-            
-            //IEnumerable<CartProductViewModel> cartProducts = 
-            //    this._db.Cart
-            //    .Where(x => x.Id == cartId)
-            //    .Select(c => c.CartProducts)
-            //   .ToArray();
+            var cartId = Int32.Parse(id);
 
-            return null;
-            //return products;
-            //TODO
+            //IEnumerable<CartProductViewModel> cartProducts =
+            //    this._db.CartProducts
+            //    .Where(x => x.Id == cartId)
+            //    .ToArray();
+
+
+            var cart = this._db.Cart
+                .Include(c => c.CartProducts)
+                .FirstOrDefault(c => c.Id == cartId);
+
+            var products = cart.CartProducts
+                 .Select(cp => new CartProductViewModel
+                 {
+                     Name = cp.Name,
+                     Size = cp.Size.Value,
+                     Gender = cp.Gender.ToString(),
+                     Details = cp.Details,
+                     ImageUrl = cp.ImageUrl,
+                     Price = cp.Price,
+                     Quantity = cp.Quantity,
+                     ProductType = cp.ProductType.ToString(),
+                     CreatedOn = cp.CreatedOn.ToString()
+                 })
+                .ToArray();
+
+            return products;
         }
 
        
