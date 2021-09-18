@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
 import { ToastrService } from 'ngx-toastr';
-import { Local } from 'protractor/built/driverProviders';
 
 @Component({
   selector: 'app-cart',
@@ -14,9 +13,11 @@ export class CartComponent implements OnInit {
 
   cartProducts: ICartProduct[];
   totalAmount: number;
+  public isDetailsCollapsed = false;
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
+  faInfoCircle = faInfoCircle;
 
   constructor(
     private cartService: CartService,
