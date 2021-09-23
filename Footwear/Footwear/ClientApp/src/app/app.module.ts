@@ -7,6 +7,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
+import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -54,6 +55,7 @@ import { UserModule } from './user/user.module';
       positionClass: 'toast-top-left'
     }),
     NgbModule,
+    CdkAccordionModule,
     NgxPaginationModule,
     FontAwesomeModule,
     UserModule

@@ -13,7 +13,7 @@ export class CartComponent implements OnInit {
 
   cartProducts: ICartProduct[];
   totalAmount: number;
-  public isDetailsCollapsed = false;
+  expandedIndex = 0;
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;

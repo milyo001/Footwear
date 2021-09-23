@@ -4,116 +4,106 @@
     <h1 class="jumbotron-heading">Your current saved products in cart</h1>
   </div>
 </section>
+<div *ngIf="cartProducts?.length" class="row">
 
-<!--<div *ngIf="cartProducts?.length" class="container mb-4">
-  <div class="row">
-    <div class="col-12">
-      <div class="table-responsive text-center">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col"> </th>
-              <th scope="col">Product</th>
-              <th scope="col">Size</th>
-              <th scope="col">Quantity</th>
-              <th scope="col" class="text-center">Details</th>
-              <th scope="col" class="text-right">Price</th>
-              <th> </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let product of cartProducts; let i = index" class="text-center">
-              <td><img class="image-resize" src="{{product?.imageUrl}}" /> </td>
-              <td>{{product.name}}</td>
-              <td>{{product.size}}</td>
-              <td>{{product.quantity}}</td>
-              <td>{{product.price * product.quantity| currency}}</td>
-              <td>
-                <ngb-accordion [closeOthers]="true" activeIds="static-0" animation="true">
-                  <ngb-panel id="static-1" title="View Details">
-                    <ng-template ngbPanelContent>
-                      {{product.details}}
-                    </ng-template>
-                  </ngb-panel>
-                </ngb-accordion>
-              </td>
+  <cdk-accordion class="example-accordion">
+    <cdk-accordion-item *ngFor="let item of cartProducts; let index = index;"
+                        #accordionItem="cdkAccordionItem"
+                        class="example-accordion-item"
+                        role="button"
+                        tabindex="0"
+                        [attr.id]="'accordion-header-' + index"
+                        [attr.aria-expanded]="accordionItem.expanded"
+                        [attr.aria-controls]="'accordion-body-' + index">
+      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+        <div class="accordion-picture-frame">
+          <img class="accordion-picture-frame-img" src="{{item?.imageUrl}}" />
+        </div>
+        <div class="accordion-product-details">
+          <p>{{item.name}}</p>
+          <p>Quantity: {{item.quantity}}</p>
+          <p>Price: {{item.price | currency}}</p>
+          <p>Size: {{item.size}}</p>
+          <span class="example-accordion-item-description">
+            Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+          </span>
+        </div>
 
-              <td><button class="btn btn-sm btn-danger" (click)="deleteCartProduct(product.cartId)"><fa-icon [icon]="faTrashAlt"></fa-icon></button> </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td><strong>Total</strong></td>
-              <td class="text-right"><strong>{{totalAmount | currency}}</strong></td>
-            </tr>
-          </tbody>
-        </table>
       </div>
-    </div>-->
-    <div *ngIf="cartProducts?.length" class="row">
-    <div *ngFor="let product of cartProducts" class="card column">
-      <img src="{{product?.imageUrl}}" class="card-img-top">
-      <div class="card-body">
-        <h5 class="card-title">{{product.name}}</h5>
-        <div class="card-details">
-          <p class="card-text">
-            Size: {{product.size}}
-          </p>
-          <p class="card-text">
-            Price: {{product.price * product.quantity| currency}}
-          </p>
+      <div class="example-accordion-item-body"
+           role="region"
+           [style.display]="accordionItem.expanded ? '' : 'none'"
+           [attr.id]="'accordion-body-' + index"
+           [attr.aria-labelledby]="'accordion-header-' + index">
+        <div class="accordion-product-details">
+          <p>Details: {{item.details}}</p>
+          <p>Total Price: {{item.price * item.quantity | currency}}</p>
         </div>
+      </div>
 
-        <div class="card-details">
-          <p class="card-text">
-            {{product.quantity}}x
-          </p>
-          <p class="card-text">
-            <a><fa-icon [icon]="faInfoCircle"></fa-icon></a>
-          </p>
-        </div>
+    </cdk-accordion-item>
+  </cdk-accordion>
 
 
-        <div class="mb-2">
-          <span class="font-bold"><strong>$99.00</strong></span>
-        </div>
-        <div class="card-footer">
-          <div class="row">
-            <div class="col-md-6 mb-2">
-              <span class="align-middle glyphicon glyphicon-star"
-                    aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star"
-                                                     aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star"
-                                                                                      aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star"
-                                                                                                                       aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star-empty"
-                                                                                                                                                        aria-hidden="true"></span>
-            </div>
-            <div class="col-md-6">
-              <button type="button"
-                      class="btn btn-primary btn-sm btn-block"
-                      id="addToCart-1" onclick="addToCart(1)">
-                <span class="glyphicon glyphicon-shopping-cart"
-                      aria-hidden="true"></span> ADD TO CART
-              </button>
-            </div>
+  <!--<div *ngFor="let product of cartProducts" class="card column">
+    <img src="{{product?.imageUrl}}" class="card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">{{product.name}}</h5>
+      <div class="card-details">
+        <p class="card-text">
+          Size: {{product.size}}
+        </p>
+        <p class="card-text">
+          Price: {{product.price * product.quantity| currency}}
+        </p>
+      </div>
+
+      <div class="card-details">
+        <p class="card-text">
+          Quantity: {{product.quantity}}
+        </p>
+        <p class="card-text">
+          <ngb-accordion [closeOthers]="true" activeIds="static-0" animation="true">
+            <ngb-panel id="static-1" title="View Details">
+              <ng-template ngbPanelContent>
+                {{product.details}}
+              </ng-template>
+            </ngb-panel>
+          </ngb-accordion>
+        </p>
+      </div>
+
+
+      <div class="mb-2">
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="col-md-6 mb-2">
+            <span class="align-middle glyphicon glyphicon-star"
+                  aria-hidden="true"></span>
+            <span class="align-middle glyphicon glyphicon-star"
+                                                   aria-hidden="true"></span>
+            <span class="align-middle glyphicon glyphicon-star" aria-hidden="true"></span>
+            <span class="align-middle glyphicon glyphicon-star" aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+          </div>
+          <div class="col-md-6">
+
           </div>
         </div>
       </div>
-      </div>
     </div>
+    </div>-->
+</div>
     <div class="col mb-2">
       <div class="row">
         <div class="col-sm-12  col-md-6">
           <button class="btn btn-block btn-light">Continue Shopping</button>
         </div>
         <div class="col-sm-12 col-md-6 text-right">
-          <button class="btn btn-block btn-success" (click)="onCheckOut()">Checkout</button>
+          <!--<button class="btn btn-block btn-success" (click)="onCheckOut()">Checkout</button>-->
         </div>
       </div>
     </div>
-  </div>
-  </div>
 
 <div class="container text-center alert alert-danger" *ngIf="!cartProducts?.length">
   It'seems that you shoping cart is empty.Go back to the products from
