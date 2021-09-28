@@ -38,6 +38,11 @@
         <div class="accordion-product-details">
           <p>Details: {{item.details}}</p>
           <p>Total Price: {{item.price * item.quantity | currency}}</p>
+          <p>Product Type: {{item.productType}} </p>
+        </div>
+        <div class="accordion-product-details-actions">
+          <a class="accordion-product-details-action-buttons quantity-modify">+/- Quantity</a>
+          <a class="accordion-product-details-action-buttons remove-from-cart-action">Remove from cart</a>
         </div>
       </div>
 

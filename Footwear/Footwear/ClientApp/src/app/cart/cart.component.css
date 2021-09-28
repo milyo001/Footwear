@@ -179,3 +179,21 @@ footer {
 .accordion-product-details p {
   margin-bottom: 5px;
 }
+.accordion-product-details-actions {
+  background-color: rgb(252,246,235);
+  display: inline-flex;
+  flex-direction: row;
+  width: 100%;
+}
+.accordion-product-details-action-buttons {
+  width:50%;
+  height:50px;
+  text-align:center;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+.remove-from-cart-action {
+    color: darkred;
+}
