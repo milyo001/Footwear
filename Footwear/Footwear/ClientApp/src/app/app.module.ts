@@ -45,7 +45,7 @@ import { UserModule } from './user/user.module';
       { path: 'products', component: ProductComponent }, //All products
       { path: 'products/:id', component: ProductSelectComponent }, //Product Details
       { path: 'about', component: AboutComponent },
-      { path: 'cart/:id', component: CartComponent, canActivate: [AuthGuard] },
+      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
       { path: 'user/login', component: LoginComponent },
       { path: 'user/register', component: RegisterComponent }
     ]),

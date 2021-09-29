@@ -35,7 +35,7 @@
             <a class="nav-link" [routerLink]="['/about']">About</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/cart/', cartId]"><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</a>
+            <a class="nav-link" [routerLink]="['/cart']"><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</a>
           </li>
           <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/register']">

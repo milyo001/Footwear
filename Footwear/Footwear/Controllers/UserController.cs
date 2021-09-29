@@ -87,6 +87,7 @@
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                
                 var token = tokenHandler.WriteToken(securityToken);
 
                 return Ok(new { token });

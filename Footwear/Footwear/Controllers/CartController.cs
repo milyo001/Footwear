@@ -8,6 +8,7 @@
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
+    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -27,16 +28,17 @@
         }
 
 
-        [HttpGet("{id}")]
-        public IEnumerable<CartProductViewModel> Get(string id)
+        [HttpGet()]
+        public IEnumerable<CartProductViewModel> Get()
         {
-            var cartId = Int32.Parse(id);
+            var handler = new JwtSecurityTokenHandler();
+            var headerToken = Request.Headers.FirstOrDefault(x => x.Key == "Authorization");
 
-            //IEnumerable<CartProductViewModel> cartProducts =
-            //    this._db.CartProducts
-            //    .Where(x => x.Id == cartId)
-            //    .ToArray();
+            //Authrization token contains string with "Bearer" as first word and the encoded string of the token as second
+            var encodedToken = headerToken.Value.ToString().Split(" ")[1];
+            var token = handler.ReadJwtToken(encodedToken);
 
+            var cartId = Int32.Parse(token.Claims.FirstOrDefault(x => x.Type == "CartId").Value);
 
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)
