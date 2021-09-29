@@ -69,23 +69,27 @@
 
             if (user != null && passwordMatch)
             {
+                
+                var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
+
                 var tokenDescriptor = new SecurityTokenDescriptor
                 {
                     Subject = new ClaimsIdentity(new Claim[]
                     {
-                        new Claim("UserId",user.Id.ToString())
+                        new Claim("UserId", user.Id.ToString()),
+                        new Claim("CartId", cartId.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
 
-                var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
+                
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 var token = tokenHandler.WriteToken(securityToken);
 
-                return Ok(new { token, cartId });
+                return Ok(new { token });
             }
             else
                 return BadRequest(new { message = "Username or password is incorrect." });
