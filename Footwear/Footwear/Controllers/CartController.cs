@@ -3,6 +3,7 @@
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
+    using Footwear.Helpers;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -18,27 +19,19 @@
     {
         private readonly ApplicationDbContext _db;
 
-        private UserManager<User> _userManager;
 
 
-        public CartController(ApplicationDbContext db, UserManager<User> userManager)
+        public CartController(ApplicationDbContext db)
         {
             this._db = db;
-            this._userManager = userManager;
         }
 
 
         [HttpGet()]
         public IEnumerable<CartProductViewModel> Get()
         {
-            var handler = new JwtSecurityTokenHandler();
-            var headerToken = Request.Headers.FirstOrDefault(x => x.Key == "Authorization");
-
-            //Authrization token contains string with "Bearer" as first word and the encoded string of the token as second
-            var encodedToken = headerToken.Value.ToString().Split(" ")[1];
-            var token = handler.ReadJwtToken(encodedToken);
-
-            var cartId = Int32.Parse(token.Claims.FirstOrDefault(x => x.Type == "CartId").Value);
+            var authHelper = new TokenHandler(Request);
+            var cartId = authHelper.GetCartId();
 
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)

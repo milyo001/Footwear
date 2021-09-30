@@ -36,11 +36,13 @@
       <h6>{{ product.details }}</h6>
     </div>
   </div>
-  <div id="pagination">
-    <pagination-controls (pageChange)="pageIndex = $event"
-                         previousLabel=""
-                         nextLabel=""></pagination-controls>
-  </div>
+  <section class="pagination-section">
+    <div id="pagination">
+      <pagination-controls (pageChange)="pageIndex = $event"
+                           previousLabel=""
+                           nextLabel=""></pagination-controls>
+    </div>
+  </section>
 </section>
 <div *ngIf="!products?.length">Sorry, no products found!</div>
 

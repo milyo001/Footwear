@@ -11,6 +11,7 @@
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity;
+    using Footwear.Helpers;
 
     [ApiController]
     [Route("[controller]")]
@@ -73,8 +74,8 @@
         [Route("addToCart")]
         public async Task<Object> AddCartProduct(CartProductViewModel model)
         {
-            var user = this._db.Users.FirstOrDefaultAsync(x => x.UserName == model.UserName).Result;
-            var userId = user.Id;
+            var authHelper = new TokenHandler(Request);
+            var userId = authHelper.GetUserId();
             var cartProduct = new CartProduct
             {
                 Name = model.Name,

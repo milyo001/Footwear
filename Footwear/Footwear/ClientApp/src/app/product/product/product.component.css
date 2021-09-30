@@ -198,5 +198,11 @@ label {
 }
 
 #pagination {
-    display: inline-block !important;
+    /*display: inline-block !important;*/
+    margin-left:50%;
+
+}
+.pagination-section {
+    display: block;
+    width:100%
 }
