@@ -25,6 +25,7 @@ import { AuthGuard } from './auth/auth.guard';
 import { AuthInterceptor } from './auth/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserModule } from './user/user.module';
+import { AppRoutingModule } from './modules/router/appRoutingModule';
 
 @NgModule({
   declarations: [
@@ -40,15 +41,7 @@ import { UserModule } from './user/user.module';
   imports: [
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'products', component: ProductComponent }, //All products
-      { path: 'products/:id', component: ProductSelectComponent }, //Product Details
-      { path: 'about', component: AboutComponent },
-      { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-      { path: 'user/login', component: LoginComponent },
-      { path: 'user/register', component: RegisterComponent }
-    ]),
+    AppRoutingModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       progressBar: true,
