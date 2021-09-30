@@ -1,10 +1,6 @@
 ﻿
 namespace Footwear.Data.Dto
 {
-    using Footwear.Data.Models;
-    using Footwear.Data.Models.Enums;
-    using System.Collections.Generic;
-
     public class CartProductViewModel
     {
 
