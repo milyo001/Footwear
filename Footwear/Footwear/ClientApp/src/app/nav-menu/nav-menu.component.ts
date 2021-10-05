@@ -7,6 +7,7 @@ import {
   faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
   faDatabase } from '@fortawesome/free-solid-svg-icons';
 import { Local } from 'protractor/built/driverProviders';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -28,7 +29,8 @@ export class NavMenuComponent implements OnInit{
   constructor(
     private cartService: CartService,
     private router: Router,
-    public userService: UserService) { }
+    public userService: UserService,
+    private cookieService: CookieService) { }
     
 
   ngOnInit(): void {
@@ -53,15 +55,18 @@ export class NavMenuComponent implements OnInit{
   }
 
   onLogout() {
-    localStorage.removeItem('token');
+    this.cookieService.delete('token');
     this.router.navigate(['/user/login']);
   }
 
-  isAuthenticated() {
-    if (localStorage.getItem('token')) {
+  isAuthenticated(): boolean {
+    if (this.cookieService.get('token') != '') {
       return true;
     }
-    return false;
+    else { return false }
+      
+    
   }
+
 
 }

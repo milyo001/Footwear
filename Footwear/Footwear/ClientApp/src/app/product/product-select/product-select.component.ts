@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProduct } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-product-select',
@@ -19,7 +20,8 @@ export class ProductSelectComponent {
     private activatedRoute: ActivatedRoute,
     private cartService: CartService,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private cookieService: CookieService
   ) { 
 
     let id: number = 0;
@@ -36,7 +38,7 @@ export class ProductSelectComponent {
   }
 
   addToCart(product): void {
-    if (localStorage.getItem('token')) {
+    if (this.cookieService.get('token')) {
       let size: number = +((document.getElementById('size') as HTMLInputElement).value);
       this.selectedProduct.size = size;
 
@@ -56,20 +58,5 @@ export class ProductSelectComponent {
       this.router.navigate(['user/login']);
     }
   }
-
   
-  //TODO: IMPLEMENT DATABASE CART
-  private addItemToLocal(product): void {
-    let localProducts = localStorage.getItem('products');
- 
-    if (localProducts == null) {
-      let products: IProduct[] = [];
-      products.push(product);
-      localStorage.setItem('products', JSON.stringify(products));
-    } else {
-      let products: IProduct[] = JSON.parse(localStorage.getItem('products'));
-      products.push(product);
-      localStorage.setItem('products', JSON.stringify(products));
-    }
-  }
 }

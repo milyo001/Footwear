@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   //The method will prevent any user from accessing the login view, who is already authenticated
   ngOnInit(): void {
-    if (this.cookieService.get('token') != null) {
+    let test = this.cookieService.get('token');
+    if (this.cookieService.get('token') != '') {
       this.router.navigate(['/']);
     }
   }

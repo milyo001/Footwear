@@ -28,7 +28,6 @@ export class UserService {
   }
 
   login(formData) {
-    localStorage.setItem('userName', formData.email);
     return this.http.post(this.baseUrl + 'user/login', formData);
   }
 
