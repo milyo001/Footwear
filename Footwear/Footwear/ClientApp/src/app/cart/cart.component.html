@@ -24,11 +24,14 @@
           <p>Quantity: {{item.quantity}}</p>
           <p>Price: {{item.price | currency}}</p>
           <p>Size: {{item.size}}</p>
-          <span class="example-accordion-item-description">
-            Click to {{ accordionItem.expanded ? 'close' : 'open' }}
-          </span>
+
         </div>
 
+      </div>
+      <div class="accordion-product-details-handler">
+        <span class="example-accordion-item-description row justify-content-md-center">
+          Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+        </span>
       </div>
       <div class="example-accordion-item-body"
            role="region"

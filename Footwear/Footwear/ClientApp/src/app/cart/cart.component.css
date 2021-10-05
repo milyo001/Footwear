@@ -145,6 +145,10 @@ footer {
 .example-accordion-item-description {
   font-size: 0.85em;
   color: #999;
+  justify-content: center;
+}
+.accordion-product-details-handler {
+  justify-content: center;
 }
 
 .example-accordion-item-header,
@@ -174,7 +178,8 @@ footer {
 }
 
 .accordion-product-details {
-    display:block;
+  display: block;
+  width: 70%;
 }
 .accordion-product-details p {
   margin-bottom: 5px;
