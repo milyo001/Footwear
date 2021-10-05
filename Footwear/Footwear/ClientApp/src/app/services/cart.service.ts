@@ -36,9 +36,8 @@ export class CartService {
   }
 
   getAllCartProducts(): Observable<ICartProduct[]> {
-    const headers = { 'Authorization': 'Bearer' + ' ' + localStorage.getItem("token") };
 
-    return this.http.get<ICartProduct[]>(this.baseUrl + "cart", { headers });
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" + "getCartItems");
   }
 
   clearCart(): ICartProduct[] {

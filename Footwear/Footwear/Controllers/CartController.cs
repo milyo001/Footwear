@@ -23,7 +23,7 @@
         }
 
 
-        [HttpGet()]
+        [HttpGet("getCartItems")]
         public IEnumerable<CartProductViewModel> Get()
         {
             
