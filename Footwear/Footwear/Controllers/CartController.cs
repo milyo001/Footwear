@@ -2,16 +2,12 @@
 {
     using Footwear.Data;
     using Footwear.Data.Dto;
-    using Footwear.Data.Models;
-    using Footwear.Helpers;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
-    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
@@ -30,13 +26,19 @@
         [HttpGet()]
         public IEnumerable<CartProductViewModel> Get()
         {
-            var authHelper = new TokenHandler(Request);
-            var cartId = authHelper.GetCartId();
+            
+            var authCookie = Request.Cookies["token"];
+            var handler = new JwtSecurityTokenHandler();
+            var token = handler.ReadJwtToken(authCookie);
+
+            var cartId = Int32.Parse(token.Claims.FirstOrDefault(x => x.Type == "CartId").Value);
 
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)
                 .FirstOrDefault(c => c.Id == cartId);
 
+            
+            
             var products = cart.CartProducts
                  .Select(cp => new CartProductViewModel
                  {

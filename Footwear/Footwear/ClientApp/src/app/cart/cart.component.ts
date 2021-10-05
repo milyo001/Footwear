@@ -25,7 +25,6 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
     this.cartService.getAllCartProducts().subscribe(productsList => {
       this.cartProducts = productsList;
     })

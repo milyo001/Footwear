@@ -17,7 +17,6 @@ export class NavMenuComponent implements OnInit{
 
   isExpanded = false;
   userDetails;
-  cartId: string;
 
   //FontAwesomeIcons:
   faShoppingCart = faShoppingCart;
@@ -30,10 +29,9 @@ export class NavMenuComponent implements OnInit{
     private cartService: CartService,
     private router: Router,
     public userService: UserService) { }
+    
 
   ngOnInit(): void {
-
-    this.cartId = localStorage.getItem('cartId');
 
     this.userService.getUserProfile().subscribe(
       response => {
@@ -43,6 +41,7 @@ export class NavMenuComponent implements OnInit{
         console.log(error)
       }
     )
+
     }
 
   collapse() {
@@ -55,8 +54,6 @@ export class NavMenuComponent implements OnInit{
 
   onLogout() {
     localStorage.removeItem('token');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('cartId');
     this.router.navigate(['/user/login']);
   }
 

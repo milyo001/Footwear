@@ -26,6 +26,7 @@ import { AuthInterceptor } from './auth/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './modules/router/appRoutingModule';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,9 @@ import { AppRoutingModule } from './modules/router/appRoutingModule';
     FontAwesomeModule,
     UserModule
   ],
-  providers: [UserService, {
+  providers:[
+    UserService,
+    CookieService, {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true

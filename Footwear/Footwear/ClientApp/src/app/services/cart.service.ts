@@ -36,20 +36,12 @@ export class CartService {
   }
 
   getAllCartProducts(): Observable<ICartProduct[]> {
-    //const httpOptions = {
-    //  headers: new HttpHeaders({
-    //    'Authorization': localStorage.getItem('token')
-    //  })
-    //};
+    const headers = { 'Authorization': 'Bearer' + ' ' + localStorage.getItem("token") };
 
-    return this.http.get<ICartProduct[]>(this.baseUrl + "cart");
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart", { headers });
   }
 
   clearCart(): ICartProduct[] {
-    //TODO
-
-    //this.items = [];
-    //return this.items;
     return;
   }
 

@@ -11,7 +11,7 @@
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity;
-    using Footwear.Helpers;
+    using System.IdentityModel.Tokens.Jwt;
 
     [ApiController]
     [Route("[controller]")]
@@ -74,8 +74,13 @@
         [Route("addToCart")]
         public async Task<Object> AddCartProduct(CartProductViewModel model)
         {
-            var authHelper = new TokenHandler(Request);
-            var userId = authHelper.GetUserId();
+            var handler = new JwtSecurityTokenHandler();
+            var headerToken = Request.Headers.FirstOrDefault(x => x.Key == "Authorization");
+            //Authrization token contains string with "Bearer" as first word and the encoded string of the token as second
+            var encodedToken = headerToken.Value.ToString().Split(" ")[1];
+            var token = handler.ReadJwtToken(encodedToken);
+
+            var userId = token.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
             var cartProduct = new CartProduct
             {
                 Name = model.Name,

@@ -3,6 +3,7 @@ import { UserService } from '../../services/user.service';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -11,11 +12,12 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
+  constructor(private userService: UserService, private router: Router,
+    private toastr: ToastrService, private cookieService: CookieService) { }
 
   //The method will prevent any user from accessing the login view, who is already authenticated
   ngOnInit(): void {
-    if (localStorage.getItem('token') != null) {
+    if (this.cookieService.get('token') != null) {
       this.router.navigate(['/']);
     }
   }
@@ -24,8 +26,7 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.login(form.value).subscribe(
       (response: any) => {
-        localStorage.setItem('token', response.token);
-        localStorage.setItem('userName', form.value.email);
+        this.cookieService.set('token', response.token)
         this.router.navigateByUrl('/');
       },
       error => {
