@@ -158,7 +158,7 @@ footer {
 
   .example-accordion-item-header:hover {
     cursor: pointer;
-    background-color: #eee;
+    background-color: rgb(245,222,179, 0.4);
   }
 
 .example-accordion-item:first-child {
@@ -202,3 +202,28 @@ a {
 .remove-from-cart-action {
     color: darkred;
 }
+.accordion-details-section {
+    display: flex;
+    width:100%;
+    flex-direction:row;
+    justify-content: space-between;
+}
+.accordion-description {
+    width:50%;
+}
+.accordion-actions-menu {
+    display: flex;
+    flex-direction: row;
+    width: 50%;
+}
+.action-button {
+  display: block;
+  width: 200px;
+  text-align: center;
+  height: 33px;
+  margin: 3px;
+  padding: 3px;
+  border-color: black;
+  border-radius: 100px;
+}
+

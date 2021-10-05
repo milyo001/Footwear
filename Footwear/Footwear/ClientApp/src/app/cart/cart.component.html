@@ -38,73 +38,27 @@
            [style.display]="accordionItem.expanded ? '' : 'none'"
            [attr.id]="'accordion-body-' + index"
            [attr.aria-labelledby]="'accordion-header-' + index">
-        <div class="accordion-product-details">
-          <p>Details: {{item.details}}</p>
-          <p>Total Price: {{item.price * item.quantity | currency}}</p>
-          <p>Product Type: {{item.productType}} </p>
-        </div>
-        <div class="accordion-product-details-actions">
-          <button type="button" class="btn btn-outline-warning waves-effect" data-mdb-ripple-color="dark">+</button>
-          <button type="button" class="btn btn-outline-warning waves-effect">-</button>
-          <button type="button" class="btn btn-outline-danger waves-effect">Danger</button>
-
-          <a class="accordion-product-details-action-buttons quantity-modify">+/- Quantity</a>
-          <a class="accordion-product-details-action-buttons remove-from-cart-action">Remove from cart</a>
-        </div>
+        <section class="accordion-details-section">
+          <div class=".accordion-description">
+            <p>Description: {{item.details}}</p>
+            <p>Good for: {{item.productType}} </p>
+            <p>Total price: {{item.price * item.quantity | currency}}</p>
+          </div>
+          <div class=".accordion-actions-menu">
+            <button class="action-button btn btn-light">View product</button>
+            <button class="action-button btn btn-light">Add</button>
+            <button class="action-button btn btn btn-light">Remove one</button>
+            <button class="action-button btn btn-danger">Remove from cart</button>
+          </div>
+        </section>
+        
       </div>
 
     </cdk-accordion-item>
   </cdk-accordion>
 
 
-  <!--<div *ngFor="let product of cartProducts" class="card column">
-    <img src="{{product?.imageUrl}}" class="card-img-top">
-    <div class="card-body">
-      <h5 class="card-title">{{product.name}}</h5>
-      <div class="card-details">
-        <p class="card-text">
-          Size: {{product.size}}
-        </p>
-        <p class="card-text">
-          Price: {{product.price * product.quantity| currency}}
-        </p>
-      </div>
 
-      <div class="card-details">
-        <p class="card-text">
-          Quantity: {{product.quantity}}
-        </p>
-        <p class="card-text">
-          <ngb-accordion [closeOthers]="true" activeIds="static-0" animation="true">
-            <ngb-panel id="static-1" title="View Details">
-              <ng-template ngbPanelContent>
-                {{product.details}}
-              </ng-template>
-            </ngb-panel>
-          </ngb-accordion>
-        </p>
-      </div>
-
-
-      <div class="mb-2">
-      </div>
-      <div class="card-footer">
-        <div class="row">
-          <div class="col-md-6 mb-2">
-            <span class="align-middle glyphicon glyphicon-star"
-                  aria-hidden="true"></span>
-            <span class="align-middle glyphicon glyphicon-star"
-                                                   aria-hidden="true"></span>
-            <span class="align-middle glyphicon glyphicon-star" aria-hidden="true"></span>
-            <span class="align-middle glyphicon glyphicon-star" aria-hidden="true"></span> <span class="align-middle glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-          </div>
-          <div class="col-md-6">
-
-          </div>
-        </div>
-      </div>
-    </div>
-    </div>-->
 </div>
     <div class="col mb-2">
       <div class="row">
