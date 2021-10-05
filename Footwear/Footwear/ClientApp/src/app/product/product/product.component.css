@@ -197,12 +197,12 @@ label {
   }
 }
 
-#pagination {
-    /*display: inline-block !important;*/
-    margin-left:50%;
+.pagination-section{
+    width:100%;
+    padding-top: 5px;
+}
 
+.custom-pagination /deep/ .ngx-pagination .current {
+  background: wheat;
 }
-.pagination-section {
-    display: block;
-    width:100%
-}
+
