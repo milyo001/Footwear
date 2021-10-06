@@ -1,5 +1,5 @@
 export interface ICartProduct {
-  id: number;
+  productId: number;
   name: string;
   price: number;
   details: string;

@@ -33,5 +33,7 @@
 
         public DateTime CreatedOn { get; set; }
 
+        public int ProductId { get; set; }
+
     }
 }

@@ -91,8 +91,8 @@
                 ImageUrl = model.ImageUrl,
                 Price = model.Price,
                 Quantity = model.Quantity,
-                CreatedOn = DateTime.Today
-                
+                CreatedOn = DateTime.Today,
+                ProductId = model.ProductId
             };
 
             var cart = this._db.Cart

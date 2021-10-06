@@ -21,7 +21,7 @@ export class CartService {
   addToCart(product): Observable<Object> {
 
     const body: ICartProduct = {
-      id: product.id,
+      productId: product.id,
       name: product.name,
       size: product.size,
       details: product.details,
@@ -36,7 +36,6 @@ export class CartService {
   }
 
   getAllCartProducts(): Observable<ICartProduct[]> {
-
     return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" + "getCartItems");
   }
 

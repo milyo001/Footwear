@@ -42,6 +42,7 @@
             var products = cart.CartProducts
                  .Select(cp => new CartProductViewModel
                  {
+                     ProductId = cp.ProductId,
                      Name = cp.Name,
                      Size = cp.Size.Value,
                      Gender = cp.Gender.ToString(),
