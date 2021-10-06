@@ -27,14 +27,12 @@ export class NavMenuComponent implements OnInit{
   faDatabase = faDatabase;
 
   constructor(
-    private cartService: CartService,
     private router: Router,
     public userService: UserService,
     private cookieService: CookieService) { }
     
 
   ngOnInit(): void {
-
     this.userService.getUserProfile().subscribe(
       response => {
         this.userDetails = response;
@@ -43,7 +41,6 @@ export class NavMenuComponent implements OnInit{
         console.log(error)
       }
     )
-
     }
 
   collapse() {
@@ -64,8 +61,6 @@ export class NavMenuComponent implements OnInit{
       return true;
     }
     else { return false }
-      
-    
   }
 
 
