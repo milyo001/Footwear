@@ -41,7 +41,8 @@ export class CartComponent implements OnInit {
     
   };
 
-  viewProduct(id) {
+  
+  viewProduct(id: number) {
     this.router.navigate(['products/' + id]);
   }
   

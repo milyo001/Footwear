@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { IProduct } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
@@ -21,16 +22,14 @@ export class ProductSelectComponent {
     private cartService: CartService,
     private router: Router,
     private toastr: ToastrService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private _location: Location
   ) { 
-
     let id: number = 0;
-
     //Get the product id from the URL parameters
     this.activatedRoute.params.subscribe(data => {
       id = data['id'];
     });
-
     productService.getProductById(id).subscribe(product => {
       this.selectedProduct = product;
     });
@@ -41,7 +40,6 @@ export class ProductSelectComponent {
     if (this.cookieService.get('token')) {
       let size: number = +((document.getElementById('size') as HTMLInputElement).value);
       this.selectedProduct.size = size;
-
       this.cartService.addToCart(this.selectedProduct).subscribe(
         (response: any) => {
           if (response.succeeded) {
@@ -52,11 +50,14 @@ export class ProductSelectComponent {
           console.log(err);
         }
       );
-      
     } else {
       this.toastr.error('You need to be signed in to add to cart.', 'Please login.');
       this.router.navigate(['user/login']);
     }
+  }
+
+  goBack(): void {
+    this._location.back();
   }
   
 }
