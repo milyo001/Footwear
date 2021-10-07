@@ -157,13 +157,13 @@ img {
 }
 
 .go-back-btn {
-  background-color: rgba(255,21,13,0.43);
+  background-color: rgba(255, 99, 71, 0.5);
 }
 .confirm-btn:hover, .like:hover {
   background: #b36800;
 }
 .go-back-btn:hover {
-  background-color: rgba(255,21,13,0.83);
+  background-color: rgba(255, 99, 71, 0.8);
 }
 .button-panel {
   width: 49%;
@@ -171,6 +171,8 @@ img {
 .buttons-section {
   display: flex;
   justify-content: space-between;
+  align-items: flex-end;
+  margin-top: 65px;
 }
 .not-available {
   text-align: center;
