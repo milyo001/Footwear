@@ -16,6 +16,7 @@ namespace Footwear
     using System;
     using Footwear.Services.TokenService;
     using Footwear.Services.CartService;
+    using System.Threading.Tasks;
 
     public class Startup
     {
@@ -59,24 +60,24 @@ namespace Footwear
                 options.Password.RequireDigit = false;
             });
 
-            //Auth tokens configuration
+            //Auth token configuration
             var signingKey = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
-                x.RequireHttpsMetadata = false;
-                x.SaveToken = false; //There is no need to save token in server
-                x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+            }).AddJwtBearer(options => {
+                options.RequireHttpsMetadata = false;
+                options.SaveToken = false; //There is no need to save token in server
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(signingKey),
                     ValidateIssuer = false,
                     ValidateAudience = false,
                     ClockSkew = TimeSpan.Zero
-            };
+                };
             });
             //Custom Services
             services.AddScoped<ITokenService, TokenService>();

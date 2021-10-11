@@ -1,11 +1,14 @@
-﻿using Footwear.Data;
-using Footwear.Data.Dto;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 namespace Footwear.Services.CartService
 {
+    using Footwear.Data;
+    using Footwear.Data.Dto;
+    using Footwear.Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class CartService : ICartService
     {
         private readonly ApplicationDbContext _db;
@@ -41,6 +44,13 @@ namespace Footwear.Services.CartService
             return products;
         }
 
+        public async Task<CartProduct> IncrementQuantityAsync(int cartProductId)
+        {
+            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+            cartProduct.Quantity++;
+            await this._db.SaveChangesAsync();
+            return cartProduct;
+        }
         
     }
 }
