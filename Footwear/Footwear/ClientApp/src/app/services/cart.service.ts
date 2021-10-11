@@ -4,6 +4,7 @@ import { ICartProduct } from '../interfaces/cartProduct';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Local } from 'protractor/built/driverProviders';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -35,9 +36,18 @@ export class CartService {
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
 
+  increaseProductQuantity(id: number, token: string): Observable<Object> {
+    const body = {
+      id: id,
+      token: token
+    };
+    return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', body);
+  }
+
   getAllCartProducts(): Observable<ICartProduct[]> {
     return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" + "getCartItems");
   }
+
 
   clearCart(): ICartProduct[] {
     return;

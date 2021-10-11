@@ -40,7 +40,25 @@ export class CartComponent implements OnInit {
     }
     
   };
+  incrementQuantity(product: ICartProduct, index: number): void {
+    //Send the id of the product
+    const id = product.productId;
+    const token = this.cookieService.get('token');
 
+    this.cartService.increaseProductQuantity(id,token).subscribe(
+        (response: any) => {
+        if (response.succeeded) {
+          var quantityElement = document.getElementById("quantity" + index);
+          var value = parseInt(quantityElement.textContent);
+          quantityElement.textContent = (++value).toString();
+          }
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    
+  }
   
   viewProduct(id: number) {
     this.router.navigate(['products/' + id]);

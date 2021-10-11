@@ -8,6 +8,7 @@
     using System.Collections.Generic;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
@@ -37,8 +38,6 @@
                 .Include(c => c.CartProducts)
                 .FirstOrDefault(c => c.Id == cartId);
 
-            
-            
             var products = cart.CartProducts
                  .Select(cp => new CartProductViewModel
                  {
@@ -58,7 +57,16 @@
             return products;
         }
 
-       
+        [HttpPut("increaseProductQuantity")]
+        public async Task<Object> IncrementCartProductQuantity([FromBody]QuantityModel model)
+        {
+
+            var id = model.Id;
+            var token = model.Token;
+
+            return Ok(new { succeeded = true });
+        }
+
 
 
 
