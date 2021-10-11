@@ -41,11 +41,8 @@ export class CartComponent implements OnInit {
     
   };
   incrementQuantity(cartProductId: number, index: number): void {
-
-    const token = this.cookieService.get('token');
-
     //Send the id of the cart product and the user auth token to change the quantity in the database
-    this.cartService.increaseProductQuantity(cartProductId, token).subscribe(
+    this.cartService.increaseProductQuantity(cartProductId).subscribe(
         (response: any) => {
         if (response.succeeded) {
           var quantityElement = document.getElementById("quantity" + index);

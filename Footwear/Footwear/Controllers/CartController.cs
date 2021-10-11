@@ -45,16 +45,13 @@
 
         [Authorize]
         [HttpPut("increaseProductQuantity")]
-        public async Task<Object> IncrementCartProductQuantity([FromBody]QuantityModel model)
+        public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
-            var cartProductId = model.CartProductId;
-            var token = model.Token;
             if(await this._cartService.IncrementQuantityAsync(cartProductId) != null)
             {
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
-            
         }
 
 

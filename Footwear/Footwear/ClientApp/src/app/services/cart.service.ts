@@ -36,12 +36,8 @@ export class CartService {
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
 
-  increaseProductQuantity(cartProductId: number, token: string): Observable<Object> {
-    const body = {
-      token: token,
-      cartProductId: cartProductId
-    };
-    return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', body);
+  increaseProductQuantity(cartProductId: number): Observable<Object> {
+    return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', cartProductId);
   }
 
   getAllCartProducts(): Observable<ICartProduct[]> {
