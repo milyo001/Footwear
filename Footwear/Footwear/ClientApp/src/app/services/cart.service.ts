@@ -39,7 +39,9 @@ export class CartService {
   increaseProductQuantity(cartProductId: number): Observable<Object> {
     return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', cartProductId);
   }
-
+  decreaseProductQuantity(cartProductId: number): Observable<Object> {
+    return this.http.put(this.baseUrl + 'cart/decreaseProductQuantity', cartProductId);
+  }
   getAllCartProducts(): Observable<ICartProduct[]> {
     return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" + "getCartItems");
   }

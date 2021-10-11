@@ -56,6 +56,29 @@ export class CartComponent implements OnInit {
       );
     
   }
+
+  decrementQuantity(cartProductId: number, index: number): void {
+    //Send the id of the cart product and the user auth token to change the quantity in the database
+    this.cartService.decreaseProductQuantity(cartProductId).subscribe(
+      (response: any) => {
+        if (response.succeeded) {
+          var quantityElement = document.getElementById("quantity" + index);
+          var value = parseInt(quantityElement.textContent);
+          if (value >= 1) {
+            quantityElement.textContent = (--value).toString();
+          }
+          else {
+            //TODO DELETE ITEM
+          }
+          
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
+
+  }
   
   viewProduct(id: number) {
     this.router.navigate(['products/' + id]);

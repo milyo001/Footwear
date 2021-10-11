@@ -44,13 +44,22 @@ namespace Footwear.Services.CartService
             return products;
         }
 
-        public async Task<CartProduct> IncrementQuantityAsync(int cartProductId)
+        public async Task<CartProduct> IncreaseQuantityAsync(int cartProductId)
         {
             var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
             cartProduct.Quantity++;
             await this._db.SaveChangesAsync();
             return cartProduct;
         }
-        
+
+        public async Task<CartProduct> DecreaseQuantityAsync(int cartProductId)
+        {
+            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+
+            cartProduct.Quantity--;
+            await this._db.SaveChangesAsync();
+            return cartProduct;
+        }
+
     }
 }

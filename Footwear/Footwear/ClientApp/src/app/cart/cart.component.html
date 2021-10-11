@@ -15,16 +15,15 @@
                         [attr.id]="'accordion-header-' + index"
                         [attr.aria-expanded]="accordionItem.expanded"
                         [attr.aria-controls]="'accordion-body-' + index">
-      <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+      <div class="example-accordion-item-header noselect" (click)="accordionItem.toggle()">
         <div class="accordion-picture-frame">
           <img class="accordion-picture-frame-img" src="{{item?.imageUrl}}" />
         </div>
         <div class="accordion-product-details">
           <p>{{item.name}}</p>
-          <p>Quantity:</p> <p id="{{'quantity' + index}}">{{item.quantity}}</p>
+          <p style="display:inline-block">Quantity:</p> <p style="display:inline" id="{{'quantity' + index}}"> {{item.quantity}}</p>
           <p>Price: {{item.price | currency}}</p>
           <p>Size: {{item.size}}</p>
-
         </div>
 
       </div>
@@ -43,12 +42,11 @@
             <p>Description: {{item.details}}</p>
             <p>Good for: {{item.productType}} </p>
             <p>Total price: {{item.price * item.quantity | currency}}</p>
-            <p>Test Id: {{item.productId}}</p>
           </div>
           <div class=".accordion-actions-menu">
             <button class="action-button btn btn-light" (click)="viewProduct(item.productId)">View product</button>
             <button class="action-button btn btn-light" (click)="incrementQuantity(item.id, index)">Add</button>
-            <button class="action-button btn btn btn-light">Remove one</button>
+            <button class="action-button btn btn btn-light" (click)="decrementQuantity(item.id, index)">Remove one</button>
             <button class="action-button btn btn-danger">Remove from cart</button>
           </div>
         </section>

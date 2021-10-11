@@ -47,13 +47,26 @@
         [HttpPut("increaseProductQuantity")]
         public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
-            if(await this._cartService.IncrementQuantityAsync(cartProductId) != null)
+            if(await this._cartService.IncreaseQuantityAsync(cartProductId) != null)
             {
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
         }
 
+        [Authorize]
+        [HttpPut("decreaseProductQuantity")]
+        public async Task<Object> DecreaseCartProductQuantity([FromBody] int cartProductId)
+        {
+            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+            
+            if (await this._cartService.DecreaseQuantityAsync(cartProductId) != null 
+                && cartProduct.Quantity >= 0)
+            {
+                return Ok(new { succeeded = true });
+            }
+            return BadRequest("Error, modifing the data!");
+        }
 
 
 
