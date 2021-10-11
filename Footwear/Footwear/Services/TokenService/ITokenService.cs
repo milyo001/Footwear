@@ -5,7 +5,7 @@ namespace Footwear.Services.TokenService
 {
     public interface ITokenService
     {
-        public int GetCartId(string token);
+        int GetCartId(string token);
 
     }
 }

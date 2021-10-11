@@ -15,6 +15,7 @@ namespace Footwear
     using System.Text;
     using System;
     using Footwear.Services.TokenService;
+    using Footwear.Services.CartService;
 
     public class Startup
     {
@@ -79,6 +80,7 @@ namespace Footwear
             });
             //Custom Services
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICartService, CartService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
