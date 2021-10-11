@@ -14,6 +14,7 @@ namespace Footwear
     using Microsoft.IdentityModel.Tokens;
     using System.Text;
     using System;
+    using Footwear.Services.TokenService;
 
     public class Startup
     {
@@ -42,11 +43,12 @@ namespace Footwear
             //CORS config
             services.AddCors();
 
+            //Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequiredLength = 6;
@@ -56,8 +58,8 @@ namespace Footwear
                 options.Password.RequireDigit = false;
             });
 
+            //Auth tokens configuration
             var signingKey = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
-
             services.AddAuthentication(x =>
             {
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -75,6 +77,8 @@ namespace Footwear
                     ClockSkew = TimeSpan.Zero
             };
             });
+            //Custom Services
+            services.AddScoped<ITokenService, TokenService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

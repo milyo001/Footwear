@@ -40,12 +40,12 @@ export class CartComponent implements OnInit {
     }
     
   };
-  incrementQuantity(product: ICartProduct, index: number): void {
-    //Send the id of the product
-    const id = product.productId;
+  incrementQuantity(cartProductId: number, index: number): void {
+
     const token = this.cookieService.get('token');
 
-    this.cartService.increaseProductQuantity(id,token).subscribe(
+    //Send the id of the cart product and the user auth token to change the quantity in the database
+    this.cartService.increaseProductQuantity(cartProductId, token).subscribe(
         (response: any) => {
         if (response.succeeded) {
           var quantityElement = document.getElementById("quantity" + index);

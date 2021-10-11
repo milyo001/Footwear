@@ -2,6 +2,7 @@
 {
     using Footwear.Data;
     using Footwear.Data.Dto;
+    using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System;
@@ -15,12 +16,13 @@
     public class CartController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
+        private readonly ITokenService _tokenService;
 
 
-
-        public CartController(ApplicationDbContext db)
+        public CartController(ApplicationDbContext db, ITokenService tokenService)
         {
             this._db = db;
+            this._tokenService = tokenService;
         }
 
 
@@ -29,10 +31,9 @@
         {
             
             var authCookie = Request.Cookies["token"];
-            var handler = new JwtSecurityTokenHandler();
-            var token = handler.ReadJwtToken(authCookie);
 
-            var cartId = Int32.Parse(token.Claims.FirstOrDefault(x => x.Type == "CartId").Value);
+
+            var cartId = this._tokenService.GetCartId(authCookie);
 
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)
@@ -41,6 +42,7 @@
             var products = cart.CartProducts
                  .Select(cp => new CartProductViewModel
                  {
+                     Id = cp.Id,
                      ProductId = cp.ProductId,
                      Name = cp.Name,
                      Size = cp.Size.Value,
@@ -61,8 +63,10 @@
         public async Task<Object> IncrementCartProductQuantity([FromBody]QuantityModel model)
         {
 
-            var id = model.Id;
+            var cartProductId = model.CartProductId;
             var token = model.Token;
+
+
 
             return Ok(new { succeeded = true });
         }

@@ -36,10 +36,10 @@ export class CartService {
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
 
-  increaseProductQuantity(id: number, token: string): Observable<Object> {
+  increaseProductQuantity(cartProductId: number, token: string): Observable<Object> {
     const body = {
-      id: id,
-      token: token
+      token: token,
+      cartProductId: cartProductId
     };
     return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', body);
   }

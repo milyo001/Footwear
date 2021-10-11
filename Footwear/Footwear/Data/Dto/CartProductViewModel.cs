@@ -1,9 +1,12 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Footwear.Data.Dto
 {
     public class CartProductViewModel
     {
-
+        [Key]
+        public int Id { get; set; }
         public int ProductId { get; set; }
 
         public string Name { get; set; }
@@ -21,8 +24,6 @@ namespace Footwear.Data.Dto
         public int Size { get; set; }
 
         public int Quantity { get; set; }
-
-        public string UserName { get; set; }
 
         public string CreatedOn { get; set; }
     }
