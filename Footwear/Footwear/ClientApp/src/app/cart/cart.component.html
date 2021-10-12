@@ -21,10 +21,8 @@
         </div>
         <div class="accordion-product-details">
           <p>{{item.name}}</p>
-          <div class="quantity-paragraph">
-          <p style="display:inline-block">Quantity:</p>
+          <p class="quantity-paragraph">Quantity:</p>
           <p style="display:inline-block" id="{{'quantity' + index}}"> {{item.quantity}}</p>
-          </div>
           <p>Price: {{item.price | currency}}</p>
           <p>Size: {{item.size}}</p>
         </div>
@@ -44,12 +42,14 @@
           <div class=".accordion-description">
             <p>Description: {{item.details}}</p>
             <p>Good for: {{item.productType}} </p>
-            <p>Total price: {{item.price * item.quantity | currency}}</p>
+            <p class="quantity-paragraph"> Total price:</p>
+            <p id="{{'totalPrice' + index}}" style="display:inline">{{item.price * item.quantity}}</p>
+            <p style="display:inline">$</p>
           </div>
           <div class=".accordion-actions-menu">
-            <button class="action-button btn btn-light" (click)="viewProduct(item.productId)">View product</button>
-            <button class="action-button btn btn-light" (click)="incrementQuantity(item.id, index)">Add</button>
-            <button class="action-button btn btn btn-light" (click)="decrementQuantity(item.id, index)">Remove one</button>
+            <button class="action-button btn btn-light" (click)="viewProduct(item.id)">View product</button>
+            <button class="action-button btn btn-light" (click)="incrementQuantity(item, index)">Add</button>
+            <button class="action-button btn btn btn-light" (click)="decrementQuantity(item, index)">Remove one</button>
             <button class="action-button btn btn-danger">Remove from cart</button>
           </div>
         </section>

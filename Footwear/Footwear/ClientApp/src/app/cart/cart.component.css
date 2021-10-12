@@ -152,6 +152,14 @@ footer {
   justify-content: center;
 }
 
+.quantity-paragraph {
+  display: inline-block;
+  margin-right: 5px;
+}
+.price-paragraph {
+  display: inline-block;
+  margin-right: 5px;
+}
 .example-accordion-item-header,
 .example-accordion-item-body {
   padding: 16px;

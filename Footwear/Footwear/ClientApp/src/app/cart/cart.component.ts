@@ -38,45 +38,54 @@ export class CartComponent implements OnInit {
       this.toastr.error('You need to log in to view the cart!');
       this.router.navigate(['user/login']);
     }
-    
   };
-  incrementQuantity(cartProductId: number, index: number): void {
+
+  incrementQuantity(cartProduct: ICartProduct, index: number): void {
     //Send the id of the cart product and the user auth token to change the quantity in the database
-    this.cartService.increaseProductQuantity(cartProductId).subscribe(
+    this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
         (response: any) => {
         if (response.succeeded) {
+          //Increment quantity in the view
           var quantityElement = document.getElementById("quantity" + index);
           var value = parseInt(quantityElement.textContent);
           quantityElement.textContent = (++value).toString();
+          //Sum the price to the total price element
+          var totalPrice = document.getElementById("totalPrice" + index);
+          var totPriceElValue = parseInt(totalPrice.textContent);
+          totalPrice.textContent = (totPriceElValue + cartProduct.price).toString();
           }
         },
         err => {
           console.log(err);
         }
       );
-    
   }
 
-  decrementQuantity(cartProductId: number, index: number): void {
-    //Send the id of the cart product and the user auth token to change the quantity in the database
-    this.cartService.decreaseProductQuantity(cartProductId).subscribe(
-      (response: any) => {
-        if (response.succeeded) {
-          var quantityElement = document.getElementById("quantity" + index);
-          var value = parseInt(quantityElement.textContent);
-          if (value > 1) {
-            quantityElement.textContent = (--value).toString();
+  decrementQuantity(cartProduct: ICartProduct, index: number): void {
+    //Send the id of the cart product and to change the quantity in the database, index is the current
+    //cartProducts collection index
+    var quantityElement = document.getElementById("quantity" + index);
+    var value = parseInt(quantityElement.textContent);
+    if (value <= 1) {
+      this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try removing the item");
+    }
+    else {
+      this.cartService.decreaseProductQuantity(cartProduct.id).subscribe(
+        (response: any) => {
+          if (response.succeeded) {
+            if (value > 1) {
+              quantityElement.textContent = (--value).toString();
+              var totalPrice = document.getElementById("totalPrice" + index);
+              var totPriceElValue = parseInt(totalPrice.textContent);
+              totalPrice.textContent = (totPriceElValue - cartProduct.price).toString();
+            }
           }
+        },
+        err => {
+          console.log(err);
         }
-        else {
-          this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try removing the item");
-        }
-      } ,
-      err => {
-        console.log(err);
-      }
-    );
-
+      );
+    }
   }
   
   viewProduct(id: number) {
