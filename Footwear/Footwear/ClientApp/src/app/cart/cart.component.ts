@@ -64,15 +64,14 @@ export class CartComponent implements OnInit {
         if (response.succeeded) {
           var quantityElement = document.getElementById("quantity" + index);
           var value = parseInt(quantityElement.textContent);
-          if (value >= 1) {
+          if (value > 1) {
             quantityElement.textContent = (--value).toString();
           }
-          else {
-            //TODO DELETE ITEM
-          }
-          
         }
-      },
+        else {
+          this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try removing the item");
+        }
+      } ,
       err => {
         console.log(err);
       }

@@ -1,5 +1,4 @@
-﻿
-namespace Footwear.Services.CartService
+﻿namespace Footwear.Services.CartService
 {
     using Footwear.Data;
     using Footwear.Data.Dto;
@@ -43,23 +42,26 @@ namespace Footwear.Services.CartService
 
             return products;
         }
-
-        public async Task<CartProduct> IncreaseQuantityAsync(int cartProductId)
+        public async Task<CartProduct> GetCardProductByIdAsync(int cartProductId)
         {
-            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+            var product = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+            return product;
+        }
+
+        public async void IncreaseQuantityAsync(int cartProductId)
+        {
+            var cartProduct = await this.GetCardProductByIdAsync(cartProductId);
             cartProduct.Quantity++;
             await this._db.SaveChangesAsync();
-            return cartProduct;
         }
 
-        public async Task<CartProduct> DecreaseQuantityAsync(int cartProductId)
+        public async void DecreaseQuantityAsync(int cartProductId)
         {
-            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
-
+            var cartProduct = await this.GetCardProductByIdAsync(cartProductId);
             cartProduct.Quantity--;
             await this._db.SaveChangesAsync();
-            return cartProduct;
         }
 
+       
     }
 }

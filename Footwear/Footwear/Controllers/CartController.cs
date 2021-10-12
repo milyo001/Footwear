@@ -47,8 +47,10 @@
         [HttpPut("increaseProductQuantity")]
         public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
-            if(await this._cartService.IncreaseQuantityAsync(cartProductId) != null)
+            var cartProduct = await this._cartService.GetCardProductByIdAsync(cartProductId);
+            if (cartProduct != null)
             {
+                this._cartService.IncreaseQuantityAsync(cartProductId);
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
@@ -58,11 +60,14 @@
         [HttpPut("decreaseProductQuantity")]
         public async Task<Object> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
-            var cartProduct = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
-            
-            if (await this._cartService.DecreaseQuantityAsync(cartProductId) != null 
-                && cartProduct.Quantity >= 0)
+            var cartProduct = await this._cartService.GetCardProductByIdAsync(cartProductId);
+            if(cartProduct == null)
             {
+                return BadRequest("Product do not exists in context");
+            }
+            if (cartProduct.Quantity > 1)
+            {
+                this._cartService.DecreaseQuantityAsync(cartProductId);
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
