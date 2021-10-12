@@ -48,18 +48,18 @@
             return product;
         }
 
-        public async void IncreaseQuantityAsync(int cartProductId)
+        public void IncreaseQuantity(int cartProductId)
         {
-            var cartProduct = await this.GetCardProductByIdAsync(cartProductId);
+            var cartProduct =  this.GetCardProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity++;
-            await this._db.SaveChangesAsync();
+            this._db.SaveChanges();
         }
 
-        public async void DecreaseQuantityAsync(int cartProductId)
+        public void DecreaseQuantity(int cartProductId)
         {
-            var cartProduct = await this.GetCardProductByIdAsync(cartProductId);
+            var cartProduct = this.GetCardProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity--;
-            await this._db.SaveChangesAsync();
+            this._db.SaveChangesAsync();
         }
 
        

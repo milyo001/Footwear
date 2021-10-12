@@ -21,7 +21,10 @@
         </div>
         <div class="accordion-product-details">
           <p>{{item.name}}</p>
-          <p style="display:inline-block">Quantity:</p> <p style="display:inline" id="{{'quantity' + index}}"> {{item.quantity}}</p>
+          <div class="quantity-paragraph">
+          <p style="display:inline-block">Quantity:</p>
+          <p style="display:inline-block" id="{{'quantity' + index}}"> {{item.quantity}}</p>
+          </div>
           <p>Price: {{item.price | currency}}</p>
           <p>Size: {{item.size}}</p>
         </div>

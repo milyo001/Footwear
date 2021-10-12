@@ -50,7 +50,7 @@
             var cartProduct = await this._cartService.GetCardProductByIdAsync(cartProductId);
             if (cartProduct != null)
             {
-                this._cartService.IncreaseQuantityAsync(cartProductId);
+                this._cartService.IncreaseQuantity(cartProductId);
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
@@ -67,7 +67,7 @@
             }
             if (cartProduct.Quantity > 1)
             {
-                this._cartService.DecreaseQuantityAsync(cartProductId);
+                this._cartService.DecreaseQuantity(cartProductId);
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
