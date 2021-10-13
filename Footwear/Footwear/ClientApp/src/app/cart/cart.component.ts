@@ -5,6 +5,8 @@ import { ICartProduct } from '../interfaces/cartProduct';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalComponent } from './modal.component';
 
 
 @Component({
@@ -26,7 +28,8 @@ export class CartComponent implements OnInit {
     private cartService: CartService,
     private toastr: ToastrService,
     private cookieService: CookieService,
-    private router: Router
+    private router: Router,
+    public modal: NgbModal
   ) { }
 
   ngOnInit() {
@@ -86,11 +89,9 @@ export class CartComponent implements OnInit {
   }
 
   deleteProduct(item: ICartProduct, index: number) {
-    if (confirm("Are you sure to delete " + item.name)) {
-      console.log("Implement delete functionality here");
-    }
+    this.modal.open(ModalComponent);
   }
-
+  
   //DOM Manipulation
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);
