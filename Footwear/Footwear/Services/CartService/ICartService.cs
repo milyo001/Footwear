@@ -14,5 +14,7 @@ namespace Footwear.Services.CartService
         void DecreaseQuantity(int productId);
         Task<CartProduct> GetCardProductByIdAsync(int productId);
 
+        void DeleteCartProduct(int productId);
+
     }
 }

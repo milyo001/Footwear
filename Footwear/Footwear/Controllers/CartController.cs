@@ -73,6 +73,19 @@
             return BadRequest("Error, modifing the data!");
         }
 
+        [Authorize]
+        [HttpPost("deleteCartProduct")]
+        public async Task<Object> DeleteCartProduct([FromBody] int cartProductId)
+        {
+            if (await this._cartService.GetCardProductByIdAsync(cartProductId) == null)
+            {
+                return BadRequest("Product do not exists in cart");
+            }
+            this._cartService.DeleteCartProduct(cartProductId);
+
+            return Ok(new { succeeded = true });
+        }
+
 
 
     }

@@ -43,9 +43,11 @@ export class CartService {
     return this.http.put(this.baseUrl + 'cart/decreaseProductQuantity', cartProductId);
   }
   getAllCartProducts(): Observable<ICartProduct[]> {
-    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/" + "getCartItems");
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/getCartItems");
   }
-
+  deleteCartProduct(cartProductId): Observable<ICartProduct> {
+    return this.http.post<ICartProduct>(this.baseUrl + "cart/deleteCartProduct", cartProductId);
+  }
 
   clearCart(): ICartProduct[] {
     return;
@@ -66,7 +68,4 @@ export class CartService {
     
   }
 
-  deleteCartProduct(items: ICartProduct[], cartId: number): void {
-    //TODO
-  }
 }

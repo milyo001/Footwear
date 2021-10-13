@@ -1,4 +1,4 @@
-import { Component, OnInit, Type } from '@angular/core';
+import { Component, Input, OnInit, Type } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
@@ -89,7 +89,23 @@ export class CartComponent implements OnInit {
   }
 
   deleteProduct(item: ICartProduct, index: number) {
-    this.modal.open(ModalComponent);
+    const modalRef = this.modal.open(ModalComponent);
+    modalRef.componentInstance.product = item;
+    modalRef.result.then(result => {
+      if (result == "confirm") {
+        this.cartService.deleteCartProduct(item.id).subscribe(
+          (response: any) => {
+            if (response.succeeded) {
+              this.deleteCartProductEl(index);
+            }
+          },
+          err => {
+            console.log(err);
+          }
+        );
+      }},
+      (reason) => { /*Handle rejection or leave blank*/ });
+
   }
   
   //DOM Manipulation
@@ -110,5 +126,9 @@ export class CartComponent implements OnInit {
     var totalPrice = document.getElementById("totalPrice" + index);
     var totPriceElValue = parseInt(totalPrice.textContent);
     totalPrice.textContent = (totPriceElValue - price).toString();
+  }
+  deleteCartProductEl(index: number) {
+    const element = document.getElementById("accordion-header-" + index);
+    element.remove();
   }
 }

@@ -62,6 +62,11 @@
             this._db.SaveChangesAsync();
         }
 
-       
+        public void DeleteCartProduct(int cartProductId)
+        {
+            var cartProduct = this.GetCardProductByIdAsync(cartProductId).Result;
+            this._db.CartProducts.Remove(cartProduct);
+            this._db.SaveChanges();
+        }
     }
 }
