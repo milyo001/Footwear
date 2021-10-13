@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-cart',
@@ -40,19 +41,17 @@ export class CartComponent implements OnInit {
     }
   };
 
+  viewProduct(id: number) {
+    this.router.navigate(['products/' + id]);
+  }
+
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
     //Send the id of the cart product and the user auth token to change the quantity in the database
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
         (response: any) => {
         if (response.succeeded) {
-          //Increment quantity in the view
-          var quantityElement = document.getElementById("quantity" + index);
-          var value = parseInt(quantityElement.textContent);
-          quantityElement.textContent = (++value).toString();
-          //Sum the price to the total price element
-          var totalPrice = document.getElementById("totalPrice" + index);
-          var totPriceElValue = parseInt(totalPrice.textContent);
-          totalPrice.textContent = (totPriceElValue + cartProduct.price).toString();
+          this.increaseDomQuantity(index);
+          this.increaseDomTotPrice(index, cartProduct.price);
           }
         },
         err => {
@@ -74,10 +73,8 @@ export class CartComponent implements OnInit {
         (response: any) => {
           if (response.succeeded) {
             if (value > 1) {
-              quantityElement.textContent = (--value).toString();
-              var totalPrice = document.getElementById("totalPrice" + index);
-              var totPriceElValue = parseInt(totalPrice.textContent);
-              totalPrice.textContent = (totPriceElValue - cartProduct.price).toString();
+              this.decreaseDomQuantity(quantityElement, value);
+              this.decreaseDomTotPrice(index, cartProduct.price);
             }
           }
         },
@@ -87,9 +84,30 @@ export class CartComponent implements OnInit {
       );
     }
   }
-  
-  viewProduct(id: number) {
-    this.router.navigate(['products/' + id]);
+
+  deleteProduct(item: ICartProduct, index: number) {
+    if (confirm("Are you sure to delete " + item.name)) {
+      console.log("Implement delete functionality here");
+    }
   }
-  
+
+  //DOM Manipulation
+  increaseDomQuantity(index: number) {
+    var quantityElement = document.getElementById("quantity" + index);
+    var value = parseInt(quantityElement.textContent);
+    quantityElement.textContent = (++value).toString();
+  }
+  increaseDomTotPrice(index: number, price: number) {
+    var totalPrice = document.getElementById("totalPrice" + index);
+    var totPriceElValue = parseInt(totalPrice.textContent);
+    totalPrice.textContent = (totPriceElValue + price).toString();
+  }
+  decreaseDomQuantity(quantityElement: HTMLElement, value) {
+    quantityElement.textContent = (--value).toString();
+  }
+  decreaseDomTotPrice(index: number, price:number) {
+    var totalPrice = document.getElementById("totalPrice" + index);
+    var totPriceElValue = parseInt(totalPrice.textContent);
+    totalPrice.textContent = (totPriceElValue - price).toString();
+  }
 }

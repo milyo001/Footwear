@@ -44,10 +44,7 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({
-      progressBar: true,
-      positionClass: 'toast-top-left'
-    }),
+    ToastrModule.forRoot({ progressBar: true, positionClass: 'toast-top-left'}),
     NgbModule,
     CdkAccordionModule,
     NgxPaginationModule,
