@@ -40,13 +40,13 @@
                   <button class="confirm-btn go-back-btn btn btn-default" (click)="goBack()">Go back</button>
                 </div>
               </div>
-              
+
             </section>
-              
-            
+
           </div>
         </div>
       </div>
     </div>
-    </div>
+  </div>
+  <mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>
 </body>

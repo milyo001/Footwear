@@ -45,13 +45,7 @@
     </div>
   </section>
 </section>
-<div *ngIf="products?.length">
-  <div class="d-flex justify-content-center loading-section">
-    <div class="spinner-border" role="status">
-      <span class="sr-only">Loading...</span>
-    </div>
-  </div>
-</div>
+<mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>
 
 
 

@@ -1,4 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IProduct } from '../interfaces';
+import { LoadingService } from '../services/loading.service';
 
 @Component({
   selector: 'app-home',
@@ -6,5 +10,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  loading = this.loader.loading;
+
+  constructor(public loader: LoadingService, private http: HttpClient) {
+
+  }
+
+  test() {
+    this.http
+      .get('https://reqres.in/api/products/3')
+      .subscribe((res) => {
+        console.log(res);
+      });
+  }
   
 }

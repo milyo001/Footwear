@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product';
 import { SortingOptions } from '../sortingOptions';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-product-data',
@@ -18,10 +19,11 @@ export class ProductComponent {
 
   //A declaration for the index for the ngx pagination package(used to render the first page of the list
   //when one of the sorting/filter methods are applied)
-  public pageIndex: number; 
+  public pageIndex: number;
 
-  constructor(private productService: ProductService, private sortingOptions: SortingOptions) {
-    
+  loading = this.loader.loading;
+
+  constructor(private productService: ProductService, private sortingOptions: SortingOptions, public loader: LoadingService) {
     this.sortingOptions = new SortingOptions();
   }
 

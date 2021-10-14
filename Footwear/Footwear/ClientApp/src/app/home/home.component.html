@@ -1,6 +1,20 @@
-<div class="d-flex justify-content-center loading-section">
+<!--<div class="d-flex justify-content-center loading-section">
   <div class="spinner-border" role="status">
     <span class="sr-only">Loading...</span>
   </div>
-</div>
+</div>-->
 
+<div class="content">
+  <button mat-raised-button (click)="loader.show()">
+    Show loader
+  </button>
+
+  <button mat-raised-button (click)="loader.hide()">
+    Hide loader
+  </button>
+  <button mat-raised-button (click)="test()">
+    Test Call
+  </button>
+  <br>
+</div>
+<mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>

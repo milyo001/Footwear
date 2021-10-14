@@ -6,6 +6,7 @@ import { IProduct } from '../../interfaces/product';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-product-select',
@@ -15,6 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ProductSelectComponent {
 
   public selectedProduct: IProduct = null;
+  loading = this.loader.loading;
 
   constructor(
     private productService: ProductService,
@@ -23,7 +25,8 @@ export class ProductSelectComponent {
     private router: Router,
     private toastr: ToastrService,
     private cookieService: CookieService,
-    private _location: Location
+    private _location: Location,
+    public loader: LoadingService
   ) { 
     let id: number = 0;
     //Get the product id from the URL parameters
@@ -59,5 +62,4 @@ export class ProductSelectComponent {
   goBack(): void {
     this._location.back();
   }
-  
 }

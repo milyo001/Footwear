@@ -6,6 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
+import { MatToolbarModule } from '@angular/material/toolbar'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatButtonModule } from '@angular/material/button'
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -23,6 +26,7 @@ import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './modules/router/appRoutingModule';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
+import { LoadingService } from './services/loading.service';
 
 @NgModule({
   declarations: [
@@ -47,6 +51,9 @@ import { ModalComponent } from './cart/modal.component';
     NgxPaginationModule,
     FontAwesomeModule,
     UserModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatButtonModule
   ],
   providers:[
     UserService,
@@ -54,7 +61,9 @@ import { ModalComponent } from './cart/modal.component';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-    }],
+    },
+    LoadingService
+  ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]
 })
