@@ -24,9 +24,9 @@
     </div>
   </div>
 </nav>
-<mat-toolbar>
-  <span>Product list is empty...</span>
-</mat-toolbar>
+<div class="products-empty-list" *ngIf="!products?.length">
+  <mat-toolbar >Item list is empty, check with the server administrator.</mat-toolbar>
+</div>
 <section class="products" *ngIf="products?.length">
   <div class="product-card" *ngFor="let product of products | paginate:{itemsPerPage: 6, currentPage:pageIndex}" [routerLink]="['/products/', product.id]">
     <div class="product-image">

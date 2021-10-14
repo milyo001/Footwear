@@ -16,7 +16,7 @@ export class ProductComponent {
 
   //All products in their original state
   public untouchedProducts: IProduct[] = [];
-
+  public showContent: boolean = false;
   //A declaration for the index for the ngx pagination package(used to render the first page of the list
   //when one of the sorting/filter methods are applied)
   public pageIndex: number;
