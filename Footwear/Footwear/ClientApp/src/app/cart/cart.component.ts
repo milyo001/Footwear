@@ -116,16 +116,16 @@ export class CartComponent implements OnInit {
   }
   increaseDomTotPrice(index: number, price: number) {
     var totalPrice = document.getElementById("totalPrice" + index);
-    var totPriceElValue = parseInt(totalPrice.textContent);
-    totalPrice.textContent = (totPriceElValue + price).toString();
+    var totPriceElValue = parseFloat(totalPrice.textContent);
+    totalPrice.textContent = (totPriceElValue + price).toFixed(2);
   }
   decreaseDomQuantity(quantityElement: HTMLElement, value) {
     quantityElement.textContent = (--value).toString();
   }
   decreaseDomTotPrice(index: number, price:number) {
     var totalPrice = document.getElementById("totalPrice" + index);
-    var totPriceElValue = parseInt(totalPrice.textContent);
-    totalPrice.textContent = (totPriceElValue - price).toString();
+    var totPriceElValue = parseFloat(totalPrice.textContent);
+    totalPrice.textContent = (totPriceElValue - price).toFixed(2);
   }
   deleteCartProductEl(index: number) {
     const element = document.getElementById("accordion-header-" + index);

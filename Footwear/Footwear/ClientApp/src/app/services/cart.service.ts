@@ -32,6 +32,9 @@ export class CartService {
 
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
+  getAllCartProducts(): Observable<ICartProduct[]> {
+    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/getCartItems");
+  }
 
   increaseProductQuantity(cartProductId: number): Observable<Object> {
     return this.http.put(this.baseUrl + 'cart/increaseProductQuantity', cartProductId);
@@ -39,9 +42,7 @@ export class CartService {
   decreaseProductQuantity(cartProductId: number): Observable<Object> {
     return this.http.put(this.baseUrl + 'cart/decreaseProductQuantity', cartProductId);
   }
-  getAllCartProducts(): Observable<ICartProduct[]> {
-    return this.http.get<ICartProduct[]>(this.baseUrl + "cart/getCartItems");
-  }
+  
   deleteCartProduct(cartProductId): Observable<ICartProduct> {
     return this.http.post<ICartProduct>(this.baseUrl + "cart/deleteCartProduct", cartProductId);
   }
