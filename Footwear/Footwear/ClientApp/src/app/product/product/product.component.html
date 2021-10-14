@@ -45,7 +45,13 @@
     </div>
   </section>
 </section>
-<div *ngIf="!products?.length">Sorry, no products found!</div>
+<div *ngIf="products?.length">
+  <div class="d-flex justify-content-center loading-section">
+    <div class="spinner-border" role="status">
+      <span class="sr-only">Loading...</span>
+    </div>
+  </div>
+</div>
 
 
 

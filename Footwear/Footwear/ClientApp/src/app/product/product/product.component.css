@@ -206,3 +206,16 @@ label {
   background: wheat;
 }
 
+.loading-section {
+  width: 100%;
+  min-height: 75vh;
+}
+
+.spinner-border {
+  width: 10rem;
+  height: 10rem;
+  margin-top: 20%;
+  vertical-align: text-bottom;
+  border: .25em solid currentColor;
+  border-right-color: transparent;
+}

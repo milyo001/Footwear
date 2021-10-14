@@ -1,10 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { IProduct } from '../interfaces';
 import { ICartProduct } from '../interfaces/cartProduct';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Local } from 'protractor/built/driverProviders';
-import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
