@@ -225,3 +225,10 @@ label {
   z-index: 5;
 }
 
+:host ::ng-deep .mat-progress-spinner circle, .mat-spinner circle {
+  stroke: #F5DEB3;
+}
+mat-toolbar {
+  text-align: center;
+  justify-content: center;
+}

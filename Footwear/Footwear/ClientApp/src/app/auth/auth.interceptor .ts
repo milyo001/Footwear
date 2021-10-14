@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { finalize, tap } from "rxjs/operators";
+import { tap } from "rxjs/operators";
 import { Router } from "@angular/router";
 import { CookieService } from "ngx-cookie-service";
 import { LoadingService } from "../services/loading.service";
@@ -24,10 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(clonedReq).pipe(
         tap(
           succ => {            
-            setTimeout(() => {
               this.loader.hide();
-            }, 2000);
-
           },
           err => {
             if (err.status == 401) { //Send error if user is not logged in, check web api controller

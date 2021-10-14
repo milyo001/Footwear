@@ -61,8 +61,7 @@ import { LoadingService } from './services/loading.service';
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-    },
-    LoadingService
+    }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]

@@ -1,4 +1,3 @@
-<p *ngIf="!products"><em>Loading...</em></p>
 
 <nav class="product-filter">
   <h1>All products</h1>
@@ -25,6 +24,9 @@
     </div>
   </div>
 </nav>
+<mat-toolbar>
+  <span>Product list is empty...</span>
+</mat-toolbar>
 <section class="products" *ngIf="products?.length">
   <div class="product-card" *ngFor="let product of products | paginate:{itemsPerPage: 6, currentPage:pageIndex}" [routerLink]="['/products/', product.id]">
     <div class="product-image">
