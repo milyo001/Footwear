@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -13,6 +13,7 @@ import { LoadingService } from '../../services/loading.service';
   templateUrl: './product-select.component.html',
   styleUrls: ['./product-select.component.css']
 })
+
 export class ProductSelectComponent {
 
   public selectedProduct: IProduct = null;
@@ -37,6 +38,11 @@ export class ProductSelectComponent {
       this.selectedProduct = product;
     });
     
+  }
+
+  ngOnInit() {
+    //When page is loaded scroll to the product view for better user experience
+    document.getElementById("productFocus").scrollIntoView();
   }
 
   addToCart(product): void {
