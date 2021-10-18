@@ -1,12 +1,14 @@
-import { Component, Input, OnInit, Type } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
-import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 
 
 @Component({
@@ -47,7 +49,10 @@ export class CartComponent implements OnInit {
   viewProduct(id: number) {
     this.router.navigate(['products/' + id]);
   }
-
+  scrollToAccordion(index) {
+    const element = document.getElementById("accordion-header-" + index);
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
     //Send the id of the cart product and the user auth token to change the quantity in the database
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
