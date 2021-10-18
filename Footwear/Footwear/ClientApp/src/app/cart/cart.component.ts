@@ -34,6 +34,8 @@ export class CartComponent implements OnInit {
     public modal: NgbModal
   ) { }
 
+
+  //Load all the products from the dabase or display a notification (error message)
   ngOnInit() {
     if (this.cookieService.get('token') != '') {
       this.cartService.getAllCartProducts().subscribe(productsList => {
@@ -46,15 +48,25 @@ export class CartComponent implements OnInit {
     }
   };
 
+  //View product by given product id
   viewProduct(id: number) {
     this.router.navigate(['products/' + id]);
   }
-  scrollToAccordion(index) {
-    const element = document.getElementById("accordion-header-" + index);
-    element.scrollIntoView({ behavior: 'smooth' });
+
+  //This method will scroll the window to the accordion, when the accordion is closed
+  scrollToAccordion(index, accordionItem) {
+    if (accordionItem._expanded) {
+      //Slow down the method so the accordion could close before it and then scroll the window
+      setTimeout(() => {
+        const element = document.getElementById("accordion-header-" + index);
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    }
   }
+
+  //When clicked increase the quantity of a given item in cart.component.html and database
+  //Increase the total price in the document
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
-    //Send the id of the cart product and the user auth token to change the quantity in the database
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
         (response: any) => {
         if (response.succeeded) {
@@ -67,10 +79,9 @@ export class CartComponent implements OnInit {
         }
       );
   }
-
+    //When clicked decrease the quantity of a given item in the document and database
+    //Decrease the total price in the document
   decrementQuantity(cartProduct: ICartProduct, index: number): void {
-    //Send the id of the cart product and to change the quantity in the database, index is the current
-    //cartProducts collection index
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
     if (value <= 1) {
@@ -92,7 +103,7 @@ export class CartComponent implements OnInit {
       );
     }
   }
-
+  //Ask for confirmation with modal and if user confirms removes item from database and the document
   deleteProduct(item: ICartProduct, index: number) {
     const modalRef = this.modal.open(ModalComponent);
     modalRef.componentInstance.product = item;
@@ -113,7 +124,7 @@ export class CartComponent implements OnInit {
 
   }
   
-  //DOM Manipulation
+  //DOM Manipulation Helpers
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);

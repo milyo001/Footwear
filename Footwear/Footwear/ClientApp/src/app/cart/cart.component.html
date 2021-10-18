@@ -15,7 +15,7 @@
                         [attr.id]="'accordion-header-' + index"
                         [attr.aria-expanded]="accordionItem.expanded"
                         [attr.aria-controls]="'accordion-body-' + index">
-      <div class="example-accordion-item-header noselect" (click)="accordionItem.toggle(); scrollToAccordion(index);">
+      <div class="example-accordion-item-header noselect" (click)="accordionItem.toggle(); scrollToAccordion(index, accordionItem);">
         <div class="accordion-picture-frame">
           <img class="accordion-picture-frame-img" src="{{item?.imageUrl}}" />
         </div>
@@ -30,7 +30,7 @@
       </div>
       <div class="accordion-product-details-handler">
         <span class="example-accordion-item-description row justify-content-md-center">
-          Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+          Click to {{ accordionItem.expanded ? 'close details' : 'open details' }}
         </span>
       </div>
       <div class="example-accordion-item-body"

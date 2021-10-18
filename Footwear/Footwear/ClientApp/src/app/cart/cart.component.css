@@ -129,12 +129,9 @@ footer {
 
 .example-accordion-item {
   display: block;
-  border: solid 1px #ccc;
+  border: solid 2px #ccc;
+  margin-bottom: 10px;
 }
-
-  .example-accordion-item + .example-accordion-item {
-    border-top: none;
-  }
 
 .example-accordion-item-header {
   display: flex;
@@ -159,6 +156,10 @@ footer {
 .price-paragraph {
   display: inline-block;
   margin-right: 5px;
+}
+
+.example-accordion-item-body {
+  background-color: RGBA(255,255,212,0.15);
 }
 .example-accordion-item-header,
 .example-accordion-item-body {
