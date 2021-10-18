@@ -58,20 +58,18 @@
 
     </cdk-accordion-item>
   </cdk-accordion>
-
-
-
 </div>
-    <div class="col mb-2">
+
+    <section class="col mb-2 finalize-buttons" *ngIf="cartProducts?.length">
       <div class="row">
-        <div class="col-sm-12  col-md-6">
-          <button class="btn btn-block btn-light">Continue Shopping</button>
+        <div class="col-sm-12  col-md-6" >
+          <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
         </div>
         <div class="col-sm-12 col-md-6 text-right">
-          <!--<button class="btn btn-block btn-success" (click)="onCheckOut()">Checkout</button>-->
+          <button class="btn btn-block" mat-stroked-button color="success" [routerLinkActive]="['link-active']" [routerLink]="['/about']" (click)="onCheckOut()">Place order</button>
         </div>
       </div>
-    </div>
+    </section>
 
 <div class="container text-center alert alert-danger" *ngIf="!cartProducts?.length">
   It'seems that you shoping cart is empty.Go back to the products from
