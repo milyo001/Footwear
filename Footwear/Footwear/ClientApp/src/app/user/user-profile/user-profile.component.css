@@ -1,0 +1,37 @@
+.primary-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+  justify-content: center;
+}
+.action-button-custom{
+    width: 200px;
+}
+
+
+
+
+/*Success mat button custom color
+*/
+.mat-button.mat-config-black-wheat,
+.mat-stroked-button.config-black-wheat {
+  color: black;
+}
+
+  .mat-button.mat-config-black-wheat:hover,
+  .mat-stroked-button.mat-config-black-wheat:hover {
+    background-color: wheat;
+  }
+
+.mat-raised-button.mat-config-black-wheat,
+.mat-flat-button.mat-config-black-wheat,
+.mat-fab.mat-config-black-wheat,
+.mat-mini-fab.mat-config-black-wheat {
+  color: #ffffed;
+  background-color: wheat;
+}
+
+.mat-icon-button.config-black-wheat {
+  color: wheat;
+}

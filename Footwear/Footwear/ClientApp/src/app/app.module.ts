@@ -9,6 +9,8 @@ import { CdkAccordionModule } from '@angular/cdk/accordion';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatButtonModule } from '@angular/material/button'
+import { MatInputModule } from '@angular/material/input';
+
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -55,7 +57,8 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
     UserModule,
     MatToolbarModule,
     MatProgressSpinnerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule
   ],
   providers:[
     UserService,
