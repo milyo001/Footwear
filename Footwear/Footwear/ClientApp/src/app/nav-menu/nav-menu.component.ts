@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import {
   faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
-  faDatabase } from '@fortawesome/free-solid-svg-icons';
+  faDatabase, 
+  faUser} from '@fortawesome/free-solid-svg-icons';
 import { Local } from 'protractor/built/driverProviders';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -25,6 +26,7 @@ export class NavMenuComponent implements OnInit{
   faSignInAlt = faSignInAlt;
   faAddressCard = faAddressCard;
   faDatabase = faDatabase;
+  faUser = faUser;
 
   constructor(
     private router: Router,

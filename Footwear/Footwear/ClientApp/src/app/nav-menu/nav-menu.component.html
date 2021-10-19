@@ -48,12 +48,16 @@
             </a>
           </li>
           <li *ngIf="isAuthenticated()" class="nav-item">
-            <a class="nav-link underline-link">
+            <a class="nav-link">
               <fa-icon [icon]="faDatabase"></fa-icon>My Orders
             </a>
+          <li *ngIf="isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['user/userProfile']">
+              <fa-icon [icon]="faUser"></fa-icon>Account
+            </a>
           <li *ngIf="isAuthenticated()" class="nav-item">
-            <a  class="logout-link nav-link" (click)="onLogout()">
-              <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout 
+            <a class="logout-link nav-link" (click)="onLogout()">
+              <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout
             </a>
         </ul>
       </div>

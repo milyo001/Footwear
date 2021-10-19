@@ -8,6 +8,7 @@ import { ProductSelectComponent } from '../../product/product-select/product-sel
 import { ProductComponent } from '../../product/product/product.component';
 import { LoginComponent } from '../../user/login/login.component';
 import { RegisterComponent } from '../../user/register/register.component';
+import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'user/login', component: LoginComponent },
-  { path: 'user/register', component: RegisterComponent }
+  { path: 'user/register', component: RegisterComponent },
+  { path: 'user/userProfile', component: UserProfileComponent }
 ]; // sets up routes constant where you define your routes
 
 // configures NgModule imports and exports

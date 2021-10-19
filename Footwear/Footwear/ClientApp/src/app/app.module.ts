@@ -27,6 +27,7 @@ import { AppRoutingModule } from './modules/router/appRoutingModule';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { LoadingService } from './services/loading.service';
     ProductSelectComponent,
     CartComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
