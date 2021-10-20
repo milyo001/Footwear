@@ -1,18 +1,1 @@
-.loading-section {
-  width:100%;
-  min-height:75vh;
-}
 
-.spinner-border {
-  width: 10rem;
-  height: 10rem;
-  margin-top: 20%;
-}
-
-.mat-progress-spinner {
-    position:absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-}

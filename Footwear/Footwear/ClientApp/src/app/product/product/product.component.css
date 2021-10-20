@@ -215,11 +215,6 @@ label {
   background: wheat;
 }
 
-.loading-section {
-  width: 100%;
-  min-height: 75vh;
-}
-
 .spinner-border {
   width: 10rem;
   height: 10rem;

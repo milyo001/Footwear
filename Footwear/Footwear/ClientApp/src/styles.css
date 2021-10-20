@@ -5,6 +5,7 @@ html {
   font-family: 'Merriweather', serif !important;
   font-size: 16px !important;
 }
+
 a {
   color: #0366d6;
 }
@@ -24,6 +25,31 @@ html, body {
 }
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html, body {
+  height: 100%;
+}
 
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/*Loading spinner style*/
+.spinner-border {
+  width: 10rem;
+  height: 10rem;
+  margin-top: 20%;
+}
+
+.mat-progress-spinner {
+  position: absolute !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+  .mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #F5DEB3 !important;
+  }

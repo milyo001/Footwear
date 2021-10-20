@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
-import { MatExpansionModule } from '@angular/material/expansion';
+import { LoadingService } from '../services/loading.service';
 
 
 
@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   cartProducts: ICartProduct[];
   totalAmount: number;
   expandedIndex = 0;
+  loading = this.loader.loading;
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
@@ -31,7 +32,8 @@ export class CartComponent implements OnInit {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private router: Router,
-    public modal: NgbModal
+    public modal: NgbModal,
+    public loader: LoadingService
   ) { }
 
 
