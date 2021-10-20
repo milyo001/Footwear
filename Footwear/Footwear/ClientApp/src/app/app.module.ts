@@ -22,7 +22,7 @@ import { CartComponent } from './cart/cart.component';
 import { FooterComponent } from './footer/footer.component';
 
 import { UserService } from './services/user.service';
-import { AuthInterceptor } from './auth/auth.interceptor ';
+import { AuthInterceptor } from './interceptors/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserModule } from './user/user.module';
 import { AppRoutingModule } from './modules/router/appRoutingModule';
@@ -30,6 +30,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { LoaderInterceptor } from './interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,11 +63,10 @@ import { UserProfileComponent } from './user/user-profile/user-profile.component
   ],
   providers:[
     UserService,
-    CookieService, {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptor,
-    multi: true
-    }
+    CookieService,
+    LoadingService,
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // CLI imports router
 import { AboutComponent } from '../../about/about.component';
-import { AuthGuard } from '../../auth/auth.guard';
+import { AuthGuard } from '../../interceptors/auth.guard';
 import { CartComponent } from '../../cart/cart.component';
 import { HomeComponent } from '../../home/home.component';
 import { ProductSelectComponent } from '../../product/product-select/product-select.component';
