@@ -71,11 +71,11 @@
       </div>
     </section>
 
-<div class="container text-center alert alert-danger" *ngIf="!cartProducts?.length">
+<!--<div class="container text-center alert alert-danger" *ngIf="!cartProducts?.length">
   It'seems that you shoping cart is empty.Go back to the products from
   <a class="text-black alert-link" routerLink="/products" routerLinkActive="active" [routerLinkActive]="['link-active']">
     here.
   </a>
-</div>
+</div>-->
 
 <mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>

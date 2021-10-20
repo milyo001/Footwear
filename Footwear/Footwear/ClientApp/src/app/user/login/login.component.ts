@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
+import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +13,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private userService: UserService, private router: Router,
-    private toastr: ToastrService, private cookieService: CookieService) { }
+  loading = this.loader.loading;
+
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private toastr: ToastrService,
+    private cookieService: CookieService,
+    public loader: LoadingService) { }
 
   //The method will prevent any user from accessing the login view, who is already authenticated
   ngOnInit(): void {

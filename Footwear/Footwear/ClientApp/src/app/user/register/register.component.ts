@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { LoadingService } from '../../services/loading.service';
 
 
 @Component({
@@ -11,11 +12,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  loading = this.loader.loading;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, public userService: UserService, private toastr: ToastrService,
-    private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    public userService: UserService,
+    private toastr: ToastrService,
+    private router: Router,
+    public loader: LoadingService  ) {
 
     this.form = fb.group({
       email: ['', [Validators.required, Validators.email, Validators.maxLength(100)], []],

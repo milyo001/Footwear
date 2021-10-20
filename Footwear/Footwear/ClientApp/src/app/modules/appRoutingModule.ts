@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router'; // CLI imports router
-import { AboutComponent } from '../../about/about.component';
-import { AuthGuard } from '../../interceptors/auth.guard';
-import { CartComponent } from '../../cart/cart.component';
-import { HomeComponent } from '../../home/home.component';
-import { ProductSelectComponent } from '../../product/product-select/product-select.component';
-import { ProductComponent } from '../../product/product/product.component';
-import { LoginComponent } from '../../user/login/login.component';
-import { RegisterComponent } from '../../user/register/register.component';
-import { UserProfileComponent } from '../../user/user-profile/user-profile.component';
+import { AboutComponent } from '../about/about.component';
+import { AuthGuard } from '../interceptors/auth.guard';
+import { CartComponent } from '../cart/cart.component';
+import { HomeComponent } from '../home/home.component';
+import { ProductSelectComponent } from '../product/product-select/product-select.component';
+import { ProductComponent } from '../product/product/product.component';
+import { LoginComponent } from '../user/login/login.component';
+import { RegisterComponent } from '../user/register/register.component';
+import { UserProfileComponent } from '../user/user-profile/user-profile.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },

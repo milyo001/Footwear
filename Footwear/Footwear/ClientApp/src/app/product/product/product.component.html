@@ -24,10 +24,6 @@
     </div>
   </div>
 </nav>
-<div class="products-empty-list" *ngIf="!products?.length">
-  <mat-progress-spinner [mode]="'indeterminate'"></mat-progress-spinner>
-  <mat-toolbar>Loading...</mat-toolbar>
-</div>
 <section class="products" *ngIf="products?.length">
   <div class="product-card" *ngFor="let product of products | paginate:{itemsPerPage: 6, currentPage:pageIndex}" [routerLink]="['/products/', product.id]">
     <div class="product-image">

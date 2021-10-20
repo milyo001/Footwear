@@ -1,41 +1,42 @@
-  <div class="wrapper fadeInDown">
+<div class="wrapper fadeInDown">
 
-    <div id="formContent">
-      <form [formGroup]="form" (submit)="onSubmit(form.value)">
-        <h2>Register</h2>
-        <input formControlName="email" type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
-            <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.required">* Email is required!</div>
-            <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.email">* Email is invalid!</div>
-            <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.maxlength">* Email is too long!</div>
+  <div id="formContent">
+    <form [formGroup]="form" (submit)="onSubmit(form.value)">
+      <h2>Register</h2>
+      <input formControlName="email" type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
+      <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.required">* Email is required!</div>
+      <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.email">* Email is invalid!</div>
+      <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.maxlength">* Email is too long!</div>
 
-            <div formGroupName="passwords">
-              <input formControlName="password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-              <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.required">* Password is required!</div>
-              <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.minlength">* Password cannot be less than 6 symbols!</div>
-              <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.maxlength">* Password cannot be more than 100 symbols!</div>
-              <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
-              <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.required">* Please confirm password!</div>
-              <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords does not match!</div>
-            </div>
+      <div formGroupName="passwords">
+        <input formControlName="password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
+        <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.required">* Password is required!</div>
+        <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.minlength">* Password cannot be less than 6 symbols!</div>
+        <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.maxlength">* Password cannot be more than 100 symbols!</div>
+        <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
+        <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.required">* Please confirm password!</div>
+        <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords does not match!</div>
+      </div>
 
-        <input formControlName="firstName" type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="First Name">
-            <div class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</div>
-            <div class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</div>
+      <input formControlName="firstName" type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="First Name">
+      <div class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</div>
+      <div class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</div>
 
-        <input formControlName="lastName" type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="Last Name">
-            <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</div>
-            <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name be more than 100 symbols!</div>
+      <input formControlName="lastName" type="text" id="lastName" class="fadeIn third" name="lastName" placeholder="Last Name">
+      <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</div>
+      <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name be more than 100 symbols!</div>
 
-        <input formControlName="phone" type="text" id="phone" class="fadeIn third" name="phone" placeholder="Phone Number">
-            <div class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone number is required!</div>
-            <div class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone number cannot be more than 20 symbols!</div>
+      <input formControlName="phone" type="text" id="phone" class="fadeIn third" name="phone" placeholder="Phone Number">
+      <div class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone number is required!</div>
+      <div class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone number cannot be more than 20 symbols!</div>
 
-        <input formControlName="address" type="text" id="address" class="fadeIn third" name="address" placeholder="Address">
-            <div class="validation-error" *ngIf="form.get('address').touched && form.get('address').errors?.required">* Address is required!</div>
-            <div class="validation-error" *ngIf="form.get('address').touched && form.get('address').errors?.maxlength">* Address cannot be more than 100 symbols</div>
+      <input formControlName="address" type="text" id="address" class="fadeIn third" name="address" placeholder="Address">
+      <div class="validation-error" *ngIf="form.get('address').touched && form.get('address').errors?.required">* Address is required!</div>
+      <div class="validation-error" *ngIf="form.get('address').touched && form.get('address').errors?.maxlength">* Address cannot be more than 100 symbols</div>
 
-        <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Create an Account">
-      </form>
-    </div>
+      <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Create an Account">
+    </form>
   </div>
+</div>
 
+<mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>
