@@ -6,10 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
-import { MatToolbarModule } from '@angular/material/toolbar'
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
-import { MatButtonModule } from '@angular/material/button'
-import { MatInputModule } from '@angular/material/input';
+
 
 
 import { AppComponent } from './app.component';
@@ -31,6 +28,7 @@ import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
 import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
+import { MaterialModule } from './modules/material.module';
 
 @NgModule({
   declarations: [
@@ -56,10 +54,7 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
     NgxPaginationModule,
     FontAwesomeModule,
     UserModule,
-    MatToolbarModule,
-    MatProgressSpinnerModule,
-    MatButtonModule,
-    MatInputModule
+    MaterialModule
   ],
   providers:[
     UserService,
