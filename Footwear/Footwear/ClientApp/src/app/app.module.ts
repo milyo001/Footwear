@@ -22,7 +22,7 @@ import { UserService } from './services/user.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { UserModule } from './modules/user.module';
-import { AppRoutingModule } from './modules/appRoutingModule';
+import { AppRoutingModule } from './modules/routing,module';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
@@ -60,8 +60,8 @@ import { MaterialModule } from './modules/material.module';
     UserService,
     CookieService,
     LoadingService,
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, //For validating if user is logged in.
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }, //For showing mat-progress-spinner when fetching data.
   ],
   bootstrap: [AppComponent],
   entryComponents: [ModalComponent]

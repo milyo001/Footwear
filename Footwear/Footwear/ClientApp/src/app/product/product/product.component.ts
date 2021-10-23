@@ -21,7 +21,6 @@ export class ProductComponent {
   //when one of the sorting/filter methods are applied)
   public pageIndex: number;
 
-  loading = this.loader.loading;
 
   constructor(private productService: ProductService, private sortingOptions: SortingOptions, public loader: LoadingService) {
     this.sortingOptions = new SortingOptions();

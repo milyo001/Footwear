@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   cartProducts: ICartProduct[];
   totalAmount: number;
   expandedIndex = 0;
-  loading = this.loader.loading;
+  /*loading = this.loader.loading;*/
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
@@ -58,11 +58,11 @@ export class CartComponent implements OnInit {
   //This method will scroll the window to the accordion, when the accordion is closed
   scrollToAccordion(index, accordionItem) {
     if (accordionItem._expanded) {
-      //Slow down the method so the accordion could close before it and then scroll the window
+      //Slow down the method so the accordion could close itself before scrolling the window
       setTimeout(() => {
         const element = document.getElementById("accordion-header-" + index);
         element.scrollIntoView({ behavior: 'smooth' });
-      }, 100);
+      }, 50);
     }
   }
 

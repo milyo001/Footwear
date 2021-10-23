@@ -13,8 +13,6 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class LoginComponent implements OnInit {
 
-  loading = this.loader.loading;
-
   constructor(
     private userService: UserService,
     private router: Router,
@@ -24,7 +22,6 @@ export class LoginComponent implements OnInit {
 
   //The method will prevent any user from accessing the login view, who is already authenticated
   ngOnInit(): void {
-    let test = this.cookieService.get('token');
     if (this.cookieService.get('token') != '') {
       this.router.navigate(['/']);
     }

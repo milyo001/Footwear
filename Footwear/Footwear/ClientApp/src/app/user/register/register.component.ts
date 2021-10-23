@@ -12,7 +12,7 @@ import { LoadingService } from '../../services/loading.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  loading = this.loader.loading;
+
   form: FormGroup;
 
   constructor(
