@@ -44,7 +44,6 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Phone = model.Phone,
-                Address = model.Address,
                 Cart = new Cart { }
             };
 
@@ -95,13 +94,5 @@
             else
                 return BadRequest(new { message = "Username or password is incorrect." });
         }
-
-
-
-
-
-
-
-
     }
 }

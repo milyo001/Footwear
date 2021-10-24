@@ -23,15 +23,14 @@ export class RegisterComponent implements OnInit {
     public loader: LoadingService  ) {
 
     this.form = fb.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(100)], []],
+      email: ['', [Validators.required, Validators.email, Validators.maxLength(30)], []],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
         confirmPassword: ['', [Validators.required], []]
       }, { validator: this.confirmPasswords }),
       firstName: ['', [Validators.required, Validators.maxLength(100)], []],
       lastName: ['', [Validators.required, Validators.maxLength(100)], []],
-      phone: ['', [Validators.required, Validators.maxLength(20)], []],
-      address: ['', [Validators.required, Validators.maxLength(100)], []]
+      phone: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[- +()0-9]+')],  []]
     });
   }
 

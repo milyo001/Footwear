@@ -21,8 +21,7 @@ export class UserService {
       Password: formData.passwords.password,
       FirstName: formData.firstName,
       LastName: formData.lastName,
-      Phone: formData.phone,
-      Address: formData.address
+      Phone: formData.phone
     };
     return this.http.post(this.baseUrl + 'user/register', body);
   }
@@ -32,7 +31,7 @@ export class UserService {
   }
 
   getUserProfile() {
-    return this.http.get(this.baseUrl + 'userprofile');
+    return this.http.get(this.baseUrl + 'user/userProfile');
   }
 
   
