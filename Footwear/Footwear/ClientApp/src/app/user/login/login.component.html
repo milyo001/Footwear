@@ -3,12 +3,12 @@
   <div id="formContent">
     <form #form="ngForm" (submit)="onSubmit(form)">
       <h2>Login</h2>
-      <input #emailInput="ngModel" type="text" id="email" class="fadeIn second" name="email" placeholder="Email" ngModel required email>
-          <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.required">* Email is required!</div>
-          <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.email">* Email is invalid!</div>
+      <input #emailInput="ngModel" type="text" id="email" class="fadeIn second" name="email" placeholder="Email" ngModel required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$">
+      <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.required">* Email is required!</div>
+      <div class="validation-error" *ngIf="emailInput.touched && emailInput.errors?.pattern">* Email is invalid!</div>
       <input #passwordInput="ngModel" type="password" id="password" class="fadeIn third" name="password" placeholder="Password" ngModel required minlength="6">
-          <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.required">* Password is required!</div>
-          <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">* Password cannot be less than 6 symbols!</div>
+      <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.required">* Password is required!</div>
+      <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">* Password cannot be less than 6 symbols!</div>
       <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Log In">
     </form>
   </div>
