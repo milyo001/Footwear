@@ -31,6 +31,8 @@ export class UserService {
   }
 
   getUserProfile() {
+    
+
     return this.http.get(this.baseUrl + 'user/userProfile');
   }
 

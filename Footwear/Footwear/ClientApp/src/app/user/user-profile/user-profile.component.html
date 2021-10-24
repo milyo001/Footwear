@@ -2,51 +2,51 @@
   <div class="container rounded bg-white">
     <div class="primary-container">
       <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+        <div class="d-flex flex-column align-items-center text-center p-1 py-5">
           <img class="rounded-circle mt-5" width="180px" src="https://cdn.pixabay.com/photo/2013/07/12/12/30/cogwheel-145804_960_720.png"><span class="font-weight-bold">Welcome,</span><span class="text-black-50">Miroslav</span><span> </span>
           <div class="mt-2 text-center"><button class="action-button-custom" mat-stroked-button color="config-black-wheat">Change password</button></div>
-          <div class="mt-2 text-center" ><button class="action-button-custom" mat-stroked-button color="config-black-wheat">Change email</button></div>
+          <div class="mt-2 text-center"><button class="action-button-custom" mat-stroked-button color="config-black-wheat">Change email</button></div>
         </div>
 
       </div>
       <div class="col-md-5 border-right">
         <div class="p-3 py-5">
-          <div class="d-flex justify-content-between align-items-center mb-3">
+          <div class="d-flex justify-content-center align-items-center mb-3">
             <h4 class="text-right">Profile Settings</h4>
           </div>
-          <div class="row mt-1">
-            <mat-form-field class="example-full-width" appearance="fill">
+          <div class="row mt-1 full-width">
+            <mat-form-field class="full-width" appearance="fill">
               <mat-label>First name</mat-label>
               <input matInput required>
             </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
+            <mat-form-field class="full-width" appearance="fill">
               <mat-label>Phone number</mat-label>
               <input matInput required>
             </mat-form-field>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Address</mat-label>
-              <textarea matInput placeholder="Enter street address">test</textarea>
+            <mat-form-field class="full-width" appearance="fill">
+              <mat-label>Street</mat-label>
+              <textarea matInput placeholder="Enter street address"></textarea>
             </mat-form-field>
-            <table class="example-full-width" cellspacing="0">
-              <tr>
-                <td>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>City</mat-label>
-                    <input matInput placeholder="Ex. San Francisco">
-                  </mat-form-field>
-                </td>
-                <td>
-                  <mat-form-field class="example-full-width" appearance="fill">
-                    <mat-label>State</mat-label>
-                    <input matInput placeholder="Ex. California">
-                  </mat-form-field>
-                </td>
-              </tr>
-            </table>
-            <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>Country</mat-label>
-              <textarea matInput placeholder="Enter country">bulgaria</textarea>
-            </mat-form-field>
+            <div class="separated-fields">
+              <mat-form-field class="half-width" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput placeholder="ex. New York">
+              </mat-form-field>
+              <mat-form-field class="half-width" appearance="fill">
+                <mat-label>State</mat-label>
+                <input matInput placeholder="ex. New York">
+              </mat-form-field>
+            </div>
+            <div class="separated-fields">
+              <mat-form-field class="half-width" appearance="fill">
+                <mat-label>Country</mat-label>
+                <input matInput placeholder="USA">
+              </mat-form-field>
+              <mat-form-field class="half-width" appearance="fill">
+                <mat-label>Zip/Postal Code</mat-label>
+                <input matInput placeholder="ex. 10001">
+              </mat-form-field>
+            </div>
             <div class="mt-5 text-center save-btn"><button class="action-button-custom btn-block" mat-stroked-button color="config-black-wheat">Save changes</button></div>
           </div>
         </div>

@@ -8,6 +8,9 @@
 .action-button-custom{
     width: 200px;
 }
+.row {
+    margin-left: 0;
+}
 
 /*Success mat button custom color
 */
@@ -40,9 +43,13 @@
   width: 100%;
 }
 
-.example-full-width {
+.full-width {
   width: 100%;
 }
+.half-width {
+    width: 49.5%;
+}
+
 
 td {
   padding-right: 8px;
@@ -53,4 +60,10 @@ td {
 }
 .save-btn{
     width:100%;
+}
+
+.separated-fields {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }

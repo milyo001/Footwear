@@ -3,6 +3,8 @@
     using Microsoft.AspNetCore.Identity;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public class User : IdentityUser
     {
 
@@ -15,8 +17,7 @@
         [Required]
         public string Phone { get; set; }
 
-        [Required]
-        public string Address { get; set; }
+        public Address Address { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
