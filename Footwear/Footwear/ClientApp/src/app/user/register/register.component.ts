@@ -11,8 +11,11 @@ import { LoadingService } from '../../services/loading.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
+
 export class RegisterComponent implements OnInit {
 
+  private emailRegex: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$';
+  private phoneRegex: string = '[- +()0-9]+';
   form: FormGroup;
 
   constructor(
@@ -20,17 +23,17 @@ export class RegisterComponent implements OnInit {
     public userService: UserService,
     private toastr: ToastrService,
     private router: Router,
-    public loader: LoadingService  ) {
+    public loader: LoadingService) {
 
     this.form = fb.group({
-      email: ['', [Validators.required, Validators.email, Validators.maxLength(30)], []],
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
       passwords: this.fb.group({
         password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
         confirmPassword: ['', [Validators.required], []]
       }, { validator: this.confirmPasswords }),
       firstName: ['', [Validators.required, Validators.maxLength(100)], []],
       lastName: ['', [Validators.required, Validators.maxLength(100)], []],
-      phone: ['', [Validators.required, Validators.maxLength(20), Validators.pattern('[- +()0-9]+')],  []]
+      phone: ['', [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []]
     });
   }
 
@@ -67,7 +70,6 @@ export class RegisterComponent implements OnInit {
     );
 
   }
-
   //Validate the two password in the form input fields
   confirmPasswords(group: FormGroup) {
     let confirmPassword = group.get('confirmPassword');

@@ -5,7 +5,7 @@
       <h2>Register</h2>
       <input formControlName="email" type="text" id="email" class="fadeIn second" name="email" placeholder="Email">
       <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.required">* Email is required!</div>
-      <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.email">* Email is invalid!</div>
+      <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.pattern">* Email is invalid!</div>
       <div class="validation-error" *ngIf="form.get('email').touched && form.get('email').errors?.maxlength">* Email is too long!</div>
 
       <div formGroupName="passwords">
