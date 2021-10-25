@@ -24,6 +24,13 @@ namespace Footwear.Services.TokenService
             return cartId;
         }
 
-        
+        public string GetUserId(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var authToken = handler.ReadJwtToken(token);
+            var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
+            return userId;
+        }
+
     }
 }

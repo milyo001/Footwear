@@ -7,5 +7,7 @@ namespace Footwear.Services.TokenService
     {
         int GetCartId(string token);
 
+        string GetUserId(string token);
+
     }
 }

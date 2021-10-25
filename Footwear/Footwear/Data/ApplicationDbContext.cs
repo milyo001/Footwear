@@ -16,6 +16,8 @@
         public DbSet<CartProduct> CartProducts { get; set; }
         public DbSet<User> Users { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
         public DbSet<ProductImage> ProductsImage { get; set; }
 
         public ApplicationDbContext(DbContextOptions options)

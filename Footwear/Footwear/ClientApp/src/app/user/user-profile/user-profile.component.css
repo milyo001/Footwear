@@ -67,3 +67,8 @@ td {
   width: 100%;
   justify-content: space-between;
 }
+
+.validation-error {
+  color: red;
+  margin-bottom: 15px;
+}

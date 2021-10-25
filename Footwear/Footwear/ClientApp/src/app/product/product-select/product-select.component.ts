@@ -17,7 +17,7 @@ import { LoadingService } from '../../services/loading.service';
 export class ProductSelectComponent {
 
   public selectedProduct: IProduct = null;
-  /*loading = this.loader.loading;*/
+  loading = this.loader.loading;
 
   constructor(
     private productService: ProductService,

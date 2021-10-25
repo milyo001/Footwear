@@ -27,9 +27,9 @@
 
 
         [HttpGet]
-        public IEnumerable<ProductDto> Get()
+        public async Task<IEnumerable<ProductDto>> Get()
         {
-            IEnumerable<ProductDto> products = this._db.Products.Select(p => new ProductDto
+            IEnumerable<ProductDto> products =  this._db.Products.Select(p => new ProductDto
             {
                 Id = p.Id,
                 Name = p.Name,

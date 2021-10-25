@@ -30,7 +30,7 @@
 
         [Authorize]
         [HttpGet("getCartItems")]
-        public IEnumerable<CartProductViewModel> Get()
+        public async Task<IEnumerable<CartProductViewModel>> Get()
         {  
             var authCookie = Request.Cookies["token"];
 

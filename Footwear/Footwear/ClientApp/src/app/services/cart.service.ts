@@ -29,7 +29,6 @@ export class CartService {
       price: product.price,
       quantity: this.defaultQuantity
     }
-
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
   getAllCartProducts(): Observable<ICartProduct[]> {

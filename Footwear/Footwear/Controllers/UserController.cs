@@ -11,25 +11,27 @@
     using System.Security.Claims;
     using System.Text;
     using System.IdentityModel.Tokens.Jwt;
-    using Microsoft.Extensions.Options;
     using System.Linq;
+    using Footwear.Services.TokenService;
+    using Microsoft.Extensions.Options;
+    using Microsoft.EntityFrameworkCore;
 
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-
         private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
+        private ITokenService _tokenService;
         private readonly ApplicationSettings _appSettings;
 
 
-        public UserController(ApplicationDbContext db, UserManager<User> userManager, SignInManager<User> signInManager, IOptions<ApplicationSettings> appSettings)
+        public UserController(ApplicationDbContext db, UserManager<User> userManager,
+             ITokenService tokenService, IOptions<ApplicationSettings> appSettings)
         {
             this._db = db;
             this._userManager = userManager;
-            this._signInManager = signInManager;
+            this._tokenService = tokenService;
             this._appSettings = appSettings.Value;
         }
 
@@ -37,6 +39,7 @@
         [Route("register")]
         public async Task<Object> RegisterUser(RegisterViewModel model)
         {
+            //Create user with blank address, user can modify his profile later and add address
             var user = new User()
             {
                 UserName = model.Email,
@@ -44,7 +47,8 @@
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Phone = model.Phone,
-                Cart = new Cart { }
+                Cart = new Cart { },
+                Address = new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }
             };
 
             try
@@ -94,5 +98,32 @@
             else
                 return BadRequest(new { message = "Username or password is incorrect." });
         }
+
+        [HttpGet]
+        [Route("getProfileData")]
+        public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
+        {
+            var authCookie = Request.Cookies["token"];
+            var userId = this._tokenService.GetUserId(authCookie);
+            var user =  await this._db.Users
+                .Where(u => u.Id == userId)
+                .Include(a => a.Address)
+                .FirstOrDefaultAsync();
+
+            var userData = new UserProfileDataViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Street = user.Address.Street,
+                City = user.Address.City,
+                State = user.Address.State,
+                Country = user.Address.Country,
+                ZipCode = user.Address.ZipCode
+            };
+            return userData;
+        }
+
     }
 }
