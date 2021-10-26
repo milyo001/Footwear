@@ -21,14 +21,24 @@ import { FooterComponent } from './footer/footer.component';
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor ';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { UserModule } from './modules/user.module';
+/*import { UserModule } from './modules/user.module';*/
 import { AppRoutingModule } from './modules/routing,module';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
-import { UserProfileComponent } from './user/user-profile/user-profile.component';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { MaterialModule } from './modules/material.module';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { LoginComponent } from './user/login/login.component';
+import { RegisterComponent } from './user/register/register.component';
+import { UserProfileComponent } from './user/user-profile/user-profile.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { UserModule } from './modules/user.module';
 
 @NgModule({
   declarations: [
@@ -40,21 +50,23 @@ import { MaterialModule } from './modules/material.module';
     ProductSelectComponent,
     CartComponent,
     FooterComponent,
-    ModalComponent,
-    UserProfileComponent
+    ModalComponent
   ],
   imports: [
     BrowserModule,
+    CommonModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot({ progressBar: true, positionClass: 'toast-top-left'}),
+    ToastrModule.forRoot({ progressBar: true, positionClass: 'toast-top-left' }),
     NgbModule,
     CdkAccordionModule,
     NgxPaginationModule,
     FontAwesomeModule,
-    UserModule,
-    MaterialModule
+    UserModule
   ],
   providers:[
     UserService,

@@ -1,0 +1,77 @@
+import { __decorate } from "tslib";
+import { NgModule } from '@angular/core';
+import { MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatExpansionModule, MatGridListModule, MatIconModule, MatInputModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule, MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule, MatStepperModule, } from '@angular/material';
+let MaterialModule = class MaterialModule {
+};
+MaterialModule = __decorate([
+    NgModule({
+        imports: [
+            MatAutocompleteModule,
+            MatButtonModule,
+            MatButtonToggleModule,
+            MatCardModule,
+            MatCheckboxModule,
+            MatChipsModule,
+            MatDatepickerModule,
+            MatDialogModule,
+            MatExpansionModule,
+            MatGridListModule,
+            MatIconModule,
+            MatInputModule,
+            MatListModule,
+            MatMenuModule,
+            MatNativeDateModule,
+            MatPaginatorModule,
+            MatProgressBarModule,
+            MatProgressSpinnerModule,
+            MatRadioModule,
+            MatRippleModule,
+            MatSelectModule,
+            MatSidenavModule,
+            MatSliderModule,
+            MatSlideToggleModule,
+            MatSnackBarModule,
+            MatSortModule,
+            MatTableModule,
+            MatTabsModule,
+            MatToolbarModule,
+            MatTooltipModule,
+            MatStepperModule,
+        ],
+        exports: [
+            MatAutocompleteModule,
+            MatButtonModule,
+            MatButtonToggleModule,
+            MatCardModule,
+            MatCheckboxModule,
+            MatChipsModule,
+            MatDatepickerModule,
+            MatDialogModule,
+            MatExpansionModule,
+            MatGridListModule,
+            MatIconModule,
+            MatInputModule,
+            MatListModule,
+            MatMenuModule,
+            MatNativeDateModule,
+            MatPaginatorModule,
+            MatProgressBarModule,
+            MatProgressSpinnerModule,
+            MatRadioModule,
+            MatRippleModule,
+            MatSelectModule,
+            MatSidenavModule,
+            MatSliderModule,
+            MatSlideToggleModule,
+            MatSnackBarModule,
+            MatSortModule,
+            MatTableModule,
+            MatTabsModule,
+            MatToolbarModule,
+            MatTooltipModule,
+            MatStepperModule,
+        ]
+    })
+], MaterialModule);
+export { MaterialModule };
+//# sourceMappingURL=material.module.js.map
