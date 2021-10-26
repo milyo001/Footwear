@@ -25,8 +25,6 @@
             <mat-form-field class="full-width" appearance="fill">
               <mat-label>Last name</mat-label>
               <input matInput formControlName="lastName" type="text" name="lastName" id="lastName">
-              <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name cannot be more than 100 symbols!</div>
-              <div class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</div>
               <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* Last name is required!</mat-error>
               <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* Last name cannot be more than 100 symbols!</mat-error>
             </mat-form-field>

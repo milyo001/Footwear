@@ -14,8 +14,6 @@ export class UserProfileComponent implements OnInit {
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
 
-
-
   constructor(private userService: UserService, private fb: FormBuilder,) {
 
   }
