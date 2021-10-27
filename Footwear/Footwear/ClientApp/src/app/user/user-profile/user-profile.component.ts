@@ -26,21 +26,22 @@ export class UserProfileComponent implements OnInit {
     this.userService.getUserProfile().subscribe(data => {
       this.userData = data as IUserData;
       this.form = this.fb.group({
+        email: [data.email],
         firstName: [data.firstName, [Validators.required, Validators.maxLength(100)], []],
         lastName: [data.lastName, [Validators.required, Validators.maxLength(100)], []],
         phone: [data.phone, [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
-        street: [data.street, [Validators.required, Validators.maxLength(100)],[]],
-        state: [data.state, [Validators.required, Validators.maxLength(20)], []],
-        country: [data.country, [Validators.required, Validators.maxLength(20)], []],
-        city: [data.city, [Validators.required, Validators.maxLength(20)], []],
-        zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20)], []]
+        street: [data.street, [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
+        state: [data.state, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+        country: [data.country, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+        city: [data.city, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+        zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
 
       })
     })
 
   }
-  updateProfile(form) {
-    this.userService.register(form).subscribe(
+  updateProfile(form: any) {
+    this.userService.updateUserProfile(form.value).subscribe(
       (response: any) => {
         if (response.succeeded) {
           this.toastr.success("Successfully updated user information!");

@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserData } from '../interfaces/userData';
 
@@ -36,23 +36,8 @@ export class UserService {
     return this.http.get<IUserData>(this.baseUrl + 'user/getProfileData');
   }
 
-  updateUserProfile(formData) {
-    var body = {
-      Email: formData.email,
-      Password: formData.passwords.password,
-      FirstName: formData.firstName,
-      LastName: formData.lastName,
-      Phone: formData.phone,
-      Address: {
-        "street": formData.street,
-        "city": formData.city,
-        "state": formData.state,
-        "country": formData.country,
-        "zip": formData.zip
-      }
-    };
-
-    return this.http.put(this.baseUrl + 'user/userProfile', body);
+  updateUserProfile(formData: any) {
+    return this.http.put(this.baseUrl + 'user/updateUserProfile', formData);
   }
 
   

@@ -86,8 +86,6 @@
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };
 
-                
-
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
                 
@@ -103,49 +101,53 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            var authCookie = Request.Cookies["token"];
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
-
-            var userData = new UserProfileDataViewModel
+            if (ModelState.IsValid)
             {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Phone = user.Phone,
-                Street = user.Address.Street,
-                City = user.Address.City,
-                State = user.Address.State,
-                Country = user.Address.Country,
-                ZipCode = user.Address.ZipCode
-            };
+                var authCookie = Request.Cookies["token"];
+                var user = await this._tokenService.GetUserByIdAsync(authCookie);
+                var userData = new UserProfileDataViewModel
+                {
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    Phone = user.Phone,
+                    Street = user.Address.Street,
+                    City = user.Address.City,
+                    State = user.Address.State,
+                    Country = user.Address.Country,
+                    ZipCode = user.Address.ZipCode
+                };
+                return userData;
+            }
+            return BadRequest(new { message = "Unable to get user information. Model is not valid." });
 
-            return userData;
         }
 
-        //[HttpPut]
-        //[Route("updateProfileData")]
-        //public async Task<ActionResult<UserProfileDataViewModel>> GetUpdateProfileData()
-        //{
-        //    var authCookie = Request.Cookies["token"];
-        //    var userId = this._tokenService.GetUserByIdAsync(authCookie);
-        //    var user = await this._db.Users
-        //        .Where(u => u.Id == userId)
-        //        .Include(a => a.Address)
-        //        .FirstOrDefaultAsync();
+        [HttpPut]
+        [Route("updateUserProfile")]
+        public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
+        {
+            
 
-        //    var userData = new UserProfileDataViewModel
-        //    {
-        //        FirstName = user.FirstName,
-        //        LastName = user.LastName,
-        //        Email = user.Email,
-        //        Phone = user.Phone,
-        //        Street = user.Address.Street,
-        //        City = user.Address.City,
-        //        State = user.Address.State,
-        //        Country = user.Address.Country,
-        //        ZipCode = user.Address.ZipCode
-        //    };
-        //    return userData;
-        //}
+            if (ModelState.IsValid)
+            {
+                var authCookie = Request.Cookies["token"];
+                var user = await this._tokenService.GetUserByIdAsync(authCookie);
+
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName;
+                user.Phone = model.Phone;
+                user.Address.Street = model.Street;
+                user.Address.State = model.State;
+                user.Address.City = model.City;
+                user.Address.Country = model.Country;
+                user.Address.ZipCode = model.ZipCode;
+
+                await _userManager.UpdateAsync(user);
+
+                return Ok(new { succeeded = true });
+            }
+            return BadRequest(new { message = "Incorrect input data." });
+        }
     }
 }

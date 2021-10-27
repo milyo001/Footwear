@@ -40,6 +40,7 @@
               <textarea matInput formControlName="street" placeholder="Enter street and house number"></textarea>
               <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
               <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
+              <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
             </mat-form-field>
             <div class="mb-3 separated-fields">
               <mat-form-field class="half-width" appearance="fill">
@@ -47,12 +48,14 @@
                 <input matInput placeholder="example Berlin" formControlName="city">
                 <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.required">* City is required!</mat-error>
                 <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.maxlenght">* City cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.minlength">* City cannot be less than 2 symbols!</mat-error>
               </mat-form-field>
               <mat-form-field class="half-width" appearance="fill">
                 <mat-label>State</mat-label>
                 <input matInput placeholder="ex. California" formControlName="state">
                 <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.required">* State is required!</mat-error>
                 <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.maxlenght">* State cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.minlength">* State cannot be less than 2 symbols!</mat-error>
               </mat-form-field>
             </div>
             <div class="mb-3 separated-fields">
@@ -61,16 +64,18 @@
                 <input matInput placeholder="ex. Spain" formControlName="country">
                 <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.required">* Country is required!</mat-error>
                 <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.maxlenght">* Country cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.minlength">* Country cannot be less than 2 symbols!</mat-error>
               </mat-form-field>
               <mat-form-field class="half-width" appearance="fill">
                 <mat-label>Zip/Postal Code</mat-label>
                 <input matInput placeholder="ex. 10001" formControlName="zipCode">
                 <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.required">* Zip/Postal code is required!</mat-error>
                 <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.maxlenght">* Zip/Postal code cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.minlength">* Zip/Postal cannot be less than 2 symbols!</mat-error>
               </mat-form-field>
             </div>
             <div class="mt-4 text-center save-btn">
-            <button mat-stroked-button  class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
+            <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
             </div>
           </div>
         </form>
