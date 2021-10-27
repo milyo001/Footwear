@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
 
@@ -14,9 +15,7 @@ export class UserProfileComponent implements OnInit {
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
 
-  constructor(private userService: UserService, private fb: FormBuilder,) {
-
-  }
+  constructor(private userService: UserService, private fb: FormBuilder,private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -41,6 +40,21 @@ export class UserProfileComponent implements OnInit {
 
   }
   updateProfile(form) {
-
+    this.userService.register(form).subscribe(
+      (response: any) => {
+        if (response.succeeded) {
+          this.toastr.success("Successfully updated user information!");
+          this.loadData();
+        }
+        else {
+          response.errors.forEach(element => { 
+           this.toastr.error(element.description, 'Update failed!');
+          })
+        }
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
 }

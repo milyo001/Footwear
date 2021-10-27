@@ -1,5 +1,7 @@
 ﻿
 using Footwear.Data;
+using Footwear.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
@@ -24,12 +26,16 @@ namespace Footwear.Services.TokenService
             return cartId;
         }
 
-        public string GetUserId(string token)
+        public async Task<User> GetUserByIdAsync(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var authToken = handler.ReadJwtToken(token);
             var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
-            return userId;
+            var user = await this._db.Users
+                .Where(u => u.Id == userId)
+                .Include(a => a.Address)
+                .FirstOrDefaultAsync();
+            return user;
         }
 
     }

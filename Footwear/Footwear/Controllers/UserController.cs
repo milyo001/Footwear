@@ -104,11 +104,7 @@
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
             var authCookie = Request.Cookies["token"];
-            var userId = this._tokenService.GetUserId(authCookie);
-            var user =  await this._db.Users
-                .Where(u => u.Id == userId)
-                .Include(a => a.Address)
-                .FirstOrDefaultAsync();
+            var user = await this._tokenService.GetUserByIdAsync(authCookie);
 
             var userData = new UserProfileDataViewModel
             {
@@ -122,8 +118,34 @@
                 Country = user.Address.Country,
                 ZipCode = user.Address.ZipCode
             };
+
             return userData;
         }
 
+        //[HttpPut]
+        //[Route("updateProfileData")]
+        //public async Task<ActionResult<UserProfileDataViewModel>> GetUpdateProfileData()
+        //{
+        //    var authCookie = Request.Cookies["token"];
+        //    var userId = this._tokenService.GetUserByIdAsync(authCookie);
+        //    var user = await this._db.Users
+        //        .Where(u => u.Id == userId)
+        //        .Include(a => a.Address)
+        //        .FirstOrDefaultAsync();
+
+        //    var userData = new UserProfileDataViewModel
+        //    {
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName,
+        //        Email = user.Email,
+        //        Phone = user.Phone,
+        //        Street = user.Address.Street,
+        //        City = user.Address.City,
+        //        State = user.Address.State,
+        //        Country = user.Address.Country,
+        //        ZipCode = user.Address.ZipCode
+        //    };
+        //    return userData;
+        //}
     }
 }
