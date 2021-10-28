@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../services/cart.service';
-import { IProduct } from '../interfaces';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import {
   faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
   faDatabase, 
   faUser} from '@fortawesome/free-solid-svg-icons';
-import { Local } from 'protractor/built/driverProviders';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({

@@ -20,11 +20,14 @@ a.navbar-brand {
 html {
   font-size: 16px;
 }
-@media (min-width: 768px) {
-  html {
+@media (max-width: 768px) {
+  html {/*
     font-size: 16px;
-    background-color: #2c343c;
+    background-color: #2c343c;*/
+
   }
+  
+  
 }
 /*.navbar {
   background-color: rgb(204, 229, 255) !important;
@@ -53,3 +56,4 @@ html {
 .overline-link {
   text-decoration: overline !important;
 }
+
