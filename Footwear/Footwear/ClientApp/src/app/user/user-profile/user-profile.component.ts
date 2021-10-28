@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
@@ -11,15 +12,24 @@ import { UserService } from '../../services/user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  public userData: IUserData = null;
-  form: FormGroup;
-  private phoneRegex: string = '[- +()0-9]+';
+  form: FormGroup; 
+  passwordForm: FormGroup;
+  emailForm: FormGroup;
 
-  constructor(private userService: UserService, private fb: FormBuilder,private toastr: ToastrService) { }
+  public userData: IUserData = null;
+
+  private phoneRegex: string = '[- +()0-9]+'; 
+  public emailSectionToggle = false;
+  public passwSectionToggle = false;
+
+  constructor(
+    private userService: UserService,
+    private fb: FormBuilder,
+    private toastr: ToastrService
+             ) { }
 
   ngOnInit(): void {
     this.loadData();
-
   }
 
   loadData() {
@@ -35,6 +45,13 @@ export class UserProfileComponent implements OnInit {
         country: [data.country, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
         city: [data.city, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
         zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
+      });
+      this.passwordForm = this.fb.group({
+        passwords: this.fb.group({
+          password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
+          newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
+          confirmPassword: ['', [Validators.required], []]
+        }, { validator: this.confirmPasswords })
 
       })
     })
@@ -48,8 +65,8 @@ export class UserProfileComponent implements OnInit {
           this.loadData();
         }
         else {
-          response.errors.forEach(element => { 
-           this.toastr.error(element.description, 'Update failed!');
+          response.errors.forEach(element => {
+            this.toastr.error(element.description, 'Update failed!');
           })
         }
       },
@@ -58,4 +75,30 @@ export class UserProfileComponent implements OnInit {
       }
     );
   }
+
+  changePassword(): void {
+
+  }
+
+  changeEmail() {
+
+  }
+
+
+  //Validate the two password in the form input fields
+  confirmPasswords(group: FormGroup) {
+    let confirmPassword = group.get('confirmPassword');
+
+    if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
+      if (group.get('password').value != confirmPassword.value) {
+        confirmPassword.setErrors({ passwordMismatch: true })
+      }
+      else {
+        confirmPassword.setErrors(null);
+      }
+    }
+  }
+  
 }
+
+
