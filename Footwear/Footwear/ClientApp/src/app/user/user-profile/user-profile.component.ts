@@ -20,7 +20,7 @@ export class UserProfileComponent implements OnInit {
 
   private phoneRegex: string = '[- +()0-9]+'; 
   public emailSectionToggle = false;
-  public passwSectionToggle = false;
+  public passSectionToggle = false;
 
   constructor(
     private userService: UserService,

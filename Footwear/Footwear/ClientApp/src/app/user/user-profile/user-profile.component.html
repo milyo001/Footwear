@@ -11,10 +11,10 @@
             </button>
           </div>
           <section id="password-change-section">
-            <div class="col-md-5 p-3 py-5">
+            <div class="col p-3 py-5">
               <div class="d-flex justify-content-center align-items-center mb-3">
                 <form *ngIf="passSectionToggle" class="example-form" [formGroup]="passwordForm" (ngSubmit)="loadData()">
-                  <div class="row mt-1 full-width">
+                  <div class="row mt-1 full-width" formGroupName="passwords">
                     <mat-form-field class="full-width" appearance="fill">
                       <mat-label>Enter password</mat-label>
                       <input matInput formControlName="password" type="password" name="password">
@@ -26,22 +26,12 @@
                     </mat-form-field>
                     <mat-form-field class="full-width" appearance="fill">
                       <mat-label>Confirm new password</mat-label>
-                      <input matInput formControlName="newPassword" type="password" name="newPassword">
+                      <input matInput formControlName="confirmPassword" type="password" name="confirmPassword">
                     </mat-form-field>
                   </div>
                 </form>
 
-                <div formGroupName="passwords">
-                  <input formControlName="password" type="password" id="password" class="fadeIn third" name="password" placeholder="Password">
-                  <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.required">* Password is required!</div>
-                  <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.minlength">* Password cannot be less than 6 symbols!</div>
-                  <div class="validation-error" *ngIf="form.get('passwords.password').touched && form.get('passwords.password').errors?.maxlength">* Password cannot be more than 100 symbols!</div>
-
-                  <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
-                  <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.required">* Please confirm password!</div>
-                  <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords does not match!</div>
-                </div>
-
+                
               </div>
             </div>
           </section>
