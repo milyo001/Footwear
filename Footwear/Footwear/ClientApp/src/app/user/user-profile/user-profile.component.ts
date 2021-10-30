@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
@@ -18,9 +17,10 @@ export class UserProfileComponent implements OnInit {
 
   public userData: IUserData = null;
 
-  private phoneRegex: string = '[- +()0-9]+'; 
-  public emailSectionToggle = false;
-  public passSectionToggle = false;
+  private phoneRegex: string = '[- +()0-9]+';
+  private emailRegex: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$';
+  public emailSectionToggle: boolean = false;
+  public passSectionToggle: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -48,12 +48,15 @@ export class UserProfileComponent implements OnInit {
       });
       this.passwordForm = this.fb.group({
         passwords: this.fb.group({
-          password: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
+          password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
           newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
           confirmPassword: ['', [Validators.required], []]
         }, { validator: this.confirmPasswords })
-
-      })
+      });
+      this.emailForm = this.fb.group({
+        email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
+        confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
+      });
     })
 
   }
@@ -76,8 +79,8 @@ export class UserProfileComponent implements OnInit {
     );
   }
 
-  changePassword(): void {
-
+  changePassword(passwordForm) {
+    console.log(passwordForm);
   }
 
   changeEmail() {

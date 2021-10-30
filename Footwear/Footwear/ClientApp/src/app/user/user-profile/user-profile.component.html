@@ -2,42 +2,76 @@
   <div class="container rounded bg-white">
     <div class="primary-container">
       <div class="col-md-3 border-right">
-        <div class="d-flex flex-column align-items-center text-center p-1 py-5">
-          <img class="rounded-circle mt-2" width="180px" src="https://cdn.pixabay.com/photo/2013/07/12/12/30/cogwheel-145804_960_720.png"><span class="font-weight-bold">Welcome,</span><span class="text-black-50">Miroslav</span><span> </span>
-          <div class="mt-2 text-center"><button class="action-button-custom" mat-stroked-button color="config-black-wheat" (click)="passSectionToggle = true; emailSectionToggle = false;">Change password</button></div>
+        <div class="d-flex flex-column align-items-center text-center mt-3">
+          <img class="rounded-circle" width="180px" src="https://cdn.pixabay.com/photo/2013/07/12/12/30/cogwheel-145804_960_720.png"><span class="font-weight-bold">Welcome,</span><span class="text-black-50">Miroslav</span><span> </span>
+          <div class="mt-2 text-center">
+            <button class="action-button-custom" mat-stroked-button color="config-black-wheat" (click)="passSectionToggle = true; emailSectionToggle = false;">
+              Change password
+            </button>
+          </div>
           <div class="mt-2 text-center">
             <button class="action-button-custom" mat-stroked-button color="config-black-wheat" (click)="passSectionToggle = false; emailSectionToggle = true;">
               Change email
             </button>
           </div>
-          <section id="password-change-section">
-            <div class="col p-3 py-5">
-              <div class="d-flex justify-content-center align-items-center mb-3">
+          <div class="col mt-1 text-center">
+            <div class="d-flex justify-content-center align-items-center mb-1">
+              <section id="password-change-section">
                 <form *ngIf="passSectionToggle" class="example-form" [formGroup]="passwordForm" (ngSubmit)="loadData()">
-                  <div class="row mt-1 full-width" formGroupName="passwords">
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Enter password</mat-label>
-                      <input matInput formControlName="password" type="password" name="password">
-                      <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* Password is required!</mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>New password</mat-label>
-                      <input matInput formControlName="newPassword" type="password" name="newPassword">
-                    </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
-                      <mat-label>Confirm new password</mat-label>
-                      <input matInput formControlName="confirmPassword" type="password" name="confirmPassword">
-                    </mat-form-field>
+                  <div class="row mt-1 full-width">
+                    <div formGroupName="passwords">
+                      <mat-form-field class="full-width mb-3" appearance="fill">
+                        <mat-label>Enter password</mat-label>
+                        <input matInput formControlName="password" type="password" name="password" id="password">
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.password').touched && passwordForm.get('passwords.password').errors?.required">* Password is required!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.password').touched && passwordForm.controls.passwords.controls.password.hasError('minlength')">* Password cannot be less than 6 symbols!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.password').touched && passwordForm.controls.passwords.controls.password.hasError('maxlength')">* Password cannot be more than 100 symbols!</mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="full-width mb-3" appearance="fill">
+                        <mat-label>New password</mat-label>
+                        <input matInput formControlName="newPassword" type="password" name="newPassword" id="newPassword">
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.get('passwords.newPassword').errors?.required">* Password is required!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.controls.passwords.controls.newPassword.hasError('minlength')">* Password cannot be less than 6 symbols!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.controls.passwords.controls.newPassword.hasError('maxlength')">* Password cannot be more than 100 symbols!</mat-error>
+                      </mat-form-field>
+                      <mat-form-field class="full-width mb-3" appearance="fill">
+                        <mat-label>Confirm new password</mat-label>
+                        <input matInput formControlName="confirmPassword" type="password" name="confirmPassword" id="confirmPassword">
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.confirmPassword').touched && passwordForm.get('passwords.confirmPassword').errors?.required">* Password is required!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.confirmPassword').touched && passwordForm.get('passwords.confirmPassword').errors?.passwordMismatch">* Password do not match!</mat-error>
+                      </mat-form-field>
+                    </div>
+                    <div class="mt-1 text-center save-btn">
+                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm)">Update</button>
+                    </div>
                   </div>
                 </form>
-
-                
-              </div>
+              </section>
+              <section id="email-change-section">
+                <form *ngIf="emailSectionToggle" class="example-form" [formGroup]="emailForm" (ngSubmit)="loadData()">
+                  <div class="row mt-1 full-width">
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Enter an email</mat-label>
+                      <input matInput formControlName="email" type="email" name="email">
+                      <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.required">* Email is required</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.pattern">* Email is invalid!</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.maxLength">* Email is too long!</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="full-width" appearance="fill">
+                      <mat-label>Confirm email</mat-label>
+                      <input matInput formControlName="confirmEmail" type="text" name="confirmEmail">
+                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.required">* Email is required</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.pattern">* Email is invalid!</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.maxLength">* Email is too long!</mat-error>
+                    </mat-form-field>
+                    <div class="mt-1 text-center save-btn">
+                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
+                    </div>
+                  </div>
+                </form>
+              </section>
             </div>
-          </section>
-          <section id="email-change-section" *ngIf="emailSectionToggle">
-            Email Change Section
-          </section>
+          </div>
         </div>
       </div>
       <div class="col-md-5 border-right">

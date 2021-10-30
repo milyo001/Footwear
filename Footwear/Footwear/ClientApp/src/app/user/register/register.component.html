@@ -16,7 +16,7 @@
 
         <input formControlName="confirmPassword" type="password" id="confirmPassword" class="fadeIn third" name="confirmPassword" placeholder="Confirm Password">
         <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.required">* Please confirm password!</div>
-        <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords does not match!</div>
+        <div class="validation-error" *ngIf="form.get('passwords.confirmPassword').touched && form.get('passwords.confirmPassword').errors?.passwordMismatch">* Passwords do not match!</div>
       </div>
 
       <input formControlName="firstName" type="text" id="firstName" class="fadeIn third" name="firstName" placeholder="First Name">
