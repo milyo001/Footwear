@@ -42,7 +42,7 @@
                       </mat-form-field>
                     </div>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm)">Update</button>
+                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm.value)">Update</button>
                     </div>
                   </div>
                 </form>
@@ -61,9 +61,10 @@
                       <mat-label>Confirm email</mat-label>
                       <input matInput formControlName="confirmEmail" type="text" name="confirmEmail">
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.required">* Email is required</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.emailMismatch">* Emails do not match!</mat-error>
                     </mat-form-field>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
+                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value)">Update</button>
                     </div>
                   </div>
                 </form>

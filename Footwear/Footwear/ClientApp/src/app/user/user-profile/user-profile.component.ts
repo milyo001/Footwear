@@ -56,7 +56,7 @@ export class UserProfileComponent implements OnInit {
       this.emailForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
         confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
-      });
+      }, { validator: this.confirmEmails });
     })
 
   }
@@ -81,10 +81,13 @@ export class UserProfileComponent implements OnInit {
 
   changePassword(passwordForm) {
     console.log(passwordForm);
+    //confirmPassword: "tests"
+    //newPassword: "tests"
+    //password: "tests"
   }
 
-  changeEmail() {
-
+  changeEmail(emailForm) {
+    console.log(emailForm);
   }
 
 
@@ -98,6 +101,19 @@ export class UserProfileComponent implements OnInit {
       }
       else {
         confirmPassword.setErrors(null);
+      }
+    }
+  }
+
+  confirmEmails(group: FormGroup) {
+    let confirmEmail = group.get('confirmEmail');
+
+    if (confirmEmail.errors == null || 'emailMismatch' in confirmEmail.errors) {
+      if (group.get('email').value != confirmEmail.value) {
+        confirmEmail.setErrors({ emailMismatch: true })
+      }
+      else {
+        confirmEmail.setErrors(null);
       }
     }
   }
