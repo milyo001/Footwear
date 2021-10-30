@@ -50,19 +50,17 @@
               <section id="email-change-section">
                 <form *ngIf="emailSectionToggle" class="example-form" [formGroup]="emailForm" (ngSubmit)="loadData()">
                   <div class="row mt-1 full-width">
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width mb-3" appearance="fill" >
                       <mat-label>Enter an email</mat-label>
                       <input matInput formControlName="email" type="email" name="email">
                       <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.required">* Email is required</mat-error>
                       <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.pattern">* Email is invalid!</mat-error>
-                      <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.maxLength">* Email is too long!</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.controls.email.hasError('maxlength')">* Email cannot be more than 100 symbols!</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="full-width" appearance="fill">
+                    <mat-form-field class="full-width mb-3" appearance="fill">
                       <mat-label>Confirm email</mat-label>
                       <input matInput formControlName="confirmEmail" type="text" name="confirmEmail">
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.required">* Email is required</mat-error>
-                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.pattern">* Email is invalid!</mat-error>
-                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.maxLength">* Email is too long!</mat-error>
                     </mat-form-field>
                     <div class="mt-1 text-center save-btn">
                       <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
