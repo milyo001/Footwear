@@ -72,7 +72,7 @@
 
             if (user != null && passwordMatch)
             {
-                
+
                 var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
 
                 var tokenDescriptor = new SecurityTokenDescriptor
@@ -88,13 +88,14 @@
 
                 var tokenHandler = new JwtSecurityTokenHandler();
                 var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                
                 var token = tokenHandler.WriteToken(securityToken);
 
                 return Ok(new { token });
             }
             else
+            {
                 return BadRequest(new { message = "Username or password is incorrect." });
+            }
         }
 
         [HttpGet]
@@ -127,7 +128,7 @@
         [Route("updateUserProfile")]
         public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
         {
-            
+
 
             if (ModelState.IsValid)
             {
@@ -148,6 +149,49 @@
                 return Ok(new { succeeded = true });
             }
             return BadRequest(new { message = "Incorrect input data." });
+        }
+
+        [HttpPut]
+        [Route("updateEmail")]
+        public async Task<IActionResult> UpdateEmail(EmailDto model)
+        {
+            var email = model.Email;
+            var authCookie = Request.Cookies["token"];
+            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
+            if (model.Email != model.ConfirmEmail || model.Email == null || model.ConfirmEmail == null)
+            {
+                return BadRequest(new { message = "Incorrect input data." });
+            }
+            if(dupplicate)
+            {
+                return BadRequest(new { message = "Email already in use." });
+            }
+            user.Email = email;
+            user.NormalizedEmail = email;
+            user.UserName = email;
+            user.NormalizedUserName = email;
+
+            await this._db.SaveChangesAsync();
+            return Ok(new { succeeded = true });
+        }
+
+
+        [HttpPut]
+        [Route("updatePassword")]
+        public async Task<IActionResult> UpdatePassword(PasswordDto model)
+        {
+            if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null 
+                || model.NewPassword == null || model == null)
+            {
+                return BadRequest(new { message = "Incorrect input data." });
+            }
+            var authCookie = Request.Cookies["token"];
+            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            var token = await this._userManager.GeneratePasswordResetTokenAsync(user);
+            await this._userManager.ResetPasswordAsync(user, token, model.NewPassword);
+            await this._db.SaveChangesAsync();
+            return Ok(new { succeeded = true });
         }
     }
 }

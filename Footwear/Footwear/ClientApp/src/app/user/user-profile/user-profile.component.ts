@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -11,7 +12,7 @@ import { UserService } from '../../services/user.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  form: FormGroup; 
+  form: FormGroup;
   passwordForm: FormGroup;
   emailForm: FormGroup;
 
@@ -26,7 +27,7 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private toastr: ToastrService
-             ) { }
+  ) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -67,27 +68,34 @@ export class UserProfileComponent implements OnInit {
           this.toastr.success("Successfully updated user information!");
           this.loadData();
         }
-        else {
-          response.errors.forEach(element => {
-            this.toastr.error(element.description, 'Update failed!');
-          })
-        }
       },
-      err => {
-        console.log(err);
+      error => {
+        console.log(error);
+        this.toastr.error(error.error.message);
       }
     );
   }
 
   changePassword(passwordForm) {
-    console.log(passwordForm);
-    //confirmPassword: "tests"
-    //newPassword: "tests"
-    //password: "tests"
+    this.userService.updatePassword(passwordForm).subscribe((response: any) => {
+      if (response.succeeded) {
+        this.toastr.success("Successfully updated your password!");
+      }
+    },
+      error => {
+        this.toastr.error(error.error.message);
+      });
   }
 
   changeEmail(emailForm) {
-    console.log(emailForm);
+    this.userService.updateEmail(emailForm).subscribe((response: any) => {
+      if (response.succeeded) {
+        this.toastr.success("Successfully updated your email!");
+      }
+    },
+      err => {
+        this.toastr.error(err.error.message);
+      })
   }
 
 
@@ -117,7 +125,7 @@ export class UserProfileComponent implements OnInit {
       }
     }
   }
-  
+
 }
 
 

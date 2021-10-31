@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
           this.router.navigate(['/user/login']);
         }
         else {
+          console.log(response);
           response.errors.forEach(element => {
             switch (element.code) {
               case 'DuplicateUserName':

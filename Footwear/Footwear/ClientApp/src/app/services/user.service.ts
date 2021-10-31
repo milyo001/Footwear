@@ -28,7 +28,7 @@ export class UserService {
     return this.http.post(this.baseUrl + 'user/register', body);
   }
 
-  login(formData) {
+  login(formData: any) {
     return this.http.post(this.baseUrl + 'user/login', formData);
   }
 
@@ -40,5 +40,11 @@ export class UserService {
     return this.http.put(this.baseUrl + 'user/updateUserProfile', formData);
   }
 
-  
+  updateEmail(formData: any) {
+    return this.http.put(this.baseUrl + 'user/updateEmail', formData);
+  }
+
+  updatePassword(formData: any) {
+    return this.http.put(this.baseUrl + 'user/updatePassword', formData);
+  }
 }
