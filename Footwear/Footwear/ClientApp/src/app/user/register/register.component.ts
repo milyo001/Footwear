@@ -43,7 +43,6 @@ export class RegisterComponent implements OnInit {
 ;
 
   onSubmit(formData) {
-    
     this.userService.register(formData).subscribe(
       (response: any) => {
         if (response.succeeded) {
@@ -51,26 +50,13 @@ export class RegisterComponent implements OnInit {
           this.toastr.success("Registration successful.", 'Please log in.');
           this.router.navigate(['/user/login']);
         }
-        else {
-          console.log(response);
-          response.errors.forEach(element => {
-            switch (element.code) {
-              case 'DuplicateUserName':
-                this.toastr.error('Username already taken!', 'Registration failed.');
-              break;  
-              default:
-                this.toastr.error(element.description, 'Registration failed.');
-              break;
-            }
-          })
-        }
       },
       err => {
-        console.log(err);
+        this.toastr.error(err.error.message);
       }
     );
-
   }
+
   //Validate the two password in the form input fields
   confirmPasswords(group: FormGroup) {
     let confirmPassword = group.get('confirmPassword');

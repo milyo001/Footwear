@@ -39,6 +39,15 @@
         [Route("register")]
         public async Task<Object> RegisterUser(RegisterViewModel model)
         {
+            if (model == null)
+            {
+                return BadRequest(new { message = "Invalid input data!" } );
+            }
+            //Check if Username already exists
+            if (this._db.Users.Any(user => user.Email == model.Email) == false)
+            {
+                return BadRequest(new { message = "User already exists!" });
+            }
             //Create user with blank address, user can modify his profile later and add address
             var user = new User()
             {
@@ -50,17 +59,9 @@
                 Cart = new Cart { },
                 Address = new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }
             };
-
-            try
-            {
-                var result = await this._userManager.CreateAsync(user, model.Password);
-
-                return Ok(result);
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            
+            var result = await this._userManager.CreateAsync(user, model.Password);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -163,7 +164,7 @@
             {
                 return BadRequest(new { message = "Incorrect input data." });
             }
-            if(dupplicate)
+            if (dupplicate)
             {
                 return BadRequest(new { message = "Email already in use." });
             }
@@ -181,7 +182,7 @@
         [Route("updatePassword")]
         public async Task<IActionResult> UpdatePassword(PasswordDto model)
         {
-            if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null 
+            if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null
                 || model.NewPassword == null || model == null)
             {
                 return BadRequest(new { message = "Incorrect input data." });
