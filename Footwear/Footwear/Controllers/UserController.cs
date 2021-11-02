@@ -39,12 +39,14 @@
         [Route("register")]
         public async Task<Object> RegisterUser(RegisterViewModel model)
         {
-            if (model == null)
+            var test = ModelState.Values;
+            if (model == null || !ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid input data!" } );
             }
             //Check if Username already exists
-            if (this._db.Users.Any(user => user.Email == model.Email) == false)
+            var dupplicateName = this._db.Users.Any(user => user.Email == (model.Email).ToUpper());
+            if (dupplicateName)
             {
                 return BadRequest(new { message = "User already exists!" });
             }
