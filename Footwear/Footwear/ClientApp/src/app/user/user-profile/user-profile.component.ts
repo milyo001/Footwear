@@ -16,8 +16,10 @@ export class UserProfileComponent implements OnInit {
   passwordForm: FormGroup;
   emailForm: FormGroup;
 
-  public userData: IUserData = null;
   public firstName: string;
+  public email: string;
+  public userData: IUserData = null;
+ 
   private phoneRegex: string = '[- +()0-9]+';
   private emailRegex: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$';
   public emailSectionToggle: boolean = false;
@@ -47,8 +49,10 @@ export class UserProfileComponent implements OnInit {
         city: [data.city, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
         zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
       });
-      //Set first name to 'greet the user'
+      //Set first name and email to show the currently logged in user
       this.firstName = this.form.get("firstName").value;
+      this.email = this.form.get("email").value;
+      
       this.passwordForm = this.fb.group({
         passwords: this.fb.group({
           password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
@@ -93,6 +97,7 @@ export class UserProfileComponent implements OnInit {
     this.userService.updateEmail(emailForm).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your email!");
+        this.email = emailForm.email;
       }
     },
       err => {
