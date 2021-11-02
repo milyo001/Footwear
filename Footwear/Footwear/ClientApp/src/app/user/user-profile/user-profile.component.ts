@@ -17,7 +17,7 @@ export class UserProfileComponent implements OnInit {
   emailForm: FormGroup;
 
   public userData: IUserData = null;
-
+  public firstName: string;
   private phoneRegex: string = '[- +()0-9]+';
   private emailRegex: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$';
   public emailSectionToggle: boolean = false;
@@ -47,6 +47,8 @@ export class UserProfileComponent implements OnInit {
         city: [data.city, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
         zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
       });
+      //Set first name to 'greet the user'
+      this.firstName = this.form.get("firstName").value;
       this.passwordForm = this.fb.group({
         passwords: this.fb.group({
           password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],

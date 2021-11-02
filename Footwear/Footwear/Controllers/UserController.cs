@@ -65,40 +65,51 @@
             return Ok(result);
         }
 
-        //A method for validating the data from client and register new user in the database
+        //A method for validating the data from client and login the user, also will generate JWT token
+        //For JWT token configuration go to StartUp.cs and find the service for token auth
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email);
-            var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
-
-            if (user != null && passwordMatch)
+            if (ModelState.IsValid)
             {
-
-                var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
-
-                var tokenDescriptor = new SecurityTokenDescriptor
+                //Check if user exists in the data
+                var user = await _userManager.FindByNameAsync(model.Email);
+                var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
+                if (user != null && passwordMatch)
                 {
-                    Subject = new ClaimsIdentity(new Claim[]
+                    //Find the user cartId and then store the cartId in the token as a claim
+                    var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
+    
+                    var tokenDescriptor = new SecurityTokenDescriptor
                     {
+                        //Add new Claims for the user and add encoding to the token
+                        Subject = new ClaimsIdentity(new Claim[]
+                        {
                         new Claim("UserId", user.Id.ToString()),
                         new Claim("CartId", cartId.ToString())
-                    }),
-                    Expires = DateTime.UtcNow.AddDays(1),
-                    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                };
+                        }),
+                        Expires = DateTime.UtcNow.AddDays(3),
+                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                    };
 
-                var tokenHandler = new JwtSecurityTokenHandler();
-                var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                var token = tokenHandler.WriteToken(securityToken);
+                    var tokenHandler = new JwtSecurityTokenHandler();
+                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+                    var token = tokenHandler.WriteToken(securityToken);
 
-                return Ok(new { token });
+                    return Ok(new { token });
+                }
+                else
+                {
+                    return BadRequest(new { message = "Username or password is incorrect." });
+                }
             }
             else
             {
-                return BadRequest(new { message = "Username or password is incorrect." });
+                //Model state is invalid
+                return BadRequest(new { message = "Incorect input data!" });
             }
+            
         }
 
         [HttpGet]
