@@ -52,7 +52,7 @@ export class UserProfileComponent implements OnInit {
       //Set first name and email to show the currently logged in user
       this.firstName = this.form.get("firstName").value;
       this.email = this.form.get("email").value;
-      
+      //Set validaions for password form
       this.passwordForm = this.fb.group({
         passwords: this.fb.group({
           password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
@@ -60,6 +60,7 @@ export class UserProfileComponent implements OnInit {
           confirmPassword: ['', [Validators.required], []]
         }, { validator: this.confirmPasswords })
       });
+      //Set validaions for email form
       this.emailForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
         confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]

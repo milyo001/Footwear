@@ -62,6 +62,7 @@
                       <input matInput formControlName="confirmEmail" type="text" name="confirmEmail">
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.required">* Email is required</mat-error>
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.emailMismatch">* Emails do not match!</mat-error>
+                      <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.pattern">* Email is invalid!</mat-error>
                     </mat-form-field>
                     <div class="mt-1 text-center save-btn">
                       <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value)">Update</button>
