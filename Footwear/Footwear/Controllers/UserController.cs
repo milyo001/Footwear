@@ -35,12 +35,12 @@
             this._appSettings = appSettings.Value;
         }
 
+        //A method for validating the data from client and register new user in the database
         [HttpPost]
         [Route("register")]
         public async Task<Object> RegisterUser(RegisterViewModel model)
         {
-            var test = ModelState.Values;
-            if (model == null || !ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid input data!" } );
             }
@@ -51,7 +51,7 @@
                 return BadRequest(new { message = "User already exists!" });
             }
             //Create user with blank address, user can modify his profile later and add address
-            var user = new User()
+            var user = new User() 
             {
                 UserName = model.Email,
                 Email = model.Email,
@@ -61,11 +61,11 @@
                 Cart = new Cart { },
                 Address = new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }
             };
-            
             var result = await this._userManager.CreateAsync(user, model.Password);
             return Ok(result);
         }
 
+        //A method for validating the data from client and register new user in the database
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
