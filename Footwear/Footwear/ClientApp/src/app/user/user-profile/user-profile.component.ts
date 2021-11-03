@@ -58,13 +58,13 @@ export class UserProfileComponent implements OnInit {
           password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
           newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
           confirmPassword: ['', [Validators.required], []]
-        }, { validator: this.confirmPasswords })
+        }, { validator: this.matchFields })
       });
       //Set validaions for email form
       this.emailForm = this.fb.group({
         email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
         confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
-      }, { validator: this.confirmEmails });
+      }, { validator: this.matchFields });
     })
 
   }
@@ -106,32 +106,33 @@ export class UserProfileComponent implements OnInit {
       })
   }
 
-
-  //Validate the two password in the form input fields
-  confirmPasswords(group: FormGroup) {
-    let confirmPassword = group.get('confirmPassword');
-
-    if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
-      if (group.get('password').value != confirmPassword.value) {
-        confirmPassword.setErrors({ passwordMismatch: true })
-      }
-      else {
-        confirmPassword.setErrors(null);
-      }
-    }
-  }
-
-  confirmEmails(group: FormGroup) {
-    let confirmEmail = group.get('confirmEmail');
-
-    if (confirmEmail.errors == null || 'emailMismatch' in confirmEmail.errors) {
-      if (group.get('email').value != confirmEmail.value) {
-        confirmEmail.setErrors({ emailMismatch: true })
-      }
-      else {
-        confirmEmail.setErrors(null);
+  //Check if password or email are matching the confirm email/passcode fields
+  matchFields(group: FormGroup) {
+    //Check if password and confirmPassword match
+    if (group.contains('confirmPassword')) {
+      let confirmPassword = group.get('confirmPassword');
+      if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
+        if (group.get('password').value != confirmPassword.value) {
+          confirmPassword.setErrors({ passwordMismatch: true })
+        }
+        else {
+          confirmPassword.setErrors(null);
+        }
       }
     }
+    //Check if email and confirmEmail match
+    else if (group.contains('confirmEmail')) {
+      let confirmEmail = group.get('confirmEmail');
+      if (confirmEmail.errors == null || 'emailMismatch' in confirmEmail.errors) {
+        if (group.get('email').value != confirmEmail.value) {
+          confirmEmail.setErrors({ emailMismatch: true })
+        }
+        else {
+          confirmEmail.setErrors(null);
+        }
+      }
+    }
+    
   }
 
 }
