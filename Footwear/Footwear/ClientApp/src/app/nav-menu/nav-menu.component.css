@@ -20,19 +20,7 @@ a.navbar-brand {
 html {
   font-size: 16px;
 }
-@media (max-width: 768px) {
-  html {/*
-    font-size: 16px;
-    background-color: #2c343c;*/
 
-  }
-  
-  
-}
-/*.navbar {
-  background-color: rgb(204, 229, 255) !important;
-
-}*/
 
 .box-shadow {
   box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);

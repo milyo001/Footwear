@@ -1,11 +1,15 @@
-  
-<section class="jumbotron text-center">
+<section *ngIf="!hasProducts" class="jumbotron text-center">
+  <div class="container">
+    <h1 class="jumbotron-heading">Cart is empty</h1>
+  </div>
+</section>
+<section *ngIf="cartProducts?.length" class="jumbotron text-center">
   <div class="container">
     <h1 class="jumbotron-heading">Your current saved products in cart</h1>
   </div>
 </section>
 <div *ngIf="cartProducts?.length" class="row">
-
+  
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item *ngFor="let item of cartProducts; let index = index;"
                         #accordionItem="cdkAccordionItem"
@@ -53,29 +57,20 @@
             <button class="action-button btn btn-danger" (click)="deleteProduct(item, index)">Remove from cart</button>
           </div>
         </section>
-        
+
       </div>
 
     </cdk-accordion-item>
   </cdk-accordion>
 </div>
 
-    <section class="col mb-2 finalize-buttons" *ngIf="cartProducts?.length">
-      <div class="row">
-        <div class="col-sm-12  col-md-6" >
-          <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
-        </div>
-        <div class="col-sm-12 col-md-6 text-right">
-          <button class="btn btn-block" mat-stroked-button color="success" [routerLinkActive]="['link-active']" [routerLink]="['/about']" (click)="onCheckOut()">Place order</button>
-        </div>
-      </div>
-    </section>
-
-<!--<div class="container text-center alert alert-danger" *ngIf="!cartProducts?.length">
-  It'seems that you shoping cart is empty.Go back to the products from
-  <a class="text-black alert-link" routerLink="/products" routerLinkActive="active" [routerLinkActive]="['link-active']">
-    here.
-  </a>
-</div>-->
-
-<!--<mat-progress-spinner *ngIf="loading | async" [mode]="'indeterminate'"></mat-progress-spinner>-->
+<section class="col mb-2 finalize-buttons" *ngIf="cartProducts?.length">
+  <div class="row">
+    <div class="col-sm-12  col-md-6">
+      <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
+    </div>
+    <div class="col-sm-12 col-md-6 text-right">
+      <button class="btn btn-block" mat-stroked-button color="success" [routerLinkActive]="['link-active']" [routerLink]="['/about']" (click)="onCheckOut()">Place order</button>
+    </div>
+  </div>
+</section>

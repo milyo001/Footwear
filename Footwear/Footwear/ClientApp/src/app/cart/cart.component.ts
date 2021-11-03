@@ -21,7 +21,7 @@ export class CartComponent implements OnInit {
   cartProducts: ICartProduct[];
   totalAmount: number;
   expandedIndex = 0;
-  /*loading = this.loader.loading;*/
+  hasProducts: boolean;
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
@@ -42,6 +42,9 @@ export class CartComponent implements OnInit {
     if (this.cookieService.get('token') != '') {
       this.cartService.getAllCartProducts().subscribe(productsList => {
         this.cartProducts = productsList;
+        if (this.cartProducts.length > 0) {
+          this.hasProducts = true;
+        }
       })
     }
     else {
@@ -70,19 +73,19 @@ export class CartComponent implements OnInit {
   //Increase the total price in the document
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
-        (response: any) => {
+      (response: any) => {
         if (response.succeeded) {
           this.increaseDomQuantity(index);
           this.increaseDomTotPrice(index, cartProduct.price);
-          }
-        },
-        err => {
-          console.log(err);
         }
-      );
+      },
+      err => {
+        console.log(err);
+      }
+    );
   }
-    //When clicked decrease the quantity of a given item in the document and database
-    //Decrease the total price in the document
+  //When clicked decrease the quantity of a given item in the document and database
+  //Decrease the total price in the document
   decrementQuantity(cartProduct: ICartProduct, index: number): void {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
@@ -115,17 +118,22 @@ export class CartComponent implements OnInit {
           (response: any) => {
             if (response.succeeded) {
               this.deleteCartProductEl(index);
+              this.cartProducts.splice(index, 1);
+              if (this.cartProducts.length == 0) {
+                this.hasProducts = false;
+              }
             }
           },
           err => {
             console.log(err);
           }
         );
-      }},
+      }
+    },
       (reason) => { /*Handle rejection or leave blank*/ });
 
   }
-  
+
   //DOM Manipulation Helpers
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);
@@ -140,7 +148,7 @@ export class CartComponent implements OnInit {
   decreaseDomQuantity(quantityElement: HTMLElement, value) {
     quantityElement.textContent = (--value).toString();
   }
-  decreaseDomTotPrice(index: number, price:number) {
+  decreaseDomTotPrice(index: number, price: number) {
     var totalPrice = document.getElementById("totalPrice" + index);
     var totPriceElValue = parseFloat(totalPrice.textContent);
     totalPrice.textContent = (totPriceElValue - price).toFixed(2);
