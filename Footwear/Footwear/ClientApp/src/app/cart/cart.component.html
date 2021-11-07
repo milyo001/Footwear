@@ -9,11 +9,11 @@
   </div>
 </section>
 <div *ngIf="cartProducts?.length" class="row">
-  
+
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item *ngFor="let item of cartProducts; let index = index;"
                         #accordionItem="cdkAccordionItem"
-                        class="example-accordion-item"
+                        class="example-accordion-item" 
                         role="button"
                         tabindex="0"
                         [attr.id]="'accordion-header-' + index"
@@ -70,7 +70,7 @@
       <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
     </div>
     <div class="col-sm-12 col-md-6 text-right">
-      <button class="btn btn-block" mat-stroked-button color="success" [routerLinkActive]="['link-active']" [routerLink]="['/placeOrder']" (click)="onCheckOut()">Place order</button>
+      <button class="btn btn-block" mat-stroked-button color="success" [routerLink]="['/placeOrder']" (click)="onCheckOut()">Place order</button>
     </div>
   </div>
 </section>
