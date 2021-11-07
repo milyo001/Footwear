@@ -9,6 +9,8 @@ import { ProductComponent } from '../product/product/product.component';
 import { LoginComponent } from '../user/login/login.component';
 import { RegisterComponent } from '../user/register/register.component';
 import { UserProfileComponent } from '../user/user-profile/user-profile.component';
+import { OrdersComponent } from '../orders/orders.component';
+import { PlaceOrderComponent } from '../orders/place-order/place-order.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -18,7 +20,9 @@ const routes: Routes = [
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
-  { path: 'user/userProfile', component: UserProfileComponent }
+  { path: 'user/userProfile', component: UserProfileComponent },
+  { path: 'placeOrder', component: PlaceOrderComponent },
+  { path: 'cart/order', component: OrdersComponent }
 ]; // sets up routes constant where you define your routes
 
 @NgModule({

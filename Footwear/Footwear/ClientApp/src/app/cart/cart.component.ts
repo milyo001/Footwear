@@ -134,6 +134,10 @@ export class CartComponent implements OnInit {
 
   }
 
+  onCheckOut() {
+    console.log("works!")
+  }
+
   //DOM Manipulation Helpers
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);

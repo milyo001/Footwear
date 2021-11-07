@@ -28,6 +28,8 @@ import { MaterialModule } from './modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UserModule } from './modules/user.module';
+import { OrdersComponent } from './orders/orders.component';
+import { PlaceOrderComponent } from './orders/place-order/place-order.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { UserModule } from './modules/user.module';
     ProductSelectComponent,
     CartComponent,
     FooterComponent,
-    ModalComponent
+    ModalComponent,
+    OrdersComponent,
+    PlaceOrderComponent
   ],
   imports: [
     BrowserModule,
