@@ -5,3 +5,32 @@
 .title {
   justify-content: center;
 }
+.user-information {
+  display: flex;
+  flex-wrap: wrap;
+  border: 1px solid black;
+  width:100%;
+  justify-content: space-between;
+}
+.user-data-form{
+    width:49%;
+}
+.half-width{
+    margin-top: 15px;
+    margin-left: 15px;
+    width: 46%;
+}
+.example-h2 {
+  margin: 10px;
+}
+
+.example-section {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  height: 60px;
+}
+
+.example-margin {
+  margin: 0 10px;
+}
