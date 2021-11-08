@@ -9,7 +9,7 @@ export class PlaceOrderComponent implements OnInit {
 
   checked = false;
   indeterminate = false;
-  labelPosition: 'before' | 'after' = 'after';
+  labelPosition: 'import' | 'notImport' = 'notImport';
   disabled = false;
 
   constructor() { }

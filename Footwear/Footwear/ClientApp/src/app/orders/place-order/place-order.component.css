@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  border: 1px solid black;
 }
 .title {
   justify-content: center;
@@ -8,7 +7,6 @@
 .user-information {
   display: flex;
   flex-wrap: wrap;
-  border: 1px solid black;
   width:100%;
   justify-content: space-between;
 }
