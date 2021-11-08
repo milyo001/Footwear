@@ -6,7 +6,6 @@
 
     public class User : IdentityUser
     {
-
         [Required]
         public string FirstName { get; set; }
 
