@@ -9,12 +9,8 @@
   width:50%;
   justify-content: space-between;
 }
-.example-h2 {
-  margin: 10px;
+.product-image {
+  height: 12vh;
+  object-fit: cover;
+  margin: 3px;
 }
-
-/*@media only screen and (max-width: 995px) {
-  .half-width {
-    width: 100%;
-  }
-}*/
