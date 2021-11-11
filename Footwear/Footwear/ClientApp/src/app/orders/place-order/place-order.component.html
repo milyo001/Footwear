@@ -4,12 +4,49 @@
       <span>Shipping Information</span>
     </mat-toolbar>
   </section>
-  <section class="user-information mt-2 mr-2 ml-2">
-    <div class="user-data-form">
-      
+  <section class="container-fluid mt-2 mr-2 ml-2">
+    <div class="row">
+      <div class="col-lg-6">
+        <mat-card>
+          <mat-card-content>
+            <section class="example-section">
+              <label class="mr-2">Import data from your account? </label>
+              <mat-radio-group [(ngModel)]="labelPosition">
+                <mat-radio-button class="mr-1 mb-1" value="import">Import</mat-radio-button>
+                <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
+              </mat-radio-group>
+            </section>
+            <section class="form">
+              <mat-form-field class="col-lg-6" appearance="fill" name="phone" ngDefaultControl>
+                <mat-label>Phone</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill" name="street" ngDefaultControl>
+                <mat-label>Street</mat-label>
+                <input matInput>
+              </mat-form-field>
 
-
-      <div class="checkbox-row">
+              <mat-form-field class="col-lg-6" appearance="fill" name="city" ngDefaultControl>
+                <mat-label>City</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill" name="state" ngDefaultControl>
+                <mat-label>State</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill" name="country" ngDefaultControl>
+                <mat-label>Country</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill" name="zipcode" ngDefaultControl>
+                <mat-label>Zip/Postal Code</mat-label>
+                <input matInput>
+              </mat-form-field>
+            </section>
+          </mat-card-content>
+        </mat-card>
+      </div>
+      <div class="col-lg-6">
         <mat-card>
           <mat-card-content>
             <section class="example-section">
@@ -20,49 +57,36 @@
               </mat-radio-group>
             </section>
             <section class="form">
-              <mat-form-field class="half-width" appearance="fill" name="firstName" ngDefaultControl>
-                <mat-label>First Name</mat-label>
-                <input matInput>
-              </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="lastName" ngDefaultControl>
-                <mat-label>Last Name</mat-label>
-                <input matInput>
-              </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="phone" ngDefaultControl>
+              <mat-form-field class="col-lg-6" appearance="fill" name="phone" ngDefaultControl>
                 <mat-label>Phone</mat-label>
                 <input matInput>
               </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="street" ngDefaultControl>
+              <mat-form-field class="col-lg-6" appearance="fill" name="street" ngDefaultControl>
                 <mat-label>Street</mat-label>
                 <input matInput>
               </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="city" ngDefaultControl>
+
+              <mat-form-field class="col-lg-6" appearance="fill" name="city" ngDefaultControl>
                 <mat-label>City</mat-label>
                 <input matInput>
               </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="state" ngDefaultControl>
+              <mat-form-field class="col-lg-6" appearance="fill" name="state" ngDefaultControl>
                 <mat-label>State</mat-label>
                 <input matInput>
               </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="country" ngDefaultControl>
+              <mat-form-field class="col-lg-6" appearance="fill" name="country" ngDefaultControl>
                 <mat-label>Country</mat-label>
                 <input matInput>
               </mat-form-field>
-              <mat-form-field class="half-width" appearance="fill" name="zipcode" ngDefaultControl>
+              <mat-form-field class="col-lg-6" appearance="fill" name="zipcode" ngDefaultControl>
                 <mat-label>Zip/Postal Code</mat-label>
                 <input matInput>
               </mat-form-field>
             </section>
           </mat-card-content>
         </mat-card>
-        
       </div>
-
-    
-</div>
-<div class="order-details">
-  
-</div>
-
+    </div>
   </section>
 </div>
+
