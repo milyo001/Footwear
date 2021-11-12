@@ -18,9 +18,16 @@
                   <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
                 </mat-radio-group>
               </div>
-
             </section>
             <section class="form">
+              <mat-form-field class="col-lg-6" appearance="fill" name="firstName" ngDefaultControl>
+                <mat-label>First Name</mat-label>
+                <input matInput>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill" name="lastName" ngDefaultControl>
+                <mat-label>Last Name</mat-label>
+                <input matInput>
+              </mat-form-field>
               <mat-form-field class="col-lg-6" appearance="fill" name="phone" ngDefaultControl>
                 <mat-label>Phone</mat-label>
                 <input matInput>
