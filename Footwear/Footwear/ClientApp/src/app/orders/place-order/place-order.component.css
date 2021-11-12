@@ -23,3 +23,10 @@ ul {
 .example-section {
   margin-bottom: 8px;
 }
+.mat-button-toggle-group {
+  margin-left: 12px;
+}
+.payment-options {
+  align-content: center;
+  justify-content: center;
+}
