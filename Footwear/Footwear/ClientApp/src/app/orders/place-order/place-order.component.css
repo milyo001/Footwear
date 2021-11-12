@@ -10,7 +10,13 @@
   justify-content: space-between;
 }
 .product-image {
-  height: 12vh;
+  height: 83px;
+  width: auto;
   object-fit: cover;
-  margin: 3px;
+  margin: 10px;
+}
+ul {
+  list-style-type: none;
+  text-align: right;
+  margin-top: 5px;
 }
