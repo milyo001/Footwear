@@ -10,7 +10,7 @@
   justify-content: space-between;
 }
 .product-image {
-  height: 83px;
+  height: 85px;
   width: auto;
   object-fit: cover;
   margin: 10px;
