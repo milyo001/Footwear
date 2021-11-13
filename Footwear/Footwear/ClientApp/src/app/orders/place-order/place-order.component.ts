@@ -11,11 +11,8 @@ import {
 })
 export class PlaceOrderComponent implements OnInit {
 
-  checked = false;
-  indeterminate = false;
   labelPosition: 'import' | 'notImport' = 'notImport';
-  disabled = false;
-
+  paymentOptions: 'card' | 'cash' = 'cash';
   //Font awesome icons
   faMoneyBillWave = faMoneyBillWave;
   faCreditCard = faCreditCard;
@@ -26,6 +23,7 @@ export class PlaceOrderComponent implements OnInit {
   }
 
 
+  
 }
 
 
