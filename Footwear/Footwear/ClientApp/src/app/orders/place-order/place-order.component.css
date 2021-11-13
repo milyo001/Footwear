@@ -30,3 +30,11 @@ ul {
   align-content: center;
   justify-content: center;
 }
+.cash-icon {
+  margin-right: 2px;
+  color: #1e6144;
+}
+.card-icon {
+  margin-right: 2px;
+  color: #183963;
+}
