@@ -30,6 +30,7 @@ import { CommonModule } from '@angular/common';
 import { UserModule } from './modules/user.module';
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './orders/place-order/place-order.component';
+import { NgxStripeModule } from 'ngx-stripe';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { PlaceOrderComponent } from './orders/place-order/place-order.component'
     CdkAccordionModule,
     NgxPaginationModule,
     FontAwesomeModule,
-    UserModule
+    UserModule,
+    NgxStripeModule.forRoot("pk_test_51JvSm1EzlmwAD2nGbVLotJuNcdiUfqLFluPQ4g6evXT1wdlEI299uJsovNldhvcDM4zrUw17UJBxthwovQm4ZFZA00ZP95L1y6")
   ],
   providers:[
     UserService,
