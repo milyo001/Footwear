@@ -31,6 +31,7 @@ import { UserModule } from './modules/user.module';
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './orders/place-order/place-order.component';
 import { NgxStripeModule } from 'ngx-stripe';
+import { environment } from '../environments/environment.prod';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { NgxStripeModule } from 'ngx-stripe';
     NgxPaginationModule,
     FontAwesomeModule,
     UserModule,
-    NgxStripeModule.forRoot("pk_test_51JvSm1EzlmwAD2nGbVLotJuNcdiUfqLFluPQ4g6evXT1wdlEI299uJsovNldhvcDM4zrUw17UJBxthwovQm4ZFZA00ZP95L1y6")
+    NgxStripeModule.forRoot(environment.payment)
   ],
   providers:[
     UserService,

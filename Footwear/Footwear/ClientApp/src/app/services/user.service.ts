@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUserData } from '../interfaces/userData';
@@ -10,8 +10,6 @@ import { IUserData } from '../interfaces/userData';
 export class UserService {
 
   private baseUrl: string;
-
-  /*userName: string;*/
 
   constructor(private fb: FormBuilder, private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
