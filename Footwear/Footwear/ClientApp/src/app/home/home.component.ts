@@ -17,12 +17,7 @@ export class HomeComponent {
 
   }
 
-  test() {
-    this.http
-      .get('https://reqres.in/api/products/3')
-      .subscribe((res) => {
-        console.log(res);
-      });
-  }
+  
+  
   
 }
