@@ -21,7 +21,7 @@ export class CartService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Access-Control-Allow-Origin', '*');
-    return this.http.post(this.baseUrl + "create-checkout-session", body, { 'headers': headers });
+    return this.http.post(this.baseUrl + "create-checkout-session", body, {'headers': headers});
   }
 
   addToCart(product): Observable<Object> {

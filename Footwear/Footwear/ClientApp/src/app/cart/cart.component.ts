@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
@@ -22,7 +22,7 @@ export class CartComponent implements OnInit {
   totalAmount: number;
   expandedIndex = 0;
   hasProducts: boolean;
-
+  
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
   faInfoCircle = faInfoCircle;
@@ -34,7 +34,7 @@ export class CartComponent implements OnInit {
     private router: Router,
     public modal: NgbModal,
     public loader: LoadingService
-  ) { }
+  ) {}
 
 
   //Load all the products from the dabase or display a notification (error message)

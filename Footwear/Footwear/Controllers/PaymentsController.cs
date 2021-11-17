@@ -6,7 +6,6 @@ using Stripe.Checkout;
 
 namespace server.Controllers
 {
-    [EnableCors("StripeCors")]
     public class PaymentsController : Controller
     {
         public PaymentsController()
@@ -26,7 +25,7 @@ namespace server.Controllers
                   new SessionLineItemOptions
                   {
                     // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                    Price = "{{price_1JwvAfEzlmwAD2nGJEh9JxZv}}",
+                    Price = "price_1JwvAfEzlmwAD2nGJEh9JxZv",
                     Quantity = 1,
                   },
                 },
@@ -35,8 +34,8 @@ namespace server.Controllers
                   "card",
                 },
                 Mode = "payment",
-                SuccessUrl = domain + "/success.html",
-                CancelUrl = domain + "/cancel.html",
+                SuccessUrl = domain + "/payment-success",
+                CancelUrl = domain + "/payment-cancel",
             };
             var service = new SessionService();
             Session session = service.Create(options);

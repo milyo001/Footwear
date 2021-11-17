@@ -11,6 +11,8 @@ import { RegisterComponent } from '../user/register/register.component';
 import { UserProfileComponent } from '../user/user-profile/user-profile.component';
 import { OrdersComponent } from '../orders/orders.component';
 import { PlaceOrderComponent } from '../orders/place-order/place-order.component';
+import { PaymentSuccessComponent } from '../payment/payment-success/payment-success.component';
+import { PaymentCancelComponent } from '../payment/payment-cancel/payment-cancel.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
@@ -22,7 +24,9 @@ const routes: Routes = [
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/userProfile', component: UserProfileComponent },
   { path: 'placeOrder', component: PlaceOrderComponent },
-  { path: 'cart/order', component: OrdersComponent }
+  { path: 'cart/order', component: OrdersComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
+  { path: 'payment-cancel', component: PaymentCancelComponent }
 ]; // sets up routes constant where you define your routes
 
 @NgModule({
