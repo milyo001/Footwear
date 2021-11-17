@@ -31,7 +31,6 @@
     "bootstrap": "^4.5.3",
     "ngx-cookie-service": "^12.0.3",
     "ngx-pagination": "^5.0.0",
-    "ngx-stripe": "^13.0.0",
     "ngx-toastr": "^11.3.3",
     "rxjs": "~6.6.0",
     "rxjs-compat": "^6.6.7",

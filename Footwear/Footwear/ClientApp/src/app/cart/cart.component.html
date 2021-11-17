@@ -69,8 +69,8 @@
     <div class="col-sm-12  col-md-6">
       <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
     </div>
-    <form method="POST">
-      <div class="col-sm-12 col-md-6 text-right">
+    <form method="POST" class="col-sm-12 col-md-6 text-right">
+      <div>
         <button class="btn btn-block" mat-stroked-button color="success" [routerLink]="['/placeOrder']" (click)="onCheckOut()">Place order</button>
       </div>
     </form>

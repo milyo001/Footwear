@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { ICartProduct } from '../interfaces/cartProduct';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,15 +9,22 @@ import { Observable } from 'rxjs';
 export class CartService {
 
   private baseUrl: string;
-  defaultQuantity: number = 1;
+  defaultQuantity: number = 1;  
 
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
   }
 
-  addToCart(product): Observable<Object> {
+  test(items) {
+    var body = {};
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    return this.http.post(this.baseUrl + "create-checkout-session", body, { 'headers': headers });
+  }
 
+  addToCart(product): Observable<Object> {
     const body: ICartProduct = {
       productId: product.id,
       name: product.name,
@@ -46,23 +53,5 @@ export class CartService {
     return this.http.post<ICartProduct>(this.baseUrl + "cart/deleteCartProduct", cartProductId);
   }
 
-  clearCart(): ICartProduct[] {
-    return;
-  }
-
-  getTotalAmount() {
-
-    //TODO
-
-    //const sum = this.items
-    //  .map(item => item.price)
-    //  .reduce((prev, curr) => prev + curr, 0);
-    return
-    
-  }
-
-  checkOut(): void {
-    
-  }
 
 }

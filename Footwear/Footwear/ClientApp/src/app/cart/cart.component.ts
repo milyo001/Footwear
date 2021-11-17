@@ -135,7 +135,10 @@ export class CartComponent implements OnInit {
   }
 
   onCheckOut() {
-    console.log("works!")
+    this.cartService.test(this.cartProducts).subscribe((response: any) => {
+      console.log(response);
+      this.toastr.success("Yeeeeah");
+    })
   }
 
   //DOM Manipulation Helpers

@@ -30,8 +30,8 @@ import { CommonModule } from '@angular/common';
 import { UserModule } from './modules/user.module';
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './orders/place-order/place-order.component';
-import { NgxStripeModule } from 'ngx-stripe';
-import { environment } from '../environments/environment.prod';
+import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
+import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,9 @@ import { environment } from '../environments/environment.prod';
     FooterComponent,
     ModalComponent,
     OrdersComponent,
-    PlaceOrderComponent
+    PlaceOrderComponent,
+    PaymentSuccessComponent,
+    PaymentCancelComponent
   ],
   imports: [
     BrowserModule,
@@ -61,8 +63,7 @@ import { environment } from '../environments/environment.prod';
     CdkAccordionModule,
     NgxPaginationModule,
     FontAwesomeModule,
-    UserModule,
-    NgxStripeModule.forRoot(environment.payment)
+    UserModule
   ],
   providers:[
     UserService,

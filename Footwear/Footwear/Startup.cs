@@ -16,7 +16,6 @@ namespace Footwear
     using System;
     using Footwear.Services.TokenService;
     using Footwear.Services.CartService;
-    using System.Threading.Tasks;
 
     public class Startup
     {
@@ -30,10 +29,10 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options => options.AddDefaultPolicy(builder => builder.AllowAnyOrigin()));
 
             //Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration, example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-
             services.AddControllersWithViews();
 
             // In production, the Angular files will be served from this directory
@@ -42,8 +41,6 @@ namespace Footwear
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            //CORS config
-            services.AddCors();
 
             //Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -67,7 +64,8 @@ namespace Footwear
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
+            }).AddJwtBearer(options =>
+            {
                 options.RequireHttpsMetadata = false;
                 options.SaveToken = false; //There is no need to save token in server
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -98,22 +96,16 @@ namespace Footwear
                 app.UseHsts();
             }
 
-            app.UseCors(builder =>
-            builder.WithOrigins(Configuration["ApplicationSettings:ApiUrl"].ToString())
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-            );
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
-            
-            app.UseRouting();
 
             app.UseAuthentication();
+            app.UseRouting();
+            app.UseCors();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
