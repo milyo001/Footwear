@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
@@ -6,6 +7,8 @@ using Stripe.Checkout;
 
 namespace server.Controllers
 {
+    [EnableCors("SiteCorsPolicy")]
+
     public class PaymentsController : Controller
     {
         public PaymentsController()
@@ -14,6 +17,7 @@ namespace server.Controllers
         }
 
         
+
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession(object test)
         {
@@ -39,9 +43,17 @@ namespace server.Controllers
             };
             var service = new SessionService();
             Session session = service.Create(options);
-
+            Response.StatusCode = 200;
             Response.Headers.Add("Location", session.Url);
-            return new StatusCodeResult(303);
+            var weatherForecast = new
+            {
+                Url = session.Url
+            };
+
+            string jsonString = JsonSerializer.Serialize(weatherForecast);
+
+
+            return Ok(jsonString);
         }
     }
 }

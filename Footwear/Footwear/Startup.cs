@@ -16,6 +16,7 @@ namespace Footwear
     using System;
     using Footwear.Services.TokenService;
     using Footwear.Services.CartService;
+    using Microsoft.AspNetCore.Cors.Infrastructure;
 
     public class Startup
     {
@@ -29,18 +30,10 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddDefaultPolicy(builder =>
-                {
-                    builder.AllowAnyOrigin();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyHeader();
-                });
-            });
-
+            
             //Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration, example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
+            services.AddCors(); 
             services.AddControllersWithViews();
 
             // In production, the Angular files will be served from this directory
@@ -49,6 +42,17 @@ namespace Footwear
                 configuration.RootPath = "ClientApp/dist";
             });
 
+            //CORS configuration
+            var corsBuilder = new CorsPolicyBuilder();
+            corsBuilder.AllowAnyHeader();
+            corsBuilder.AllowAnyMethod();
+            corsBuilder.AllowAnyOrigin(); // For anyone access.
+            //corsBuilder.WithOrigins("http://localhost:56573"); // for a specific url. Don't add a forward slash on the end!
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+            });
 
             //Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -103,6 +107,7 @@ namespace Footwear
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -110,17 +115,18 @@ namespace Footwear
                 app.UseSpaStaticFiles();
             }
 
-            //app.UseAuthentication();
-            app.UseRouting();
-            app.UseCors();
-            //app.UseAuthorization();
             app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseCors("SiteCorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+               
             });
 
             app.UseSpa(spa =>

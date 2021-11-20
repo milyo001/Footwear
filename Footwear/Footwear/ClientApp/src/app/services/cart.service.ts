@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { ICartProduct } from '../interfaces/cartProduct';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -19,10 +19,22 @@ export class CartService {
   test(items) {
     var body = {};
     const headers = new HttpHeaders()
-      .set('content-type', 'application/json')
-      .set('Access-Control-Allow-Origin', '*');
-    return this.http.post(this.baseUrl + "create-checkout-session", body, {'headers': headers});
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.baseUrl + "create-checkout-session", body, { 'headers': headers } );
   }
+
+//  const res = await fetch(`${process.env.BACKEND_API_URL}/create-checkout-session`, {
+//    method: 'POST',
+//    headers: {
+//      "Content-Type": 'application/json'
+//    }
+//  })
+//  const body = await res.json()
+//  window.location.href = body.url
+//}
+
+
+
 
   addToCart(product): Observable<Object> {
     const body: ICartProduct = {

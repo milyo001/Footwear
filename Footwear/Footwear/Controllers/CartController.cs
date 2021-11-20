@@ -4,7 +4,6 @@
     using Footwear.Data.Dto;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Collections.Generic;
@@ -26,7 +25,7 @@
             this._cartService = cartService;
         }
 
-        [Authorize]
+        
         [HttpGet("getCartItems")]
         public async Task<IEnumerable<CartProductViewModel>> Get()
         {  
@@ -41,7 +40,6 @@
             throw new Exception("User is not logged in.");
         }
 
-        [Authorize]
         [HttpPut("increaseProductQuantity")]
         public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
@@ -54,7 +52,6 @@
             return BadRequest("Error, modifing the data!");
         }
 
-        [Authorize]
         [HttpPut("decreaseProductQuantity")]
         public async Task<Object> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
@@ -71,7 +68,6 @@
             return BadRequest("Error, modifing the data!");
         }
 
-        [Authorize]
         [HttpPost("deleteCartProduct")]
         public async Task<Object> DeleteCartProduct([FromBody] int cartProductId)
         {

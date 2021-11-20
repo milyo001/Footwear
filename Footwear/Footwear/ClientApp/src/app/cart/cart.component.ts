@@ -137,6 +137,7 @@ export class CartComponent implements OnInit {
   onCheckOut() {
     this.cartService.test(this.cartProducts).subscribe((response: any) => {
       console.log(response);
+      window.location.href = response.Url
       this.toastr.success("Yeeeeah");
     })
   }
