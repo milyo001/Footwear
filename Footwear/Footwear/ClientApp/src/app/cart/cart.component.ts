@@ -77,6 +77,8 @@ export class CartComponent implements OnInit {
         if (response.succeeded) {
           this.increaseDomQuantity(index);
           this.increaseDomTotPrice(index, cartProduct.price);
+          this.cartProducts[index].quantity++;
+          console.log(this.cartProducts);
         }
       },
       err => {
@@ -90,7 +92,7 @@ export class CartComponent implements OnInit {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
     if (value <= 1) {
-      this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try removing the item");
+      this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try to delete the item");
     }
     else {
       this.cartService.decreaseProductQuantity(cartProduct.id).subscribe(
@@ -99,6 +101,8 @@ export class CartComponent implements OnInit {
             if (value > 1) {
               this.decreaseDomQuantity(quantityElement, value);
               this.decreaseDomTotPrice(index, cartProduct.price);
+              this.cartProducts[index].quantity--;
+              console.log(this.cartProducts);
             }
           }
         },
