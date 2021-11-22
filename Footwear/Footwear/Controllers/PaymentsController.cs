@@ -21,7 +21,7 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession(object test)
         {
-            var domain = "https://localhost:44323";
+            var domain = "https://localhost:44365";
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -51,7 +51,6 @@ namespace server.Controllers
             };
 
             string jsonString = JsonSerializer.Serialize(weatherForecast);
-
 
             return Ok(jsonString);
         }

@@ -46,8 +46,8 @@ namespace Footwear
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
-            corsBuilder.AllowAnyOrigin(); // For anyone access.
-            //corsBuilder.WithOrigins("http://localhost:56573"); // for a specific url. Don't add a forward slash on the end!
+            // Gets the allowed origins in appsettings.json
+            corsBuilder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString()); 
 
             services.AddCors(options =>
             {
