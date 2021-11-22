@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CartService } from '../services/cart.service';
 import { faInfoCircle, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { ICartProduct } from '../interfaces/cartProduct';
@@ -136,9 +136,11 @@ export class CartComponent implements OnInit {
 
  
   onCheckOut() {
-    this.cartService.test(this.cartProducts).subscribe((response: any) => {
+    this.cartService.checkout(this.cartProducts).subscribe((response: any) => {
+      this.toastr.toastrConfig.positionClass = "toast-top-full-width";
       window.location.href = response.Url
       this.toastr.success("Redirecting please wait!");
+      setTimeout(() => { }, 3000);
     })
   }
 

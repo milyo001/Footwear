@@ -16,7 +16,7 @@ export class CartService {
     this.baseUrl = baseUrl;
   }
 
-  test(items) {
+  checkout(items) {
     var body = {};
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
