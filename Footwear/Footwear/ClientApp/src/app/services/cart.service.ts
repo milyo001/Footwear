@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { ICartProduct } from '../interfaces/cartProduct';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({

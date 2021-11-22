@@ -9,8 +9,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
 import { LoadingService } from '../services/loading.service';
 
-
-
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -141,10 +139,9 @@ export class CartComponent implements OnInit {
  
   onCheckOut() {
     this.cartService.checkout(this.cartProducts).subscribe((response: any) => {
-      this.toastr.toastrConfig.positionClass = "toast-top-full-width";
-      window.location.href = response.Url
       this.toastr.success("Redirecting please wait!");
       setTimeout(() => { }, 3000);
+      window.location.href = response.Url
     })
   }
 
