@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
+using Footwear.Data.Dto;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
@@ -19,8 +20,13 @@ namespace server.Controllers
         
 
         [HttpPost("create-checkout-session")]
-        public ActionResult CreateCheckoutSession(object test)
+        public ActionResult CreateCheckoutSession([FromBody] CartProductViewModel[] items)
         {
+            if(items == null)
+            {
+                return BadRequest(new { message = "Invalid product data!" });
+            }
+
             var domain = "https://localhost:44365";
             var options = new SessionCreateOptions
             {

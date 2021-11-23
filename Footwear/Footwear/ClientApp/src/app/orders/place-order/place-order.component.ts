@@ -1,3 +1,4 @@
+import { error } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import {
   faCreditCard,
@@ -29,15 +30,27 @@ export class PlaceOrderComponent implements OnInit {
     this.cartProducts = this.paymentService.products;
   }
 
-
   onCheckOut() {
     this.paymentService.checkout(this.cartProducts).subscribe((response: any) => {
       this.toastr.success("Redirecting please wait!");
-      setTimeout(() => { }, 3000);
-      window.location.href = response.Url
-    });
+      setTimeout(() => { window.location.href = response.Url }, 4000);
+    },
+      error => {
+        if (error.status == 400) { //bad request from the api
+          this.toastr.error(error.error.message, 'An unexpected error occured!');
+          console.log(error);
+        }
+      })
   }
-  
+
+
+
+
+
+
+
 }
+
+
 
 

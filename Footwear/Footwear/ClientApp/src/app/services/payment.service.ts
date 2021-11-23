@@ -7,6 +7,7 @@ import { ICartProduct } from '../interfaces/cartProduct';
 })
 export class PaymentService {
 
+    //Store products here passed from cart component to avoid additional request to the server
     products: ICartProduct[];
     baseUrl: string;
 
@@ -14,10 +15,10 @@ export class PaymentService {
     this.baseUrl = baseUrl;
   }
 
+  //Send the items to the server in the body
   checkout(items: ICartProduct[]) {
-    var body = {};
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + "create-checkout-session", body, { 'headers': headers });
+    return this.http.post(this.baseUrl + "create-checkout-session", items, { 'headers': headers });
   }
 }

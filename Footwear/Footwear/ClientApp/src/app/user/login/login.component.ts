@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       error => {
         if (error.status == 400) { //bad request from the api
           this.toastr.error(error.error.message, 'Authentication failed!');
-        } else {
           console.log(error);
         }
         

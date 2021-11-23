@@ -140,11 +140,6 @@ export class CartComponent implements OnInit {
 
  
   onCheckOut() {
-    //this.cartService.checkout(this.cartProducts).subscribe((response: any) => {
-    //  this.toastr.success("Redirecting please wait!");
-    //  setTimeout(() => { }, 3000);
-    //  window.location.href = response.Url
-    //})
     this.paymentService.products = this.cartProducts;
   }
 
