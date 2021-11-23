@@ -30,10 +30,9 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
             //Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration, example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            services.AddCors(); 
+           
             services.AddControllersWithViews();
 
             // In production, the Angular files will be served from this directory
@@ -46,12 +45,11 @@ namespace Footwear
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
-            // Gets the allowed origins in appsettings.json
+            // Gets the allowed origins in appsettings.json (persist in .gitignore file)
             corsBuilder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString()); 
-
             services.AddCors(options =>
             {
-                options.AddPolicy("SiteCorsPolicy", corsBuilder.Build());
+                options.AddPolicy("FootwearCorsPolicy", corsBuilder.Build());
             });
 
             //Database confirguration and identity
@@ -119,7 +117,7 @@ namespace Footwear
 
             app.UseRouting();
 
-            app.UseCors("SiteCorsPolicy");
+            app.UseCors("FootwearCorsPolicy");
 
             app.UseEndpoints(endpoints =>
             {

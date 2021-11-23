@@ -3,6 +3,7 @@ using System.Text.Json;
 using Footwear.Data.Dto;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Stripe;
 using Stripe.Checkout;
 
@@ -12,9 +13,13 @@ namespace server.Controllers
 
     public class PaymentsController : Controller
     {
-        public PaymentsController()
+
+        public IConfiguration Configuration { get; }
+
+        public PaymentsController(IConfiguration configuration)
         {
-            StripeConfiguration.ApiKey = "sk_test_51JvSm1EzlmwAD2nGZhL8vfUSiDteGqAYl0iKaPDbix9v9rZcfzjcOm9Kh0GgUMsXSNurIyW6T6br9dbuAlWkO74e008QjJw2YC";
+            Configuration = configuration;
+            StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
         
@@ -22,12 +27,12 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] CartProductViewModel[] items)
         {
-            if(items == null)
+            if(items == null || !ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
 
-            var domain = "https://localhost:44365";
+            var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
