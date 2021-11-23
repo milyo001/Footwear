@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Text.Json;
 using Footwear.Data.Dto;
 using Microsoft.AspNetCore.Cors;
@@ -27,9 +28,21 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] CartProductViewModel[] items)
         {
+            //Check if data is valid or model was bound successfully
             if(items == null || !ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid product data!" });
+            }
+
+            //The total price to charge, if you want stripe dashboard statistics use stripe price Id 
+            //See https://stripe.com/docs/api/prices for details
+            decimal totalPrice = 0;
+            foreach (var item in items)
+            {
+                for (int i = 0; i < item.Quantity; i++)
+                {
+                    totalPrice += (decimal)item.Price;
+                }
             }
 
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
@@ -39,8 +52,11 @@ namespace server.Controllers
                 {
                   new SessionLineItemOptions
                   {
-                    // Provide the exact Price ID (e.g. pr_1234) of the product you want to sell
-                    Price = "price_1JwvAfEzlmwAD2nGJEh9JxZv",
+                    Name = "Total amount for all products:",
+                    Currency = "usd",
+                    //Sripe api expects a number as the given example: 20$ in decimal/double = 2000 or
+                    //45.50$ in decimal/double = 4550
+                    Amount = (long)(totalPrice * 100),
                     Quantity = 1,
                   },
                 },
@@ -54,14 +70,13 @@ namespace server.Controllers
             };
             var service = new SessionService();
             Session session = service.Create(options);
-            Response.StatusCode = 200;
-            Response.Headers.Add("Location", session.Url);
-            var weatherForecast = new
+
+            //Passing the url to the client to redirect user to the prebuild checkout page
+            var generatedUrl = new
             {
                 Url = session.Url
             };
-
-            string jsonString = JsonSerializer.Serialize(weatherForecast);
+            string jsonString = JsonSerializer.Serialize(generatedUrl);
 
             return Ok(jsonString);
         }
