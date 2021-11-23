@@ -16,13 +16,6 @@ export class CartService {
     this.baseUrl = baseUrl;
   }
 
-  checkout(items) {
-    var body = {};
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + "create-checkout-session", body, { 'headers': headers } );
-  }
-
   addToCart(product): Observable<Object> {
     const body: ICartProduct = {
       productId: product.id,

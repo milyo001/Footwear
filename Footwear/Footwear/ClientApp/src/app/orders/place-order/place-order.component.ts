@@ -35,7 +35,7 @@ export class PlaceOrderComponent implements OnInit {
       this.toastr.success("Redirecting please wait!");
       setTimeout(() => { }, 3000);
       window.location.href = response.Url
-    })
+    });
   }
   
 }

@@ -14,7 +14,7 @@ export class PaymentService {
     this.baseUrl = baseUrl;
   }
 
-  checkout(items) {
+  checkout(items: ICartProduct[]) {
     var body = {};
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');

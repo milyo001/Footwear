@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
 import { LoadingService } from '../services/loading.service';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-cart',
@@ -27,6 +28,7 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
+    private paymentService: PaymentService,
     private toastr: ToastrService,
     private cookieService: CookieService,
     private router: Router,
@@ -138,11 +140,12 @@ export class CartComponent implements OnInit {
 
  
   onCheckOut() {
-    this.cartService.checkout(this.cartProducts).subscribe((response: any) => {
-      this.toastr.success("Redirecting please wait!");
-      setTimeout(() => { }, 3000);
-      window.location.href = response.Url
-    })
+    //this.cartService.checkout(this.cartProducts).subscribe((response: any) => {
+    //  this.toastr.success("Redirecting please wait!");
+    //  setTimeout(() => { }, 3000);
+    //  window.location.href = response.Url
+    //})
+    this.paymentService.products = this.cartProducts;
   }
 
   //DOM Manipulation Helpers
