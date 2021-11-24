@@ -12,9 +12,10 @@ namespace Footwear.Services.CartService
         IEnumerable<CartProductViewModel> GetCartProducts(int cartId);
         void IncreaseQuantity(int productId);
         void DecreaseQuantity(int productId);
-        Task<CartProduct> GetCardProductByIdAsync(int productId);
-
+        Task<CartProduct> GetCartProductByIdAsync(int productId);
         void DeleteCartProduct(int productId);
+        void DeleteCartProducts(int productId);
+
 
     }
 }

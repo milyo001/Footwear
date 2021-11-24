@@ -42,7 +42,7 @@
 
             return products;
         }
-        public async Task<CartProduct> GetCardProductByIdAsync(int cartProductId)
+        public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
             var product = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
             return product;
@@ -50,22 +50,29 @@
 
         public void IncreaseQuantity(int cartProductId)
         {
-            var cartProduct =  this.GetCardProductByIdAsync(cartProductId).Result;
+            var cartProduct =  this.GetCartProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity++;
             this._db.SaveChanges();
         }
 
         public void DecreaseQuantity(int cartProductId)
         {
-            var cartProduct = this.GetCardProductByIdAsync(cartProductId).Result;
+            var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity--;
             this._db.SaveChangesAsync();
         }
 
         public void DeleteCartProduct(int cartProductId)
         {
-            var cartProduct = this.GetCardProductByIdAsync(cartProductId).Result;
+            var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
             this._db.CartProducts.Remove(cartProduct);
+            this._db.SaveChanges();
+        }
+
+        public void DeleteCartProducts(int cartId)
+        {
+            var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);
+            this._db.CartProducts.RemoveRange(cartProducts);
             this._db.SaveChanges();
         }
     }

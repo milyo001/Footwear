@@ -43,7 +43,7 @@
         [HttpPut("increaseProductQuantity")]
         public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
-            var cartProduct = await this._cartService.GetCardProductByIdAsync(cartProductId);
+            var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if (cartProduct != null)
             {
                 this._cartService.IncreaseQuantity(cartProductId);
@@ -55,7 +55,7 @@
         [HttpPut("decreaseProductQuantity")]
         public async Task<Object> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
-            var cartProduct = await this._cartService.GetCardProductByIdAsync(cartProductId);
+            var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if(cartProduct == null)
             {
                 return BadRequest("Product do not exists in context");
@@ -71,7 +71,7 @@
         [HttpPost("deleteCartProduct")]
         public async Task<Object> DeleteCartProduct([FromBody] int cartProductId)
         {
-            if (await this._cartService.GetCardProductByIdAsync(cartProductId) == null)
+            if (await this._cartService.GetCartProductByIdAsync(cartProductId) == null)
             {
                 return BadRequest("Product do not exists in cart");
             }
