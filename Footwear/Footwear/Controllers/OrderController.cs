@@ -1,59 +1,44 @@
 ﻿namespace Footwear.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
+    
     using Footwear.Data;
-    using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Stripe;
+    using Stripe.Checkout;
 
     [Route("[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
+        public IConfiguration Configuration { get; }
 
         private UserManager<User> _userManager;
 
 
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager)
+        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration)
         {
             this._db = db;
             this._userManager = userManager;
+            Configuration = configuration;
+            StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
-        //[HttpPost]
-        //public async void  PostOrder (OrderViewModel model)
-        //{
-        //    var order = new Order()
-        //    {
-        //        Id = model.Id,
-        //        Name = Guid.NewGuid().ToString(),
-        //        OrderStatus = model.OrderStatus,
-        //        CreatedOn = model.CreatedOn,
-        //        Address =  model.Address
-        //    };
 
-        //    foreach (var product in model.Products)
-        //    {
-        //        var currentProduct = this._db.Products.FirstOrDefault(x=> x.Id == product.Id);
-        //        order.Products.Add(currentProduct);
-        //    }
-        //    var user = await this._userManager.FindByIdAsync(model.UserId);
+        [HttpGet("/payment-success")]
+        public ActionResult OrderSuccess([FromQuery] string session_id)
+        {
+            var sessionService = new SessionService();
+            Session session = sessionService.Get(session_id);
 
-        //    try
-        //    {
-        //         user.Orders.Add(order);
-        //        _db.SaveChanges();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
+            var customerService = new CustomerService();
+            Customer customer = customerService.Get(session.CustomerId);
+
+            return Ok(new { succeeded = true });
+        }
 
     }
 }

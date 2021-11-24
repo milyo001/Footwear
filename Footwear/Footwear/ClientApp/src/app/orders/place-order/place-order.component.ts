@@ -32,7 +32,7 @@ export class PlaceOrderComponent implements OnInit {
 
   onCheckOut() {
     this.paymentService.checkout(this.cartProducts).subscribe((response: any) => {
-      this.toastr.success("Redirecting please wait!");
+      this.toastr.success("Redirecting, please wait!");
       setTimeout(() => { window.location.href = response.Url }, 3000);
     },
       error => {

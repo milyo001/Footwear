@@ -66,7 +66,7 @@ namespace server.Controllers
                   "card",
                 },
                 Mode = "payment",
-                SuccessUrl = domain + "/payment-success",
+                SuccessUrl = domain + "/payment-success/?session_id={CHECKOUT_SESSION_ID}",
                 CancelUrl = domain + "/payment-cancel",
             };
             var service = new SessionService();
