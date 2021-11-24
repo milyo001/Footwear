@@ -1,17 +1,17 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using Footwear.Data.Dto;
-using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using Stripe;
-using Stripe.Checkout;
-
+﻿
 namespace server.Controllers
 {
-    [EnableCors("SiteCorsPolicy")]
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using Footwear.Data.Dto;
+    using Microsoft.AspNetCore.Cors;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.Extensions.Configuration;
+    using Stripe;
+    using Stripe.Checkout;
 
+
+    [EnableCors("SiteCorsPolicy")]
     public class PaymentsController : Controller
     {
 
