@@ -34,9 +34,6 @@ namespace Footwear.Data.Dto
 
         [Required]
         public int Quantity { get; set; }
-
-        [Required]
-        public string CreatedOn { get; set; }
     }
 
 }

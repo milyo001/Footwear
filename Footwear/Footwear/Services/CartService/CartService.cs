@@ -35,8 +35,7 @@
                      ImageUrl = cp.ImageUrl,
                      Price = cp.Price,
                      Quantity = cp.Quantity,
-                     ProductType = cp.ProductType.ToString(),
-                     CreatedOn = cp.CreatedOn.ToString()
+                     ProductType = cp.ProductType.ToString()
                  })
                 .ToArray();
 
@@ -74,6 +73,7 @@
             var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);
             this._db.CartProducts.RemoveRange(cartProducts);
             this._db.SaveChanges();
+
         }
     }
 }

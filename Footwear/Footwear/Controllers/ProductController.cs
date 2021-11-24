@@ -91,7 +91,6 @@
                 ImageUrl = model.ImageUrl,
                 Price = model.Price,
                 Quantity = model.Quantity,
-                CreatedOn = DateTime.Today,
                 ProductId = model.ProductId
             };
 

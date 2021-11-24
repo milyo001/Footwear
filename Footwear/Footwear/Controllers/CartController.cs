@@ -31,13 +31,14 @@
         {  
             var authCookie = Request.Cookies["token"];
 
-            if (authCookie != "" || authCookie != null)
+            if (authCookie == "" || authCookie == null)
             {
-                var cartId = this._tokenService.GetCartId(authCookie);
-                var products = this._cartService.GetCartProducts(cartId);
-                return products;
+                throw new Exception("User is not logged in.");
             }
-            throw new Exception("User is not logged in.");
+            var cartId = this._tokenService.GetCartId(authCookie);
+            var products = this._cartService.GetCartProducts(cartId);
+            return products;
+
         }
 
         [HttpPut("increaseProductQuantity")]

@@ -31,8 +31,6 @@
 
         public int Quantity { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-
         public int ProductId { get; set; }
 
         public int CartId { get; set; }

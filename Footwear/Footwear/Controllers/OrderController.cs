@@ -4,6 +4,7 @@
     using Footwear.Data;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
+    using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -17,13 +18,15 @@
         private readonly ApplicationDbContext _db;
         public IConfiguration Configuration { get; }
         private readonly ICartService _cartService;
+        private readonly ITokenService _tokenService;
 
 
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, ICartService cartService)
+        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, ICartService cartService, ITokenService tokenService)
         {
+            this._cartService = cartService;
+            this._tokenService = tokenService;
             this._db = db;
             Configuration = configuration;
-            this._cartService = cartService;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
 
         }
@@ -32,13 +35,17 @@
         [HttpGet("/payment-success")]
         public ActionResult OrderSuccess([FromQuery] string session_id)
         {
+            var authCookie = Request.Cookies["token"];
+            var cartId = this._tokenService.GetCartId(authCookie);
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString() + "/order-completed";
+
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
-            //TO DO REMOVE cart items
+
             var customerService = new CustomerService();
             Customer customer = customerService.Get(session.CustomerId);
 
+            this._cartService.DeleteCartProducts(cartId);
             return Redirect(domain);
         }
 
