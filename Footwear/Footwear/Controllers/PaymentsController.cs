@@ -28,14 +28,12 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] CartProductViewModel[] items)
         {
-            //Check if data is valid or model was bound successfully
+            //Check if data is invalid or model was not bound successfully
             if(items == null || !ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
-
-            //The total price to charge, if you want stripe dashboard statistics use stripe price Id 
-            //See https://stripe.com/docs/api/prices for details
+            
             decimal totalPrice = 0;
             foreach (var item in items)
             {
@@ -46,6 +44,9 @@ namespace server.Controllers
             }
 
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
+
+            //The total price to charge, if you want stripe dashboard statistics use stripe price Id 
+            //See https://stripe.com/docs/api/prices for details
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>

@@ -10,11 +10,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class CartService : ICartService
+    public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _db;
 
-        public CartService(ApplicationDbContext db)
+        public OrderService(ApplicationDbContext db)
         {
             this._db = db;
         }

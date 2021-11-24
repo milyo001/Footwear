@@ -15,10 +15,10 @@
     {
         private readonly ApplicationDbContext _db;
         private readonly ITokenService _tokenService;
-        private readonly ICartService _cartService;
+        private readonly IOrderService _cartService;
 
 
-        public CartController(ApplicationDbContext db, ITokenService tokenService, ICartService cartService)
+        public CartController(ApplicationDbContext db, ITokenService tokenService, IOrderService cartService)
         {
             this._db = db;
             this._tokenService = tokenService;
