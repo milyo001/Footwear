@@ -1,7 +1,6 @@
 ﻿namespace Footwear.Services.OrderService
 {
     using Footwear.Data;
-    using System;
 
     public class OrderService : IOrderService
     {
@@ -14,7 +13,7 @@
 
         public void CreateOrder(string token)
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
     }
 }

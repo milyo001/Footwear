@@ -16,7 +16,9 @@ namespace Footwear
     using System;
     using Footwear.Services.TokenService;
     using Footwear.Services.CartService;
+    using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Cors.Infrastructure;
+    
 
     public class Startup
     {
@@ -89,6 +91,7 @@ namespace Footwear
             });
             //Custom Services
             services.AddScoped<ITokenService, TokenService>();
+            services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrderService, OrderService>();
         }
 

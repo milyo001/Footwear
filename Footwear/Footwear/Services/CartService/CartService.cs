@@ -4,17 +4,15 @@
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class OrderService : IOrderService
+    public class CartService : ICartService
     {
         private readonly ApplicationDbContext _db;
 
-        public OrderService(ApplicationDbContext db)
+        public CartService(ApplicationDbContext db)
         {
             this._db = db;
         }

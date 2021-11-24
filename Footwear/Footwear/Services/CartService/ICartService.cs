@@ -7,7 +7,7 @@ namespace Footwear.Services.CartService
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    public interface IOrderService
+    public interface ICartService
     {
         IEnumerable<CartProductViewModel> GetCartProducts(int cartId);
         void IncreaseQuantity(int productId);

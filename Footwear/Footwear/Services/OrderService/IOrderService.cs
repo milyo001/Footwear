@@ -1,10 +1,10 @@
 ﻿
-
 namespace Footwear.Services.OrderService
 {
-    public interface IOrderService
+    interface IOrderService
     {
         void CreateOrder(string token);
+
 
     }
 }
