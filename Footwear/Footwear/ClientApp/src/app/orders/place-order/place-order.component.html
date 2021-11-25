@@ -13,7 +13,7 @@
               <h5 class="text-center d-block m-1">Please enter delivery address and name for the invoice!</h5>
               <div class="mt-3 ml-3">
                 <label class="mr-2">Import data from your account? </label>
-                <mat-radio-group [(ngModel)]="labelPosition">
+                <mat-radio-group [(ngModel)]="labelPosition" (change)="handleImports($event)">
                   <mat-radio-button class="mr-1 mb-1" value="import">Import</mat-radio-button>
                   <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
                 </mat-radio-group>

@@ -31,7 +31,8 @@
 
         }
 
-        //Retrieve session id from stripe api and redirect to payment successfull page
+        //Retrieve session id from stripe api and redirect to payment successfull page, 
+        //make an order and then delete current products stored in the cart!
         [HttpGet("/payment-success")]
         public ActionResult OrderSuccess([FromQuery] string session_id)
         {

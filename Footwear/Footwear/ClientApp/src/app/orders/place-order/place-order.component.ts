@@ -4,7 +4,7 @@ import {
   faCreditCard,
   faMoneyBillWave
 } from '@fortawesome/free-solid-svg-icons';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
 import { PaymentService } from '../../services/payment.service';
 
@@ -43,6 +43,14 @@ export class PlaceOrderComponent implements OnInit {
       })
   }
 
+  handleImports(event) {
+    if (event.value == 'import') {
+
+    } else {
+
+    }
+    
+  }
 
 
 
