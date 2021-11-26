@@ -6,47 +6,23 @@
   </section>
   <section class="container-fluid mt-2 mr-2 ml-2">
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-6 mb-3">
         <mat-card>
           <label class="text-center">
             Products List:
           </label>
           <mat-card-content>
             <div class="d-flex flex-column justify-content-between">
-              <mat-card class="p-2 d-flex justify-content-between">
+              <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
                 <div>
-                  <img class="product-image" src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg" alt="testImage">
+                  <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
                 </div>
-                <ul class="font-weight-light" *ngFor="let item of cartProducts">
+                <ul class="font-weight-light">
                   <li>{{item.name}} </li>
                   <li>{{item.size}}</li>
                   <li>{{item.quantity}}$ </li>
                   <li>{{item.price}}$</li>
                   <li class="bold">Total/items: {{+item.price * item.quantity}}</li>
-                </ul>
-              </mat-card>
-              <mat-card class="p-2 d-flex justify-content-between">
-                <div>
-                  <img class="product-image" src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg" alt="testImage">
-                </div>
-                <ul class="font-weight-light">
-                  <li>Virsache </li>
-                  <li>Size: 44</li>
-                  <li>Quantity: 2 </li>
-                  <li>Price: 442$ </li>
-                  <li class="bold">Total/items: 884$ </li>
-                </ul>
-              </mat-card>
-              <mat-card class="p-2 d-flex justify-content-between">
-                <div>
-                  <img class="product-image" src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg" alt="testImage">
-                </div>
-                <ul class="font-weight-light">
-                  <li>Virsache </li>
-                  <li>Size: 44</li>
-                  <li>Quantity: 2 </li>
-                  <li>Price: 442$ </li>
-                  <li class="bold">Total/items: 884$ </li>
                 </ul>
               </mat-card>
             </div>
