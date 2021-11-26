@@ -17,12 +17,12 @@
                 <div>
                   <img class="product-image" src="https://cdn.pixabay.com/photo/2016/11/19/18/06/feet-1840619_960_720.jpg" alt="testImage">
                 </div>
-                <ul class="font-weight-light">
-                  <li>Virsache </li>
-                  <li>Size: 44</li>
-                  <li>Quantity: 2 </li>
-                  <li>Price: 442$ </li>
-                  <li class="bold">Total/items: 884$ </li>
+                <ul class="font-weight-light" *ngFor="let item of cartProducts">
+                  <li>{{item.name}} </li>
+                  <li>{{item.size}}</li>
+                  <li>{{item.quantity}}$ </li>
+                  <li>{{item.price}}$</li>
+                  <li class="bold">Total/items: {{+item.price * item.quantity}}</li>
                 </ul>
               </mat-card>
               <mat-card class="p-2 d-flex justify-content-between">
@@ -129,9 +129,7 @@
                     <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
                   </mat-button-toggle-group>
                 </div>
-                <div *ngIf="paymentOptions == 'card'" class="row card-payment">
-                  <button (click)="onCheckOut()">Test</button>
-                </div>
+               
                 <div class="mt-4 text-center save-btn">
                   <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
                 </div>
@@ -143,7 +141,9 @@
     </div>
     <mat-card class="p-2 d-flex text-center">
       TO DO: put price here and details about items, estimated delivery date
-      Total Price : 233.77$ 
+      Total Price : 233.77$
+      <button (click)="onCheckOut()">Test</button>
+      <button (click)="onCheckOutTest()">Log items</button>
     </mat-card>
   </section>
   

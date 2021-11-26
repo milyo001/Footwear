@@ -64,6 +64,9 @@ export class PlaceOrderComponent implements OnInit {
         }
       })
   }
+  onCheckOutTest() {
+    console.log(this.cartProducts);
+  }
 
   handleImports(event) {
     if (event.value == 'import') {
