@@ -72,7 +72,7 @@ export class PlaceOrderComponent implements OnInit {
     if (event.value == 'import') {
 
     } else {
-
+      this.form.reset();
     }
 
   }
