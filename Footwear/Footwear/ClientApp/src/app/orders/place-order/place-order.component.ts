@@ -31,6 +31,7 @@ export class PlaceOrderComponent implements OnInit {
   faCreditCard = faCreditCard;
 
   cartProducts: ICartProduct[];
+  order: IOrder;
 
   constructor(
     private paymentService: PaymentService,
@@ -56,7 +57,7 @@ export class PlaceOrderComponent implements OnInit {
  };
 
   onCheckOut(): void{
-    this.paymentService.checkout(this.cartProducts).subscribe((response: any) => {
+    this.paymentService.checkoutCard(this.order).subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect
@@ -93,14 +94,15 @@ export class PlaceOrderComponent implements OnInit {
   submitData(form) {
     if (form.value.payment == "card") {
       var today = new Date();
-      const order: IOrder = {
+      this.order = {
         products: this.cartProducts,
         payment: "card",
         createdOn: today.toUTCString(),
-        status: "pending"
+        status: "pending",
+        userData: form.value
       }
-
-      console.log(order);
+      console.log(this.order);
+      
     }
     else {
       console.log("user will pay with cash!")

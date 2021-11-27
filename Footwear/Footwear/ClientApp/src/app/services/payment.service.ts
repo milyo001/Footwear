@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { ICartProduct } from '../interfaces/cartProduct';
+import { IOrder } from '../interfaces/order';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,16 @@ export class PaymentService {
     this.baseUrl = baseUrl;
   }
 
-  //Send the items to the server in the body
-  checkout(items: ICartProduct[]) {
+  //Send the order to the server in the body
+  checkoutCard(order: IOrder) {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + "create-checkout-session", items, { 'headers': headers });
+    return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
+  }
+  checkoutCash(order: IOrder) {
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
   }
 
 
