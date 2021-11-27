@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
+import { IPaymentProduct } from '../../interfaces/paymentProducts';
 import { IUserData } from '../../interfaces/userData';
 import { CartService } from '../../services/cart.service';
 import { PaymentService } from '../../services/payment.service';
@@ -54,9 +55,11 @@ export class PlaceOrderComponent implements OnInit {
       });
  };
 
-  onCheckOut() {
+  onCheckOut(): void{
     this.paymentService.checkout(this.cartProducts).subscribe((response: any) => {
+      //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
+      //Wait few seconds then redirect
       setTimeout(() => { window.location.href = response.Url }, 3000);
     },
       error => {
@@ -66,13 +69,10 @@ export class PlaceOrderComponent implements OnInit {
         }
       })
   }
-  onCheckOutTest() {
-    console.log(this.cartProducts);
-  }
 
-  handleImports(event) {
+  handleImports(event): void {
     if (event.value == 'import') {
-      //Patch Value will set the form fields without validating them
+      //Patch value will set the form fields without validating them
       this.userService.getUserProfile().subscribe(result => {
         this.form.patchValue({
           firstName: result.firstName,
@@ -85,18 +85,19 @@ export class PlaceOrderComponent implements OnInit {
           zipCode: result.zipCode
         })
       })
+    } else {
+      //You can add this.form.clear() if you want to clear the form when clicked
     }
-
   }
-
 
   submitData(form) {
-    console.log(form.value);
+    if (form.value.payment == "card") {
+      console.log("user will pay with card!");
+    }
+    else {
+      console.log("user will pay with cash!")
+    }
   }
-
-
-
-
 }
 
 
