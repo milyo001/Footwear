@@ -70,9 +70,19 @@ export class PlaceOrderComponent implements OnInit {
 
   handleImports(event) {
     if (event.value == 'import') {
-
-    } else {
-      this.form.reset();
+      //Patch Value will set the form fields without validating them
+      this.userService.getUserProfile().subscribe(result => {
+        this.form.patchValue({
+          firstName: result.firstName,
+          lastName: result.lastName,
+          phone: result.phone,
+          street: result.street,
+          city: result.city,
+          state: result.state,
+          country: result.country,
+          zipCode: result.zipCode
+        })
+      })
     }
 
   }

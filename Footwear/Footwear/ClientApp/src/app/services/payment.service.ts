@@ -21,4 +21,6 @@ export class PaymentService {
       .set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + "create-checkout-session", items, { 'headers': headers });
   }
+
+
 }
