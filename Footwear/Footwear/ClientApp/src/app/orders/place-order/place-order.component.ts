@@ -7,6 +7,7 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
 import { IUserData } from '../../interfaces/userData';
+import { CartService } from '../../services/cart.service';
 import { PaymentService } from '../../services/payment.service';
 import { UserService } from '../../services/user.service';
 
@@ -34,11 +35,12 @@ export class PlaceOrderComponent implements OnInit {
     private paymentService: PaymentService,
     private toastr: ToastrService,
     private userService: UserService,
+    private cartService: CartService,
     private fb: FormBuilder
   ) { }
 
   ngOnInit(): void {
-    this.cartProducts = this.paymentService.products;
+      this.cartService.getAllCartProducts().subscribe(products => { this.cartProducts = products })
       this.form = this.fb.group({
         firstName: ["", [Validators.required, Validators.maxLength(100)], []],
         lastName: ["", [Validators.required, Validators.maxLength(100)], []],

@@ -7,9 +7,7 @@ import { ICartProduct } from '../interfaces/cartProduct';
 })
 export class PaymentService {
 
-    //Store products here passed from cart component to avoid additional request to the server
-    products: ICartProduct[];
-    baseUrl: string;
+   baseUrl: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
