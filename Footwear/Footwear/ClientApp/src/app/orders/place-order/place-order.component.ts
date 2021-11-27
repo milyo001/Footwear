@@ -6,7 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
-import { IPaymentProduct } from '../../interfaces/paymentProducts';
+import { IOrder } from '../../interfaces/order';
 import { IUserData } from '../../interfaces/userData';
 import { CartService } from '../../services/cart.service';
 import { PaymentService } from '../../services/payment.service';
@@ -41,7 +41,7 @@ export class PlaceOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.cartService.getAllCartProducts().subscribe(products => { this.cartProducts = products })
+    this.cartService.getAllCartProducts().subscribe(products => { this.cartProducts = products });
       this.form = this.fb.group({
         firstName: ["", [Validators.required, Validators.maxLength(100)], []],
         lastName: ["", [Validators.required, Validators.maxLength(100)], []],
@@ -73,16 +73,16 @@ export class PlaceOrderComponent implements OnInit {
   handleImports(event): void {
     if (event.value == 'import') {
       //Patch value will set the form fields without validating them
-      this.userService.getUserProfile().subscribe(result => {
+      this.userService.getUserProfile().subscribe(response => {
         this.form.patchValue({
-          firstName: result.firstName,
-          lastName: result.lastName,
-          phone: result.phone,
-          street: result.street,
-          city: result.city,
-          state: result.state,
-          country: result.country,
-          zipCode: result.zipCode
+          firstName: response.firstName,
+          lastName: response.lastName,
+          phone: response.phone,
+          street: response.street,
+          city: response.city,
+          state: response.state,
+          country: response.country,
+          zipCode: response.zipCode
         })
       })
     } else {
@@ -92,7 +92,15 @@ export class PlaceOrderComponent implements OnInit {
 
   submitData(form) {
     if (form.value.payment == "card") {
-      console.log("user will pay with card!");
+      var today = new Date();
+      const order: IOrder = {
+        products: this.cartProducts,
+        payment: "card",
+        createdOn: today.toUTCString(),
+        status: "pending"
+      }
+
+      console.log(order);
     }
     else {
       console.log("user will pay with cash!")

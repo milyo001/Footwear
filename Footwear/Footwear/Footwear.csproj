@@ -28,9 +28,5 @@
     <PackageReference Include="Stripe.net" Version="39.77.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\interfaces\paymentProducts.ts" />
-  </ItemGroup>
-
 
 </Project>
