@@ -92,20 +92,21 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   submitData(form) {
+    var today = new Date();
+    this.order = {
+      products: this.cartProducts,
+      createdOn: today.toUTCString(),
+      payment: "cash", //Paying with cash by default
+      status: "pending",
+      userData: form.value
+    }
+
     if (form.value.payment == "card") {
-      var today = new Date();
-      this.order = {
-        products: this.cartProducts,
-        payment: "card",
-        createdOn: today.toUTCString(),
-        status: "pending",
-        userData: form.value
-      }
-      console.log(this.order);
-      
+      this.order.payment = "card";
+
     }
     else {
-      console.log("user will pay with cash!")
+      
     }
   }
 }
