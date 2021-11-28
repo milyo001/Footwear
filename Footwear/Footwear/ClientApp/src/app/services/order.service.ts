@@ -1,12 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ICartProduct } from '../interfaces/cartProduct';
 import { IOrder } from '../interfaces/order';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentService {
+export class OrderService {
 
    baseUrl: string;
 

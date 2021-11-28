@@ -9,7 +9,7 @@ import { ICartProduct } from '../../interfaces/cartProduct';
 import { IOrder } from '../../interfaces/order';
 import { IUserData } from '../../interfaces/userData';
 import { CartService } from '../../services/cart.service';
-import { PaymentService } from '../../services/payment.service';
+import { OrderService } from '../../services/order.service';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class PlaceOrderComponent implements OnInit {
   order: IOrder;
 
   constructor(
-    private paymentService: PaymentService,
+    private orderService: OrderService,
     private toastr: ToastrService,
     private userService: UserService,
     private cartService: CartService,
@@ -57,7 +57,7 @@ export class PlaceOrderComponent implements OnInit {
  };
 
   onCheckOut(): void{
-    this.paymentService.checkoutCard(this.order).subscribe((response: any) => {
+    this.orderService.checkoutCard(this.order).subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect

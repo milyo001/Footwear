@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
 import { LoadingService } from '../services/loading.service';
-import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-cart',
@@ -28,7 +27,6 @@ export class CartComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private paymentService: PaymentService,
     private toastr: ToastrService,
     private cookieService: CookieService,
     private router: Router,

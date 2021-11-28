@@ -32,7 +32,7 @@ import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './orders/place-order/place-order.component';
 import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
 import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.component';
-import { PaymentService } from './services/payment.service';
+import { OrderService } from './services/order.service';
 
 @NgModule({
   declarations: [
@@ -70,7 +70,7 @@ import { PaymentService } from './services/payment.service';
     UserService,
     CookieService,
     LoadingService,
-    PaymentService,
+    OrderService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }, //For validating if user is logged in.
     { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true }, //For showing mat-progress-spinner when fetching data.
   ],
