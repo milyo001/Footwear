@@ -15,9 +15,10 @@ export class OrderService {
 
   //Send the order to the server in the body
   checkoutCard(order: IOrder) {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
+    var test = JSON.stringify(order);
+    console.log(order);
+    console.log(test);
+    return this.http.post(this.baseUrl + "create-checkout-session", order);
   }
 
   checkoutCash(order: IOrder) {
@@ -27,8 +28,7 @@ export class OrderService {
   }
 
   createOrder(order: IOrder) {
-    var test = JSON.stringify(order);
-    console.log(test);
+    
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + "order/create-order", order, { 'headers': headers });
