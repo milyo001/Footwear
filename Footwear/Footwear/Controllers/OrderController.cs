@@ -50,7 +50,7 @@
             return Redirect(domain);
         }
 
-
+        [Route("createOrder")]
         public ActionResult CreateOrder()
         {
             

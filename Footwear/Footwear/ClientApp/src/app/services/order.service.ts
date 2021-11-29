@@ -27,7 +27,8 @@ export class OrderService {
   }
 
   createOrder(order: IOrder) {
-
+    var test = JSON.stringify(order);
+    console.log(test);
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + "order/create-order", order, { 'headers': headers });

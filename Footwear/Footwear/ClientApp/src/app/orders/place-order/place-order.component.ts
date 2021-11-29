@@ -92,21 +92,32 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   submitData(form) {
+    const fvalue = form.value;
     var today = new Date();
     this.order = {
       products: this.cartProducts,
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",
-      userData: form.value
+      userData: {
+        firstName: fvalue.firstName,
+        lastName: fvalue.lastName,
+        email: fvalue.email,
+        phone: fvalue.phone,
+        street: fvalue.street,
+        city: fvalue.city,
+        state: fvalue.state,
+        country: fvalue.country,
+        zipCode: fvalue.zipCode
+      }
     }
 
     if (form.value.payment == "card") {
       this.order.payment = "card";
-
+      this.onCheckOut();
     }
     else {
-      
+      this.onCheckOut();
     }
   }
 }

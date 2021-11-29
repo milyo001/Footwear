@@ -26,22 +26,22 @@ namespace server.Controllers
         
 
         [HttpPost("create-checkout-session")]
-        public ActionResult CreateCheckoutSession([FromBody] CartProductViewModel[] items)
+        public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)
         {
             //Check if data is invalid or model was not bound successfully
-            if(items == null || !ModelState.IsValid)
+            if(order == null || !ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
             
             decimal totalPrice = 0;
-            foreach (var item in items)
-            {
-                for (int i = 0; i < item.Quantity; i++)
-                {
-                    totalPrice += (decimal)item.Price;
-                }
-            }
+            //foreach (var item in order.Products)
+            //{
+            //    for (int i = 0; i < item.Quantity; i++)
+            //    {
+            //        totalPrice += (decimal)item.Price;
+            //    }
+            //}
 
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
