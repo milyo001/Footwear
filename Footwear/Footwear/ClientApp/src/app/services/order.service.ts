@@ -19,11 +19,18 @@ export class OrderService {
       .set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
   }
+
   checkoutCash(order: IOrder) {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');
     return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
   }
 
+  createOrder(order: IOrder) {
+
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json');
+    return this.http.post(this.baseUrl + "order/create-order", order, { 'headers': headers });
+  }
 
 }

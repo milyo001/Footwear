@@ -1,21 +1,26 @@
 ﻿namespace Footwear.Data.Dto
 {
-    using System.Collections.Generic;
+    using System;
+    using System.ComponentModel.DataAnnotations;
 
     public class OrderViewModel
     {
-        public string UserId { get; set; }
 
-        public string Id { get; set; }
+        //Will recieve "card" or "cash" from client
+        [Required]
+        public string Payment { get; set; }
 
-        public string Name { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; }
 
-        public string Address { get; set; }
+        [Required]
+        public string Status { get; set; }
 
-        public string CreatedOn { get; set; }
+        [Required]
+        public CartProductViewModel[] Products { get; set; }
 
-        public string OrderStatus { get; set; }
+        [Required]
+        public UserProfileDataViewModel UserData { get; set; }
 
-        public ICollection<ProductViewModel> Products { get; set; } = new List<ProductViewModel>();
     }
 }

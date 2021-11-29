@@ -3,7 +3,8 @@
     public enum Status
     {
         Pending,
-        Delivery,
-        Finished
+        DeliveryPaid,
+        DeliveryCash,
+        Completed
     }
 }

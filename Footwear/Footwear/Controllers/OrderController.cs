@@ -50,5 +50,11 @@
             return Redirect(domain);
         }
 
+
+        public ActionResult CreateOrder()
+        {
+            
+            return null;
+        }
     }
 }
