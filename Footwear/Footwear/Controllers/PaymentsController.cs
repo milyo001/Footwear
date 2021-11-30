@@ -35,13 +35,13 @@ namespace server.Controllers
             }
             
             decimal totalPrice = 0;
-            //foreach (var item in order.Products)
-            //{
-            //    for (int i = 0; i < item.Quantity; i++)
-            //    {
-            //        totalPrice += (decimal)item.Price;
-            //    }
-            //}
+            foreach (var item in order.Products)
+            {
+                for (int i = 0; i < item.Quantity; i++)
+                {
+                    totalPrice += (decimal)item.Price;
+                }
+            }
 
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 

@@ -71,6 +71,20 @@ export class PlaceOrderComponent implements OnInit {
       })
   }
 
+
+  createOrder(): void {
+    this.orderService.createOrder(this.order).subscribe((response: any) => {
+      console.log("Order successfull!")
+    },
+      error => {
+        if (error.status == 400) { //bad request from the api
+          this.toastr.error(error.error.message, 'Error,unable to create order!');
+          console.log(error);
+        }
+      })
+    
+  }
+
   handleImports(event): void {
     if (event.value == 'import') {
       //Patch value will set the form fields without validating them
@@ -114,10 +128,10 @@ export class PlaceOrderComponent implements OnInit {
 
     if (form.value.payment == "card") {
       this.order.payment = "card";
-      this.onCheckOut();
+      this.createOrder();
     }
     else {
-      this.onCheckOut();
+      this.createOrder();
     }
   }
 }
