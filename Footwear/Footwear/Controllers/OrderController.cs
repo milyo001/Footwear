@@ -59,7 +59,9 @@
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
-            var orderTest = order;
+            var orderTest = new Data.Models.Order() {
+                //TODO
+            };
             return Ok();
         }
     }

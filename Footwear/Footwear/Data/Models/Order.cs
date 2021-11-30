@@ -13,9 +13,6 @@
         public string Name { get; set; }
 
         [Required]
-        public string Address { get; set; }
-
-        [Required]
         public DateTime CreatedOn { get; set; }
 
         [Required]
@@ -25,7 +22,7 @@
         public string Status { get; set; }
 
         [Required]
-        public List<BillingInformation> UserData { get; set; } = new List<BillingInformation>();
+        public BillingInformation UserData { get; set; } 
 
         [Required]
         public virtual ICollection<CartProduct> Products { get; set; } = new List<CartProduct>();

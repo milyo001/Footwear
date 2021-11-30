@@ -5,7 +5,6 @@ namespace Footwear.Data.Dto
 {
     public class UserProfileDataViewModel
     {
-        [Required]
         public string Email { get; set; }
 
         [Required, MaxLength(100)]
