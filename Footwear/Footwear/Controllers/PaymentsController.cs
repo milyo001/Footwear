@@ -28,11 +28,7 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)
         {
-            //Check if data is invalid or model was not bound successfully
-            if(order == null || !ModelState.IsValid)
-            {
-                return BadRequest(new { message = "Invalid product data!" });
-            }
+            
             
             decimal totalPrice = 0;
             foreach (var item in order.Products)

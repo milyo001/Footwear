@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Data.Models
 {
+    using Footwear.Data.Dto;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -14,11 +15,21 @@
         [Required]
         public string Address { get; set; }
 
-        public string CreatedOn { get; set; }
+        [Required]
+        public DateTime CreatedOn { get; set; }
 
-        public string OrderStatus { get; set; }
+        [Required]
+        public string Payment { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; } = new List<Product>();
+        [Required]
+        public string Status { get; set; }
+
+        [Required]
+        public List<BillingInformation> UserData { get; set; } = new List<BillingInformation>();
+
+        [Required]
+        public virtual ICollection<CartProduct> Products { get; set; } = new List<CartProduct>();
+
 
     }
 }

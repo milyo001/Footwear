@@ -2,6 +2,7 @@
 {
     
     using Footwear.Data;
+    using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
@@ -50,11 +51,16 @@
             return Redirect(domain);
         }
 
-        [Route("createOrder")]
-        public ActionResult CreateOrder()
+        [Route("create-order")]
+        public ActionResult CreateOrder([FromBody] OrderViewModel order)
         {
-            
-            return null;
+            //Check if data is invalid or model was not bound successfully
+            if (order == null || !ModelState.IsValid)
+            {
+                return BadRequest(new { message = "Invalid product data!" });
+            }
+            var orderTest = order;
+            return Ok();
         }
     }
 }
