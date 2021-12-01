@@ -63,25 +63,42 @@
                 return BadRequest(new { message = "Invalid product data!" });
             }
 
-            var products = order.Products.ToList();
-
-            var orderTest = new Data.Models.Order() {
-                Status = order.Status,
-                CreatedOn = DateTime.UtcNow,
-                Payment = order.Payment,
-                Products = order.Products.Cast<CartProduct>().ToList(),
-                UserData = new BillingInformation
+            var products = new List<CartProduct>();
+            foreach (var product in order.Products)
+            {
+                var cartProduct = new CartProduct()
                 {
-                    FirstName = order.UserData.FirstName,
-                    LastName = order.UserData.LastName,
-                    Phone = order.UserData.Phone,
-                    Street = order.UserData.Street,
-                    City = order.UserData.City,
-                    Country = order.UserData.Country,
-                    State = order.UserData.State,
-                    ZipCode = order.UserData.ZipCode,
-                }
-            };
+
+                };
+            }
+
+            
+            try
+            {
+                var orderTest = new Data.Models.Order()
+                {
+                    Status = order.Status,
+                    CreatedOn = DateTime.UtcNow,
+                    Payment = order.Payment,
+                    Products = order.Products.Cast<CartProduct>().ToList(),
+                    UserData = new BillingInformation
+                    {
+                        FirstName = order.UserData.FirstName,
+                        LastName = order.UserData.LastName,
+                        Phone = order.UserData.Phone,
+                        Street = order.UserData.Street,
+                        City = order.UserData.City,
+                        Country = order.UserData.Country,
+                        State = order.UserData.State,
+                        ZipCode = order.UserData.ZipCode,
+                    }
+                };
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
             return Ok();
         }
     }
