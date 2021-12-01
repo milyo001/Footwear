@@ -11,6 +11,9 @@
     using Microsoft.Extensions.Configuration;
     using Stripe;
     using Stripe.Checkout;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     [Route("[controller]")]
     [ApiController]
@@ -59,8 +62,25 @@
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
+
+            var products = order.Products.ToList();
+
             var orderTest = new Data.Models.Order() {
-                //TODO
+                Status = order.Status,
+                CreatedOn = DateTime.UtcNow,
+                Payment = order.Payment,
+                Products = order.Products.Cast<CartProduct>().ToList(),
+                UserData = new BillingInformation
+                {
+                    FirstName = order.UserData.FirstName,
+                    LastName = order.UserData.LastName,
+                    Phone = order.UserData.Phone,
+                    Street = order.UserData.Street,
+                    City = order.UserData.City,
+                    Country = order.UserData.Country,
+                    State = order.UserData.State,
+                    ZipCode = order.UserData.ZipCode,
+                }
             };
             return Ok();
         }
