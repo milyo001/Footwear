@@ -36,7 +36,7 @@
                 throw new Exception("User is not logged in.");
             }
             var cartId = this._tokenService.GetCartId(authCookie);
-            var products = this._cartService.GetCartProducts(cartId);
+            var products = this._cartService.GetCartProductsViewModel(cartId);
             return products;
 
         }

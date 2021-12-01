@@ -63,42 +63,43 @@
                 return BadRequest(new { message = "Invalid product data!" });
             }
 
-            var products = new List<CartProduct>();
-            foreach (var product in order.Products)
-            {
-                var cartProduct = new CartProduct()
-                {
+            var authCookie = Request.Cookies["token"];
 
-                };
-            }
-
+            var cartId = this._tokenService.GetCartId(authCookie);
             
+            
+
+            var orderTest = new Data.Models.Order()
+            {
+                Id = Guid.NewGuid().ToString(),
+                Status = order.Status,
+                CreatedOn = DateTime.UtcNow,
+                Payment = order.Payment,
+                Products = this._cartService.GetCartProducts(cartId),
+                UserData = new BillingInformation
+                {
+                    FirstName = order.UserData.FirstName,
+                    LastName = order.UserData.LastName,
+                    Phone = order.UserData.Phone,
+                    Street = order.UserData.Street,
+                    City = order.UserData.City,
+                    Country = order.UserData.Country,
+                    State = order.UserData.State,
+                    ZipCode = order.UserData.ZipCode
+                }
+            };
             try
             {
-                var orderTest = new Data.Models.Order()
-                {
-                    Status = order.Status,
-                    CreatedOn = DateTime.UtcNow,
-                    Payment = order.Payment,
-                    Products = order.Products.Cast<CartProduct>().ToList(),
-                    UserData = new BillingInformation
-                    {
-                        FirstName = order.UserData.FirstName,
-                        LastName = order.UserData.LastName,
-                        Phone = order.UserData.Phone,
-                        Street = order.UserData.Street,
-                        City = order.UserData.City,
-                        Country = order.UserData.Country,
-                        State = order.UserData.State,
-                        ZipCode = order.UserData.ZipCode,
-                    }
-                };
+
+                this._db.Orders.Add(orderTest);
+                this._db.SaveChanges();
             }
             catch (Exception ex)
             {
-
                 throw ex;
+                var test = ex;
             }
+            
             return Ok();
         }
     }

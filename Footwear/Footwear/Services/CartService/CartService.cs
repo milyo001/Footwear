@@ -17,7 +17,8 @@
             this._db = db;
         }
 
-        public IEnumerable<CartProductViewModel> GetCartProducts(int cartId)
+        //Get all cart products and return the view model to send it to the client
+        public IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId)
         {
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)
@@ -41,12 +42,26 @@
 
             return products;
         }
+
+        //Get all cart products to add them to order
+        public ICollection<CartProduct> GetCartProducts(int cartId)
+        {
+            var cart = this._db.Cart
+                .Include(c => c.CartProducts)
+                .FirstOrDefault(c => c.Id == cartId);
+
+            var products = cart.CartProducts.Where(cp => cp.CartId == cartId).ToList();
+
+            return products;
+        }
+        //Get cart product by given cart product id asynchronous
         public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
             var product = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
             return product;
         }
 
+        //Increases the given cart product quantity
         public void IncreaseQuantity(int cartProductId)
         {
             var cartProduct =  this.GetCartProductByIdAsync(cartProductId).Result;
@@ -54,6 +69,7 @@
             this._db.SaveChanges();
         }
 
+        //Decreases the given cart product quantity
         public void DecreaseQuantity(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
@@ -61,6 +77,7 @@
             this._db.SaveChangesAsync();
         }
 
+        //Removes the cart product by given id
         public void DeleteCartProduct(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
@@ -68,6 +85,7 @@
             this._db.SaveChanges();
         }
 
+        //Removes all cart products
         public void DeleteCartProducts(int cartId)
         {
             var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);

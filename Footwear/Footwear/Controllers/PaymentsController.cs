@@ -28,16 +28,15 @@ namespace server.Controllers
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)
         {
-            
-            
-            decimal totalPrice = 0;
-            foreach (var item in order.Products)
-            {
-                for (int i = 0; i < item.Quantity; i++)
-                {
-                    totalPrice += (decimal)item.Price;
-                }
-            }
+
+            decimal totalPrice = 66666;
+            //foreach (var item in order.Products)
+            //{
+            //    for (int i = 0; i < item.Quantity; i++)
+            //    {
+            //        totalPrice += (decimal)item.Price;
+            //    }
+            //}
 
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
