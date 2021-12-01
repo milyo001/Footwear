@@ -17,9 +17,6 @@
         public string Status { get; set; }
 
         [Required]
-        public CartProductViewModel[] Products { get; set; }
-
-        [Required]
         public UserProfileDataViewModel UserData { get; set; }
 
     }
