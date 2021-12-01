@@ -5,6 +5,7 @@
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
+    using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
@@ -23,12 +24,14 @@
         public IConfiguration Configuration { get; }
         private readonly ICartService _cartService;
         private readonly ITokenService _tokenService;
+        private readonly IOrderService _orderService;
 
 
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, ICartService cartService, ITokenService tokenService)
+        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, ICartService cartService, ITokenService tokenService, IOrderService orderService)
         {
             this._cartService = cartService;
             this._tokenService = tokenService;
+            this._orderService = orderService;
             this._db = db;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
@@ -65,40 +68,8 @@
 
             var authCookie = Request.Cookies["token"];
 
-            var cartId = this._tokenService.GetCartId(authCookie);
+            this._orderService.CreateOrder(authCookie, order);
             
-            
-
-            var orderTest = new Data.Models.Order()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Status = order.Status,
-                CreatedOn = DateTime.UtcNow,
-                Payment = order.Payment,
-                Products = this._cartService.GetCartProducts(cartId),
-                UserData = new BillingInformation
-                {
-                    FirstName = order.UserData.FirstName,
-                    LastName = order.UserData.LastName,
-                    Phone = order.UserData.Phone,
-                    Street = order.UserData.Street,
-                    City = order.UserData.City,
-                    Country = order.UserData.Country,
-                    State = order.UserData.State,
-                    ZipCode = order.UserData.ZipCode
-                }
-            };
-            try
-            {
-
-                this._db.Orders.Add(orderTest);
-                this._db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-                var test = ex;
-            }
             
             return Ok();
         }

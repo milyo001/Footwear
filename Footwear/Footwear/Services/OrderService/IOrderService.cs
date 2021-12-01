@@ -1,9 +1,12 @@
 ﻿
 namespace Footwear.Services.OrderService
 {
-    interface IOrderService
+
+    using Footwear.Data.Dto;
+
+    public interface IOrderService
     {
-        void CreateOrder(string token);
+        void CreateOrder(string token, OrderViewModel order);
         
 
     }

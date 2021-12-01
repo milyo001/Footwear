@@ -1,6 +1,7 @@
 ﻿namespace Footwear.Data.Models
 {
     using Footwear.Data.Dto;
+    using Footwear.Data.Models.Enums;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,7 @@
         public string Payment { get; set; }
 
         [Required]
-        public string Status { get; set; }
+        public Status Status { get; set; }
 
         [Required]
         public BillingInformation UserData { get; set; } 
