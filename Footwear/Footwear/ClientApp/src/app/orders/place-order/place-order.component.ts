@@ -74,7 +74,13 @@ export class PlaceOrderComponent implements OnInit {
 
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
-      console.log("Order successfull!")
+      if (response.cardPayment) {
+        console.log("Paying with Card");
+      }
+      else {
+        console.log("Paying with Cash");
+      }
+      
     },
       error => {
         if (error.status == 400) { //bad request from the api

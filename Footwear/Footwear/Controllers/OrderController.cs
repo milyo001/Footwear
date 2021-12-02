@@ -68,10 +68,12 @@
 
             var authCookie = Request.Cookies["token"];
 
+            //Check if payment is with card so the client can handle card payment session
+            var cardPayment = order.Payment == "card" ? true : false;
             this._orderService.CreateOrder(authCookie, order);
             
             
-            return Ok();
+            return Ok( new { cardPayment });
         }
     }
 }
