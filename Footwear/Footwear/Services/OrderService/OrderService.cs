@@ -9,6 +9,7 @@
     using System;
     using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
+    using System.Threading.Tasks;
 
     public class OrderService : IOrderService
     {
@@ -62,9 +63,11 @@
             this._db.SaveChanges();
         }
 
-        public string GetLatestAddedOrderId(string token)
+        public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
-            
+            var user = await this._tokenService.GetUserByIdAsync(token);
+            var latestOrderId = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault().Id;
+            return latestOrderId;
         }
     }
 }

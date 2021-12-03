@@ -8,6 +8,6 @@ namespace Footwear.Services.OrderService
     {
         void CreateOrder(string token, OrderViewModel order);
 
-        string GetLatestAddedOrderId(string token);
+        string GetLatestAddedOrderIdAsync(string token);
     }
 }
