@@ -15,6 +15,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
@@ -58,7 +59,7 @@
         }
 
         [Route("create-order")]
-        public ActionResult CreateOrder([FromBody] OrderViewModel order)
+        public async Task<ActionResult> CreateOrderAsync([FromBody] OrderViewModel order)
         {
             //Check if data is invalid or model was not bound successfully
             if (order == null || !ModelState.IsValid)
@@ -71,9 +72,9 @@
             //Check if payment is with card so the client can handle card payment session
             var cardPayment = order.Payment == "card" ? true : false;
             this._orderService.CreateOrder(authCookie, order);
-            var test = "test";
+            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authCookie);
             
-            return Ok( new { cardPayment, test  });
+            return Ok( new { cardPayment, orderId  });
         }
     }
 }

@@ -75,11 +75,12 @@ export class PlaceOrderComponent implements OnInit {
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
       if (response.cardPayment) {
-
+        
         this.onCheckOut();
       }
       else {
         console.log("Paying with Cash");
+        console.log("Order ID is: ", response.orderId);
       }
       
     },
