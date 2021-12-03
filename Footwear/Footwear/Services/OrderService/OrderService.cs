@@ -25,11 +25,7 @@
 
         public void CreateOrder(string token, OrderViewModel order)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var decodedToken = handler.ReadJwtToken(token);
-
-            var userId = decodedToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
-            var user = this._db.Users.FirstOrDefault(x => x.Id == userId);
+            var user = this._tokenService.GetUserByIdAsync(token).Result;
 
             var cartId = this._tokenService.GetCartId(token);
 
@@ -64,6 +60,11 @@
             //Add order to current user and update database
             user.Orders.Add(newOrder);
             this._db.SaveChanges();
+        }
+
+        public string GetLatestAddedOrderId(string token)
+        {
+            
         }
     }
 }
