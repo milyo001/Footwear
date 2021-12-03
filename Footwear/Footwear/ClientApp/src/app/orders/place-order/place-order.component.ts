@@ -61,7 +61,7 @@ export class PlaceOrderComponent implements OnInit {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect
-      setTimeout(() => { window.location.href = response.Url }, 3000);
+      setTimeout(() => { window.location.href = response.Url }, 2000);
     },
       error => {
         if (error.status == 400) { //bad request from the api
@@ -75,7 +75,8 @@ export class PlaceOrderComponent implements OnInit {
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
       if (response.cardPayment) {
-        console.log("Paying with Card");
+
+        this.onCheckOut();
       }
       else {
         console.log("Paying with Cash");
@@ -131,7 +132,7 @@ export class PlaceOrderComponent implements OnInit {
         zipCode: fvalue.zipCode
       }
     }
-
+    //Set the payment type and send the order to the API
     if (form.value.payment == "card") {
       this.order.payment = "card";
       this.createOrder();

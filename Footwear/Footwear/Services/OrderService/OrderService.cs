@@ -61,16 +61,9 @@
                     ZipCode = order.UserData.ZipCode
                 }
             };
-            try
-            {
-                user.Orders.Add(newOrder);
-                this._db.SaveChanges();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-                var test = ex;
-            }
+            //Add order to current user and update database
+            user.Orders.Add(newOrder);
+            this._db.SaveChanges();
         }
     }
 }
