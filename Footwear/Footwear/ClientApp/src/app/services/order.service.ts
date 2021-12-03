@@ -13,20 +13,12 @@ export class OrderService {
     this.baseUrl = baseUrl;
   }
 
-  //Send the order to the server in the body
-  checkoutCard(order: IOrder) {
-    var test = JSON.stringify(order);
-    console.log(order);
-    console.log(test);
+  //Redirect user to the stripe payment page 
+  checkOutCard(order: IOrder) {
     return this.http.post(this.baseUrl + "create-checkout-session", order);
   }
 
-  checkoutCash(order: IOrder) {
-    const headers = new HttpHeaders()
-      .set('Content-Type', 'application/json');
-    return this.http.post(this.baseUrl + "create-checkout-session", order, { 'headers': headers });
-  }
-
+  //Send the order to the server in the body
   createOrder(order: IOrder) {
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json');

@@ -57,7 +57,7 @@ export class PlaceOrderComponent implements OnInit {
  };
 
   onCheckOut(): void{
-    this.orderService.checkoutCard(this.order).subscribe((response: any) => {
+    this.orderService.checkOutCard(this.order).subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect
@@ -118,6 +118,7 @@ export class PlaceOrderComponent implements OnInit {
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",
+      //user data is the address that user can select and could be different from the account/userdata
       userData: {
         firstName: fvalue.firstName,
         lastName: fvalue.lastName,
