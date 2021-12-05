@@ -25,4 +25,7 @@ export class OrderService {
     return this.http.post(this.baseUrl + "order/create-order", order, { 'headers': headers });
   }
 
+  validatePayment(sessionId: string) {
+    return this.http.get(this.baseUrl + 'order/payment-success/?session_id=' + sessionId);
+  }
 }

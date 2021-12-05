@@ -56,6 +56,10 @@ namespace server.Controllers
                     Quantity = 1,
                   },
                 },
+                Metadata = new Dictionary<string, string>
+                {
+                    { "PaymentStatus", "Succeeded" }
+                },
                 PaymentMethodTypes = new List<string>
                 {
                   "card",
@@ -75,6 +79,20 @@ namespace server.Controllers
             string jsonString = JsonSerializer.Serialize(generatedUrl);
 
             return Ok(jsonString);
+        }
+
+        [HttpGet("order/payment-success")]
+        public ActionResult OrderSuccess([FromQuery] string session_id)
+        {
+            var sessionService = new SessionService();
+            Session session = sessionService.Get(session_id);
+
+           var paymentStatus =  session.Metadata["PaymentStatus"];
+           
+            var customerService = new CustomerService();
+            Customer customer = customerService.Get(session.CustomerId);
+
+            return Ok(new { paymentStatus });
         }
     }
 }

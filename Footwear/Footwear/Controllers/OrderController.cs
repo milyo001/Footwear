@@ -41,22 +41,22 @@
 
         //Retrieve session id from stripe api and redirect to payment successfull page, 
         //make an order and then delete current products stored in the cart!
-        [HttpGet("/payment-success")]
-        public ActionResult OrderSuccess([FromQuery] string session_id)
-        {
-            var authCookie = Request.Cookies["token"];
-            var cartId = this._tokenService.GetCartId(authCookie);
-            var domain = Configuration["ApplicationSettings:ClientUrl"].ToString() + "/order-completed";
 
-            var sessionService = new SessionService();
-            Session session = sessionService.Get(session_id);
+        //public ActionResult OrderSuccess([FromQuery] string session_id)
+        //{
+        //    var authCookie = Request.Cookies["token"];
+        //    var cartId = this._tokenService.GetCartId(authCookie);
+        //    var domain = Configuration["ApplicationSettings:ClientUrl"].ToString() + "/order-completed";
 
-            var customerService = new CustomerService();
-            Customer customer = customerService.Get(session.CustomerId);
+        //    var sessionService = new SessionService();
+        //    Session session = sessionService.Get(session_id);
 
-            this._cartService.DeleteCartProducts(cartId);
-            return Redirect(domain);
-        }
+        //    var customerService = new CustomerService();
+        //    Customer customer = customerService.Get(session.CustomerId);
+
+        //    this._cartService.DeleteCartProducts(cartId);
+        //    return Redirect(domain);
+        //}
 
         [Route("create-order")]
         public async Task<ActionResult> CreateOrderAsync([FromBody] OrderViewModel order)

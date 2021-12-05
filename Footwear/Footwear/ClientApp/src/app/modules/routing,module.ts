@@ -25,9 +25,10 @@ const routes: Routes = [
   { path: 'user/userProfile', component: UserProfileComponent },
   { path: 'placeOrder', component: PlaceOrderComponent },
   { path: 'cart/order', component: OrdersComponent },
-  { path: 'order-completed', component: PaymentSuccessComponent },
+  { path: 'payment-success', component: PaymentSuccessComponent },
   { path: 'payment-cancel', component: PaymentCancelComponent }
 ]; // sets up routes constant where you define your routes
+
 
 @NgModule({
   imports: [

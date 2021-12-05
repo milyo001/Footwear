@@ -80,6 +80,7 @@ export class PlaceOrderComponent implements OnInit {
         this.onCheckOut();
       }
       else {
+        //TODO
         this.router.navigate(['/', 'landing'])
       }
       
