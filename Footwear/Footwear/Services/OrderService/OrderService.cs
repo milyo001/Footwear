@@ -23,45 +23,47 @@
             this._cartService = cartService;
         }
 
-        public void CreateOrder(string token, OrderViewModel orderView)
+        public void CreateOrder(string token, OrderViewModel orderViewModel)
         {
+            //Get the current logged in user
             var user = this._tokenService.GetUserByIdAsync(token).Result;
-
+            //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
-
-            if(orderView.Payment == "card")
+            //Check the payment type and set the data directly in the view model
+            if(orderViewModel.Payment == "card")
             {
-                orderView.Status = "Pending";
+                orderViewModel.Status = "Pending";
             }
-            else if(orderView.Payment == "cash")
+            else if(orderViewModel.Payment == "cash")
             {
-                orderView.Status = "DeliveryCash";
+                orderViewModel.Status = "DeliveryCash";
             }
 
             var order = new Data.Models.Order()
             {
                 Id = Guid.NewGuid().ToString(),
-                Status = (Status)Enum.Parse(typeof(Status), orderView.Status),
+                Status = (Status)Enum.Parse(typeof(Status), orderViewModel.Status),
                 CreatedOn = DateTime.UtcNow,
-                Payment = orderView.Payment,
+                Payment = orderViewModel.Payment,
                 Products = this._cartService.GetCartProducts(cartId),
                 UserData = new BillingInformation
                 {
-                    FirstName = orderView.UserData.FirstName,
-                    LastName = orderView.UserData.LastName,
-                    Phone = orderView.UserData.Phone,
-                    Street = orderView.UserData.Street,
-                    City = orderView.UserData.City,
-                    Country = orderView.UserData.Country,
-                    State = orderView.UserData.State,
-                    ZipCode = orderView.UserData.ZipCode
+                    FirstName = orderViewModel.UserData.FirstName,
+                    LastName = orderViewModel.UserData.LastName,
+                    Phone = orderViewModel.UserData.Phone,
+                    Street = orderViewModel.UserData.Street,
+                    City = orderViewModel.UserData.City,
+                    Country = orderViewModel.UserData.Country,
+                    State = orderViewModel.UserData.State,
+                    ZipCode = orderViewModel.UserData.ZipCode
                 }
             };
-            //Add order to current user and update database
+            //Add order to current user's orders and update database
             user.Orders.Add(order);
             this._db.SaveChanges();
         }
 
+        //A asynchronous method that will return the last added user Order
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
