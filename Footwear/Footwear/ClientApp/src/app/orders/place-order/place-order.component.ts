@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   faCreditCard,
   faMoneyBillWave
@@ -38,7 +39,8 @@ export class PlaceOrderComponent implements OnInit {
     private toastr: ToastrService,
     private userService: UserService,
     private cartService: CartService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -75,12 +77,10 @@ export class PlaceOrderComponent implements OnInit {
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
       if (response.cardPayment) {
-        
         this.onCheckOut();
       }
       else {
-        console.log("Paying with Cash");
-        console.log("Order ID is: ", response.orderId);
+        this.router.navigate(['/', 'landing'])
       }
       
     },

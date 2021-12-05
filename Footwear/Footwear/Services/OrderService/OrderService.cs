@@ -7,7 +7,6 @@
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
     using System;
-    using System.IdentityModel.Tokens.Jwt;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -24,42 +23,42 @@
             this._cartService = cartService;
         }
 
-        public void CreateOrder(string token, OrderViewModel order)
+        public void CreateOrder(string token, OrderViewModel orderView)
         {
             var user = this._tokenService.GetUserByIdAsync(token).Result;
 
             var cartId = this._tokenService.GetCartId(token);
 
-            if(order.Payment == "card")
+            if(orderView.Payment == "card")
             {
-                order.Status = "Pending";
+                orderView.Status = "Pending";
             }
-            else if(order.Payment == "cash")
+            else if(orderView.Payment == "cash")
             {
-                order.Status = "DeliveryCash";
+                orderView.Status = "DeliveryCash";
             }
 
-            var newOrder = new Data.Models.Order()
+            var order = new Data.Models.Order()
             {
                 Id = Guid.NewGuid().ToString(),
-                Status = (Status)Enum.Parse(typeof(Status), order.Status),
+                Status = (Status)Enum.Parse(typeof(Status), orderView.Status),
                 CreatedOn = DateTime.UtcNow,
-                Payment = order.Payment,
+                Payment = orderView.Payment,
                 Products = this._cartService.GetCartProducts(cartId),
                 UserData = new BillingInformation
                 {
-                    FirstName = order.UserData.FirstName,
-                    LastName = order.UserData.LastName,
-                    Phone = order.UserData.Phone,
-                    Street = order.UserData.Street,
-                    City = order.UserData.City,
-                    Country = order.UserData.Country,
-                    State = order.UserData.State,
-                    ZipCode = order.UserData.ZipCode
+                    FirstName = orderView.UserData.FirstName,
+                    LastName = orderView.UserData.LastName,
+                    Phone = orderView.UserData.Phone,
+                    Street = orderView.UserData.Street,
+                    City = orderView.UserData.City,
+                    Country = orderView.UserData.Country,
+                    State = orderView.UserData.State,
+                    ZipCode = orderView.UserData.ZipCode
                 }
             };
             //Add order to current user and update database
-            user.Orders.Add(newOrder);
+            user.Orders.Add(order);
             this._db.SaveChanges();
         }
 
