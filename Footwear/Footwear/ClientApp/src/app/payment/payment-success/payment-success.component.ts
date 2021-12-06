@@ -24,6 +24,9 @@ export class PaymentSuccessComponent implements OnInit {
         console.log(response.paymentStatus);
         this.toastr.show("Yeeeeeah!");
       }
+      else {
+        this.toastr.error("Error!", "Payment declined!");
+      }
     })
   }
 
