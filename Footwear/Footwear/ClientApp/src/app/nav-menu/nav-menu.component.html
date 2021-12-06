@@ -42,7 +42,7 @@
             </a>
           </li>
           <li *ngIf="isAuthenticated()" class="nav-item">
-            <a class="nav-link" [routerLink]="['cart/order']" (click)="toggle()">
+            <a class="nav-link" [routerLink]="['orders']" (click)="toggle()">
               <fa-icon [icon]="faDatabase"></fa-icon>My Orders
             </a>
           <li *ngIf="isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">

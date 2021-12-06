@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'user/register', component: RegisterComponent },
   { path: 'user/userProfile', component: UserProfileComponent },
   { path: 'placeOrder', component: PlaceOrderComponent },
-  { path: 'cart/order', component: OrdersComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: 'payment-success', component: PaymentSuccessComponent },
   { path: 'payment-cancel', component: PaymentCancelComponent }
 ]; // sets up routes constant where you define your routes
