@@ -12,17 +12,15 @@ export class PaymentSuccessComponent implements OnInit {
 
   sessionId: string;
 
-  constructor(private orderService: OrderService, private toastr: ToastrService, private route: ActivatedRoute) {
-
-  }
+  constructor(private orderService: OrderService, private toastr: ToastrService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    //Get the query parameters and send it to the API
     this.route.queryParams.subscribe(params => { this.sessionId = params['session_id'] });
-
+    //Validate if payment is succeeded in API
     this.orderService.validatePayment(this.sessionId).subscribe((response: any) => {
       if (response.paymentStatus == 'Succeeded') {
-        console.log(response.paymentStatus);
-        this.toastr.show("Yeeeeeah!");
+        this.toastr.success("Order created!");
       }
       else {
         this.toastr.error("Error!", "Payment declined!");
