@@ -14,11 +14,12 @@ img {
 .conf-text-section{
     margin-top: 10px;
     margin-bottom: 15px;
-}
-p {
-  text-align: center;
+    text-align: center;
 }
 .conf-order-header {
   font-weight: bold;
+}
+.card{
+   border: none;  
 }
 
