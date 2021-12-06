@@ -2,9 +2,13 @@ img {
   width: 200px;
   height: 180px;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
-.card{
-    align-items:center;
+.container-fluid{
+    margin-top: 30px;
+}
+.card {
+  align-items: center;
 }
 .conf-text-section{
     margin-top: 10px;
