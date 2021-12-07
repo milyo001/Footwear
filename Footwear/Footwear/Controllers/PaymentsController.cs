@@ -4,6 +4,8 @@ namespace server.Controllers
     using System.Collections.Generic;
     using System.Text.Json;
     using Footwear.Data.Dto;
+    using Footwear.Services.OrderService;
+    using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -15,10 +17,12 @@ namespace server.Controllers
     public class PaymentsController : Controller
     {
 
+
         public IConfiguration Configuration { get; }
 
-        public PaymentsController(IConfiguration configuration)
+        public PaymentsController(IConfiguration configuration, ITokenService tokenService, IOrderService orderService)
         {
+
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
@@ -93,9 +97,7 @@ namespace server.Controllers
             Session session = sessionService.Get(session_id);
 
            var paymentStatus =  session.Metadata["PaymentStatus"];
-           
-            var customerService = new CustomerService();
-            Customer customer = customerService.Get(session.CustomerId);
+
 
             return Ok(new { paymentStatus });
         }

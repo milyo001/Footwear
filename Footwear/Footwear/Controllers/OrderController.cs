@@ -11,10 +11,6 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
-    using Stripe.Checkout;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
 
     [Route("[controller]")]
@@ -23,15 +19,11 @@
     {
         private readonly ApplicationDbContext _db;
         public IConfiguration Configuration { get; }
-        private readonly ICartService _cartService;
-        private readonly ITokenService _tokenService;
         private readonly IOrderService _orderService;
 
 
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, ICartService cartService, ITokenService tokenService, IOrderService orderService)
+        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration,  IOrderService orderService)
         {
-            this._cartService = cartService;
-            this._tokenService = tokenService;
             this._orderService = orderService;
             this._db = db;
             Configuration = configuration;
