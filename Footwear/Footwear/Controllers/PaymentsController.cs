@@ -16,13 +16,16 @@ namespace server.Controllers
     [EnableCors("SiteCorsPolicy")]
     public class PaymentsController : Controller
     {
+        private readonly ITokenService _tokenService;
 
+        private readonly IOrderService _orderService;
 
         public IConfiguration Configuration { get; }
 
         public PaymentsController(IConfiguration configuration, ITokenService tokenService, IOrderService orderService)
         {
-
+            this._tokenService = tokenService;
+            this._orderService = orderService;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
@@ -85,6 +88,7 @@ namespace server.Controllers
             return Ok(jsonString);
         }
 
+
         [HttpGet("order/payment-success")]
         public ActionResult OrderSuccess([FromQuery] string session_id)
         {
@@ -92,6 +96,7 @@ namespace server.Controllers
             {
                 return BadRequest("Session id cannot be null!");
             }
+            
 
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);

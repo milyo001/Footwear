@@ -64,11 +64,11 @@
         }
 
         //A asynchronous method that will return the last added user Order
-        public async Task<string> GetLatestAddedOrderIdAsync(string token)
+        public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
-            var latestOrderId = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault().Id;
-            return latestOrderId;
+            var latestOrder = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault();
+            return latestOrder;
         }
     }
 }
