@@ -96,13 +96,12 @@ namespace server.Controllers
             {
                 return BadRequest("Session id cannot be null!");
             }
-            
 
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
 
            var paymentStatus =  session.Metadata["PaymentStatus"];
-
+           
 
             return Ok(new { paymentStatus });
         }

@@ -6,6 +6,7 @@
     using Footwear.Data.Models.Enums;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
+    using Microsoft.EntityFrameworkCore;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
@@ -63,12 +64,26 @@
             this._db.SaveChanges();
         }
 
-        //A asynchronous method that will return the last added user Order
-        public async Task<Order> GetLatestAddedOrderAsync(string token)
+        //A asynchronous method that will return the last added user Order id
+        public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
-            var latestOrder = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault();
-            return latestOrder;
+            var latestOrderId = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault().Id;
+            return latestOrderId;
+        }
+
+
+        public async Task<Order> GetOrderByIdAsync(string id)
+        {
+            var order = await this._db.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            return order;
+        }
+
+        public void ModifyPaidOrder(string orderId)
+        {
+            var order = this.GetOrderByIdAsync(orderId);
+            order.Result.Status = Status.DeliveryPaid;
+            this._db.SaveChanges();
         }
     }
 }

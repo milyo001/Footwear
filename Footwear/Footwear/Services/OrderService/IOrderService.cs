@@ -10,6 +10,10 @@ namespace Footwear.Services.OrderService
     {
         void CreateOrder(string token, OrderViewModel order);
 
-        Task<Order> GetLatestAddedOrderAsync(string token);
+        Task<string> GetLatestAddedOrderIdAsync(string token);
+
+        Task<Order> GetOrderByIdAsync(string id);
+
+        void ModifyPaidOrder(string orderId);
     }
 }
