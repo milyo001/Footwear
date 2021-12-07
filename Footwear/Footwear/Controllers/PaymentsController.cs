@@ -84,6 +84,11 @@ namespace server.Controllers
         [HttpGet("order/payment-success")]
         public ActionResult OrderSuccess([FromQuery] string session_id)
         {
+            if(session_id == null)
+            {
+                return BadRequest("Session id cannot be null!");
+            }
+
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
 
