@@ -78,6 +78,7 @@ namespace server.Controllers
             };
             var service = new SessionService();
             Session session = service.Create(options);
+            var test = session.PaymentStatus;
 
             //Passing the url to the client to redirect user to the prebuild checkout page
             var generatedUrl = new
@@ -93,19 +94,19 @@ namespace server.Controllers
         [HttpGet("order/payment-success")]
         public async Task<ActionResult> OrderSuccess([FromQuery] string session_id)
         {
-            var token = Request.Cookies["token"];
             if (session_id == null)
             {
-                return BadRequest("Session id cannot be null!");
+                return BadRequest("Session id invalid");
             }
+
+            var token = Request.Cookies["token"];
+            var sessionService = new SessionService();
+            Session session = sessionService.Get(session_id);
+            var paymentStatus = session.PaymentStatus;
+
             //Get latest added order and change the payment status to paid
             var orderId = await this._orderService.GetLatestAddedOrderIdAsync(token);
             this._orderService.ModifyPaidOrder(orderId);
-            
-            var sessionService = new SessionService();
-            Session session = sessionService.Get(session_id);
-           var paymentStatus =  session.Metadata["PaymentStatus"];
-           
 
             return Ok(new { paymentStatus });
         }
