@@ -17,6 +17,9 @@
         public string Payment { get; set; }
 
         [Required]
+        public string UserId { get; set; }
+
+        [Required]
         public Status Status { get; set; }
 
         [Required]

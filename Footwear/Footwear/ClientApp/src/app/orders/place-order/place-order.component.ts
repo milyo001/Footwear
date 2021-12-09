@@ -63,7 +63,7 @@ export class PlaceOrderComponent implements OnInit {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect
-      setTimeout(() => { window.location.href = response.Url }, 2000);
+      setTimeout(() => { window.location.href = response.Url }, 1000);
     },
       error => {
         if (error.status == 400) { //bad request from the api

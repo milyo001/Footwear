@@ -64,12 +64,17 @@
             this._db.SaveChanges();
         }
 
-        //A asynchronous method that will return the last added user Order id
+        //A method that will return the last added user order id
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
-            var latestOrderId = user.Orders.OrderByDescending(o => o.CreatedOn).FirstOrDefault().Id;
-            return latestOrderId;
+            var orderId = this._db.Orders
+                .Where(x => x.UserId == user.Id)
+                .OrderByDescending(o => o.CreatedOn)
+                .First()
+                .Id;
+
+            return orderId;
         }
 
 
@@ -81,8 +86,8 @@
 
         public void ModifyPaidOrder(string orderId)
         {
-            var order = this.GetOrderByIdAsync(orderId);
-            order.Result.Status = Status.DeliveryPaid;
+            var order = this.GetOrderByIdAsync(orderId).Result;
+            order.Status = Status.DeliveryPaid;
             this._db.SaveChanges();
         }
     }

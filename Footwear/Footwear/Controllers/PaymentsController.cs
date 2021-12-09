@@ -3,6 +3,7 @@ namespace server.Controllers
 {
     using System.Collections.Generic;
     using System.Text.Json;
+    using System.Threading.Tasks;
     using Footwear.Data.Dto;
     using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
@@ -90,16 +91,19 @@ namespace server.Controllers
 
 
         [HttpGet("order/payment-success")]
-        public ActionResult OrderSuccess([FromQuery] string session_id)
+        public async Task<ActionResult> OrderSuccess([FromQuery] string session_id)
         {
-            if(session_id == null)
+            var token = Request.Cookies["token"];
+            if (session_id == null)
             {
                 return BadRequest("Session id cannot be null!");
             }
-
+            //Get latest added order and change the payment status to paid
+            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(token);
+            this._orderService.ModifyPaidOrder(orderId);
+            
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
-
            var paymentStatus =  session.Metadata["PaymentStatus"];
            
 

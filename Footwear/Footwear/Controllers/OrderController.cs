@@ -4,9 +4,7 @@
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
-    using Footwear.Services.CartService;
     using Footwear.Services.OrderService;
-    using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -64,9 +62,8 @@
             //Check if payment is with card so the client can handle card payment session
             var cardPayment = order.Payment == "card" ? true : false;
             this._orderService.CreateOrder(authCookie, order);
-            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authCookie);
             
-            return Ok( new { cardPayment, orderId  });
+            return Ok( new { cardPayment });
         }
     }
 }
