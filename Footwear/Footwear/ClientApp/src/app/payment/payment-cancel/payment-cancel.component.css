@@ -1,0 +1,29 @@
+img {
+  width: 200px;
+  height: 180px;
+  margin-top: 75px;
+  margin-bottom: 10px;
+}
+
+.container-fluid {
+  margin-top: 30px;
+}
+
+.card {
+  align-items: center;
+  height: 500px;
+}
+
+.conf-text-section {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.conf-order-header {
+  font-weight: bold;
+}
+
+.card {
+  border: none;
+}

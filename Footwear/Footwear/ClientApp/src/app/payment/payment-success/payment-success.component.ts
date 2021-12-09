@@ -19,7 +19,7 @@ export class PaymentSuccessComponent implements OnInit {
     //Check if session exists in the URL, if present return session id, if not return undefined
     this.route.queryParams.subscribe(params => { this.sessionId = params['session_id'] });
 
-    //Validation for card payment 
+    //Extra validation for card payment
     if (this.sessionId) {
       this.orderService.validatePayment(this.sessionId).subscribe((response: any) => {
         if (response.paymentStatus == 'paid') {
