@@ -17,14 +17,20 @@
             this._db = db;
         }
 
-        //Get all cart products and return the view model to send it to the client
-        public IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId)
+        public Cart GetCart(int cartId)
         {
             var cart = this._db.Cart
                 .Include(c => c.CartProducts)
                 .FirstOrDefault(c => c.Id == cartId);
-
+            return cart;
+        }
+        //Get all cart products and return the view model to send it to the client
+        public IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId)
+        {
+            var cart = this.GetCart(cartId);
+            //Gets the products that are not ordered yet
             var products = cart.CartProducts
+                 .Where(cp => cp.isOrdered == false)
                  .Select(cp => new CartProductViewModel
                  {
                      Id = cp.Id,
@@ -46,14 +52,13 @@
         //Get all cart products to add them to order
         public ICollection<CartProduct> GetCartProducts(int cartId)
         {
-            var cart = this._db.Cart
-                .Include(c => c.CartProducts)
-                .FirstOrDefault(c => c.Id == cartId);
-
+            var cart = this.GetCart(cartId);
+                
             var products = cart.CartProducts.Where(cp => cp.CartId == cartId).ToList();
 
             return products;
         }
+
         //Get cart product by given cart product id asynchronous
         public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
