@@ -19,16 +19,15 @@
                 </div>
                 <ul class="font-weight-light">
                   <li>{{item.name}} </li>
-                  <li>{{item.size}}</li>
-                  <li>{{item.quantity}}$ </li>
-                  <li>{{item.price}}$</li>
-                  <li class="bold">Total/items: {{+item.price * item.quantity}}</li>
+                  <li>Size: {{item.size}}</li>
+                  <li>{{item.quantity}} x</li>
+                  <li>Price: {{item.price}}$</li>
+                  <li class="bold">Total: {{+item.price * item.quantity}}$</li>
                 </ul>
               </mat-card>
               <mat-card class="p-2 d-flex text-center mt-2">
                 TO DO: put price here and details about items, estimated delivery date
                 Total Price : 233.77$
-                <button (click)="onCheckOut()">Test</button>
               </mat-card>
             </div>
           </mat-card-content>
