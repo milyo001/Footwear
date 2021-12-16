@@ -35,5 +35,7 @@
 
         public int CartId { get; set; }
 
+        public bool isOrdered { get; set; }
+
     }
 }

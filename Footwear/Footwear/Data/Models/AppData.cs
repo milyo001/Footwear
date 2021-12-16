@@ -2,6 +2,7 @@
 namespace Footwear.Data.Models
 {
     using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     [Keyless]
     public class AppData
@@ -13,6 +14,7 @@ namespace Footwear.Data.Models
         public int MaxDelivery { get; set; }
 
         //The default price for delivery
+        [Column(TypeName = "decimal(18,4)")]
         public decimal DeliveryPrice { get; set; }
 
     }
