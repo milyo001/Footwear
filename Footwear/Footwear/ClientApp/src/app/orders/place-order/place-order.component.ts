@@ -59,7 +59,7 @@ export class PlaceOrderComponent implements OnInit {
  };
 
   onCheckOut(): void{
-    this.orderService.checkOutCard(this.order).subscribe((response: any) => {
+    this.orderService.checkOut(this.order).subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect
