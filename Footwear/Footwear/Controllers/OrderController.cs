@@ -49,7 +49,7 @@
         //}
 
         [Route("create-order")]
-        public async Task<ActionResult> CreateOrderAsync([FromBody] OrderViewModel order)
+        public ActionResult CreateOrder([FromBody] OrderViewModel order)
         {
             //Check if data is invalid or model was not bound successfully
             if (order == null || !ModelState.IsValid)
