@@ -6,9 +6,10 @@
 
     public class ApplicationDbContext : IdentityDbContext
     {
-        
+        public DbSet<AppData> AppData { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<Cart> Cart { get; set; }
@@ -26,6 +27,8 @@
 
         }
 
-        
+       
+
+
     }
 }
