@@ -22,7 +22,7 @@
                   <li>Size: {{item.size}}</li>
                   <li>{{item.quantity}} x</li>
                   <li>Price: {{item.price}}$</li>
-                  <li class="bold">Total: {{+item.price * item.quantity}}$</li>
+                  <li class="bold" *ngIf="item.quantity > 1">Total: {{+item.price * item.quantity}}$</li>
                 </ul>
               </mat-card>
               <mat-card class="p-2 d-flex text-center mt-2">
