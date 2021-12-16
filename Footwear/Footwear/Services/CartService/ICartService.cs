@@ -18,6 +18,8 @@ namespace Footwear.Services.CartService
         void DeleteCartProduct(int productId);
         void DeleteCartProducts(int productId);
 
+        void ChangeOrderStateCartProducts(int cartId);
+
 
     }
 }

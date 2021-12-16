@@ -17,6 +17,7 @@
             this._db = db;
         }
 
+
         public Cart GetCart(int cartId)
         {
             var cart = this._db.Cart
@@ -53,13 +54,11 @@
         public ICollection<CartProduct> GetCartProducts(int cartId)
         {
             var cart = this.GetCart(cartId);
-                
             var products = cart.CartProducts.Where(cp => cp.CartId == cartId).ToList();
-
             return products;
         }
 
-        //Get cart product by given cart product id asynchronous
+        //Get a single cart product by given cart product id
         public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
             var product = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
@@ -96,7 +95,14 @@
             var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);
             this._db.CartProducts.RemoveRange(cartProducts);
             this._db.SaveChanges();
+        }
 
+        //Change isOrdered property all cart products after order is finished
+        public void ChangeOrderStateCartProducts(int cartId)
+        {
+            var cartProducts = this.GetCartProducts(cartId).ToList();
+            cartProducts.ForEach(cp => cp.isOrdered = true);
+            this._db.SaveChanges();
         }
     }
 }

@@ -29,25 +29,6 @@
 
         }
 
-        //Retrieve session id from stripe api and redirect to payment successfull page, 
-        //make an order and then delete current products stored in the cart!
-
-        //public ActionResult OrderSuccess([FromQuery] string session_id)
-        //{
-        //    var authCookie = Request.Cookies["token"];
-        //    var cartId = this._tokenService.GetCartId(authCookie);
-        //    var domain = Configuration["ApplicationSettings:ClientUrl"].ToString() + "/order-completed";
-
-        //    var sessionService = new SessionService();
-        //    Session session = sessionService.Get(session_id);
-
-        //    var customerService = new CustomerService();
-        //    Customer customer = customerService.Get(session.CustomerId);
-
-        //    this._cartService.DeleteCartProducts(cartId);
-        //    return Redirect(domain);
-        //}
-
         [Route("create-order")]
         public ActionResult CreateOrder([FromBody] OrderViewModel order)
         {

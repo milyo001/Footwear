@@ -42,7 +42,7 @@
         }
 
         [HttpPut("increaseProductQuantity")]
-        public async Task<Object> IncrementCartProductQuantity([FromBody]int cartProductId)
+        public async Task<IActionResult> IncrementCartProductQuantity([FromBody]int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if (cartProduct != null)
@@ -54,9 +54,10 @@
         }
 
         [HttpPut("decreaseProductQuantity")]
-        public async Task<Object> DecreaseCartProductQuantity([FromBody] int cartProductId)
+        public async Task<IActionResult> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
+
             if(cartProduct == null)
             {
                 return BadRequest("Product do not exists in context");
@@ -66,11 +67,12 @@
                 this._cartService.DecreaseQuantity(cartProductId);
                 return Ok(new { succeeded = true });
             }
+
             return BadRequest("Error, modifing the data!");
         }
 
         [HttpPost("deleteCartProduct")]
-        public async Task<Object> DeleteCartProduct([FromBody] int cartProductId)
+        public async Task<IActionResult> DeleteCartProduct([FromBody] int cartProductId)
         {
             if (await this._cartService.GetCartProductByIdAsync(cartProductId) == null)
             {
@@ -81,6 +83,14 @@
             return Ok(new { succeeded = true });
         }
 
+        [HttpPut("removeCartProducts")]
+        public IActionResult RemoveCartProducts()
+        {
+            var authCookie = Request.Cookies["token"];
+            var cartId = this._tokenService.GetCartId(authCookie);
+            this._cartService.ChangeOrderStateCartProducts(cartId);
+            return Ok();
+        }
 
 
     }
