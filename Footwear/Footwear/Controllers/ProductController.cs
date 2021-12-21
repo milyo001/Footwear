@@ -11,6 +11,7 @@
     using Microsoft.AspNetCore.Identity;
     using System.IdentityModel.Tokens.Jwt;
     using Footwear.Services.CartService;
+    using Footwear.Services.TokenService;
 
     [ApiController]
     [Route("[controller]")]
@@ -19,11 +20,15 @@
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly ICartService _cartService;
-        public ProductController(ApplicationDbContext db, UserManager<User> userManager, ICartService cartService)
+        private readonly ITokenService _tokenService;
+
+        public ProductController(ApplicationDbContext db, UserManager<User> userManager, ICartService cartService,
+            ITokenService tokenService)
         {
             this._userManager = userManager;
             this._db = db;
             this._cartService = cartService;
+            this._tokenService = tokenService;
         }
 
 
@@ -75,10 +80,7 @@
         [Route("addToCart")]
         public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var headerToken = Request.Headers.FirstOrDefault(x => x.Key == "Authorization");
-            //Authrization token contains string with "Bearer" as first word and the encoded string of the token as second
-            var encodedToken = headerToken.Value.ToString().Split(" ")[1];
+            
             var token = handler.ReadJwtToken(encodedToken);
 
             var userId = token.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
@@ -87,7 +89,5 @@
         
             return Ok(new { succeeded = true });
         }
-
-        
     }
 }

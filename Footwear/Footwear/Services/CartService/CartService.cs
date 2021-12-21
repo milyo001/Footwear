@@ -62,6 +62,7 @@
             var dupplicateProduct = cart.CartProducts
                     .Where(x => x.Name == model.Name)
                     .Where(x => x.Size == model.Size)
+                    .Where(x => x.isOrdered == false)
                     .FirstOrDefault();
 
             if (dupplicateProduct != null)
