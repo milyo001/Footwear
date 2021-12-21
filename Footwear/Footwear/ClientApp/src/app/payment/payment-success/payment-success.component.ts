@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
 
 @Component({
@@ -12,8 +13,8 @@ export class PaymentSuccessComponent implements OnInit {
 
   sessionId: string;
 
-  constructor(private orderService: OrderService, private toastr: ToastrService, private route: ActivatedRoute,
-              private router: Router  ) { }
+  constructor(private orderService: OrderService, private cartService: CartService, private toastr: ToastrService,
+    private route: ActivatedRoute, private router: Router  ) { }
 
   ngOnInit(): void {
     //Check if session exists in the URL, if present return session id, if not return undefined
@@ -23,7 +24,6 @@ export class PaymentSuccessComponent implements OnInit {
     if (this.sessionId) {
       this.orderService.validatePayment(this.sessionId).subscribe((response: any) => {
         if (response.paymentStatus == 'paid') {
-          this.toastr.success("Thank you!", "Payment successful!");
         }
         else {
           this.router.navigate(['/', 'payment-cancel'])
@@ -34,7 +34,9 @@ export class PaymentSuccessComponent implements OnInit {
     else {
       //Handle cash payment 
     }
-    
+    this.toastr.success("Thank you!", "Order created. Order status: delivery!");
+    //Change cart products
+    this.cartService.removeAllCartProduts();
   }
 
 }
