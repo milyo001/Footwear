@@ -12,6 +12,7 @@ namespace Footwear.Services.CartService
         IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId);
         ICollection<CartProduct> GetCartProducts(int cartId);
 
+        Task AddCartProductAsync(string userId, CartProductViewModel model)
         void IncreaseQuantity(int productId);
         void DecreaseQuantity(int productId);
         Task<CartProduct> GetCartProductByIdAsync(int productId);

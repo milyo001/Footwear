@@ -7,11 +7,10 @@
     using Microsoft.EntityFrameworkCore;
     using Footwear.Data;
     using Footwear.Data.Dto;
-    using System;
     using Footwear.Data.Models;
-    using Footwear.Data.Models.Enums;
     using Microsoft.AspNetCore.Identity;
     using System.IdentityModel.Tokens.Jwt;
+    using Footwear.Services.CartService;
 
     [ApiController]
     [Route("[controller]")]
@@ -19,10 +18,12 @@
     {
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
-        public ProductController(ApplicationDbContext db, UserManager<User> userManager)
+        private readonly ICartService _cartService;
+        public ProductController(ApplicationDbContext db, UserManager<User> userManager, ICartService cartService)
         {
             this._userManager = userManager;
             this._db = db;
+            this._cartService = cartService;
         }
 
 
@@ -72,7 +73,7 @@
 
         [HttpPost]
         [Route("addToCart")]
-        public async Task<Object> AddCartProduct(CartProductViewModel model)
+        public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
         {
             var handler = new JwtSecurityTokenHandler();
             var headerToken = Request.Headers.FirstOrDefault(x => x.Key == "Authorization");
@@ -81,49 +82,12 @@
             var token = handler.ReadJwtToken(encodedToken);
 
             var userId = token.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
-            var cartProduct = new CartProduct
-            {
-                Name = model.Name,
-                Details = model.Details,
-                Size = model.Size,
-                Gender = (Gender)Enum.Parse(typeof(Gender), model.Gender), //Parse from string to Enum
-                ProductType = (ProductType)Enum.Parse(typeof(ProductType), model.ProductType),
-                ImageUrl = model.ImageUrl,
-                Price = model.Price,
-                Quantity = model.Quantity,
-                ProductId = model.ProductId
-            };
 
-            var cart = this._db.Cart
-                .Where(x => x.UserId == userId)
-                .Include(x => x.CartProducts)
-                .FirstOrDefault();
-
-            await CheckDupplicateProductQuantityAndName(userId, cartProduct);
+            await this._cartService.AddCartProductAsync(userId, model);
         
             return Ok(new { succeeded = true });
         }
 
-        //Check if the product name is existing and have the same size
-        //in the database and change the quantity of that cartProduct, instead of adding new instance of 
-        //CartProduct
-        private async Task CheckDupplicateProductQuantityAndName(string userId, CartProduct cartProduct)
-        {
-            var cart = this._db.Cart.FirstOrDefault(x => x.UserId == userId);
-            var dupplicateProduct = cart.CartProducts
-                    .Where(x => x.Name == cartProduct.Name)
-                    .Where(x => x.Size == cartProduct.Size)
-                    .FirstOrDefault();
-
-            if (dupplicateProduct != null)
-            {
-                dupplicateProduct.Quantity++;
-            }
-            else
-            {
-                cart.CartProducts.Add(cartProduct);
-            }
-            await this._db.SaveChangesAsync();
-        }
+        
     }
 }

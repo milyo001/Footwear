@@ -3,7 +3,9 @@
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
+    using Footwear.Data.Models.Enums;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -49,6 +51,42 @@
 
             return products;
         }
+
+        //Check if the product name is existing and have the same size
+        //in the database and change the quantity of that cartProduct, instead of adding new instance of 
+        //CartProduct
+        public async Task AddCartProductAsync(string userId, CartProductViewModel model)
+        {
+            var cart = this._db.Cart.FirstOrDefault(x => x.UserId == userId);
+            //Check if product with same name and size already exists
+            var dupplicateProduct = cart.CartProducts
+                    .Where(x => x.Name == model.Name)
+                    .Where(x => x.Size == model.Size)
+                    .FirstOrDefault();
+
+            if (dupplicateProduct != null)
+            {
+                dupplicateProduct.Quantity++;
+            }
+            else
+            {
+                var cartProduct = new CartProduct
+                {
+                    Name = model.Name,
+                    Details = model.Details,
+                    Size = model.Size,
+                    Gender = (Gender)Enum.Parse(typeof(Gender), model.Gender), //Parse from string to Enum
+                    ProductType = (ProductType)Enum.Parse(typeof(ProductType), model.ProductType),
+                    ImageUrl = model.ImageUrl,
+                    Price = model.Price,
+                    Quantity = model.Quantity,
+                    ProductId = model.ProductId
+                };
+                cart.CartProducts.Add(cartProduct);
+            }
+            await this._db.SaveChangesAsync();
+        }
+
 
         //Get all cart products to add them to order
         public ICollection<CartProduct> GetCartProducts(int cartId)
