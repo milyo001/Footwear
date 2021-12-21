@@ -45,6 +45,7 @@ export class CartService {
     return this.http.post<ICartProduct>(this.baseUrl + "cart/deleteCartProduct", cartProductId);
   }
 
+  //Change the cart product isOrdered property to true, keep the cart products in the database
   removeAllCartProduts() {
     return this.http.delete(this.baseUrl + 'cart/removeCartProducts');
   }

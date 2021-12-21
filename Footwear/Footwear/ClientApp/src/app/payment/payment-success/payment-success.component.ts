@@ -35,8 +35,8 @@ export class PaymentSuccessComponent implements OnInit {
       //Handle cash payment 
     }
     this.toastr.success("Thank you!", "Order created. Order status: delivery!");
-    //Change cart products
-    this.cartService.removeAllCartProduts();
+    //Change cart products isOrdered property to true, cart products won't be visible at cart component anymore
+    this.cartService.removeAllCartProduts().subscribe();
   }
 
 }

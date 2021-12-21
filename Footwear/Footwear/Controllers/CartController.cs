@@ -83,11 +83,12 @@
             return Ok(new { succeeded = true });
         }
 
-        [HttpPut("removeCartProducts")]
+        [HttpDelete("removeCartProducts")]
         public IActionResult RemoveCartProducts()
         {
             var authCookie = Request.Cookies["token"];
             var cartId = this._tokenService.GetCartId(authCookie);
+            //Change the status of cart products
             this._cartService.ChangeOrderStateCartProducts(cartId);
             return Ok();
         }
