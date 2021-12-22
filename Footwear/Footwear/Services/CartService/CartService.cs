@@ -22,7 +22,6 @@
             this._tokenService = tokenService;
         }
 
-
         public Cart GetCart(int cartId)
         {
             var cart = this._db.Cart

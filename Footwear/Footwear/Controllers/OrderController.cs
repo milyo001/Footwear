@@ -9,13 +9,11 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
-    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
 
@@ -23,7 +21,6 @@
         public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration,  IOrderService orderService)
         {
             this._orderService = orderService;
-            this._db = db;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
 
