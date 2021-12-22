@@ -107,11 +107,11 @@
         }
 
         //Increases the given cart product quantity
-        public void IncreaseQuantity(int cartProductId)
+        public async Task IncreaseQuantityAsync(int cartProductId)
         {
             var cartProduct =  this.GetCartProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity++;
-            this._db.SaveChanges();
+            await this._db.SaveChangesAsync();
         }
 
         //Decreases the given cart product quantity
