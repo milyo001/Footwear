@@ -116,25 +116,25 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                var authCookie = Request.Cookies["token"];
-                var user = await this._tokenService.GetUserByIdAsync(authCookie);
-                var userData = new UserProfileDataViewModel
-                {
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Email = user.Email,
-                    Phone = user.Phone,
-                    Street = user.Address.Street,
-                    City = user.Address.City,
-                    State = user.Address.State,
-                    Country = user.Address.Country,
-                    ZipCode = user.Address.ZipCode
-                };
-                return userData;
+                return BadRequest(new { message = "Unable to get user information. Model is not valid." });
             }
-            return BadRequest(new { message = "Unable to get user information. Model is not valid." });
+            var authCookie = Request.Cookies["token"];
+            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            var userData = new UserProfileDataViewModel
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Phone = user.Phone,
+                Street = user.Address.Street,
+                City = user.Address.City,
+                State = user.Address.State,
+                Country = user.Address.Country,
+                ZipCode = user.Address.ZipCode
+            };
+            return userData;
 
         }
 
