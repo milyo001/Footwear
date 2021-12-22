@@ -56,9 +56,8 @@
         }
 
 
-        //Check if the product name already exists and have the same size
-        //in the database and change the quantity of that cartProduct, instead of adding additional instance of 
-        //CartProduct or create new cart product
+        //Check if the product name already exists and have the same size in the CartProducts table
+        //and change the quantity of that dupplicate cartProduct, instead of adding additional instance of CartProduct
         public async Task AddCartProductAsync(string token, CartProductViewModel model)
         {
             var cartId = this._tokenService.GetCartId(token);
@@ -93,7 +92,6 @@
             }
             await this._db.SaveChangesAsync();
         }
-
 
         //Get all cart products to add them to order
         public ICollection<CartProduct> GetCartProducts(int cartId)
