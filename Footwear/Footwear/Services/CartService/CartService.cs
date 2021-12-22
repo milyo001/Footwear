@@ -4,6 +4,7 @@
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
+    using Footwear.Services.TokenService;
     using Microsoft.EntityFrameworkCore;
     using System;
     using System.Collections.Generic;
@@ -13,10 +14,12 @@
     public class CartService : ICartService
     {
         private readonly ApplicationDbContext _db;
+        private readonly ITokenService _tokenService;
 
-        public CartService(ApplicationDbContext db)
+        public CartService(ApplicationDbContext db, ITokenService tokenService)
         {
             this._db = db;
+            this._tokenService = tokenService;
         }
 
 
@@ -56,9 +59,10 @@
         //Check if the product name already exists and have the same size
         //in the database and change the quantity of that cartProduct, instead of adding additional instance of 
         //CartProduct or create new cart product
-        public async Task AddCartProductAsync(string userId, CartProductViewModel model)
+        public async Task AddCartProductAsync(string token, CartProductViewModel model)
         {
-            var cart = this._db.Cart.FirstOrDefault(x => x.UserId == userId);
+            var cartId = this._tokenService.GetCartId(token);
+            var cart = this.GetCart(cartId);
 
             //Check if product with same name and size already exists, check if product is unordered
             var dupplicateProduct = cart.CartProducts
@@ -67,11 +71,7 @@
                     .Where(x => x.isOrdered == false)
                     .FirstOrDefault();
 
-            if (dupplicateProduct != null)
-            {
-                dupplicateProduct.Quantity++;
-            }
-            else
+            if (dupplicateProduct == null)
             {
                 var cartProduct = new CartProduct
                 {
@@ -86,6 +86,10 @@
                     ProductId = model.ProductId
                 };
                 cart.CartProducts.Add(cartProduct);
+            }
+            else
+            {
+                dupplicateProduct.Quantity++;
             }
             await this._db.SaveChangesAsync();
         }

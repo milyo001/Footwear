@@ -1,7 +1,4 @@
-﻿
-
-
-namespace Footwear.Services.TokenService
+﻿namespace Footwear.Services.TokenService
 {
     using Footwear.Data;
     using Footwear.Data.Models;

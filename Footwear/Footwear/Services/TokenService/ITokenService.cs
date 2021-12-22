@@ -1,6 +1,4 @@
-﻿
-
-namespace Footwear.Services.TokenService
+﻿namespace Footwear.Services.TokenService
 {
     using Footwear.Data.Models;
     using System.Threading.Tasks;
@@ -10,6 +8,5 @@ namespace Footwear.Services.TokenService
         string GetUserId(string token);
         int GetCartId(string token);
         Task<User> GetUserByIdAsync(string token);
-
     }
 }
