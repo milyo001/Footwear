@@ -52,13 +52,15 @@
             return products;
         }
 
-        //Check if the product name is existing and have the same size
-        //in the database and change the quantity of that cartProduct, instead of adding new instance of 
-        //CartProduct
+
+        //Check if the product name already exists and have the same size
+        //in the database and change the quantity of that cartProduct, instead of adding additional instance of 
+        //CartProduct or create new cart product
         public async Task AddCartProductAsync(string userId, CartProductViewModel model)
         {
             var cart = this._db.Cart.FirstOrDefault(x => x.UserId == userId);
-            //Check if product with same name and size already exists
+
+            //Check if product with same name and size already exists, check if product is unordered
             var dupplicateProduct = cart.CartProducts
                     .Where(x => x.Name == model.Name)
                     .Where(x => x.Size == model.Size)
@@ -129,19 +131,19 @@
         }
 
         //Removes all cart products
-        public void DeleteCartProducts(int cartId)
+        public async Task DeleteCartProductsAsync(int cartId)
         {
             var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);
             this._db.CartProducts.RemoveRange(cartProducts);
-            this._db.SaveChanges();
+            await this._db.SaveChangesAsync();
         }
 
         //Change isOrdered property all cart products after order is finished
-        public void ChangeOrderStateCartProducts(int cartId)
+        public async Task ChangeOrderStateCartProductsAsync(int cartId)
         {
             var cartProducts = this.GetCartProducts(cartId).ToList();
             cartProducts.ForEach(cp => cp.isOrdered = true);
-            this._db.SaveChanges();
+            await this._db.SaveChangesAsync();
         }
     }
 }
