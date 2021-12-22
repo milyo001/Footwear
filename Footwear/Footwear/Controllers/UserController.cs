@@ -47,24 +47,13 @@
             {
                 return BadRequest(new { message = "Invalid input data!" } );
             }
-            //Check if Username already exists
             if (this._userService.isUsernameInUse(model.Email))
             {
                 return BadRequest(new { message = "User already exists!" });
             }
-            //Create user with blank address, user can modify his profile later and add address
-            var user = new User() 
-            {
-                UserName = model.Email,
-                Email = model.Email,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                Phone = model.Phone,
-                Cart = new Cart { },
-                Address = new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }
-            };
-            var result = await this._userManager.CreateAsync(user, model.Password);
-            return Ok(result);
+            //Create user with blank address, user can modify his profile later and add address or modify the account information
+            await this._userService.CreateUserAsync(model);
+            return Ok(new { succeeded = true });
         }
 
         //A method for validating the data from client and login the user, also will generate JWT token

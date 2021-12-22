@@ -8,7 +8,7 @@ namespace Footwear.Services.UserService
     {
         bool isUsernameInUse(string email);
 
-        Task CreateUser(RegisterViewModel model);
+        Task CreateUserAsync(RegisterViewModel model);
 
     }
 }
