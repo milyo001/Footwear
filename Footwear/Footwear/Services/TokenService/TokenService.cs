@@ -18,6 +18,17 @@ namespace Footwear.Services.TokenService
             this._db = db;
         }
 
+
+        //Get UserId from token's claims
+        public string GetUserId(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var authToken = handler.ReadJwtToken(token);
+            var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
+            return userId;
+        }
+
+        //Get CartId from token's claims
         public int GetCartId(string token)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -26,6 +37,7 @@ namespace Footwear.Services.TokenService
             return cartId;
         }
 
+        //Get user by 
         public async Task<User> GetUserByIdAsync(string token)
         {
             var handler = new JwtSecurityTokenHandler();
@@ -37,6 +49,8 @@ namespace Footwear.Services.TokenService
                 .FirstOrDefaultAsync();
             return user;
         }
+
+        
 
     }
 }

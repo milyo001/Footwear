@@ -7,6 +7,7 @@ namespace Footwear.Services.TokenService
 
     public interface ITokenService
     {
+        string GetUserId(string token);
         int GetCartId(string token);
 
         Task<User> GetUserByIdAsync(string token);

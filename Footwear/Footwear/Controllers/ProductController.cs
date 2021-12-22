@@ -80,11 +80,8 @@
         [Route("addToCart")]
         public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
         {
-            
-            var token = handler.ReadJwtToken(encodedToken);
-
-            var userId = token.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
-
+            var authCookie = Request.Cookies["token"];
+            var userId = await this._tokenService.GetUserByIdAsync(authCookie);
             await this._cartService.AddCartProductAsync(userId, model);
         
             return Ok(new { succeeded = true });
