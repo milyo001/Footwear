@@ -1,14 +1,16 @@
 ﻿
-using Footwear.Data;
-using Footwear.Data.Models;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Footwear.Services.TokenService
 {
+    using Footwear.Data;
+    using Footwear.Data.Models;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.IdentityModel.Tokens.Jwt;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class TokenService : ITokenService
     {
         private readonly ApplicationDbContext _db;
@@ -17,7 +19,6 @@ namespace Footwear.Services.TokenService
         {
             this._db = db;
         }
-
 
         //Get UserId from token's claims
         public string GetUserId(string token)
