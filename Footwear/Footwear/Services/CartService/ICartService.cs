@@ -13,9 +13,9 @@ namespace Footwear.Services.CartService
         ICollection<CartProduct> GetCartProducts(int cartId);
         Task AddCartProductAsync(string userId, CartProductViewModel model);
         void IncreaseQuantity(int productId);
-        void DecreaseQuantity(int productId);
+        Task DecreaseQuantityAsync(int productId);
         Task<CartProduct> GetCartProductByIdAsync(int productId);
-        void DeleteCartProduct(int productId);
+        Task DeleteCartProductAsync(int productId);
         Task DeleteCartProductsAsync(int productId);
         Task ChangeOrderStateCartProductsAsync(int cartId);
     }

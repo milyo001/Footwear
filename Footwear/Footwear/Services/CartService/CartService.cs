@@ -115,19 +115,19 @@
         }
 
         //Decreases the given cart product quantity
-        public void DecreaseQuantity(int cartProductId)
+        public async Task DecreaseQuantityAsync(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
             cartProduct.Quantity--;
-            this._db.SaveChangesAsync();
+            await this._db.SaveChangesAsync();
         }
 
         //Removes the cart product by given id
-        public void DeleteCartProduct(int cartProductId)
+        public async Task DeleteCartProductAsync(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
             this._db.CartProducts.Remove(cartProduct);
-            this._db.SaveChanges();
+            await this._db.SaveChangesAsync();
         }
 
         //Removes all cart products
