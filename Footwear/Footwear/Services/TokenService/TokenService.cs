@@ -37,12 +37,10 @@ namespace Footwear.Services.TokenService
             return cartId;
         }
 
-        //Get user by 
+        
         public async Task<User> GetUserByIdAsync(string token)
         {
-            var handler = new JwtSecurityTokenHandler();
-            var authToken = handler.ReadJwtToken(token);
-            var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
+            var userId = this.GetUserId(token);
             var user = await this._db.Users
                 .Where(u => u.Id == userId)
                 .Include(a => a.Address)

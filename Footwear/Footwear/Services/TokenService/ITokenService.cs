@@ -9,7 +9,6 @@ namespace Footwear.Services.TokenService
     {
         string GetUserId(string token);
         int GetCartId(string token);
-
         Task<User> GetUserByIdAsync(string token);
 
     }
