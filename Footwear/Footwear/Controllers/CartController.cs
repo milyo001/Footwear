@@ -47,7 +47,7 @@
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if (cartProduct != null)
             {
-                this._cartService.IncreaseQuantity(cartProductId);
+                await this._cartService.IncreaseQuantityAsync(cartProductId);
                 return Ok(new { succeeded = true });
             }
             return BadRequest("Error, modifing the data!");
@@ -64,7 +64,7 @@
             }
             if (cartProduct.Quantity > 1)
             {
-                this._cartService.DecreaseQuantity(cartProductId);
+                await this._cartService.DecreaseQuantityAsync(cartProductId);
                 return Ok(new { succeeded = true });
             }
 
@@ -78,18 +78,18 @@
             {
                 return BadRequest("Product do not exists in cart");
             }
-            this._cartService.DeleteCartProduct(cartProductId);
+            await this._cartService.DeleteCartProductAsync(cartProductId);
 
             return Ok(new { succeeded = true });
         }
 
         [HttpDelete("removeCartProducts")]
-        public IActionResult RemoveCartProducts()
+        public async Task<IActionResult> RemoveCartProducts()
         {
             var authCookie = Request.Cookies["token"];
             var cartId = this._tokenService.GetCartId(authCookie);
             //Change the status of cart products
-            this._cartService.ChangeOrderStateCartProducts(cartId);
+            await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
         }
 
