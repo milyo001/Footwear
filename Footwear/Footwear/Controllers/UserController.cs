@@ -41,7 +41,7 @@
         //A method for validating the data from client and register new user in the database
         [HttpPost]
         [Route("register")]
-        public async Task<Object> RegisterUser(RegisterViewModel model)
+        public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
             if (!ModelState.IsValid)
             {
