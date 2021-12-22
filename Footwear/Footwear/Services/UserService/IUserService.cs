@@ -4,7 +4,7 @@ namespace Footwear.Services.UserService
     using Footwear.Data.Dto;
     using System.Threading.Tasks;
 
-    interface IUserService
+    public interface IUserService
     {
         bool isUsernameInUse(string email);
 

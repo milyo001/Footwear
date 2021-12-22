@@ -18,7 +18,7 @@ namespace Footwear
     using Footwear.Services.CartService;
     using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Cors.Infrastructure;
-    
+    using Footwear.Services.UserService;
 
     public class Startup
     {

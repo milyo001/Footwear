@@ -15,22 +15,25 @@
     using Footwear.Services.TokenService;
     using Microsoft.Extensions.Options;
     using Microsoft.EntityFrameworkCore;
+    using Footwear.Services.UserService;
 
     [ApiController]
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        private UserManager<User> _userManager;
-        private ITokenService _tokenService;
+        private readonly UserManager<User> _userManager;
+        private readonly ITokenService _tokenService;
         private readonly ApplicationSettings _appSettings;
+        private readonly IUserService _userService;
 
 
         public UserController(ApplicationDbContext db, UserManager<User> userManager,
-             ITokenService tokenService, IOptions<ApplicationSettings> appSettings)
+             ITokenService tokenService, IOptions<ApplicationSettings> appSettings, IUserService userService)
         {
             this._db = db;
             this._userManager = userManager;
+            this._userService = userService;
             this._tokenService = tokenService;
             this._appSettings = appSettings.Value;
         }
@@ -45,8 +48,7 @@
                 return BadRequest(new { message = "Invalid input data!" } );
             }
             //Check if Username already exists
-            var dupplicateName = this._db.Users.Any(user => user.Email == (model.Email).ToUpper());
-            if (dupplicateName)
+            if (this._userService.isUsernameInUse(model.Email))
             {
                 return BadRequest(new { message = "User already exists!" });
             }
