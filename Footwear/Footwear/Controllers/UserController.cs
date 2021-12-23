@@ -76,8 +76,6 @@
             return Ok(new { token });
         }
 
-
-
         [HttpGet]
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
@@ -88,6 +86,7 @@
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
+
             var userData = new UserProfileDataViewModel
             {
                 FirstName = user.FirstName,

@@ -36,6 +36,8 @@ namespace Footwear
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
            
             services.AddControllersWithViews();
+            //Configure automapper
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
