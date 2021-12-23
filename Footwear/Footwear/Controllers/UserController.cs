@@ -67,7 +67,7 @@
             //Check if user exists in the database
             var user = await _userManager.FindByNameAsync(model.Email);
             var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
-            if (user != null && passwordMatch)
+            if (user == null || !passwordMatch)
             {
                 return BadRequest(new { message = "Username or password is incorrect." });
             }
