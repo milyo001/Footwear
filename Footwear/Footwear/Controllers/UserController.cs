@@ -6,12 +6,6 @@
     using Microsoft.AspNetCore.Identity;
     using Footwear.Data.Dto;
     using System.Threading.Tasks;
-    using System;
-    using Microsoft.IdentityModel.Tokens;
-    using System.Security.Claims;
-    using System.Text;
-    using System.IdentityModel.Tokens.Jwt;
-    using System.Linq;
     using Footwear.Services.TokenService;
     using Microsoft.Extensions.Options;
     using Microsoft.EntityFrameworkCore;
@@ -77,27 +71,9 @@
             {
                 return BadRequest(new { message = "Username or password is incorrect." });
             }
-
             //Find the user cartId and then store the cartId in the token as a claim
             var cartId = this._cartService.GetCartId(user.Id);
-
-
-            var tokenDescriptor = new SecurityTokenDescriptor
-            {
-                //Add new Claims for the user and add encoding to the token
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                        new Claim("UserId", user.Id.ToString()),
-                        new Claim("CartId", cartId.ToString())
-                }),
-                Expires = DateTime.UtcNow.AddDays(3),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-            };
-
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-            var token = tokenHandler.WriteToken(securityToken);
-
+            var token = this._tokenService.GenerateToken(user.Id, cartId);
             return Ok(new { token });
         }
 
