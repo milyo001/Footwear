@@ -59,7 +59,6 @@
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            //Validate view model
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { message = "Incorect input data!" });
@@ -71,8 +70,8 @@
             {
                 return BadRequest(new { message = "Username or password is incorrect." });
             }
-            //Find the user cartId and then store the cartId in the token as a claim
             var cartId = this._cartService.GetCartId(user.Id);
+            //Store userId and cartId as Claims in the token for better accesibility
             var token = this._tokenService.GenerateToken(user.Id, cartId);
             return Ok(new { token });
         }
