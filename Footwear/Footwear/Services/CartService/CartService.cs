@@ -22,6 +22,13 @@
             this._tokenService = tokenService;
         }
 
+        //Get the cartId by given user id
+        public int GetCartId(string userId)
+        {
+            var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == userId).Id;
+            return cartId;
+        }
+
         public Cart GetCart(int cartId)
         {
             var cart = this._db.Cart
@@ -146,5 +153,7 @@
             cartProducts.ForEach(cp => cp.isOrdered = true);
             await this._db.SaveChangesAsync();
         }
+
+        
     }
 }

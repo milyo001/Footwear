@@ -16,6 +16,7 @@
     using Microsoft.Extensions.Options;
     using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
+    using Footwear.Services.CartService;
 
     [ApiController]
     [Route("[controller]")]
@@ -26,15 +27,17 @@
         private readonly ITokenService _tokenService;
         private readonly ApplicationSettings _appSettings;
         private readonly IUserService _userService;
+        private readonly ICartService _cartService;
 
 
         public UserController(ApplicationDbContext db, UserManager<User> userManager,
-             ITokenService tokenService, IOptions<ApplicationSettings> appSettings, IUserService userService)
+             ITokenService tokenService, IOptions<ApplicationSettings> appSettings, IUserService userService, ICartService cartService)
         {
             this._db = db;
             this._userManager = userManager;
             this._userService = userService;
             this._tokenService = tokenService;
+            this._cartService = cartService;
             this._appSettings = appSettings.Value;
         }
 
@@ -45,7 +48,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Invalid input data!" } );
+                return BadRequest(new { message = "Invalid input data!" });
             }
             if (this._userService.isUsernameInUse(model.Email))
             {
@@ -56,52 +59,49 @@
             return Ok(new { succeeded = true });
         }
 
-        //A method for validating the data from client and login the user, also will generate JWT token
+        //A method for validating the data from client and generate auth token, also will generate JWT token
         //For JWT token configuration go to StartUp.cs and find the service for token auth
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (ModelState.IsValid)
+            //Validate view model
+            if (!ModelState.IsValid)
             {
-                //Check if user exists in the database
-                var user = await _userManager.FindByNameAsync(model.Email);
-                var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
-                if (user != null && passwordMatch)
-                {
-                    //Find the user cartId and then store the cartId in the token as a claim
-                    var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == user.Id).Id;
-    
-                    var tokenDescriptor = new SecurityTokenDescriptor
-                    {
-                        //Add new Claims for the user and add encoding to the token
-                        Subject = new ClaimsIdentity(new Claim[]
-                        {
-                        new Claim("UserId", user.Id.ToString()),
-                        new Claim("CartId", cartId.ToString())
-                        }),
-                        Expires = DateTime.UtcNow.AddDays(3),
-                        SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
-                    };
-
-                    var tokenHandler = new JwtSecurityTokenHandler();
-                    var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-                    var token = tokenHandler.WriteToken(securityToken);
-
-                    return Ok(new { token });
-                }
-                else
-                {
-                    return BadRequest(new { message = "Username or password is incorrect." });
-                }
-            }
-            else
-            {
-                //Model state is invalid
                 return BadRequest(new { message = "Incorect input data!" });
             }
-            
+            //Check if user exists in the database
+            var user = await _userManager.FindByNameAsync(model.Email);
+            var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
+            if (user != null && passwordMatch)
+            {
+                return BadRequest(new { message = "Username or password is incorrect." });
+            }
+
+            //Find the user cartId and then store the cartId in the token as a claim
+            var cartId = this._cartService.GetCartId(user.Id);
+
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                //Add new Claims for the user and add encoding to the token
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                        new Claim("UserId", user.Id.ToString()),
+                        new Claim("CartId", cartId.ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(3),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var securityToken = tokenHandler.CreateToken(tokenDescriptor);
+            var token = tokenHandler.WriteToken(securityToken);
+
+            return Ok(new { token });
         }
+
+
 
         [HttpGet]
         [Route("getProfileData")]
@@ -135,7 +135,7 @@
         {
             if (!ModelState.IsValid)
             {
-              return BadRequest(new { message = "Incorrect input data." });
+                return BadRequest(new { message = "Incorrect input data." });
             }
 
             var authCookie = Request.Cookies["token"];

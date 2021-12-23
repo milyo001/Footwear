@@ -9,6 +9,7 @@ namespace Footwear.Services.CartService
 
     public interface ICartService
     {
+        int GetCartId(string userId);
         IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId);
         ICollection<CartProduct> GetCartProducts(int cartId);
         Task AddCartProductAsync(string userId, CartProductViewModel model);
