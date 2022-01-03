@@ -16,7 +16,8 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | Import User Information | &#10004; | Import user information functionality when finalizing order |
 | Check/Modify User Information | &#10004; | Check or modify user information, invoice address, first, last name etc. |
 | Remember me option  | &#10060; | Remember user details |
-| Facebook/Google login  | &#10060; | Log in with social network |
+| Facebook/Google login  | &#10060; | Log in with social network API |
+| Add forget password option | &#10060; | Add forget password option, send email or text message on the phone to reset |
 
 ## Product Features 
 | Feature  | Coded? | Description |
@@ -30,7 +31,6 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | Add Product To Cart | &#10004; | Add the selected product to cart stored in the database |
 
 ## Cart Features 
-
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
 | View All Cart Products | &#10004; | View all cart products for the user |
