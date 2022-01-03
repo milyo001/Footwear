@@ -29,6 +29,8 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | View Product  | &#10004; | View a single product functionality |
 | Select Product Size  | &#10004; | Select product size functionality |
 | Add Product To Cart | &#10004; | Add the selected product to cart stored in the database |
+| Search For Product by Name | &#10060; | Search for specific product |
+| Check Available Products | &#10060; | Check if product size is available in the database |
 
 ## Cart Features 
 | Feature  | Coded? | Description |
@@ -41,3 +43,7 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | View Cart Product | &#10004; | View Cart Product directly from the cart page |
 | Checkout  | &#10004; | Checkout functionality |
 
+## Order Features
+| View Orders | &#10060; | View all orders |
+| Create cash order | &#10004; | Create pay on delivery order |
+| Create paid order | &#10004; | Pay for order with a credit card |
