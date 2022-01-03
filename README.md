@@ -1,7 +1,7 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An e-commerce web application made with Angular 11 and .NET 5. The applicaiton is build with desktop first design pattern, but it's fully responsive(used bootstrap 4 grid system and css flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,
+An e-commerce web application made with Angular 11 and .NET 5. The applicaiton is build with desktop first design pattern, but it's fully responsive(bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,
 select delivery address and choose payment. Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
 
 ## User Features
@@ -21,7 +21,6 @@ select delivery address and choose payment. Payment type is cash on delivery or 
 
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| Add product to cart | &#10004; | Add the selected product to cart stored in the databse |
 | View Products  | &#10004; | View all products functionality  |
 | Sort Products  | &#10004; | Sort all products by ascending, descending etc. functionality |
 | Filter Products  | &#10004; | Filter all products by gender (man, woman, kids) functionality |
@@ -29,3 +28,14 @@ select delivery address and choose payment. Payment type is cash on delivery or 
 | View Product  | &#10004; | View a single product functionality |
 | Select Product Size  | &#10004; | Select product size functionality |
 | Add Product To Cart | &#10004; | Add the selected product to cart stored in the database |
+
+## Cart Features 
+
+| Feature  | Coded? | Description |
+|----------|:-------------:|:-------------|
+| View All Cart Products | &#10004; | View all cart products for the user |
+| Increment Cart Product  | &#10004; | Increment Cart Product |
+| Decrement Cart Product Quantity | &#10004; | Decrement cart product quantity  |
+| Add New Cart Product When Size Is Diffrent | &#10004; | Create new instance of cart product, only when the size is diffrent, otherwise increase quantity |
+| Remove Cart Product | &#10004; | Remove cart product |
+
