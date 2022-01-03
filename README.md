@@ -44,6 +44,8 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | Checkout  | &#10004; | Checkout functionality |
 
 ## Order Features
+| Feature  | Coded? | Description |
+|----------|:-------------:|:-------------|
 | View Orders | &#10060; | View all orders |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
