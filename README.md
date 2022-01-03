@@ -38,4 +38,5 @@ select delivery address and choose payment. Payment type is cash on delivery or 
 | Decrement Cart Product Quantity | &#10004; | Decrement cart product quantity  |
 | Add New Cart Product When Size Is Diffrent | &#10004; | Create new instance of cart product, only when the size is diffrent, otherwise increase quantity |
 | Remove Cart Product | &#10004; | Remove cart product |
+| View Cart Product | &#10004; | View Cart Product directly from the cart page |
 
