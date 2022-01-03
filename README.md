@@ -6,7 +6,6 @@ select delivery address and choose payment. The Payment type is cash on delivery
 
 # Functionality
 ## User Features
-
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
 | Register a new user | &#10004; | Register a new user using JWT Authorization token functionality |
@@ -19,9 +18,7 @@ select delivery address and choose payment. The Payment type is cash on delivery
 | Remember me option  | &#10060; | Remember user details |
 | Facebook/Google login  | &#10060; | Log in with social network |
 
-
 ## Product Features 
-
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
 | View Products  | &#10004; | View all products functionality  |
