@@ -1,7 +1,8 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
-# Footwear 
-An e-commerce web application made with Angular 11 and .NET 5. The applicaiton is build with desktop first design pattern, but it's fully responsive(used bootstrap 4 grid system and css flexbox). The application contains few products manually seeded which user can select and add to a cart
+# Footwear - Brief Information 
+An e-commerce web application made with Angular 11 and .NET 5. The applicaiton is build with desktop first design pattern, but it's fully responsive(used bootstrap 4 grid system and css flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,
+select delivery address and choose payment. Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
 
 ## User Features
 
@@ -13,6 +14,8 @@ An e-commerce web application made with Angular 11 and .NET 5. The applicaiton i
 | Change email/username | &#10004; | Change email/username functionality |
 | Add User Information | &#10004; | Add default user billing information |
 | Import User Information | &#10004; | Import user information functionality when finalizing order |
+| Check/Modify User Information | &#10004; | Check or modify user information, invoice address, first, last name etc. |
+
 
 ## Product Features 
 
