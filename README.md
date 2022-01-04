@@ -51,10 +51,14 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 
 # Addons and Libiries
 ## ASP .NET CORE [Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
-> AutoMapper 8.1.1
-> JwtBearer 5.0.13
-> EntityFrameworkCore 5.0.0
-> Stripe.net 39.77.0
-## Angular
-> bootstrap 4.5.3
-> 
+* AutoMapper 8.1.1
+* JwtBearer 5.0.13
+* EntityFrameworkCore 5.0.0
+* Stripe.net 39.77.0
+## Angular [Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/ClientApp/package.json)
+* Bootstrap 4.5.3
+* Ngx-toastr": 11.3.3
+* Rxjs 6.6.0
+* Fontawesome Icons 5.15
+* Angular Animations 11.0.1
+* Angular Material 11.0.1
