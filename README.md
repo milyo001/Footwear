@@ -51,5 +51,6 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 
 # Addons and Libiries
 > AutoMapper 8.1.1
-> JwtBearer 3.1.10
-> AspNet Cors 
+> JwtBearer 5.0.13
+> AspNet Cors 2.2.0
+> 
