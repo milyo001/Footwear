@@ -50,7 +50,11 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 | Create paid order | &#10004; | Pay for order with a credit card |
 
 # Addons and Libiries
+## ASP .NET CORE [Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
 > AutoMapper 8.1.1
 > JwtBearer 5.0.13
-> AspNet Cors 2.2.0
+> EntityFrameworkCore 5.0.0
+> Stripe.net 39.77.0
+## Angular
+> bootstrap 4.5.3
 > 
