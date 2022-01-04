@@ -92,21 +92,8 @@
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
-
-            var userData = new UserProfileDataViewModel
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email,
-                Phone = user.Phone,
-                Street = user.Address.Street,
-                City = user.Address.City,
-                State = user.Address.State,
-                Country = user.Address.Country,
-                ZipCode = user.Address.ZipCode
-            };
+            var userData = this._userService.GetUserData(user);
             return userData;
-
         }
 
         [HttpPut]

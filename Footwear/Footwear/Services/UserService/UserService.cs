@@ -33,5 +33,11 @@
         {
             return this._db.Users.Any(user => user.Email == email.ToUpper());
         }
+
+        public UserProfileDataViewModel GetUserData(User user)
+        {
+            var userData = this._mapper.Map<UserProfileDataViewModel>(user);
+            return userData;
+        }
     }
 }

@@ -15,13 +15,13 @@
                 opt.MapFrom(src => new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }))
                 .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => new Cart { }));
 
-            //Modfiy user information
-            CreateMap<UserProfileDataViewModel, User>()
-                .ForMember(dest => dest.Address.Street, opt => opt.MapFrom(src => src.Street))
-                .ForMember(dest => dest.Address.City, opt => opt.MapFrom(src => src.City))
-                .ForMember(dest => dest.Address.State, opt => opt.MapFrom(src => src.State))
-                .ForMember(dest => dest.Address.ZipCode, opt => opt.MapFrom(src => src.ZipCode))
-                .ForMember(dest => dest.Address.Country, opt => opt.MapFrom(src => src.Country));
+            //Get user information
+            CreateMap<User, UserProfileDataViewModel>()
+                .ForMember(dest => dest.Street, opt => opt.MapFrom(src => src.Address.Street))
+                .ForMember(dest => dest.City, opt => opt.MapFrom(src => src.Address.City))
+                .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.Address.State))
+                .ForMember(dest => dest.ZipCode, opt => opt.MapFrom(src => src.Address.ZipCode))
+                .ForMember(dest => dest.Country, opt => opt.MapFrom(src => src.Address.Country));
                 
 
         }       

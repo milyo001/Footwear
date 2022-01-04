@@ -2,6 +2,7 @@
 namespace Footwear.Services.UserService
 {
     using Footwear.Data.Dto;
+    using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using System.Threading.Tasks;
 
@@ -11,6 +12,6 @@ namespace Footwear.Services.UserService
 
         Task<IdentityResult> CreateUserAsync(RegisterViewModel model);
 
-
+        UserProfileDataViewModel GetUserData(User user);
     }
 }
