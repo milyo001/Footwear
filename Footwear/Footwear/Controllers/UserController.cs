@@ -39,11 +39,13 @@
         [Route("register")]
         public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
+            bool isUserDupplicate = this._userService.isUsernameInUse(model.Email);
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { message = "Invalid input data!" });
             }
-            if (this._userService.isUsernameInUse(model.Email))
+            if (isUserDupplicate)
             {
                 return BadRequest(new { message = "User already exists!" });
             }
