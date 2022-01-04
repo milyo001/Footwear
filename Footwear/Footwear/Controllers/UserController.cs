@@ -82,7 +82,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Unable to get user information. Model is not valid." });
+                return BadRequest(new { message = "Unable to get user information. Invalid data!" });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
@@ -134,17 +134,21 @@
         public async Task<IActionResult> UpdateEmail(EmailDto model)
         {
             var email = model.Email;
+            var confEmail = model.ConfirmEmail;
             var authCookie = Request.Cookies["token"];
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            
+            //Check for existing username
             var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
-            if (model.Email != model.ConfirmEmail || model.Email == null || model.ConfirmEmail == null)
-            {
-                return BadRequest(new { message = "Incorrect input data." });
-            }
             if (dupplicate)
             {
                 return BadRequest(new { message = "Email already in use." });
             }
+            if (email != confEmail || email == null || confEmail == null)
+            {
+                return BadRequest(new { message = "Incorrect input data." });
+            }
+
+            var user = await this._tokenService.GetUserByIdAsync(authCookie);
             user.Email = email;
             user.NormalizedEmail = email;
             user.UserName = email;
