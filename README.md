@@ -48,3 +48,8 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 | View Orders | &#10060; | View all orders |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
+
+# Addons and Libiries
+> AutoMapper 8.1.1
+> JwtBearer 3.1.10
+> AspNet Cors 
