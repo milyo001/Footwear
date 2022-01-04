@@ -150,9 +150,9 @@
 
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             user.Email = email;
-            user.NormalizedEmail = email;
+            user.NormalizedEmail = email.ToUpper();
             user.UserName = email;
-            user.NormalizedUserName = email;
+            user.NormalizedUserName = email.ToUpper();
             await this._userManager.UpdateAsync(user);
 
             return Ok(new { succeeded = true });
