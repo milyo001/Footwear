@@ -153,8 +153,8 @@
             user.NormalizedEmail = email;
             user.UserName = email;
             user.NormalizedUserName = email;
+            await this._userManager.UpdateAsync(user);
 
-            await this._db.SaveChangesAsync();
             return Ok(new { succeeded = true });
         }
 
