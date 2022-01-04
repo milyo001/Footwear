@@ -9,7 +9,6 @@
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using System.IdentityModel.Tokens.Jwt;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
 
