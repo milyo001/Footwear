@@ -11,5 +11,6 @@ namespace Footwear.Services.UserService
 
         Task<IdentityResult> CreateUserAsync(RegisterViewModel model);
 
+
     }
 }
