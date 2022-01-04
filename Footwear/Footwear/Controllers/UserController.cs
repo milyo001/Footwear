@@ -20,20 +20,18 @@
         private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly ApplicationSettings _appSettings;
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
 
 
         public UserController(ApplicationDbContext db, UserManager<User> userManager,
-             ITokenService tokenService, IOptions<ApplicationSettings> appSettings, IUserService userService, ICartService cartService)
+             ITokenService tokenService, IUserService userService, ICartService cartService)
         {
             this._db = db;
             this._userManager = userManager;
             this._userService = userService;
             this._tokenService = tokenService;
             this._cartService = cartService;
-            this._appSettings = appSettings.Value;
         }
 
         //A method for validating the data from client and register new user in the database
