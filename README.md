@@ -3,6 +3,21 @@
 # Footwear - Brief Information 
 An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive(bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). 
 
+# Addons and Libiries
+## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
+* AutoMapper 8.1.1
+* JwtBearer 5.0.13
+* EntityFrameworkCore 5.0.0
+* Stripe.net 39.77.0
+## [Angular Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/ClientApp/package.json)
+* Bootstrap 4.5.3
+* Ngx-toastr 11.3.3
+* Rxjs 6.6.0
+* Fontawesome Icons 5.15
+* Angular Animations 11.0.1
+* Angular Material 11.0.1
+
+
 # Functionality
 ## User Features
 | Feature  | Coded? | Description |
@@ -49,12 +64,4 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
 
-# Addons and Libiries
-## ASP .NET CORE [Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
-> AutoMapper 8.1.1
-> JwtBearer 5.0.13
-> EntityFrameworkCore 5.0.0
-> Stripe.net 39.77.0
-## Angular
-> bootstrap 4.5.3
-> 
+
