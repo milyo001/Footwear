@@ -21,14 +21,11 @@
             this._mapper = mapper;
         }
 
-        public async Task CreateUserAsync(RegisterViewModel model)
+        public async Task<IdentityResult> CreateUserAsync(RegisterViewModel model)
         {
             var user = this._mapper.Map<User>(model);
             IdentityResult result = await this._userManager.CreateAsync(user, model.Password);
-            if(!result.Succeeded)
-            {
-                throw new InvalidOperationException(result.Errors.ToString());
-            }
+            return result;
         }
 
         //Check if user already exist

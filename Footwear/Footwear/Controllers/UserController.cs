@@ -11,6 +11,7 @@
     using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
+    using System;
 
     [ApiController]
     [Route("[controller]")]
@@ -49,7 +50,12 @@
                 return BadRequest(new { message = "User already exists!" });
             }
             //Create user with blank address, user can modify his profile later and add address or modify the account information
-            await this._userService.CreateUserAsync(model);
+            IdentityResult result = await this._userService.CreateUserAsync(model);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException(result.Errors.ToString());
+            }
             return Ok(new { succeeded = true });
         }
 
