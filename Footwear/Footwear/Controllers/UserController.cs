@@ -7,7 +7,6 @@
     using Footwear.Data.Dto;
     using System.Threading.Tasks;
     using Footwear.Services.TokenService;
-    using Microsoft.Extensions.Options;
     using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
@@ -54,7 +53,7 @@
 
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException(result.Errors.ToString());
+                return BadRequest(new { message = "Unable to register! Please contact administrator!" });
             }
             return Ok(new { succeeded = true });
         }
