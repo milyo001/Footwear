@@ -13,5 +13,8 @@ namespace Footwear.Services.UserService
         Task<IdentityResult> CreateUserAsync(RegisterViewModel model);
 
         UserProfileDataViewModel GetUserData(User user);
+
+        Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model);
+
     }
 }

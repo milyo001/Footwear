@@ -5,7 +5,6 @@
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     public class UserService : IUserService
@@ -38,6 +37,13 @@
         {
             var userData = this._mapper.Map<UserProfileDataViewModel>(user);
             return userData;
+        }
+
+        public async Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model)
+        {
+            var usertest = this._mapper.Map<ProfileUpdateViewModel, User>(model, user);
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            return result;
         }
     }
 }
