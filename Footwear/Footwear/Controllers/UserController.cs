@@ -10,7 +10,7 @@
     using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
-    using Footwear.Controllers.Helpers;
+    using Footwear.Controllers.ErrorHandler;
 
     [ApiController]
     [Route("[controller]")]
@@ -41,18 +41,18 @@
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = UserErrors.InvalidData });
+                return BadRequest(new { message = IdentityErrors.InvalidData });
             }
             if (isUserDupplicate)
             {
-                return BadRequest(new { message = UserErrors.UserIsInUse });
+                return BadRequest(new { message = IdentityErrors.UserIsInUse });
             }
             //Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = UserErrors.CannotRegister });
+                return BadRequest(new { message = IdentityErrors.CannotRegister });
             }
             return Ok(new { succeeded = true });
         }
@@ -65,14 +65,14 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = UserErrors.InvalidData });
+                return BadRequest(new { message = IdentityErrors.InvalidData });
             }
             //Check if user exists in the database
             var user = await _userManager.FindByNameAsync(model.Email);
             var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
             if (user == null || !passwordMatch)
             {
-                return BadRequest(new { message = UserErrors.InvalidUsernamePassword });
+                return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
             }
             var cartId = this._cartService.GetCartId(user.Id);
             //Store userId and cartId as Claims in the token for better accesibility
@@ -86,7 +86,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = UserErrors.UnableToGetUserInfo });
+                return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
@@ -100,14 +100,14 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = UserErrors.InvalidData });
+                return BadRequest(new { message = IdentityErrors.InvalidData });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = UserErrors.UnableToUpdateUserInfo});
+                return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo});
                 
             }
             return Ok(new { succeeded = true });
@@ -125,11 +125,11 @@
             var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
             if (dupplicate)
             {
-                return BadRequest(new { message = UserErrors.EmailInUse });
+                return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
             if (email != confEmail || email == null || confEmail == null)
             {
-                return BadRequest(new { message = UserErrors.InvalidData });
+                return BadRequest(new { message = IdentityErrors.InvalidData });
             }
 
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
@@ -150,7 +150,7 @@
             if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null
                 || model.NewPassword == null || model == null)
             {
-                return BadRequest(new { message = UserErrors.InvalidData });
+                return BadRequest(new { message = IdentityErrors.InvalidData });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);

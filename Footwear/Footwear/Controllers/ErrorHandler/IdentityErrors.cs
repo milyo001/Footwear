@@ -1,7 +1,7 @@
 ﻿
-namespace Footwear.Controllers.Helpers
+namespace Footwear.Controllers.ErrorHandler
 {
-    public static class UserErrors
+    public static class IdentityErrors
     {
         //User Error Constants
         public const string InvalidData = "Invalid input data!";
