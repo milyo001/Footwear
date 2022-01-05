@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
@@ -77,7 +76,6 @@ export class UserProfileComponent implements OnInit {
         }
       },
       error => {
-        console.log(error);
         this.toastr.error(error.error.message);
       }
     );

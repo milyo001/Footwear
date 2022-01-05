@@ -104,27 +104,14 @@
             {
                 return BadRequest(new { message = "Incorrect input data." });
             }
-
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             var result = await this._userService.UpdateUserDataAsync(user, model);
-
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException(result.Errors.ToString());
+                return BadRequest(new { message = "Unable to get user information. Invalid data!" });
+                
             }
-
-            //user.FirstName = model.FirstName;
-            //user.LastName = model.LastName;
-            //user.Phone = model.Phone;
-            //user.Address.Street = model.Street;
-            //user.Address.State = model.State;
-            //user.Address.City = model.City;
-            //user.Address.Country = model.Country;
-            //user.Address.ZipCode = model.ZipCode;
-
-            //await _userManager.UpdateAsync(user);
-
             return Ok(new { succeeded = true });
         }
 

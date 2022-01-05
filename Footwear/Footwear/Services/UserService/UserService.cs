@@ -41,8 +41,9 @@
 
         public async Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model)
         {
-            var usertest = this._mapper.Map<ProfileUpdateViewModel, User>(model, user);
-            IdentityResult result = await _userManager.UpdateAsync(user);
+            var modifiedUser = this._mapper.Map(model, user);
+            
+            IdentityResult result = await _userManager.UpdateAsync(modifiedUser);
             return result;
         }
     }
