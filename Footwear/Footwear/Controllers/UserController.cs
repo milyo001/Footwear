@@ -66,7 +66,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Incorect input data!" });
+                return BadRequest(new { message = "Invalid input data!" });
             }
             //Check if user exists in the database
             var user = await _userManager.FindByNameAsync(model.Email);
