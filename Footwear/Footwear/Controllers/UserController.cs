@@ -11,6 +11,7 @@
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
     using System;
+    using Footwear.Controllers.Helpers;
 
     [ApiController]
     [Route("[controller]")]
@@ -22,7 +23,6 @@
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
 
-
         public UserController(ApplicationDbContext db, UserManager<User> userManager,
              ITokenService tokenService, IUserService userService, ICartService cartService)
         {
@@ -31,6 +31,7 @@
             this._userService = userService;
             this._tokenService = tokenService;
             this._cartService = cartService;
+
         }
 
         //A method for validating the data from client and register new user in the database
@@ -42,18 +43,18 @@
 
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Invalid input data!" });
+                return BadRequest(new { message = ErrorConstants.InvalidData });
             }
             if (isUserDupplicate)
             {
-                return BadRequest(new { message = "User already exists!" });
+                return BadRequest(new { message = ErrorConstants.UserIsInUse });
             }
             //Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = "Unable to register! Please contact administrator!" });
+                return BadRequest(new { message = ErrorConstants.CannotRegister });
             }
             return Ok(new { succeeded = true });
         }
