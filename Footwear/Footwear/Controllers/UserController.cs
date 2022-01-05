@@ -10,7 +10,6 @@
     using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
-    using System;
     using Footwear.Controllers.Helpers;
 
     [ApiController]
@@ -31,7 +30,6 @@
             this._userService = userService;
             this._tokenService = tokenService;
             this._cartService = cartService;
-
         }
 
         //A method for validating the data from client and register new user in the database
@@ -67,14 +65,14 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Invalid input data!" });
+                return BadRequest(new { message = ErrorConstants.InvalidData });
             }
             //Check if user exists in the database
             var user = await _userManager.FindByNameAsync(model.Email);
             var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
             if (user == null || !passwordMatch)
             {
-                return BadRequest(new { message = "Username or password is incorrect." });
+                return BadRequest(new { message = ErrorConstants.InvalidUsernamePassword });
             }
             var cartId = this._cartService.GetCartId(user.Id);
             //Store userId and cartId as Claims in the token for better accesibility
@@ -88,7 +86,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Unable to get user information. Invalid data!" });
+                return BadRequest(new { message = ErrorConstants.UnableToGetUserInfo });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
@@ -102,14 +100,14 @@
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest(new { message = "Incorrect input data." });
+                return BadRequest(new { message = ErrorConstants.InvalidData });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = "Unable to get user information. Invalid data!" });
+                return BadRequest(new { message = ErrorConstants.UnableToUpdateUserInfo});
                 
             }
             return Ok(new { succeeded = true });
@@ -127,11 +125,11 @@
             var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
             if (dupplicate)
             {
-                return BadRequest(new { message = "Email already in use." });
+                return BadRequest(new { message = ErrorConstants.EmailInUse });
             }
             if (email != confEmail || email == null || confEmail == null)
             {
-                return BadRequest(new { message = "Incorrect input data." });
+                return BadRequest(new { message = ErrorConstants.InvalidData });
             }
 
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
@@ -152,7 +150,7 @@
             if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null
                 || model.NewPassword == null || model == null)
             {
-                return BadRequest(new { message = "Incorrect input data." });
+                return BadRequest(new { message = ErrorConstants.InvalidData });
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
