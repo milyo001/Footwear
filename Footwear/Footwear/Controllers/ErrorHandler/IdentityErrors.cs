@@ -11,7 +11,5 @@ namespace Footwear.Controllers.ErrorHandler
         public const string UnableToGetUserInfo = "Unable to get user information. Invalid data!";
         public const string UnableToUpdateUserInfo = "Unable to update user information. Invalid data!";
         public const string EmailInUse = "Email already in use.";
-
-
     }
 }

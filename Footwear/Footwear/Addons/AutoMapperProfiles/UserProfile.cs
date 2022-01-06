@@ -30,6 +30,7 @@
                 .ForPath(dest => dest.Address.ZipCode, opt => opt.MapFrom(src => src.ZipCode))
                 .ForPath(dest => dest.Address.Country, opt => opt.MapFrom(src => src.Country));
 
+            CreateMap<EmailDto, User>();
         }       
     }
 }
