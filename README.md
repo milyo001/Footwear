@@ -32,6 +32,7 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 | Remember me option  | &#10060; | Remember user details |
 | Facebook/Google login  | &#10060; | Log in with social network API |
 | Add forget password option | &#10060; | Add forget password option, send email or text message on the phone to reset |
+| Add user token id interceptor | &#10004; | Validate if user token data is valid |
 
 ## Product Features 
 | Feature  | Coded? | Description |
