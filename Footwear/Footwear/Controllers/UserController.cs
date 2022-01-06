@@ -115,7 +115,7 @@
 
         [HttpPut]
         [Route("updateEmail")]
-        public async Task<IActionResult> UpdateEmail(EmailDto model)
+        public async Task<IActionResult> UpdateEmail(EmailViewModel model)
         {
             var email = model.Email;
             var confEmail = model.ConfirmEmail;
