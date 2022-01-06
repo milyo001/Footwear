@@ -120,17 +120,19 @@
             var email = model.Email;
             var confEmail = model.ConfirmEmail;
             var authCookie = Request.Cookies["token"];
-            
+
+            if (email != confEmail || !ModelState.IsValid)
+            {
+                return BadRequest(new { message = IdentityErrors.InvalidData });
+            }
             //Check for existing username
             var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
+            
             if (dupplicate)
             {
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
-            if (email != confEmail || email == null || confEmail == null)
-            {
-                return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
+            
 
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             user.Email = email;
