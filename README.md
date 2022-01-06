@@ -1,7 +1,8 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive(bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). 
+An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive(bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
+The application is made to practice my ASP .NET Core 5 (started from 3.1, upgraded later to .Net) and Angular 11 (started to building it on Angular 8). 
 
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
@@ -12,7 +13,7 @@ An open source e-commerce web application build with Angular 11 and ASP .NET Cor
 ## [Angular Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/ClientApp/package.json)
 * Bootstrap 4.5.3
 * Ngx-toastr 11.3.3
-* Rxjs 6.6.0
+* Rxjs 6.6.0 
 * Fontawesome Icons 5.15
 * Angular Animations 11.0.1
 * Angular Material 11.0.1
