@@ -18,5 +18,7 @@ namespace Footwear.Services.UserService
 
         Task<IdentityResult> UpdateEmailAsync(User user, string email);
 
+        Task<IdentityResult> UpdatePassword(User user, string password);
+
     }
 }

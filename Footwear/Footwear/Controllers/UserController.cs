@@ -124,10 +124,7 @@
             {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }
-            //Check for existing username
-            var dupplicate = await this._db.Users.AnyAsync(u => u.UserName == email);
-            
-            if (dupplicate)
+            if (this._userService.isUsernameInUse(email))
             {
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
@@ -155,9 +152,11 @@
             }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
-            var token = await this._userManager.GeneratePasswordResetTokenAsync(user);
-            await this._userManager.ResetPasswordAsync(user, token, model.NewPassword);
-            await this._db.SaveChangesAsync();
+            var result = await this._userService.UpdatePassword(user, model.Password);
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
+            }
             return Ok(new { succeeded = true });
         }
     }

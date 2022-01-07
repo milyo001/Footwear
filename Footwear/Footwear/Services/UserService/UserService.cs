@@ -57,6 +57,11 @@
             return result;
         }
 
-
+        public async Task<IdentityResult> UpdatePassword(User user, string password)
+        {
+            var token = await this._userManager.GeneratePasswordResetTokenAsync(user);
+            var result = await this._userManager.ResetPasswordAsync(user, token, password);
+            return result;
+        }
     }
 }
