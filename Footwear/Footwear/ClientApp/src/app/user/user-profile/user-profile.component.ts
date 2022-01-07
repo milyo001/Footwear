@@ -82,7 +82,7 @@ export class UserProfileComponent implements OnInit {
   }
 
   changePassword(passwordForm) {
-    this.userService.updatePassword(passwordForm).subscribe((response: any) => {
+    this.userService.updatePassword(passwordForm.passwords).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
       }
@@ -110,7 +110,7 @@ export class UserProfileComponent implements OnInit {
     if (group.contains('confirmPassword')) {
       let confirmPassword = group.get('confirmPassword');
       if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
-        if (group.get('password').value != confirmPassword.value) {
+        if (group.get('newPassword').value != confirmPassword.value) {
           confirmPassword.setErrors({ passwordMismatch: true })
         }
         else {
