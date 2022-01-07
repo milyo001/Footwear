@@ -108,7 +108,6 @@
             if (!result.Succeeded)
             {
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo});
-                
             }
             return Ok(new { succeeded = true });
         }
@@ -133,13 +132,13 @@
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
             
-
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
-            user.Email = email;
-            user.NormalizedEmail = email.ToUpper();
-            user.UserName = email;
-            user.NormalizedUserName = email.ToUpper();
-            await this._userManager.UpdateAsync(user);
+            IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
+
+            if (!result.Succeeded)
+            {
+                return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
+            }
 
             return Ok(new { succeeded = true });
         }

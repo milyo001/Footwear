@@ -46,5 +46,17 @@
             IdentityResult result = await _userManager.UpdateAsync(modifiedUser);
             return result;
         }
+
+        public async Task<IdentityResult> UpdateEmailAsync(User user, string email)
+        {
+            user.Email = email;
+            user.NormalizedEmail = email.ToUpper();
+            user.UserName = email;
+            user.NormalizedUserName = email.ToUpper();
+            var result = await this._userManager.UpdateAsync(user);
+            return result;
+        }
+
+
     }
 }
