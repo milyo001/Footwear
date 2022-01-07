@@ -137,7 +137,7 @@
 
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
+                return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
             }
 
             return Ok(new { succeeded = true });
