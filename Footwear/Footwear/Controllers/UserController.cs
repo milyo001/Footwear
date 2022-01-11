@@ -7,7 +7,6 @@
     using Footwear.Data.Dto;
     using System.Threading.Tasks;
     using Footwear.Services.TokenService;
-    using Microsoft.EntityFrameworkCore;
     using Footwear.Services.UserService;
     using Footwear.Services.CartService;
     using Footwear.Controllers.ErrorHandler;
