@@ -13,5 +13,6 @@ namespace Footwear.Controllers.ErrorHandler
         public const string EmailInUse = "Email already in use.";
         public const string UnableToUpdateEmail = "Unable to update user email. Please contact administrator!";
         public const string PasswordsNotMatch = "New and Confirm passwords does not match!";
+        public const string UnableToUpdatePassword = "Unable to update user password. Please contact administrator!";
     }
 }

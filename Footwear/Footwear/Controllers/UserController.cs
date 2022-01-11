@@ -151,16 +151,19 @@
             }
             if(model.NewPassword != model.ConfirmPassword)
             {
-                return BadRequest(new { message = IdentityError.PasswordsNotMatch });
+                return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
             }
+
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             var result = await this._userService.UpdatePassword(user, model.NewPassword);
+
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
+                return BadRequest(new { message = IdentityErrors.UnableToUpdatePassword });
             }
-            return Ok(new { succeeded = true });
+
+            return Accepted(new { succeeded = true });
         }
     }
 }
