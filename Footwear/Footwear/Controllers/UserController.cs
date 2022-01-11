@@ -137,7 +137,7 @@
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
             }
 
-            return Ok(new { succeeded = true });
+            return Accepted(new { succeeded = true });
         }
 
 
