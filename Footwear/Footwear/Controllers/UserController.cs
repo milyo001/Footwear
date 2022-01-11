@@ -143,15 +143,19 @@
 
         [HttpPut]
         [Route("updatePassword")]
-        public async Task<IActionResult> UpdatePassword(PasswordDto model)
+        public async Task<IActionResult> UpdatePassword(PasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }
+            if(model.NewPassword != model.ConfirmPassword)
+            {
+                return BadRequest(new { message = IdentityError.PasswordsNotMatch });
+            }
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
-            var result = await this._userService.UpdatePassword(user, model.Password);
+            var result = await this._userService.UpdatePassword(user, model.NewPassword);
             if (!result.Succeeded)
             {
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
