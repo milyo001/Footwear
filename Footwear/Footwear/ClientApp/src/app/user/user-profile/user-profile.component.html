@@ -51,14 +51,14 @@
                 <form *ngIf="emailSectionToggle" class="example-form" [formGroup]="emailForm" #emailFormDirective="ngForm">
                   <div class="row mt-1 full-width">
                     <mat-form-field class="full-width mb-3" appearance="fill" >
-                      <mat-label>Enter an email</mat-label>
+                      <mat-label>Enter new email</mat-label>
                       <input matInput formControlName="email" type="email" name="email">
                       <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.required">* Email is required</mat-error>
                       <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.get('email').errors?.pattern">* Email is invalid!</mat-error>
                       <mat-error class="validation-error" *ngIf="emailForm.get('email').touched && emailForm.controls.email.hasError('maxlength')">* Email cannot be more than 100 symbols!</mat-error>
                     </mat-form-field>
                     <mat-form-field class="full-width mb-3" appearance="fill">
-                      <mat-label>Confirm email</mat-label>
+                      <mat-label>Confirm new email</mat-label>
                       <input matInput formControlName="confirmEmail" type="text" name="confirmEmail">
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.required">* Email is required</mat-error>
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.emailMismatch">* Emails do not match!</mat-error>
