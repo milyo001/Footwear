@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
@@ -10,7 +10,6 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent  {
-
   form: FormGroup;
   passwordForm: FormGroup;
   emailForm: FormGroup;
@@ -80,12 +79,14 @@ export class UserProfileComponent  {
     );
   }
 
-  changePassword(passwordForm) {
+  changePassword(passwordForm: any, passFormDirective: FormGroupDirective) : void {
     this.userService.updatePassword(passwordForm.passwords).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
         this.passwordForm.reset();
-        this.passwordForm.markAsUntouched();
+        //<mat-error> check the validity of FormGroupDirective,
+        //not FormGroup, and resetting FormGroup does not reset FormGroupDirective.
+        passFormDirective.resetForm();
       }
     },
       error => {

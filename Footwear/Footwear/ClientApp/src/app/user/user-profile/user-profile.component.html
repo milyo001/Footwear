@@ -17,7 +17,7 @@
           <div class="col mt-1 text-center">
             <div class="d-flex justify-content-center align-items-center mb-1">
               <section id="password-change-section">
-                <form *ngIf="passSectionToggle" class="example-form" [formGroup]="passwordForm" (ngSubmit)="loadData()">
+                <form *ngIf="passSectionToggle" class="example-form" [formGroup]="passwordForm" #passFormDirective="ngForm">
                   <div class="row mt-1 full-width">
                     <div formGroupName="passwords">
                       <mat-form-field class="full-width mb-3" appearance="fill">
@@ -42,7 +42,7 @@
                       </mat-form-field>
                     </div>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm.value)">Update</button>
+                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm.value, passFormDirective)">Update</button>
                     </div>
                   </div>
                 </form>
