@@ -155,6 +155,13 @@
 
             var authCookie = Request.Cookies["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
+
+            if (!isPassValid)
+            {
+                return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
+            }
+
             var result = await this._userService.UpdatePassword(user, model.NewPassword);
 
             if (!result.Succeeded)

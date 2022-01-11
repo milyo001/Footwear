@@ -63,5 +63,7 @@
             var result = await this._userManager.ResetPasswordAsync(user, token, password);
             return result;
         }
+
+        
     }
 }
