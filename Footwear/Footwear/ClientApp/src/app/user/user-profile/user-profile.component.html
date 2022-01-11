@@ -48,7 +48,7 @@
                 </form>
               </section>
               <section id="email-change-section">
-                <form *ngIf="emailSectionToggle" class="example-form" [formGroup]="emailForm" (ngSubmit)="loadData()">
+                <form *ngIf="emailSectionToggle" class="example-form" [formGroup]="emailForm" #emailFormDirective="ngForm">
                   <div class="row mt-1 full-width">
                     <mat-form-field class="full-width mb-3" appearance="fill" >
                       <mat-label>Enter an email</mat-label>
@@ -65,7 +65,7 @@
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.pattern">* Email is invalid!</mat-error>
                     </mat-form-field>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value)">Update</button>
+                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value, emailFormDirective)">Update</button>
                     </div>
                   </div>
                 </form>

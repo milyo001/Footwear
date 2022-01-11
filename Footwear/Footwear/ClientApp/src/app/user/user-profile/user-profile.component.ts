@@ -94,11 +94,15 @@ export class UserProfileComponent  {
       });
   }
 
-  changeEmail(emailForm) {
+  changeEmail(emailForm, emailFormDirective: FormGroupDirective) {
     this.userService.updateEmail(emailForm).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your email!");
         this.email = emailForm.email;
+        this.emailForm.reset();
+        //<mat-error> check the validity of FormGroupDirective,
+        //not FormGroup, and resetting FormGroup does not reset FormGroupDirective.
+        emailFormDirective.resetForm();
       }
     },
       err => {
