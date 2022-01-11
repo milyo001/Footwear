@@ -145,8 +145,7 @@
         [Route("updatePassword")]
         public async Task<IActionResult> UpdatePassword(PasswordDto model)
         {
-            if (model.ConfirmPassword != model.NewPassword || model.Password == null || model.ConfirmPassword == null
-                || model.NewPassword == null || model == null)
+            if (!ModelState.IsValid)
             {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }

@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent  {
 
   form: FormGroup;
   passwordForm: FormGroup;
@@ -28,11 +28,10 @@ export class UserProfileComponent implements OnInit {
     private userService: UserService,
     private fb: FormBuilder,
     private toastr: ToastrService
-  ) { }
+  ) {
+      this.loadData();
+    }
 
-  ngOnInit(): void {
-    this.loadData();
-  }
 
   loadData() {
     this.userService.getUserProfile().subscribe(data => {
@@ -85,6 +84,8 @@ export class UserProfileComponent implements OnInit {
     this.userService.updatePassword(passwordForm.passwords).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
+        this.passwordForm.reset();
+        this.passwordForm.markAsUntouched();
       }
     },
       error => {
