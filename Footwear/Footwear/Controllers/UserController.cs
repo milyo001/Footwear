@@ -109,7 +109,7 @@
             {
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo});
             }
-            return Ok(new { succeeded = true });
+            return Accepted(new { succeeded = true });
         }
 
         [HttpPut]
