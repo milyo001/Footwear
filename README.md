@@ -69,7 +69,10 @@ The application is made to practice my ASP .NET Core 5 (started from 3.1, upgrad
 ## Tests
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| View Orders | &#10060; | View all orders |
-| Create cash order | &#10004; | Create pay on delivery order |
-| Create paid order | &#10004; | Pay for order with a credit card |
+| Test ASP .NET Controller logic | &#10004; | Test the api controllers logic |
+| Test ASP .NET Models | &#10004; | Test the validation in models  |
+| Test ASP .NET Services | &#10004; | Test the methods in the services  |
+| Test ASP .NET StartUp class | &#10004; | Test the application composition root  |
+| Test Angular | &#10004; | Test the application composition root  |
+
 
