@@ -29,6 +29,8 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
+3. Seed some products in the database, you can do it manually, later I will make a seed method in the ApplicationDbContext to seed it automatically
+4. 
 
 
 # Addons and Libiries
