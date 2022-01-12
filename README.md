@@ -29,11 +29,6 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
-3. Seed some products in the database, you can do it manually, later I will make a seed method in the ApplicationDbContext to seed it automatically
-| Name  | Price | Details | ImageId  | Size | Gender | ProductType |
-|----------|:-------------:|:-------------:|:-------------:|:-------------:|:-------------:|-------------|
-| Nice Ultimate Edition |	185.88 |	Perfect for running all day and night.| Designed with love! |	1 |	NULL | 0 |	1 |
-
 
 
 # Addons and Libiries
