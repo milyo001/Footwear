@@ -74,8 +74,8 @@ The application is made to practice my ASP .NET Core 5 (started from 3.1, upgrad
 | Test ASP .NET Services | &#10004; | Test the methods in the services  |
 | Test ASP .NET StartUp class | &#10004; | Test the application composition root  |
 | Test Angular components | &#10004; | Test the all components logic |
-| Test Angular components | &#10004; | Test the all components logic |
-| Test Angular components | &#10004; | Test the all components logic |
-| Test Angular components | &#10004; | Test the all components logic |
+| Test Angular services | &#10004; | Test the all http services and application services |
+| Test Angular attribute directives | &#10004; | Test all attribute directives |
+| Test Angular pipes | &#10004; | Test all Angular pipes |
 
 
