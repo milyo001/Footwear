@@ -1,8 +1,35 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive(bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
-The application is made to practice my ASP .NET Core 5 (started from 3.1, upgraded later to .Net) and Angular 11 (started to building it on Angular 8). 
+An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
+The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 5 (ini3.1, upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
+
+# Guide/ How to run locally on your machine
+1.Download the repo
+2.Create appsettings.json. Example below:
+```
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  },
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=<<EXAMPLE: DESKTOP-PM1111111111M\\SQLEXPRESS>>;Database=<<Example: FootwearTestDb2323>>;Trusted_Connection=True;"
+  },
+  "AllowedHosts": "*",
+  "AllowedOrigins": [ "https://checkout.stripe.com/", "<<Example: https://localhost:2323232332322323>>" ],
+  "ApplicationSettings": {
+    "ApiUrl": "<<YOUR LOCALHOST API URL HERE Example: https://localhost:2323232332322323>>",
+    "ClientUrl": "<<YOUR ANGULAR URL HERE Example: https://localhost:2323232332322323>>",
+    "JWT_Secret": "<<YOUR JWT SECRET KEY HERE>>",
+    "Stripe_Secret": "<<YOUR STRIPE SECRET KEY HERE>>"
+  }
+}
+```
+3.Run Package Manager Console command "Update-Database" and wait the database to seed
 
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
@@ -17,7 +44,6 @@ The application is made to practice my ASP .NET Core 5 (started from 3.1, upgrad
 * Fontawesome Icons 5.15
 * Angular Animations 11.0.1
 * Angular Material 11.0.1
-
 
 # Functionality
 ## User Features
@@ -69,13 +95,11 @@ The application is made to practice my ASP .NET Core 5 (started from 3.1, upgrad
 ## Tests
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| Test ASP .NET Controller logic | &#10004; | Test the api controllers logic |
-| Test ASP .NET Models | &#10004; | Test the validation in models  |
-| Test ASP .NET Services | &#10004; | Test the methods in the services  |
-| Test ASP .NET StartUp class | &#10004; | Test the application composition root  |
-| Test Angular components | &#10004; | Test the all components logic |
-| Test Angular services | &#10004; | Test the all http services and application services |
-| Test Angular attribute directives | &#10004; | Test all attribute directives |
-| Test Angular pipes | &#10004; | Test all Angular pipes |
-
-
+| Test ASP .NET Controller logic | &#10060; | Test the api controllers logic |
+| Test ASP .NET Models | &#10060; | Test the validation in models  |
+| Test ASP .NET Services | &#10060; | Test the methods in the services  |
+| Test ASP .NET StartUp class | &#10060; | Test the application composition root  |
+| Test Angular components | &#10060; | Test the all components logic |
+| Test Angular services | &#10060; | Test the all http services and application services |
+| Test Angular attribute directives | &#10060; | Test all attribute directives |
+| Test Angular pipes | &#10060; | Test all Angular pipes |
