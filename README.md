@@ -66,4 +66,10 @@ The application is made to practice my ASP .NET Core 5 (started from 3.1, upgrad
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
 
+## Tests
+| Feature  | Coded? | Description |
+|----------|:-------------:|:-------------|
+| View Orders | &#10060; | View all orders |
+| Create cash order | &#10004; | Create pay on delivery order |
+| Create paid order | &#10004; | Pay for order with a credit card |
 
