@@ -95,11 +95,11 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
 ## Tests
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| Test ASP .NET Controller logic | &#10004; | Test the api controllers logic |
-| Test ASP .NET Models | &#10004; | Test the validation in models  |
-| Test ASP .NET Services | &#10004; | Test the methods in the services  |
-| Test ASP .NET StartUp class | &#10004; | Test the application composition root  |
-| Test Angular components | &#10004; | Test the all components logic |
-| Test Angular services | &#10004; | Test the all http services and application services |
-| Test Angular attribute directives | &#10004; | Test all attribute directives |
-| Test Angular pipes | &#10004; | Test all Angular pipes |
+| Test ASP .NET Controller logic | &#10060; | Test the api controllers logic |
+| Test ASP .NET Models | &#10060; | Test the validation in models  |
+| Test ASP .NET Services | &#10060; | Test the methods in the services  |
+| Test ASP .NET StartUp class | &#10060; | Test the application composition root  |
+| Test Angular components | &#10060; | Test the all components logic |
+| Test Angular services | &#10060; | Test the all http services and application services |
+| Test Angular attribute directives | &#10060; | Test all attribute directives |
+| Test Angular pipes | &#10060; | Test all Angular pipes |
