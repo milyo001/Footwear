@@ -7,7 +7,9 @@
     //An extention of ModelBuilder class. "this" keyword tells the compiler that this particular Extension Method should be added to objects of type ModelBuilder
     public static class ModelBuilderExtentions
     {
-        //A method for seeding some products into the database
+        ///<summary>
+        ///Seed the database with data
+        ///</summary>
         public static void Seed(this ModelBuilder builder)
         {
             builder.Entity<ProductImage>().HasData(

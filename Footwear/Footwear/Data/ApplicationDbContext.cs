@@ -26,7 +26,13 @@
         {
 
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+            //Seeds the database with data
+            builder.Seed();
+            
+        }
 
 
 
