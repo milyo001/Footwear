@@ -4,14 +4,16 @@ using Footwear.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220113215911_AddProductImageId")]
+    partial class AddProductImageId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -236,15 +238,15 @@ namespace Footwear.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
-
-                    b.Property<int?>("ProductImageId")
-                        .HasColumnType("int");
 
                     b.Property<int>("ProductType")
                         .HasColumnType("int");
@@ -254,7 +256,7 @@ namespace Footwear.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductImageId");
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Products");
                 });
@@ -545,7 +547,9 @@ namespace Footwear.Migrations
                 {
                     b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
                         .WithMany()
-                        .HasForeignKey("ProductImageId");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProductImage");
                 });

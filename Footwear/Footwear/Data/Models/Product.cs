@@ -19,7 +19,7 @@
         [Required, MaxLength(500)]
         public string Details { get; set; }
 
-        [Required, ForeignKey(nameof(ProductImage))]
+        [ForeignKey("ProductImage")]
         public int ImageId { get; set; }
 
         public ProductImage ProductImage { get; set; } = new ProductImage();
