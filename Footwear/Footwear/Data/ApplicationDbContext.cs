@@ -1,8 +1,8 @@
 ﻿namespace Footwear.Data
 {
-    using Microsoft.EntityFrameworkCore;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
 
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -22,12 +22,12 @@
         public DbSet<ProductImage> ProductsImage { get; set; }
 
         public ApplicationDbContext(DbContextOptions options)
-            :base(options)
+            : base(options)
         {
 
         }
 
-       
+
 
 
     }

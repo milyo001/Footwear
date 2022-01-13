@@ -8,6 +8,6 @@ namespace Footwear.Data.Dto
         public string Email { get; set; }
 
         [Required]
-        public string  ConfirmEmail { get; set; }
+        public string ConfirmEmail { get; set; }
     }
 }

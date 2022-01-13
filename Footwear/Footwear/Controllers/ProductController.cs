@@ -1,16 +1,16 @@
 ﻿namespace Footwear.Controllers
 {
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
-    using Microsoft.AspNetCore.Identity;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [ApiController]
     [Route("[controller]")]
@@ -34,7 +34,7 @@
         [HttpGet]
         public async Task<IEnumerable<ProductDto>> Get()
         {
-            IEnumerable<ProductDto> products =  this._db.Products.Select(p => new ProductDto
+            IEnumerable<ProductDto> products = this._db.Products.Select(p => new ProductDto
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -81,7 +81,7 @@
         {
             var token = Request.Cookies["token"];
             await this._cartService.AddCartProductAsync(token, model);
-        
+
             return Ok(new { succeeded = true });
         }
     }

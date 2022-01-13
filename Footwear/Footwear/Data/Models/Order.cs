@@ -1,6 +1,5 @@
 ﻿namespace Footwear.Data.Models
 {
-    using Footwear.Data.Dto;
     using Footwear.Data.Models.Enums;
     using System;
     using System.Collections.Generic;
@@ -23,7 +22,7 @@
         public Status Status { get; set; }
 
         [Required]
-        public BillingInformation UserData { get; set; } 
+        public BillingInformation UserData { get; set; }
 
         [Required]
         public virtual ICollection<CartProduct> Products { get; set; } = new List<CartProduct>();

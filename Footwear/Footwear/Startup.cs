@@ -1,24 +1,24 @@
 namespace Footwear
 {
+    using Footwear.Data;
+    using Footwear.Data.Models;
+    using Footwear.Services.CartService;
+    using Footwear.Services.OrderService;
+    using Footwear.Services.TokenService;
+    using Footwear.Services.UserService;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
+    using Microsoft.AspNetCore.Cors.Infrastructure;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SpaServices.AngularCli;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-    using Footwear.Data;
-    using Footwear.Data.Models;
-    using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.IdentityModel.Tokens;
-    using System.Text;
     using System;
-    using Footwear.Services.TokenService;
-    using Footwear.Services.CartService;
-    using Footwear.Services.OrderService;
-    using Microsoft.AspNetCore.Cors.Infrastructure;
-    using Footwear.Services.UserService;
+    using System.Text;
 
     public class Startup
     {
@@ -34,7 +34,7 @@ namespace Footwear
         {
             //Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration, example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-           
+
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
 
@@ -49,7 +49,7 @@ namespace Footwear
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
             // Gets the allowed origins in appsettings.json (persist in .gitignore file)
-            corsBuilder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString()); 
+            corsBuilder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString());
             services.AddCors(options =>
             {
                 options.AddPolicy("FootwearCorsPolicy", corsBuilder.Build());
@@ -110,7 +110,7 @@ namespace Footwear
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            
+
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -129,7 +129,7 @@ namespace Footwear
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
-               
+
             });
 
             app.UseSpa(spa =>

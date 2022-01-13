@@ -1,9 +1,6 @@
 ﻿
 namespace server.Controllers
 {
-    using System.Collections.Generic;
-    using System.Text.Json;
-    using System.Threading.Tasks;
     using Footwear.Data.Dto;
     using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
@@ -12,6 +9,9 @@ namespace server.Controllers
     using Microsoft.Extensions.Configuration;
     using Stripe;
     using Stripe.Checkout;
+    using System.Collections.Generic;
+    using System.Text.Json;
+    using System.Threading.Tasks;
 
 
     [EnableCors("SiteCorsPolicy")]
@@ -31,7 +31,7 @@ namespace server.Controllers
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
-        
+
 
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)

@@ -42,7 +42,7 @@
         public async Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model)
         {
             var modifiedUser = this._mapper.Map(model, user);
-            
+
             IdentityResult result = await _userManager.UpdateAsync(modifiedUser);
             return result;
         }
@@ -64,6 +64,6 @@
             return result;
         }
 
-        
+
     }
 }

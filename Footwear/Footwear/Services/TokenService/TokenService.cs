@@ -41,7 +41,7 @@
             return cartId;
         }
 
-        
+
         public async Task<User> GetUserByIdAsync(string token)
         {
             var userId = this.GetUserId(token);

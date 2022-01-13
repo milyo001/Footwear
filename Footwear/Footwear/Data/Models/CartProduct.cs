@@ -3,7 +3,6 @@
     using Footwear.Data.Models.Enums;
     using System;
     using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
 
     public class CartProduct
     {

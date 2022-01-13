@@ -17,7 +17,7 @@
 
         public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-        public Cart Cart {get; set;}
+        public Cart Cart { get; set; }
 
         public Address Address { get; set; }
 

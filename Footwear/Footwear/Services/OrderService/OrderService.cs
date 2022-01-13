@@ -31,11 +31,11 @@
             //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
             //Check the payment type and set the data directly in the view model
-            if(orderViewModel.Payment == "card")
+            if (orderViewModel.Payment == "card")
             {
                 orderViewModel.Status = "Pending";
             }
-            else if(orderViewModel.Payment == "cash")
+            else if (orderViewModel.Payment == "cash")
             {
                 orderViewModel.Status = "DeliveryCash";
             }

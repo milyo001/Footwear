@@ -1,6 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
-    
+
     using Footwear.Data;
     using Footwear.Data.Dto;
     using Footwear.Data.Models;
@@ -18,7 +18,7 @@
         private readonly IOrderService _orderService;
 
 
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration,  IOrderService orderService)
+        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, IOrderService orderService)
         {
             this._orderService = orderService;
             Configuration = configuration;
@@ -40,8 +40,8 @@
             //Check if payment is with card so the client can handle card payment session
             var cardPayment = order.Payment == "card" ? true : false;
             this._orderService.CreateOrder(authCookie, order);
-            
-            return Ok( new { cardPayment });
+
+            return Ok(new { cardPayment });
         }
     }
 }

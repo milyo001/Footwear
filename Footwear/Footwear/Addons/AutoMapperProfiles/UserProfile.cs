@@ -31,6 +31,6 @@
                 .ForPath(dest => dest.Address.Country, opt => opt.MapFrom(src => src.Country));
 
             CreateMap<EmailViewModel, User>();
-        }       
+        }
     }
 }

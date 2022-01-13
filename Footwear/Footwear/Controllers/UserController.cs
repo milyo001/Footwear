@@ -1,15 +1,15 @@
 ﻿namespace Footwear.Controllers
 {
-    using Microsoft.AspNetCore.Mvc;
+    using Footwear.Controllers.ErrorHandler;
     using Footwear.Data;
-    using Footwear.Data.Models;
-    using Microsoft.AspNetCore.Identity;
     using Footwear.Data.Dto;
-    using System.Threading.Tasks;
+    using Footwear.Data.Models;
+    using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
     using Footwear.Services.UserService;
-    using Footwear.Services.CartService;
-    using Footwear.Controllers.ErrorHandler;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using System.Threading.Tasks;
 
     [ApiController]
     [Route("[controller]")]
@@ -106,7 +106,7 @@
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)
             {
-                return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo});
+                return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
             }
             return Accepted(new { succeeded = true });
         }
@@ -127,7 +127,7 @@
             {
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
-            
+
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
@@ -148,7 +148,7 @@
             {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }
-            if(model.NewPassword != model.ConfirmPassword)
+            if (model.NewPassword != model.ConfirmPassword)
             {
                 return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
             }

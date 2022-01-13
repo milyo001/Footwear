@@ -1,6 +1,5 @@
 ﻿namespace Footwear.Data.Dto
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
 
     public class OrderViewModel

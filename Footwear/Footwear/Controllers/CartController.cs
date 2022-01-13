@@ -25,10 +25,10 @@
             this._cartService = cartService;
         }
 
-        
+
         [HttpGet("getCartItems")]
         public async Task<IEnumerable<CartProductViewModel>> Get()
-        {  
+        {
             var authCookie = Request.Cookies["token"];
 
             if (authCookie == "" || authCookie == null)
@@ -42,7 +42,7 @@
         }
 
         [HttpPut("increaseProductQuantity")]
-        public async Task<IActionResult> IncrementCartProductQuantity([FromBody]int cartProductId)
+        public async Task<IActionResult> IncrementCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if (cartProduct != null)
@@ -58,7 +58,7 @@
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
 
-            if(cartProduct == null)
+            if (cartProduct == null)
             {
                 return BadRequest("Product do not exists in context");
             }
