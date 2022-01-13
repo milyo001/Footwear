@@ -10,6 +10,68 @@
         //A method for seeding some products into the database
         public static void Seed(this ModelBuilder builder)
         {
+            builder.Entity<ProductImage>().HasData(
+                new ProductImage
+                {
+                    Id = 1,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2016/11/21/15/54/countryside-1846093_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 2,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2017/07/30/15/49/adidas-2554690_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 3,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2017/07/13/02/53/shoe-2498994_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 4,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2020/05/03/19/09/nike-5126389_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 5,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2016/04/12/14/08/shoe-1324431_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 6,
+                    ImageUrl = "https://cdn.pixabay.com/photo/2018/09/30/21/30/puma-3714734_1280.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 7,
+                    ImageUrl = "https://images.footlocker.com/is/image/FLEU/315240315002_01?wid=763&hei=538&fmt=png-alpha"
+                },
+                new ProductImage
+                {
+                    Id = 8,
+                    ImageUrl = "https://media.gq.com/photos/5d93aa2c636d4800084025ae/4:3/w_1600%2Cc_limit/sneakers.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 9,
+                    ImageUrl = "https://m.media-amazon.com/images/I/711BXI98hKL._AC_SR255,340_.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 10,
+                    ImageUrl = "https://pyxis.nymag.com/v1/imgs/72a/06b/e8ae5bc2097f7531dfdc690095c55e319c-25-kids-sneakers-1.2x.rsquare.w600.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 11,
+                    ImageUrl = "https://assets.hermes.com/is/image/hermesproduct/avatar-sneaker--201463ZH01-front-1-300-0-1000-1000.jpg"
+                },
+                new ProductImage
+                {
+                    Id = 12,
+                    ImageUrl = "https://footwearnews.com/wp-content/uploads/2019/03/m20324_01_standard-e1551720111734.jpg?w=700&h=437&crop=1"
+                });
+
             builder.Entity<Product>().HasData(
                 new Product
                 {
