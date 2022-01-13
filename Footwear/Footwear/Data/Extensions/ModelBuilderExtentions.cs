@@ -77,6 +77,7 @@
             builder.Entity<Product>().HasData(
                 new Product
                 {
+                    Id = 1,
                     Name = "Nice Ultimate Edition",
                     Price = 185.88,
                     Details = "Perfect for running all day and night.Designed with love!",
@@ -86,6 +87,7 @@
                 },
                 new Product
                 {
+                    Id = 2,
                     Name = "Abibas Pure Joy",
                     Price = 124.66,
                     Details = "For Ultimate Performace.",
@@ -95,6 +97,7 @@
                 },
                 new Product
                 {
+                    Id = 3,
                     Name = "Abibas Razerblade 10x",
                     Price = 299.99,
                     Details = "Limited edition, perfect for baseketball and hiking!",
@@ -104,6 +107,7 @@
                 },
                 new Product
                 {
+                    Id = 4,
                     Name = "Nice Air 2020 Urban White",
                     Price = 325.99,
                     Details = "Comfort and durable all day sneaker.",
@@ -113,6 +117,7 @@
                 },
                 new Product
                 {
+                    Id = 5,
                     Name = "Nice RedDragon",
                     Price = 255.99,
                     Details = "Model, still reliable tho.",
@@ -122,6 +127,7 @@
                 },
                 new Product
                 {
+                    Id = 6,
                     Name = "Pumaa Lady 5.0",
                     Price = 188.99,
                     Details = "Great choise for ladies.",
@@ -131,6 +137,7 @@
                 },
                 new Product
                 {
+                    Id = 7,
                     Name = "Balvethica",
                     Price = 110.15,
                     Details = "Good for running.",
@@ -140,6 +147,7 @@
                 },
                 new Product
                 {
+                    Id = 8,
                     Name = "VLC MAX ",
                     Price = 49.99,
                     Details = "Legendary as the media player.",
@@ -149,6 +157,7 @@
                 },
                 new Product
                 {
+                    Id = 9,
                     Name = "Legion Smart",
                     Price = 35.99,
                     Details = "Definitely not made in China.",
@@ -158,6 +167,7 @@
                 },
                 new Product
                 {
+                    Id = 10,
                     Name = "Keeddo",
                     Price = 75.22,
                     Details = "A mexican style sneakers for you kids.",
@@ -167,6 +177,7 @@
                 },
                 new Product
                 {
+                    Id = 11,
                     Name = "Legion V12",
                     Price = 35.99,
                     Details = "Only for serious hikers.",
@@ -176,6 +187,7 @@
                 },
                 new Product
                 {
+                    Id = 12,
                     Name = "Abdulas",
                     Price = 155.49,
                     Details = "Perfect for the gym and park walk.",
