@@ -29,7 +29,10 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
-3.Run Package Manager Console command "Update-Database" and wait the database to seed
+3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment 
+```
+//builder.Seed();
+```
 
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
