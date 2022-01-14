@@ -15,7 +15,6 @@
         public DbSet<Cart> Cart { get; set; }
 
         public DbSet<CartProduct> CartProducts { get; set; }
-        public DbSet<User> Users { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
 
@@ -24,15 +23,14 @@
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
-
+            this.Database.EnsureCreated();
         }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            //Seeds the database with data
-            builder.Seed();
+            base.OnModelCreating(builder);
+            //builder.Seed();
         }
-
-
 
     }
 }
