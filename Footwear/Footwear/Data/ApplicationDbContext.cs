@@ -17,6 +17,10 @@
         public DbSet<CartProduct> CartProducts { get; set; }
         public DbSet<User> Users { get; set; }
 
+        //Store encoded JWT tokens,where you can store user id and other information as claims,communicate with HTTP
+        //between client and server by passing an token id istead of the token to prevent user from decoding the token
+        public DbSet<Token> Tokens { get; set; }
+
         public DbSet<Address> Addresses { get; set; }
         //public DbSet<Token> Tokens { get; set; }
 
@@ -31,6 +35,7 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            //Uncomment the line below if you are starting new project, TODO: automate the process
             //builder.Seed();
         }
 

@@ -52,7 +52,8 @@
             return user;
         }
 
-        public string GenerateToken(string userId, int cartId)
+        
+        public async Task<string> GenerateTokenAsync(string userId, int cartId)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -65,11 +66,16 @@
                 Expires = DateTime.UtcNow.AddDays(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
             };
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
-            var token = tokenHandler.WriteToken(securityToken);
-            return token;
+            var encodedToken = tokenHandler.WriteToken(securityToken);
+            var token = new Token()
+            {
+                Id = new Guid().ToString(),
+                EncodedToken = encodedToken
+            };
+            await this._db.SaveChangesAsync();
+            return token.Id;
         }
     }
 }

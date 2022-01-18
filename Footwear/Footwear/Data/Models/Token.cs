@@ -8,6 +8,6 @@
         public string Id { get; set; }
 
         [Required]
-        public string DecodeToken { get; set; }
+        public string EncodedToken { get; set; }
     }
 }
