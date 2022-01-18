@@ -2,12 +2,12 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public class Tokens
+    public class Token
     {
         [Key]
         public string Id { get; set; }
 
         [Required]
-        public string Token { get; set; }
+        public string DecodeToken { get; set; }
     }
 }
