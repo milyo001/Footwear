@@ -29,11 +29,14 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
-3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment (I am using already populated DB) then run the application
+3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment (I am using already populated DB) then run the application. Later I will automate the process,
+for now it can be done only manually.
 ```
 //builder.Seed();
 ```
-
+```diff
+-Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
+```
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
 * AutoMapper 8.1.1
