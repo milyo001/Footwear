@@ -29,7 +29,8 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
-3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment (I am using already populated DB) then run the application
+3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment (I am using already populated DB) then run the application. Later I will automate the process,
+for now it can be done only manually.
 ```
 //builder.Seed();
 ```
