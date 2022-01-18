@@ -33,6 +33,7 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
 ```
 //builder.Seed();
 ```
+Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
 
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
