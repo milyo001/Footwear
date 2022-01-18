@@ -23,6 +23,16 @@
             this._appSettings = appSettings.Value;
         }
 
+        public async Task<string> GetTokenByIdAsync(string tokenId)
+        {
+            var token = await this._db.Tokens.FirstOrDefaultAsync(t => t.Id == tokenId);
+            if (token == null)
+            {
+                throw new SecurityTokenInvalidSignatureException();
+            }
+            return token.EncodedToken;
+
+        }
         //Get UserId from token's claims
         public string GetUserId(string token)
         {
@@ -71,7 +81,7 @@
             var encodedToken = tokenHandler.WriteToken(securityToken);
             var token = new Token()
             {
-                Id = new Guid().ToString(),
+                Id = Guid.NewGuid().ToString(),
                 EncodedToken = encodedToken
             };
             await this._db.SaveChangesAsync();
