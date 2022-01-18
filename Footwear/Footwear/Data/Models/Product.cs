@@ -21,10 +21,7 @@
 
         [ForeignKey("ProductImage")]
         public int ImageId { get; set; }
-
         public ProductImage ProductImage { get; set; } = new ProductImage();
-
-        public int? Size { get; set; }
 
         //Used to filter results by type
         public Gender Gender { get; set; }

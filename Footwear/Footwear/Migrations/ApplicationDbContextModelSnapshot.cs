@@ -236,6 +236,9 @@ namespace Footwear.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
+                    b.Property<int>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -243,18 +246,12 @@ namespace Footwear.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
-                    b.Property<int?>("ProductImageId")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProductType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProductImageId");
+                    b.HasIndex("ImageId");
 
                     b.ToTable("Products");
                 });
@@ -545,7 +542,9 @@ namespace Footwear.Migrations
                 {
                     b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
                         .WithMany()
-                        .HasForeignKey("ProductImageId");
+                        .HasForeignKey("ImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ProductImage");
                 });

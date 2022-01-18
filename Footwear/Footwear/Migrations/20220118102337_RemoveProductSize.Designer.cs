@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220113215911_AddProductImageId")]
-    partial class AddProductImageId
+    [Migration("20220118102337_RemoveProductSize")]
+    partial class RemoveProductSize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -249,9 +249,6 @@ namespace Footwear.Migrations
                         .HasColumnType("float");
 
                     b.Property<int>("ProductType")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Size")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
