@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   //The method will prevent any user from accessing the login view, who is already authenticated
   ngOnInit(): void {
-    if (this.cookieService.get('token') != '') {
+    if (this.cookieService.get('tokenId') != '') {
       this.router.navigate(['/']);
     }
   }
@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.userService.login(form.value).subscribe(
       (response: any) => {
-        this.cookieService.set('token', response.token)
-        console.log(response.token);
+        this.cookieService.set('tokenId', response.tokenId)
+        console.log(response.tokenId);
         this.router.navigateByUrl('/');
       },
       error => {

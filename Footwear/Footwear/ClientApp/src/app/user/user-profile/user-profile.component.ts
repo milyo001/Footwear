@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent  {
+export class UserProfileComponent implements OnInit {
   form: FormGroup;
   passwordForm: FormGroup;
   emailForm: FormGroup;
@@ -17,51 +17,71 @@ export class UserProfileComponent  {
   public firstName: string;
   public email: string;
   public userData: IUserData = null;
- 
+
   private phoneRegex: string = '[- +()0-9]+';
   private emailRegex: string = '[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,63}$';
   public emailSectionToggle: boolean = false;
   public passSectionToggle: boolean = false;
 
-  constructor(
-    private userService: UserService,
-    private fb: FormBuilder,
-    private toastr: ToastrService
-  ) {
-      this.loadData();
-    }
+  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
 
+  ngOnInit(): void {
+    //Initialize user data form validators
+    this.setUserFormValidation();
+    //Initialize user change password form validators
+    this.setPasswordFormValidation();
+    //Initialize email form validators
+    this.setEmailFormValidation();
+    this.loadData();
+  }
 
-  loadData() {
+  setEmailFormValidation(): void {
+    this.emailForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
+      confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
+    }, { validator: this.matchFields });
+  }
+
+  setPasswordFormValidation(): void {
+    this.passwordForm = this.fb.group({
+      passwords: this.fb.group({
+        password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
+        newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
+        confirmPassword: ['', [Validators.required], []]
+      }, { validator: this.matchFields })
+    });
+  }
+
+  setUserFormValidation(): void {
+    this.form = this.fb.group({
+      email: [],
+      firstName: ["", [Validators.required, Validators.maxLength(100)], []],
+      lastName: ["", [Validators.required, Validators.maxLength(100)], []],
+      phone: ["", [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
+      street: ["", [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
+      state: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      country: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      city: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
+    });
+  }
+
+  loadData(): void {
     this.userService.getUserProfile().subscribe(data => {
       this.userData = data as IUserData;
-      this.form = this.fb.group({
-        email: [data.email],
-        firstName: [data.firstName, [Validators.required, Validators.maxLength(100)], []],
-        lastName: [data.lastName, [Validators.required, Validators.maxLength(100)], []],
-        phone: [data.phone, [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
-        street: [data.street, [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
-        state: [data.state, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        country: [data.country, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        city: [data.city, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        zipCode: [data.zipCode, [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
-      });
-      //Set first name and email to show the currently logged in user
+      //Set first name and email properties to visualize about the currently logged in user
       this.firstName = this.form.get("firstName").value;
       this.email = this.form.get("email").value;
-      //Set validaions for password form
-      this.passwordForm = this.fb.group({
-        passwords: this.fb.group({
-          password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
-          newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
-          confirmPassword: ['', [Validators.required], []]
-        }, { validator: this.matchFields })
-      });
-      //Set validaions for email form
-      this.emailForm = this.fb.group({
-        email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
-        confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
-      }, { validator: this.matchFields });
+      this.form.patchValue({
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phone: data.phone,
+        street: data.street,
+        state: data.state,
+        country: data.country,
+        city: data.city,
+        zipCode: data.zipCode
+      })
     })
 
   }
@@ -79,7 +99,7 @@ export class UserProfileComponent  {
     );
   }
 
-  changePassword(passwordForm: any, passFormDirective: FormGroupDirective) : void {
+  changePassword(passwordForm: any, passFormDirective: FormGroupDirective): void {
     this.userService.updatePassword(passwordForm.passwords).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
@@ -136,7 +156,7 @@ export class UserProfileComponent  {
         }
       }
     }
-    
+
   }
 
 }
