@@ -5,9 +5,16 @@
     using System.Security.Cryptography;
     using System.Text;
 
+    ///<summary>
+    ///Aes class which is in System.Security.Cryptography namespace that uses the same key for encryption and decryption. AES algorithm supports 128, 198, and 256 bit encryption.
+    ///</summary>
     public static class AesOperations
     {
-        public static string Encrypt(string key, string plainText)
+
+        ///<summary>
+        ///Encrypt an encoded authorization token
+        ///</summary>
+        public static string Encrypt(string token)
         {
             byte[] iv = new byte[16];
             byte[] array;
