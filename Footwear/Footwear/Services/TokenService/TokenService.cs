@@ -24,7 +24,7 @@
         }
 
         //Get UserId from token's claims
-        public async Task<string> GetUserIdAsync(string token)
+        public string GetUserIdAsync(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var authToken = handler.ReadJwtToken(token);
@@ -51,7 +51,7 @@
             return user;
         }
         
-        public async Task<string> GenerateTokenAsync(string userId, int cartId)
+        public string GenerateTokenAsync(string userId, int cartId)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
             {

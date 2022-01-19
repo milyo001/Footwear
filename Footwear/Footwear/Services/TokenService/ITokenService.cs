@@ -8,7 +8,7 @@
         Task<string> GetUserIdAsync(string token);
         int GetCartId(string token);
         Task<User> GetUserByIdAsync(string token);
-        Task<string> GenerateTokenAsync(string userId, int cartId);
+        string GenerateTokenAsync(string userId, int cartId);
 
 
 
