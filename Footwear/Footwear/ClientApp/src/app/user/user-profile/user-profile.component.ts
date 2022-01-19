@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
@@ -9,7 +9,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements OnInit {
+export class UserProfileComponent implements AfterViewInit {
   form: FormGroup;
   passwordForm: FormGroup;
   emailForm: FormGroup;
@@ -25,7 +25,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
 
-  ngOnInit(): void {
+  ngAfterViewInit(): void {
     //Initialize user data form validators
     this.setUserFormValidation();
     //Initialize user change password form validators
