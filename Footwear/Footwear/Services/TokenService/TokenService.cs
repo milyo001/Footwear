@@ -52,7 +52,6 @@
             return cartId;
         }
 
-
         public async Task<User> GetUserByIdAsync(string tokenId)
         {
             var userId = await this.GetUserIdAsync(tokenId);
@@ -62,7 +61,6 @@
                 .FirstOrDefaultAsync();
             return user;
         }
-
         
         public async Task<string> GenerateTokenAsync(string userId, int cartId)
         {
@@ -85,7 +83,8 @@
 
             if (await this.TokenExistsAsync(encodedToken))
             {
-
+                var tokenId = await this.GetTokenIdAsync(encodedToken); ;
+                return tokenId;
             }
             var token = new Token()
             {
@@ -97,9 +96,15 @@
             return token.Id;
         }
 
-        private async Task<bool> TokenExistsAsync(string encodedToken)
+        public async Task<bool> TokenExistsAsync(string encodedToken)
         {
             return await this._db.Tokens.AnyAsync(t => t.EncodedToken == encodedToken);
+        }
+
+        public async Task<string> GetTokenIdAsync(string encodedToken)
+        {
+            var token = await this._db.Tokens.FirstOrDefaultAsync(t => t.EncodedToken == encodedToken);
+            return token.Id;
         }
     }
 }

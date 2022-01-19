@@ -11,7 +11,10 @@
         Task<User> GetUserByIdAsync(string token);
         Task<string> GenerateTokenAsync(string userId, int cartId);
         Task<bool> TokenExistsAsync(string encodedToken);
-        
+
+        Task<string> GetTokenIdAsync(string encodedToken);
+
+
 
 
     }
