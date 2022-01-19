@@ -16,6 +16,7 @@
         ///</summary>
         public static string Encrypt(string token)
         {
+            var key = Startup.StaticConfig["ApplicationSettings:JWT_Secret"].ToString();
             byte[] iv = new byte[16];
             byte[] array;
 
@@ -31,7 +32,7 @@
                 using CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write);
                 using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
                 {
-                    streamWriter.Write(plainText);
+                    streamWriter.Write(token);
                 }
 
                 array = memoryStream.ToArray();
