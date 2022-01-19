@@ -5,7 +5,7 @@
 
     public interface ITokenService
     {
-        Task<string> GetUserIdAsync(string token);
+        string GetUserId(string token);
         int GetCartId(string token);
         Task<User> GetUserByIdAsync(string token);
         string GenerateTokenAsync(string userId, int cartId);

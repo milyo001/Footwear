@@ -24,7 +24,7 @@
         }
 
         //Get UserId from token's claims
-        public string GetUserIdAsync(string token)
+        public string GetUserId(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             var authToken = handler.ReadJwtToken(token);
@@ -43,7 +43,7 @@
 
         public async Task<User> GetUserByIdAsync(string token)
         {
-            var userId = await this.GetUserIdAsync(token);
+            var userId = this.GetUserId(token);
             var user = await this._db.Users
                 .Where(u => u.Id == userId)
                 .Include(a => a.Address)
