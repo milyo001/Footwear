@@ -75,7 +75,7 @@
             }
             var cartId = this._cartService.GetCartId(user.Id);
             //Store userId and cartId as Claims in the token for better accesibility
-            var tokenId = await this._tokenService.GenerateTokenAsync(user.Id, cartId);
+            var tokenId = this._tokenService.GenerateToken(user.Id, cartId);
             return Ok(new { tokenId });
         }
 

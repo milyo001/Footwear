@@ -51,7 +51,7 @@
             return user;
         }
         
-        public string GenerateTokenAsync(string userId, int cartId)
+        public string GenerateToken(string userId, int cartId)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
             {
