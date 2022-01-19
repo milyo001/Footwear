@@ -6,9 +6,11 @@
     public interface ITokenService
     {
         Task<string> GetTokenByIdAsync(string tokenId);
-        string GetUserId(string token);
+        Task<string> GetUserIdAsync(string token);
         int GetCartId(string token);
         Task<User> GetUserByIdAsync(string token);
         Task<string> GenerateTokenAsync(string userId, int cartId);
+
+
     }
 }

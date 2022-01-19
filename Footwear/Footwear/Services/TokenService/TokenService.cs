@@ -34,8 +34,9 @@
 
         }
         //Get UserId from token's claims
-        public string GetUserId(string token)
+        public async Task<string> GetUserIdAsync(string tokenId)
         {
+            var token = await this.GetTokenByIdAsync(tokenId);
             var handler = new JwtSecurityTokenHandler();
             var authToken = handler.ReadJwtToken(token);
             var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
@@ -52,9 +53,9 @@
         }
 
 
-        public async Task<User> GetUserByIdAsync(string token)
+        public async Task<User> GetUserByIdAsync(string tokenId)
         {
-            var userId = this.GetUserId(token);
+            var userId = await this.GetUserIdAsync(tokenId);
             var user = await this._db.Users
                 .Where(u => u.Id == userId)
                 .Include(a => a.Address)
@@ -76,6 +77,8 @@
                 Expires = DateTime.UtcNow.AddDays(3),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
             };
+
+
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var encodedToken = tokenHandler.WriteToken(securityToken);
@@ -84,6 +87,7 @@
                 Id = Guid.NewGuid().ToString(),
                 EncodedToken = encodedToken
             };
+            this._db.Tokens.Add(token);
             await this._db.SaveChangesAsync();
             return token.Id;
         }
