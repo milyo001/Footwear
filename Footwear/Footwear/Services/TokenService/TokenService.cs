@@ -23,20 +23,9 @@
             this._appSettings = appSettings.Value;
         }
 
-        public async Task<string> GetTokenByIdAsync(string tokenId)
-        {
-            var token = await this._db.Tokens.FirstOrDefaultAsync(t => t.Id == tokenId);
-            if (token == null)
-            {
-                throw new SecurityTokenInvalidSignatureException();
-            }
-            return token.EncodedToken;
-
-        }
         //Get UserId from token's claims
-        public async Task<string> GetUserIdAsync(string tokenId)
+        public async Task<string> GetUserIdAsync(string token)
         {
-            var token = await this.GetTokenByIdAsync(tokenId);
             var handler = new JwtSecurityTokenHandler();
             var authToken = handler.ReadJwtToken(token);
             var userId = authToken.Claims.FirstOrDefault(x => x.Type == "UserId").Value;
@@ -52,9 +41,9 @@
             return cartId;
         }
 
-        public async Task<User> GetUserByIdAsync(string tokenId)
+        public async Task<User> GetUserByIdAsync(string token)
         {
-            var userId = await this.GetUserIdAsync(tokenId);
+            var userId = await this.GetUserIdAsync(token);
             var user = await this._db.Users
                 .Where(u => u.Id == userId)
                 .Include(a => a.Address)
@@ -76,35 +65,12 @@
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
             };
 
-
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var encodedToken = tokenHandler.WriteToken(securityToken);
-
-            if (await this.TokenExistsAsync(encodedToken))
-            {
-                var tokenId = await this.GetTokenIdAsync(encodedToken); ;
-                return tokenId;
-            }
-            var token = new Token()
-            {
-                Id = Guid.NewGuid().ToString(),
-                EncodedToken = encodedToken
-            };
-            this._db.Tokens.Add(token);
-            await this._db.SaveChangesAsync();
-            return token.Id;
+            return encodedToken;
         }
 
-        public async Task<bool> TokenExistsAsync(string encodedToken)
-        {
-            return await this._db.Tokens.AnyAsync(t => t.EncodedToken == encodedToken);
-        }
-
-        public async Task<string> GetTokenIdAsync(string encodedToken)
-        {
-            var token = await this._db.Tokens.FirstOrDefaultAsync(t => t.EncodedToken == encodedToken);
-            return token.Id;
-        }
+        
     }
 }
