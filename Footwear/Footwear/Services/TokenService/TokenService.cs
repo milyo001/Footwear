@@ -82,6 +82,11 @@
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var encodedToken = tokenHandler.WriteToken(securityToken);
+
+            if (await this.TokenExistsAsync(encodedToken))
+            {
+
+            }
             var token = new Token()
             {
                 Id = Guid.NewGuid().ToString(),
@@ -90,6 +95,11 @@
             this._db.Tokens.Add(token);
             await this._db.SaveChangesAsync();
             return token.Id;
+        }
+
+        private async Task<bool> TokenExistsAsync(string encodedToken)
+        {
+            return await this._db.Tokens.AnyAsync(t => t.EncodedToken == encodedToken);
         }
     }
 }
