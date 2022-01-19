@@ -10,19 +10,18 @@
     ///</summary>
     public static class AesOperations
     {
+        private static string key = Startup.StaticConfig["ApplicationSettings:EncryptionKey"].ToString();
 
         ///<summary>
-        ///Encrypt an encoded authorization token
+        ///A simple symmetric algorithm to encrypt an encoded authorization token.By default the key is stored in appsettings.json: EncryptionKey
         ///</summary>
-        public static string Encrypt(string token)
+        public static string EncryptToken(string token)
         {
-            var key = Startup.StaticConfig["ApplicationSettings:JWT_Secret"].ToString();
             byte[] iv = new byte[16];
             byte[] array;
 
             using (Aes aes = Aes.Create())
             {
-
                 aes.Key = Encoding.UTF8.GetBytes(key);
                 aes.IV = iv;
 
@@ -34,11 +33,29 @@
                 {
                     streamWriter.Write(token);
                 }
-
+                
                 array = memoryStream.ToArray();
             }
 
             return Convert.ToBase64String(array);
+        }
+
+        public static string DecryptToken(string key, string cipherText)
+        {
+            byte[] iv = new byte[16];
+            byte[] buffer = Convert.FromBase64String(cipherText);
+
+            using Aes aes = Aes.Create();
+            aes.Key = Encoding.UTF8.GetBytes(key);
+            aes.IV = iv;
+            ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
+
+            using MemoryStream memoryStream = new MemoryStream(buffer);
+            using CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read);
+            using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
+            {
+                return streamReader.ReadToEnd();
+            }
         }
     }
 }
