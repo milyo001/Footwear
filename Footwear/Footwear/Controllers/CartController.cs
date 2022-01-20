@@ -29,13 +29,8 @@
         [HttpGet("getCartItems")]
         public async Task<IEnumerable<CartProductViewModel>> Get()
         {
-            var authCookie = Request.Cookies["token"];
-
-            if (authCookie == "" || authCookie == null)
-            {
-                throw new Exception("User is not logged in.");
-            }
-            var cartId = this._tokenService.GetCartId(authCookie);
+            string authToken = HttpContext.Items["token"].ToString();
+            var cartId = this._tokenService.GetCartId(authToken);
             var products = this._cartService.GetCartProductsViewModel(cartId);
             return products;
 
@@ -86,8 +81,8 @@
         [HttpDelete("removeCartProducts")]
         public async Task<IActionResult> RemoveCartProducts()
         {
-            var authCookie = Request.Cookies["token"];
-            var cartId = this._tokenService.GetCartId(authCookie);
+            string authToken = HttpContext.Items["token"].ToString();
+            var cartId = this._tokenService.GetCartId(authToken);
             //Change the status of cart products
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();

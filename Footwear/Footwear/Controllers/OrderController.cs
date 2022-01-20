@@ -34,12 +34,11 @@
             {
                 return BadRequest(new { message = "Invalid product data!" });
             }
-            //Send the auth cookie to get userId and cartId
-            var authCookie = Request.Cookies["token"];
+            string authToken = HttpContext.Items["token"].ToString();
 
             //Check if payment is with card so the client can handle card payment session
             var cardPayment = order.Payment == "card" ? true : false;
-            this._orderService.CreateOrder(authCookie, order);
+            this._orderService.CreateOrder(authToken, order);
 
             return Ok(new { cardPayment });
         }
