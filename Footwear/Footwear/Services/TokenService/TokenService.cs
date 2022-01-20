@@ -23,6 +23,18 @@
             this._appSettings = appSettings.Value;
         }
 
+        //Encrypt the token to hide all the claims from user (JWT token is encoded, but can easily be decoded)
+        public string EncryptToken(string token)
+        {
+            return AesOperations.EncryptToken(token);
+        }
+
+        //Decrypt the token to process the information about the currently logged in user
+        public string DecryptToken(string token)
+        {
+            return AesOperations.DecryptToken(token);
+        }
+
         //Get UserId from token's claims
         public string GetUserId(string token)
         {
@@ -68,7 +80,8 @@
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var encodedToken = tokenHandler.WriteToken(securityToken);
-            return encodedToken;
+            var encryptedToken = this.EncryptToken(encodedToken);
+            return encryptedToken;
         }
 
         
