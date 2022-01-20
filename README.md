@@ -4,7 +4,7 @@
 An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
 The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 5 (ini3.1, upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
-# Guide/ How to run locally on your machine
+# Guide / How to run locally on your machine
 1.Download the repo
 2.Create appsettings.json. Example below:
 ```
