@@ -102,6 +102,7 @@
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }
             var authCookie = Request.Cookies["token"];
+            var token = HttpContext.Items["token"];
             var user = await this._tokenService.GetUserByIdAsync(authCookie);
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)

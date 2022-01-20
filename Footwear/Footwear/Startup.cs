@@ -2,6 +2,7 @@ namespace Footwear
 {
     using Footwear.Data;
     using Footwear.Data.Models;
+    using Footwear.Middlewares;
     using Footwear.Services.CartService;
     using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
@@ -120,6 +121,7 @@ namespace Footwear
                 app.UseSpaStaticFiles();
             }
 
+            app.UseDecryptCookieMiddleware();
             app.UseHttpsRedirection();
 
             app.UseRouting();
