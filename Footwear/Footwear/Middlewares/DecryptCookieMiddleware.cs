@@ -29,6 +29,12 @@ namespace Footwear.Middlewares
 
     public static class DecryptCookieMiddlewareExtensions
     {
+        /// <summary>
+        /// Decrypt the token cookie value already stored in browser and store it in HttpContext.Items,where
+        /// key is "token" and value is the decrypted cookie value. With this middleware the application is protected against stolen token claims(JWT tokens are decodable)
+        /// </summary>
+        /// <param name="builder"></param>
+        /// <returns></returns>
         public static IApplicationBuilder UseDecryptCookieMiddleware(
             this IApplicationBuilder builder)
         {
