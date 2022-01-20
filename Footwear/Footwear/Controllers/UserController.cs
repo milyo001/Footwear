@@ -87,8 +87,8 @@
             {
                 return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
             }
-            var authCookie = Request.Cookies["token"];
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            string authToken = HttpContext.Items["token"].ToString();
+            var user = await this._tokenService.GetUserByIdAsync(authToken);
             var userData = this._userService.GetUserData(user);
             return userData;
         }
@@ -101,9 +101,8 @@
             {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
             }
-            var authCookie = Request.Cookies["token"];
-            var token = HttpContext.Items["token"];
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            string authToken = HttpContext.Items["token"].ToString();
+            var user = await this._tokenService.GetUserByIdAsync(authToken);
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)
             {
@@ -118,7 +117,7 @@
         {
             var email = model.Email;
             var confEmail = model.ConfirmEmail;
-            var authCookie = Request.Cookies["token"];
+            string authToken = HttpContext.Items["token"].ToString();
 
             if (email != confEmail || !ModelState.IsValid)
             {
@@ -129,7 +128,7 @@
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
             }
 
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            var user = await this._tokenService.GetUserByIdAsync(authToken);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
             if (!result.Succeeded)
@@ -154,8 +153,8 @@
                 return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
             }
 
-            var authCookie = Request.Cookies["token"];
-            var user = await this._tokenService.GetUserByIdAsync(authCookie);
+            string authToken = HttpContext.Items["token"].ToString();
+            var user = await this._tokenService.GetUserByIdAsync(authToken);
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
 
             if (!isPassValid)
