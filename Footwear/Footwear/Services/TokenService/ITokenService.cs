@@ -10,12 +10,5 @@
         Task<User> GetUserByIdAsync(string token);
         string GenerateToken(string userId, int cartId);
         string EncryptToken(string token);
-        string DecryptToken(string token);
-
-
-
-
-
-
     }
 }
