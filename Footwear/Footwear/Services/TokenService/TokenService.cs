@@ -29,12 +29,6 @@
             return AesOperations.EncryptToken(token);
         }
 
-        //Decrypt the token to process the information about the currently logged in user
-        public string DecryptToken(string token)
-        {
-            return AesOperations.DecryptToken(token);
-        }
-
         //Get UserId from token's claims
         public string GetUserId(string token)
         {
