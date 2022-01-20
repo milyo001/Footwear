@@ -13,7 +13,7 @@
         private static readonly string Key = Startup.StaticConfig["ApplicationSettings:EncryptionKey"].ToString();
 
         ///<summary>
-        ///A simple symmetric algorithm to encrypt an encoded authorization token.By default the key is stored in appsettings.json: EncryptionKey
+        ///A simple symmetric algorithm to encrypt an encoded authorization token.By default the key is stored in appsettings.json with name: EncryptionKey. You can use any 256-bit key, you can generate one online
         ///</summary>
         public static string EncryptToken(string token)
         {
@@ -27,9 +27,9 @@
 
                 ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
 
-                using MemoryStream memoryStream = new MemoryStream();
-                using CryptoStream cryptoStream = new CryptoStream(memoryStream, encryptor, CryptoStreamMode.Write);
-                using (StreamWriter streamWriter = new StreamWriter(cryptoStream))
+                using MemoryStream memoryStream = new();
+                using CryptoStream cryptoStream = new(memoryStream, encryptor, CryptoStreamMode.Write);
+                using (StreamWriter streamWriter = new(cryptoStream))
                 {
                     streamWriter.Write(token);
                 }
@@ -50,9 +50,9 @@
             aes.IV = iv;
             ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
 
-            using MemoryStream memoryStream = new MemoryStream(buffer);
-            using CryptoStream cryptoStream = new CryptoStream(memoryStream, decryptor, CryptoStreamMode.Read);
-            using StreamReader streamReader = new StreamReader(cryptoStream);
+            using MemoryStream memoryStream = new(buffer);
+            using CryptoStream cryptoStream = new(memoryStream, decryptor, CryptoStreamMode.Read);
+            using StreamReader streamReader = new(cryptoStream);
             return streamReader.ReadToEnd();
         }
     }
