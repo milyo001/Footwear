@@ -5,7 +5,6 @@
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Mvc;
-    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
