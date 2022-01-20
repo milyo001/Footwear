@@ -99,13 +99,13 @@ namespace server.Controllers
                 return BadRequest("Session id invalid");
             }
 
-            var token = Request.Cookies["token"];
+            string authToken = HttpContext.Items["token"].ToString();
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
             var paymentStatus = session.PaymentStatus;
 
             //Get latest added order and change the payment status to paid
-            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(token);
+            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
             this._orderService.ModifyPaidOrder(orderId);
 
             return Ok(new { paymentStatus });
