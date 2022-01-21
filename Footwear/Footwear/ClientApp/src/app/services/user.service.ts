@@ -30,8 +30,8 @@ export class UserService {
     return this.http.post(this.baseUrl + 'user/login', formData);
   }
 
-  getUserProfile(): Observable<IUserData> {
-    return this.http.get<IUserData>(this.baseUrl + 'user/getProfileData');
+  getUserProfile(): Promise<IUserData> {
+    return this.http.get<IUserData>(this.baseUrl + 'user/getProfileData').toPromise();
   }
 
   updateUserProfile(formData: any) {

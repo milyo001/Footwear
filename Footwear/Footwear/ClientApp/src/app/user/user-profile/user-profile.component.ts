@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
 
@@ -10,7 +11,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
-export class UserProfileComponent implements AfterViewInit {
+export class UserProfileComponent implements AfterViewInit, OnInit {
   form: FormGroup;
   passwordForm: FormGroup;
   emailForm: FormGroup;
@@ -24,10 +25,10 @@ export class UserProfileComponent implements AfterViewInit {
   public emailSectionToggle: boolean = false;
   public passSectionToggle: boolean = false;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService,
-    private cookieSerivce: CookieService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
+    
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     //Initialize user data form validators
     this.setUserFormValidation();
     //Initialize user change password form validators
@@ -35,9 +36,10 @@ export class UserProfileComponent implements AfterViewInit {
     //Initialize email form validators
     this.setEmailFormValidation();
 
-    if (this.cookieSerivce.check('token')){
+  }
+
+  ngAfterViewInit(): void {
       this.loadData();
-    }
   }
 
   setEmailFormValidation(): void {
@@ -71,8 +73,9 @@ export class UserProfileComponent implements AfterViewInit {
     });
   }
 
-  loadData(): void {
-    this.userService.getUserProfile().subscribe(data => {
+  //Loads already filled data from user if any, otherwise form fields will remain blank
+  async loadData(): Promise<void> {
+    this.userService.getUserProfile().then(data => {
       this.userData = data as IUserData;
       //Set first name and email properties to visualize about the currently logged in user
       this.firstName = this.form.get("firstName").value;

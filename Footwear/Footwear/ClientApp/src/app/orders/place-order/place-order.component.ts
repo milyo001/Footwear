@@ -93,10 +93,10 @@ export class PlaceOrderComponent implements OnInit {
     
   }
 
-  handleImports(event): void {
+  handleImports(event)  {
     if (event.value == 'import') {
       //Patch value will set the form fields without validating them
-      this.userService.getUserProfile().subscribe(response => {
+      this.userService.getUserProfile().then(response => {
         this.form.patchValue({
           firstName: response.firstName,
           lastName: response.lastName,

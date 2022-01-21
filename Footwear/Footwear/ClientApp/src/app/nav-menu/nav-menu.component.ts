@@ -12,7 +12,7 @@ import { CookieService } from 'ngx-cookie-service';
   templateUrl: './nav-menu.component.html',
   styleUrls: ['./nav-menu.component.css']
 })
-export class NavMenuComponent implements OnInit{
+export class NavMenuComponent {
 
   isExpanded = false;
   userDetails;
@@ -30,18 +30,6 @@ export class NavMenuComponent implements OnInit{
     public userService: UserService,
     private cookieService: CookieService) { }
     
-
-  ngOnInit(): void {
-    this.userService.getUserProfile().subscribe(
-      response => {
-        this.userDetails = response;
-      },
-      error => {
-        console.log(error)
-      }
-    )
-    }
-
   collapse() {
     this.isExpanded = false;
   }
