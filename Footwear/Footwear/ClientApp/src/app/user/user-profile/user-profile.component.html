@@ -79,7 +79,7 @@
           <div class="d-flex justify-content-center align-items-center mb-3">
             <h4 class="text-right">Profile Settings</h4>
           </div>
-          <form *ngIf="userData" class="example-form" [formGroup]="form" (ngSubmit)="updateProfile(form)">
+          <form class="example-form" [formGroup]="form" (ngSubmit)="updateProfile(form)">
             <div class="row mt-1 full-width">
               <mat-form-field class="full-width" appearance="fill">
                 <mat-label>First name</mat-label>

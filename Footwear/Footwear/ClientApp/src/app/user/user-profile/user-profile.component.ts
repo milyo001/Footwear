@@ -35,11 +35,10 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     this.setPasswordFormValidation();
     //Initialize email form validators
     this.setEmailFormValidation();
-
   }
 
   ngAfterViewInit(): void {
-      this.loadData();
+     this.loadDataAsync();
   }
 
   setEmailFormValidation(): void {
@@ -61,7 +60,6 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
 
   setUserFormValidation(): void {
     this.form = this.fb.group({
-      email: [],
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
       lastName: ["", [Validators.required, Validators.maxLength(100)], []],
       phone: ["", [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
@@ -74,10 +72,9 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   }
 
   //Loads already filled data from user if any, otherwise form fields will remain blank
-  async loadData(): Promise<void> {
-    this.userService.getUserProfile().then(data => {
+  async loadDataAsync(): Promise<void> {
+    await this.userService.getUserProfile().then(data => {
       this.userData = data as IUserData;
-      
       this.form.patchValue({
         firstName: data.firstName,
         lastName: data.lastName,
@@ -87,7 +84,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         country: data.country,
         city: data.city,
         zipCode: data.zipCode
-      })
+      });
       //Set first name and email properties to visualize about the currently logged in user
       this.firstName = this.form.get("firstName").value;
       this.email = data.email;
@@ -99,7 +96,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       (response: any) => {
         if (response.succeeded) {
           this.toastr.success("Successfully updated user information!");
-          this.loadData();
+          this.loadDataAsync();
         }
       },
       error => {
