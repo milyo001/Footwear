@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 import { ToastrService } from 'ngx-toastr';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
@@ -23,7 +24,8 @@ export class UserProfileComponent implements AfterViewInit {
   public emailSectionToggle: boolean = false;
   public passSectionToggle: boolean = false;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService,
+    private cookieSerivce: CookieService) { }
 
   ngAfterViewInit(): void {
     //Initialize user data form validators
@@ -32,7 +34,10 @@ export class UserProfileComponent implements AfterViewInit {
     this.setPasswordFormValidation();
     //Initialize email form validators
     this.setEmailFormValidation();
-    this.loadData();
+
+    if (this.cookieSerivce.check('token')){
+      this.loadData();
+    }
   }
 
   setEmailFormValidation(): void {
