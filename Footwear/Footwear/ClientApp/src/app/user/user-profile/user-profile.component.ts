@@ -77,9 +77,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   async loadData(): Promise<void> {
     this.userService.getUserProfile().then(data => {
       this.userData = data as IUserData;
-      //Set first name and email properties to visualize about the currently logged in user
-      this.firstName = this.form.get("firstName").value;
-      this.email = this.form.get("email").value;
+      
       this.form.patchValue({
         firstName: data.firstName,
         lastName: data.lastName,
@@ -90,6 +88,9 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         city: data.city,
         zipCode: data.zipCode
       })
+      //Set first name and email properties to visualize about the currently logged in user
+      this.firstName = this.form.get("firstName").value;
+      this.email = data.email;
     })
 
   }
