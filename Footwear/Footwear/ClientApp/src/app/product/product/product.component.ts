@@ -26,7 +26,7 @@ export class ProductComponent {
     this.sortingOptions = new SortingOptions();
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.productService.getAllProducts().subscribe(productsList => {
       this.products = productsList,
       this.untouchedProducts = productsList
@@ -38,26 +38,24 @@ export class ProductComponent {
 
   //Sorting methods:
   sortingAdvanced(event: any): void {
-
     const target = event.target.value;
-
-    if (target == "ascending") {
-      this.products = this.sortingOptions.sortProductsAscending(this.products);
-      console.log(this.products);
-    }
-    else if (target == "descending") {
-      this.products = this.sortingOptions.sortProductsDescending(this.products);
-    }
-    else if (target == "ascendingPrice") {
-      this.products = this.sortingOptions.sortProductsByPriceAscending(this.products);
-    }
-    else if (target == "descendingPrice") {
-      this.products = this.sortingOptions.sortProductsByPriceDescending(this.products)
-    }
-    else {
-      this.products = [];
-      //Make a copy of the original array
-      this.products = this.untouchedProducts.filter(() => true);
+    switch (target) {
+      case "ascending":
+        this.products = this.sortingOptions.sortProductsAscending(this.products);
+        break;
+      case "descending":
+        this.products = this.sortingOptions.sortProductsDescending(this.products);
+        break;
+      case "ascendingPrice":
+        this.products = this.sortingOptions.sortProductsByPriceAscending(this.products);
+        break;
+      case "descendingPrice":
+        this.products = this.sortingOptions.sortProductsByPriceDescending(this.products)
+        break;
+      default:
+        //Make a copy of the original array
+        this.products = this.untouchedProducts.filter(() => true);
+        break;
     }
     this.pageIndex = 1;
   }
@@ -65,7 +63,6 @@ export class ProductComponent {
   //Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
   filterProducts(event: any): void {
     const dropdownValue = event.target.value;
-
     if (dropdownValue === 'Default') {
       this.products = [];
       //Make a copy of the original array
