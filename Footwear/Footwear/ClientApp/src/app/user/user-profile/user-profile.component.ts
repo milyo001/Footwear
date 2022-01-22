@@ -1,8 +1,6 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
-import { CookieService } from 'ngx-cookie-service';
+import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
 

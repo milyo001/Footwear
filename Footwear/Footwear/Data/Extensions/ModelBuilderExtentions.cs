@@ -19,7 +19,7 @@
                     Name = "Nice Ultimate Edition",
                     Price = 185.88,
                     Details = "Perfect for running all day and night.Designed with love!",
-                    ProductImage = new ProductImage 
+                    ProductImage = new ProductImage
                     {
                         Id = 1,
                         ImageUrl = "https://cdn.pixabay.com/photo/2016/11/21/15/54/countryside-1846093_1280.jpg"

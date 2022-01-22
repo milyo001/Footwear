@@ -33,7 +33,7 @@
                 {
                     streamWriter.Write(token);
                 }
-                
+
                 array = memoryStream.ToArray();
             }
 

@@ -56,7 +56,7 @@
                 .FirstOrDefaultAsync();
             return user;
         }
-        
+
         public string GenerateToken(string userId, int cartId)
         {
             var tokenDescriptor = new SecurityTokenDescriptor
@@ -78,6 +78,6 @@
             return encryptedToken;
         }
 
-        
+
     }
 }
