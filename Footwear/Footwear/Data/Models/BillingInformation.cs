@@ -18,16 +18,16 @@
         [Required, RegularExpression("[- +()0-9]+")]
         public string Phone { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(100)]
         public string Street { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(50)]
         public string City { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(50)]
         public string State { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(50)]
         public string Country { get; set; }
 
         [Required, MaxLength(20)]

@@ -16,8 +16,6 @@
     {
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
-
-
         public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, IOrderService orderService)
         {
             this._orderService = orderService;

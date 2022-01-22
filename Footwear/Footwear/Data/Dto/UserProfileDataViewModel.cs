@@ -16,7 +16,7 @@ namespace Footwear.Data.Dto
         [Required, RegularExpression("[- +()0-9]+")]
         public string Phone { get; set; }
 
-        [Required, MaxLength(20)]
+        [Required, MaxLength(100)]
         public string Street { get; set; }
 
         [Required, MaxLength(20)]

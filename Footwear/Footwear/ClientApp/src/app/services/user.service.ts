@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { IUserData } from '../interfaces/userData';
 
 @Injectable({

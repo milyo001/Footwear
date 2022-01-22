@@ -22,9 +22,7 @@ export class ProductComponent {
   public pageIndex: number;
 
 
-  constructor(private productService: ProductService, private sortingOptions: SortingOptions, public loader: LoadingService) {
-    this.sortingOptions = new SortingOptions();
-  }
+  constructor(private productService: ProductService, private sortingOptions: SortingOptions, public loader: LoadingService) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(productsList => {
@@ -38,7 +36,7 @@ export class ProductComponent {
 
   //Sorting methods:
   sortingAdvanced(event: any): void {
-    const target = event.target.value;
+    const target: string = event.target.value;
     switch (target) {
       case "ascending":
         this.products = this.sortingOptions.sortProductsAscending(this.products);
