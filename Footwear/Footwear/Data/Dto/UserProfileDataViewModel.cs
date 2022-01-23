@@ -1,8 +1,8 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
-
 namespace Footwear.Data.Dto
 {
+    using System.ComponentModel.DataAnnotations;
+
     public class UserProfileDataViewModel
     {
         public string Email { get; set; }
