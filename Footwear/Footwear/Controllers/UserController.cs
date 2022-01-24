@@ -46,6 +46,7 @@
             {
                 return Conflict(new { message = IdentityErrors.UserIsInUse });
             }
+
             //Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
 
