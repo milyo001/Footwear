@@ -1,7 +1,7 @@
 ﻿namespace Footwear.Controllers
 {
     using Footwear.Data;
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
