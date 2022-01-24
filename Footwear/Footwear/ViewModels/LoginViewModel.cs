@@ -1,8 +1,8 @@
 ﻿
-using System.ComponentModel.DataAnnotations;
 
-namespace Footwear.Data.Dto
+namespace Footwear.ViewModels
 {
+    using System.ComponentModel.DataAnnotations;
 
     public class LoginViewModel
     {

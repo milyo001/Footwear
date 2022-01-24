@@ -1,6 +1,6 @@
-﻿namespace Footwear.Data.Dto
+﻿namespace Footwear.ViewModels
 {
-    public class ProductViewModel
+    public class ProductDto
     {
         public int Id { get; set; }
 
@@ -16,6 +16,5 @@
 
         public string Gender { get; set; }
 
-        public string Size { get; set; }
     }
 }

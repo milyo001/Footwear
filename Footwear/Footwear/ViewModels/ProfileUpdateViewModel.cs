@@ -1,9 +1,7 @@
-﻿
-namespace Footwear.Data.Dto
+﻿namespace Footwear.ViewModels
 {
     public class ProfileUpdateViewModel
     {
-
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Phone { get; set; }

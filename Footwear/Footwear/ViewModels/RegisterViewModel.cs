@@ -1,11 +1,9 @@
-﻿
-namespace Footwear.Data.Dto
+﻿namespace Footwear.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 
     public class RegisterViewModel
     {
-
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -17,8 +15,6 @@ namespace Footwear.Data.Dto
 
         [Required, EmailAddress]
         public string Email { get; set; }
-
-
     }
 
 }

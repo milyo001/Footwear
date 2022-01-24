@@ -1,11 +1,9 @@
-﻿namespace Footwear.Data.Dto
+﻿namespace Footwear.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 
     public class OrderViewModel
     {
-
-        //Will recieve "card" or "cash" from client
         [Required]
         public string Payment { get; set; }
 

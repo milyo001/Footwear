@@ -1,5 +1,4 @@
-﻿
-namespace Footwear.Data.Dto
+﻿namespace Footwear.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 
