@@ -155,14 +155,14 @@
 
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
+            
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
-
+            
             if (!isPassValid)
             {
                 return BadRequest(new { message = IdentityErrors.InvalidPassword });
             }
-
-            var result = await this._userService.UpdatePassword(user, model.NewPassword);
+            var result = await this._userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
 
             if (!result.Succeeded)
             {
