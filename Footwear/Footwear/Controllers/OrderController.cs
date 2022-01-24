@@ -2,7 +2,7 @@
 {
 
     using Footwear.Data;
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Identity;

@@ -1,7 +1,7 @@
 ﻿namespace Footwear.Services.OrderService
 {
     using Footwear.Data;
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
     using Footwear.Services.CartService;

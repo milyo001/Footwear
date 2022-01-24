@@ -1,7 +1,7 @@
 ﻿
 namespace server.Controllers
 {
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Cors;

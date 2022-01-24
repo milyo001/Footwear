@@ -2,7 +2,7 @@
 {
     using AutoMapper;
     using Footwear.Data;
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using System.Linq;

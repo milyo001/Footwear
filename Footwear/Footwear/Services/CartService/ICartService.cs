@@ -2,7 +2,7 @@
 
 namespace Footwear.Services.CartService
 {
-    using Footwear.Data.Dto;
+    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using System.Collections.Generic;
     using System.Threading.Tasks;
