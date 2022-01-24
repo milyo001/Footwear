@@ -47,6 +47,9 @@
             return result;
         }
 
+        /// <summary>
+        /// Using custom update email method, instead of user manager build in one, which updates only the email and  normalized email, by default application uses email as username
+        /// </summary>
         public async Task<IdentityResult> UpdateEmailAsync(User user, string email)
         {
             user.Email = email;
