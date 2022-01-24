@@ -159,7 +159,7 @@
 
             if (!isPassValid)
             {
-                return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
+                return BadRequest(new { message = IdentityErrors.InvalidPassword });
             }
 
             var result = await this._userService.UpdatePassword(user, model.NewPassword);

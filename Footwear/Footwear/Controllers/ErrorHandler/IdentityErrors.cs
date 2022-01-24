@@ -12,7 +12,8 @@ namespace Footwear.Controllers.ErrorHandler
         public const string UnableToUpdateUserInfo = "Unable to update user information. Please contact administrator!";
         public const string EmailInUse = "Email already in use.";
         public const string UnableToUpdateEmail = "Unable to update user email. Please contact administrator!";
-        public const string PasswordsNotMatch = "New and Confirm passwords does not match!";
+        public const string PasswordsNotMatch = "New passwords does not match!";
         public const string UnableToUpdatePassword = "Unable to update user password. Please contact administrator!";
+        public const string InvalidPassword = "Unable to change password. Password is invalid!";
     }
 }
