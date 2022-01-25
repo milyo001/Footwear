@@ -32,7 +32,6 @@ export class LoginComponent implements OnInit {
     this.userService.login(form.value).subscribe(
       (response: any) => {
         this.cookieService.set('token', response.token)
-        console.log(response.token);
         this.router.navigateByUrl('/');
       },
       error => {
