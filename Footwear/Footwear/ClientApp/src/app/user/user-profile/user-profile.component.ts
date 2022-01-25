@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { validateOldAndNewPassword } from '../../../shared/validators/user-profile.validators';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
 
@@ -9,6 +10,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './user-profile.component.html',
   styleUrls: ['./user-profile.component.css']
 })
+
 export class UserProfileComponent implements AfterViewInit, OnInit {
   form: FormGroup;
   passwordForm: FormGroup;
@@ -25,7 +27,6 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
 
   constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
     
-
   ngOnInit(): void {
     //Initialize user data form validators
     this.setUserFormValidation();
@@ -43,16 +44,25 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
       confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
-    }, { validator: this.matchFields });
+    },
+      { validator: this.matchFields }
+    );
   }
 
   setPasswordFormValidation(): void {
     this.passwordForm = this.fb.group({
       passwords: this.fb.group({
-        password: ['', [Validators.required, Validators.maxLength(100), Validators.minLength(6)], []],
-        newPassword: ['', [Validators.required, Validators.minLength(6), Validators.maxLength(100)], []],
-        confirmPassword: ['', [Validators.required], []]
-      }, { validator: this.matchFields })
+        password: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(6)]),
+        newPassword: new FormControl('',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(100),
+            validateOldAndNewPassword
+          ]
+        ),
+        confirmPassword: new FormControl('', [Validators.required])
+      })
     });
   }
 
@@ -71,7 +81,8 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
 
   //Loads already filled data from user if any, otherwise form fields will remain blank
   async loadDataAsync(): Promise<void> {
-    await this.userService.getUserProfile().then(data => {
+    await this.userService.getUserProfile()
+      .then(data => {
       this.userData = data as IUserData;
       this.form.patchValue({
         firstName: data.firstName,
@@ -162,7 +173,6 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     }
 
   }
-
 }
 
 

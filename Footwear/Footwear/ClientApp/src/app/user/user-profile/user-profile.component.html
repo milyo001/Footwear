@@ -31,6 +31,7 @@
                         <mat-label>New password</mat-label>
                         <input matInput formControlName="newPassword" type="password" name="newPassword" id="newPassword">
                         <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.get('passwords.newPassword').errors?.required">* Password is required!</mat-error>
+                        <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.get('passwords.newPassword').errors?.passwordsMismatch">* Old and new passwords cannot be the same!</mat-error>
                         <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.controls.passwords.controls.newPassword.hasError('minlength')">* Password cannot be less than 6 symbols!</mat-error>
                         <mat-error class="validation-error" *ngIf="passwordForm.get('passwords.newPassword').touched && passwordForm.controls.passwords.controls.newPassword.hasError('maxlength')">* Password cannot be more than 100 symbols!</mat-error>
                       </mat-form-field>
