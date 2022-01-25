@@ -108,6 +108,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       },
       error => {
         this.toastr.error(error.error.message);
+        console.log(error.error.message);
       }
     );
   }
@@ -118,7 +119,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         this.toastr.success("Successfully updated your password!");
         this.passwordForm.reset();
         //<mat-error> check the validity of FormGroupDirective,
-        //not FormGroup, and resetting FormGroup does not reset FormGroupDirective.
+        //not FormGroup and resetting FormGroup does not reset FormGroupDirective.
         passFormDirective.resetForm();
       }
     },
@@ -134,7 +135,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         this.email = emailForm.email;
         this.emailForm.reset();
         //<mat-error> check the validity of FormGroupDirective,
-        //not FormGroup, and resetting FormGroup does not reset FormGroupDirective.
+        //not FormGroup and resetting FormGroup does not reset FormGroupDirective.
         emailFormDirective.resetForm();
       }
     },
