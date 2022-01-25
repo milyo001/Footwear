@@ -1,5 +1,8 @@
 import { FormControl } from '@angular/forms';
 
+/**
+ * A custom validator used to return 'passwordsMismatch' error property when old password and new password fields are different
+ */
 export function validateOldAndNewPass(control: FormControl) {
   if (control.parent == null) {
     return null;
@@ -9,6 +12,9 @@ export function validateOldAndNewPass(control: FormControl) {
   return pass === newPass ? { passwordsMismatch: true } : null;
 }
 
+/**
+ * A custom validator used to return 'confPasswordMismatch' error property when new password and confirm password fields are different
+ */
 export function validateNewAndConfPass(control: FormControl) {
   if (control.parent == null) {
     return null;
@@ -18,6 +24,9 @@ export function validateNewAndConfPass(control: FormControl) {
   return newPass !== confPass ? { confPasswordMismatch: true } : null;
 }
 
+/**
+ * A custom validator used to return 'emailMismatch' error property when email and confirm email fields are different
+ */
 export function valideEmails(control: FormControl) {
   if (control.parent == null) {
     return null;
