@@ -35,11 +35,8 @@ export class LoginComponent implements OnInit {
         this.router.navigateByUrl('/');
       },
       error => {
-        if (error.status == 400) { //bad request from the api
-          this.toastr.error(error.error.message, 'Authentication failed!');
-          console.log(error);
-        }
-        
+        this.toastr.error(error.error.message, 'Authentication failed!');
+        console.log(error);
       }
     )
   }
