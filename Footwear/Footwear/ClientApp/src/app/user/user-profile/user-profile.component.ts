@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { validateNewAndConfPass, validateOldAndNewPass } from '../../../shared/validators/user-profile.validators';
+import { validateNewAndConfPass, validateOldAndNewPass, valideEmails } from '../../../shared/validators/user-profile.validators';
 import { IUserData } from '../../interfaces/userData';
 import { UserService } from '../../services/user.service';
 
@@ -43,7 +43,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   setEmailFormValidation(): void {
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
-      confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []]
+      confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30), valideEmails], []]
     });
   }
 

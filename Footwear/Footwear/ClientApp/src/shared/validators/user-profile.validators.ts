@@ -18,31 +18,11 @@ export function validateNewAndConfPass(control: FormControl) {
   return newPass !== confPass ? { confPasswordMismatch: true } : null;
 }
 
-//Check if password or email are matching the confirm email/passcode fields
-//matchFields(group: FormGroup) {
-//  //Check if password and confirmPassword match
-//  if (group.contains('confirmPassword')) {
-//    let confirmPassword = group.get('confirmPassword');
-//    if (confirmPassword.errors == null || 'passwordMismatch' in confirmPassword.errors) {
-//      if (group.get('newPassword').value != confirmPassword.value) {
-//        confirmPassword.setErrors({ passwordMismatch: true })
-//      }
-//      else {
-//        confirmPassword.setErrors(null);
-//      }
-//    }
-//  }
-//  //Check if email and confirmEmail match
-//  else if (group.contains('confirmEmail')) {
-//    let confirmEmail = group.get('confirmEmail');
-//    if (confirmEmail.errors == null || 'emailMismatch' in confirmEmail.errors) {
-//      if (group.get('email').value != confirmEmail.value) {
-//        confirmEmail.setErrors({ emailMismatch: true })
-//      }
-//      else {
-//        confirmEmail.setErrors(null);
-//      }
-//    }
-//  }
-
-//}
+export function valideEmails(control: FormControl) {
+  if (control.parent == null) {
+    return null;
+  }
+  let email = control.parent.get('email').value;
+  let confEmail = control.value;
+  return email !== confEmail ? { emailMismatch: true } : null;
+}
