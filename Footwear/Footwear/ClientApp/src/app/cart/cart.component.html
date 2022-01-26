@@ -2,7 +2,9 @@
 <section *ngIf="!hasProducts" class="jumbotron text-center empty-cart-container">
   <div class="container">
     <img src="https://cdn.pixabay.com/photo/2019/08/11/16/17/carton-4399301_1280.png" alt="Oops Error!" class="empty-cart-image" />
-    <h1 class="jumbotron-heading">Cart is empty</h1>
+    <h1 class="jumbotron-heading">Your Cart is empty</h1>
+    <h3>Looks like you haven't added anything to your cart yet</h3>
+    <mat-button>test</mat-button>
   </div>
 </section>
 <section *ngIf="cartProducts?.length" class="jumbotron text-center">

@@ -1,9 +1,10 @@
 .empty-cart-container{
     height: 75vh;
 }
-.empty-cart-image{
-    width:140px;
-    margin-bottom:5px;
+.empty-cart-image {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-top: 90px;
 }
 .image-resize {
   width: 50px;
