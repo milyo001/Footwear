@@ -1,28 +1,22 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router, private cookieService: CookieService) {
+  constructor(private router: Router, private cookieService: CookieService, private toastr: ToastrService ) { }
 
-  }
-
-  canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-    if (this.cookieService.get("token") != null) {
+  canActivate(): boolean {
+    if (this.cookieService.check("token")) {
       return true;
     }
-    else {
       this.router.navigate(['user/login']);
+    this.toastr.warning("Authorization failed! Please log in.", "Cannot access that page!");
       return false;
-    }
   }
 
-
-  
 }

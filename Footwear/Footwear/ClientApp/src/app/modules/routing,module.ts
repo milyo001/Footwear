@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router'; // CLI imports router
+import { Routes, RouterModule } from '@angular/router'; 
 import { AboutComponent } from '../about/about.component';
 import { AuthGuard } from '../interceptors/auth.guard';
 import { CartComponent } from '../cart/cart.component';
@@ -16,18 +16,18 @@ import { PaymentCancelComponent } from '../payment/payment-cancel/payment-cancel
 
 const routes: Routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
-  { path: 'products', component: ProductComponent }, //All products
-  { path: 'products/:id', component: ProductSelectComponent }, //Product Details
-  { path: 'about', component: AboutComponent },
-  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'products', component: ProductComponent },
+  { path: 'products/:id', component: ProductSelectComponent },
+  { path: 'about', component: AboutComponent }, 
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] }, 
   { path: 'user/login', component: LoginComponent },
   { path: 'user/register', component: RegisterComponent },
-  { path: 'user/userProfile', component: UserProfileComponent },
-  { path: 'placeOrder', component: PlaceOrderComponent },
-  { path: 'orders', component: OrdersComponent },
-  { path: 'payment-success', component: PaymentSuccessComponent },
-  { path: 'payment-cancel', component: PaymentCancelComponent }
-]; // sets up routes constant where you define your routes
+  { path: 'user/userProfile', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'placeOrder', component: PlaceOrderComponent, canActivate: [AuthGuard]},
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard] },
+  { path: 'payment-success', component: PaymentSuccessComponent, canActivate: [AuthGuard] },
+  { path: 'payment-cancel', component: PaymentCancelComponent, canActivate: [AuthGuard] }
+]; 
 
 
 @NgModule({
