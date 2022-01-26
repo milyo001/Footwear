@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/xK2mJCzZ4kZTY3xi8hDmGtpfvbFB7eUZw7+hLLqkHREDgZtCJ92a8A8WOMUt6y8R6hpCeRbrfYHC0XiDdv3vw==",
+  "dgSpecHash": "+leZhfTxI8GE6HajHK45fB+qVk2NYq5hi0/0TTp5+4IS01fUgD93BFUewpOzqZrDsqxpFOtKRu3Z/34EbVa6QA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearTests\\FootwearApiTests.csproj",
+  "projectFilePath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearApiTests\\FootwearApiTests.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\coverlet.collector\\3.0.2\\coverlet.collector.3.0.2.nupkg.sha512",
     "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\microsoft.codecoverage\\16.9.4\\microsoft.codecoverage.16.9.4.nupkg.sha512",

@@ -4909,11 +4909,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearTests\\FootwearApiTests.csproj",
+      "projectUniqueName": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearApiTests\\FootwearApiTests.csproj",
       "projectName": "FootwearApiTests",
-      "projectPath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearTests\\FootwearApiTests.csproj",
+      "projectPath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearApiTests\\FootwearApiTests.csproj",
       "packagesPath": "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearTests\\obj\\",
+      "outputPath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\FootwearApiTests\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
