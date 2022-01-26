@@ -19,7 +19,6 @@ export class CartComponent implements OnInit {
   cartProducts: ICartProduct[];
   totalAmount: number;
   expandedIndex = 0;
-  hasProducts: boolean;
   
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
@@ -28,7 +27,6 @@ export class CartComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private toastr: ToastrService,
-    private cookieService: CookieService,
     private router: Router,
     public modal: NgbModal,
     public loader: LoadingService
@@ -37,18 +35,9 @@ export class CartComponent implements OnInit {
 
   //Load all the products from the dabase or display a notification (error message)
   ngOnInit() {
-    if (this.cookieService.get('token') != '') {
       this.cartService.getAllCartProducts().subscribe(productsList => {
         this.cartProducts = productsList;
-        if (this.cartProducts.length > 0) {
-          this.hasProducts = true;
-        }
       })
-    }
-    else {
-      this.toastr.error('You need to log in to view the cart!');
-      this.router.navigate(['user/login']);
-    }
   };
 
   //View product by given product id
@@ -121,9 +110,6 @@ export class CartComponent implements OnInit {
             if (response.succeeded) {
               this.deleteCartProductEl(index);
               this.cartProducts.splice(index, 1);
-              if (this.cartProducts.length == 0) {
-                this.hasProducts = false;
-              }
             }
           },
           err => {
