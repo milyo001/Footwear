@@ -23,6 +23,7 @@ export class PlaceOrderComponent implements OnInit {
   public userData: IUserData = null;
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
+  public totalPrice: string = '';
 
   //Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
@@ -44,19 +45,31 @@ export class PlaceOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cartService.getAllCartProducts().subscribe(products => { this.cartProducts = products });
-      this.form = this.fb.group({
-        firstName: ["", [Validators.required, Validators.maxLength(100)], []],
-        lastName: ["", [Validators.required, Validators.maxLength(100)], []],
-        phone: ["", [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
-        street: ["", [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
-        state: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        country: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        city: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-        payment: ["", [Validators.required],[]]
-      });
- };
+    this.cartService.getAllCartProducts().subscribe(products => {
+      this.cartProducts = products
+      this.GetTotalPrice();
+    });
+    this.form = this.fb.group({
+      firstName: ["", [Validators.required, Validators.maxLength(100)], []],
+      lastName: ["", [Validators.required, Validators.maxLength(100)], []],
+      phone: ["", [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
+      street: ["", [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
+      state: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      country: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      city: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
+      payment: ["", [Validators.required], []]
+    });
+    
+  }
+
+  //Gets products total price and store it in the component property
+  GetTotalPrice() {
+    let price = this.cartProducts.reduce((total: number, product: ICartProduct) =>
+      total + (product.price * product.quantity), 0);
+    this.totalPrice = price.toString();
+    };
+
 
   onCheckOut(): void{
     this.orderService.checkOut(this.order).subscribe((response: any) => {
