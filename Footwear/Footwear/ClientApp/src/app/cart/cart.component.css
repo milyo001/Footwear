@@ -1,4 +1,10 @@
-
+.empty-cart-container{
+    height: 75vh;
+}
+.empty-cart-image{
+    width:140px;
+    margin-bottom:5px;
+}
 .image-resize {
   width: 50px;
   height: auto;
