@@ -26,8 +26,9 @@
                 </ul>
               </mat-card>
               <mat-card class="p-2 d-flex text-center mt-2">
-                TO DO: put price here and details about items, estimated delivery date
-                Total Price : {{totalPrice}}$
+                <h2>Shipping aproximate time {{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</h2>
+                <h2>Delivery Price: {{deliveryInfo.deliveryPrice}}$</h2>
+                <h1>Total Price : {{totalPrice}}$</h1>
               </mat-card>
             </div>
           </mat-card-content>

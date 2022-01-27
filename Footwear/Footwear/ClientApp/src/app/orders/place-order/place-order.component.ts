@@ -25,7 +25,7 @@ export class PlaceOrderComponent implements OnInit {
   public deliveryInfo: IDeliveryInfo = null;
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
-  public totalPrice: string = '';
+  public totalPrice: number;
 
 
   //Document properties
@@ -50,15 +50,17 @@ export class PlaceOrderComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.cartService.getAllCartProducts().subscribe(products => {
-      this.cartProducts = products;
-      //Gets the min and max delivery days and the cost of the delivery
-      this.orderService.getDeliveryPricingData().subscribe(info => {
-        this.deliveryInfo = info;
+    this.orderService.getDeliveryPricingData().subscribe(info => {
+      this.deliveryInfo = info;
+      this.cartService.getAllCartProducts().subscribe(products => {
+        this.cartProducts = products;
+        this.GetTotalPrice(products);
+        //Gets the min and max delivery days and the cost of the delivery
+
       });
-      console.log(this.deliveryInfo);
-      this.GetTotalPrice();
     });
+    
+    
     this.form = this.fb.group({
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
       lastName: ["", [Validators.required, Validators.maxLength(100)], []],
@@ -74,11 +76,11 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   //Gets products total price for all products and delivery price and store it in the component property
-  GetTotalPrice() {
-    let price = this.cartProducts.reduce((total: number, product: ICartProduct) =>
-      total + (product.price * product.quantity), 0);
+  GetTotalPrice(products: ICartProduct[]) {
+    let price = products.reduce
+      ((total: number, product: ICartProduct) => total + (product.price * product.quantity), 0);
     price += this.deliveryInfo.deliveryPrice;
-    this.totalPrice = price.toString();
+    this.totalPrice = price;
     };
 
 
@@ -106,7 +108,6 @@ export class PlaceOrderComponent implements OnInit {
       else {
         this.router.navigate(['/', 'payment-success'])
       }
-      
     },
       error => {
         if (error.status == 400) { //bad request from the api
@@ -114,7 +115,6 @@ export class PlaceOrderComponent implements OnInit {
           console.log(error);
         }
       })
-    
   }
 
   handleImports(event)  {

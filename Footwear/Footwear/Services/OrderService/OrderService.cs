@@ -64,16 +64,16 @@
             this._db.SaveChanges();
         }
 
-        public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
+        public DeliveryInfoViewModel GetDeliveryData()
         {
-            AppData data = await this._db.AppData.FirstOrDefaultAsync();
-            DeliveryInfoViewModel vm = new DeliveryInfoViewModel
+            AppData data = this._db.AppData.FirstOrDefault();
+            DeliveryInfoViewModel result = new DeliveryInfoViewModel
             {
                 MinDelivery = data.MinDelivery,
                 MaxDelivery = data.MaxDelivery,
                 DeliveryPrice = data.DeliveryPrice
             };
-            return vm;
+            return result;
         }
 
         //A method that will return the last added user order id

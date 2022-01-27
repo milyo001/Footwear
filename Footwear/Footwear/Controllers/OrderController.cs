@@ -10,6 +10,7 @@
     using Microsoft.Extensions.Configuration;
     using Stripe;
     using System.Threading.Tasks;
+    using System.Collections.Generic;
 
     [Route("[controller]")]
     [ApiController]
@@ -43,9 +44,10 @@
         }
 
         [Route("getDeliveryInfo")]
-        public async Task<IActionResult> GetDeliveryData()
+        public ActionResult<DeliveryInfoViewModel> GetDeliveryData()
         {
             var result = this._orderService.GetDeliveryData();
+            return result;
         }
     }
 }

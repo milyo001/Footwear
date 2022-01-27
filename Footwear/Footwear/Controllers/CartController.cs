@@ -26,7 +26,7 @@
 
 
         [HttpGet("getCartItems")]
-        public async Task<IEnumerable<CartProductViewModel>> Get()
+        public IEnumerable<CartProductViewModel> GetItems()
         {
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);

@@ -1,5 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { IDeliveryInfo } from '../interfaces/deliveryInfo';
 import { IOrder } from '../interfaces/order';
 
 @Injectable({
@@ -29,7 +31,7 @@ export class OrderService {
     return this.http.get(this.baseUrl + 'order/payment-success/?session_id=' + sessionId);
   }
 
-  getDeliveryPricingData() {
-    return this.http.get(this.baseUrl + 'order/getDeliveryInfo');
+  getDeliveryPricingData(): Observable<IDeliveryInfo> {
+    return this.http.get<IDeliveryInfo>(this.baseUrl + 'order/getDeliveryInfo');
   }
 }
