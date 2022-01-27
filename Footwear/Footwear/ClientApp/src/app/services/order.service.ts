@@ -28,4 +28,8 @@ export class OrderService {
   validatePayment(sessionId: string) {
     return this.http.get(this.baseUrl + 'order/payment-success/?session_id=' + sessionId);
   }
+
+  getDeliveryPricingData() {
+    return this.http.get(this.baseUrl + 'order/getDeliveryInfo');
+  }
 }

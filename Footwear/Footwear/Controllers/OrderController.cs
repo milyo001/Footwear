@@ -9,6 +9,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
+    using System.Threading.Tasks;
 
     [Route("[controller]")]
     [ApiController]
@@ -39,6 +40,12 @@
             this._orderService.CreateOrder(authToken, order);
 
             return Ok(new { cardPayment });
+        }
+
+        [Route("getDeliveryInfo")]
+        public async Task<IActionResult> GetDeliveryData()
+        {
+            var result = this._orderService.GetDeliveryData();
         }
     }
 }

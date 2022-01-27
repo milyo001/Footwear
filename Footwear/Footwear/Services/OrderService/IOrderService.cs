@@ -15,5 +15,7 @@ namespace Footwear.Services.OrderService
         Task<Order> GetOrderByIdAsync(string id);
 
         void ModifyPaidOrder(string orderId);
+
+        AppData GetDeliveryData()
     }
 }
