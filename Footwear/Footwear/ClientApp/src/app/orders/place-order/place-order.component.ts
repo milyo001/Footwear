@@ -7,6 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
+import { IDeliveryInfo } from '../../interfaces/deliveryInfo';
 import { IOrder } from '../../interfaces/order';
 import { IUserData } from '../../interfaces/userData';
 import { CartService } from '../../services/cart.service';
@@ -21,9 +22,11 @@ import { UserService } from '../../services/user.service';
 export class PlaceOrderComponent implements OnInit {
 
   public userData: IUserData = null;
+  public deliveryInfo: IDeliveryInfo = null;
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
   public totalPrice: string = '';
+
 
   //Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
@@ -34,6 +37,8 @@ export class PlaceOrderComponent implements OnInit {
 
   cartProducts: ICartProduct[];
   order: IOrder;
+
+  
 
   constructor(
     private orderService: OrderService,
@@ -46,7 +51,12 @@ export class PlaceOrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.cartService.getAllCartProducts().subscribe(products => {
-      this.cartProducts = products
+      this.cartProducts = products;
+      //Gets the min and max delivery days and the cost of the delivery
+      this.orderService.getDeliveryPricingData().subscribe(info => {
+        this.deliveryInfo = info;
+      });
+      console.log(this.deliveryInfo);
       this.GetTotalPrice();
     });
     this.form = this.fb.group({
@@ -63,10 +73,11 @@ export class PlaceOrderComponent implements OnInit {
     
   }
 
-  //Gets products total price and store it in the component property
+  //Gets products total price for all products and delivery price and store it in the component property
   GetTotalPrice() {
     let price = this.cartProducts.reduce((total: number, product: ICartProduct) =>
       total + (product.price * product.quantity), 0);
+    price += this.deliveryInfo.deliveryPrice;
     this.totalPrice = price.toString();
     };
 

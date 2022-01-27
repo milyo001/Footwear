@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
       return true;
     }
       this.router.navigate(['user/login']);
-    this.toastr.warning("Authorization failed! Please log in.", "Cannot access that page!");
+    this.toastr.warning("Please log in.", "Cannot access this page!");
       return false;
   }
 
