@@ -103,7 +103,10 @@
         public async Task<ICollection<CartProduct>> GetCartProductsAsync(int cartId)
         {
             var cart = await this.GetCartAsync(cartId);
-            var products = cart.CartProducts.Where(cp => cp.CartId == cartId).ToList();
+            var products = cart.CartProducts
+                .Where(cp => cp.CartId == cartId)
+                .Where(cp => cp.isOrdered == false)
+                .ToList();
             return products;
         }
 
@@ -150,8 +153,8 @@
         //Change isOrdered property all cart products after order is finished
         public async Task ChangeOrderStateCartProductsAsync(int cartId)
         {
-            var cartProducts = await this.GetCartProducts(cartId).ToList();
-            cartProducts.ForEach(cp => cp.isOrdered = true);
+            var cartProducts = await this.GetCartProductsAsync(cartId);
+            cartProducts.ToList().ForEach(cp => cp.isOrdered = true);
             await this._db.SaveChangesAsync();
         }
 
