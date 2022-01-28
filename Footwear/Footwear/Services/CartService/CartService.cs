@@ -29,17 +29,17 @@
             return cartId;
         }
 
-        public Cart GetCart(int cartId)
+        public async Task<Cart> GetCartAsync(int cartId)
         {
-            var cart = this._db.Cart
+            var cart = await this._db.Cart
                 .Include(c => c.CartProducts)
-                .FirstOrDefault(c => c.Id == cartId);
+                .FirstOrDefaultAsync(c => c.Id == cartId);
             return cart;
         }
         //Get all cart products and return the view model to send it to the client
-        public IEnumerable<CartProductViewModel> GetCartProductsViewModel(int cartId)
+        public async Task<IEnumerable<CartProductViewModel>> GetCartProductsViewModelAsync(int cartId)
         {
-            var cart = this.GetCart(cartId);
+            var cart = await this.GetCartAsync(cartId);
             //Gets the products that are not ordered yet
             var products = cart.CartProducts
                  .Where(cp => cp.isOrdered == false)
@@ -67,7 +67,7 @@
         public async Task AddCartProductAsync(string token, CartProductViewModel model)
         {
             var cartId = this._tokenService.GetCartId(token);
-            var cart = this.GetCart(cartId);
+            var cart = await this.GetCartAsync(cartId);
 
             //Check if product with same name and size already exists, check if product is unordered
             var dupplicateProduct = cart.CartProducts
@@ -100,9 +100,9 @@
         }
 
         //Get all cart products to add them to order
-        public ICollection<CartProduct> GetCartProducts(int cartId)
+        public async Task<ICollection<CartProduct>> GetCartProductsAsync(int cartId)
         {
-            var cart = this.GetCart(cartId);
+            var cart = await this.GetCartAsync(cartId);
             var products = cart.CartProducts.Where(cp => cp.CartId == cartId).ToList();
             return products;
         }
@@ -110,7 +110,8 @@
         //Get a single cart product by given cart product id
         public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
-            var product = await this._db.CartProducts.FirstOrDefaultAsync(p => p.Id == cartProductId);
+            var product = await this._db.CartProducts
+                .FirstOrDefaultAsync(p => p.Id == cartProductId);
             return product;
         }
 
@@ -149,7 +150,7 @@
         //Change isOrdered property all cart products after order is finished
         public async Task ChangeOrderStateCartProductsAsync(int cartId)
         {
-            var cartProducts = this.GetCartProducts(cartId).ToList();
+            var cartProducts = await this.GetCartProducts(cartId).ToList();
             cartProducts.ForEach(cp => cp.isOrdered = true);
             await this._db.SaveChangesAsync();
         }
