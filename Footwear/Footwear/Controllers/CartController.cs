@@ -26,11 +26,11 @@
 
 
         [HttpGet("getCartItems")]
-        public IEnumerable<CartProductViewModel> GetItems()
+        public async Task<IEnumerable<CartProductViewModel>> GetItemsAsync()
         {
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);
-            var products = this._cartService.GetCartProductsViewModel(cartId);
+            var products = await this._cartService.GetCartProductsViewModelAsync(cartId);
             return products;
 
         }
