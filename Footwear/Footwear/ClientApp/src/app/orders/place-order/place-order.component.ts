@@ -3,8 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
   faCreditCard,
-  faMoneyBillWave
-} from '@fortawesome/free-solid-svg-icons';
+  faDollarSign,
+  faHandHoldingUsd,
+  faMoneyBillWave,
+  faShippingFast
+}
+  from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/cartProduct';
 import { IDeliveryInfo } from '../../interfaces/deliveryInfo';
@@ -21,24 +25,26 @@ import { UserService } from '../../services/user.service';
 })
 export class PlaceOrderComponent implements OnInit {
 
+  //Component Properties
   public userData: IUserData = null;
   public deliveryInfo: IDeliveryInfo = null;
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
   public totalPrice: number;
 
-
   //Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
+
   //Font awesome icons
   faMoneyBillWave = faMoneyBillWave;
   faCreditCard = faCreditCard;
+  faShippingFast = faShippingFast;
+  faDollarSign = faDollarSign;
+  faHandFoldingUsd = faHandHoldingUsd;
 
   cartProducts: ICartProduct[];
   order: IOrder;
-
-  
 
   constructor(
     private orderService: OrderService,
