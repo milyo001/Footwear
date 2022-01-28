@@ -24,7 +24,7 @@
             this._cartService = cartService;
         }
 
-        public void CreateOrder(string token, OrderViewModel orderViewModel)
+        public async Task CreateOrderAsync(string token, OrderViewModel orderViewModel)
         {
             //Get the current logged in user
             var user = this._tokenService.GetUserByIdAsync(token).Result;
@@ -40,13 +40,13 @@
                 orderViewModel.Status = "DeliveryCash";
             }
 
-            var order = new Data.Models.Order()
+            var order = new Order()
             {
                 Id = Guid.NewGuid().ToString(),
                 Status = (Status)Enum.Parse(typeof(Status), orderViewModel.Status),
                 CreatedOn = DateTime.UtcNow,
                 Payment = orderViewModel.Payment,
-                Products = this._cartService.GetCartProducts(cartId),
+                Products = await this._cartService.GetCartProductsAsync(cartId),
                 UserData = new BillingInformation
                 {
                     FirstName = orderViewModel.UserData.FirstName,
@@ -64,7 +64,7 @@
             this._db.SaveChanges();
         }
 
-        public async Task<DeliveryInfoViewModel> GetDeliveryData()
+        public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
         {
             AppData data = await this._db.AppData.FirstOrDefaultAsync();
             DeliveryInfoViewModel result = new()

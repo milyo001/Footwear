@@ -10,7 +10,6 @@
     using Microsoft.Extensions.Configuration;
     using Stripe;
     using System.Threading.Tasks;
-    using System.Collections.Generic;
 
     [Route("[controller]")]
     [ApiController]
@@ -18,16 +17,15 @@
     {
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
-        public OrderController(ApplicationDbContext db, UserManager<User> userManager, IConfiguration configuration, IOrderService orderService)
+        public OrderController(IConfiguration configuration, IOrderService orderService)
         {
             this._orderService = orderService;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
-
         }
 
         [Route("create-order")]
-        public ActionResult CreateOrder([FromBody] OrderViewModel order)
+        public async Task<ActionResult> CreateOrder([FromBody] OrderViewModel order)
         {
             //Check if data is invalid or model was not bound successfully
             if (order == null || !ModelState.IsValid)
@@ -38,15 +36,15 @@
 
             //Check if payment is with card so the client can handle card payment session
             var cardPayment = order.Payment == "card" ? true : false;
-            this._orderService.CreateOrder(authToken, order);
+            await this._orderService.CreateOrderAsync(authToken, order);
 
             return Ok(new { cardPayment });
         }
 
         [Route("getDeliveryInfo")]
-        public ActionResult<DeliveryInfoViewModel> GetDeliveryData()
+        public async Task<ActionResult<DeliveryInfoViewModel>> GetDeliveryData()
         {
-            var result = this._orderService.GetDeliveryData();
+            var result = await this._orderService.GetDeliveryDataAsync();
             return result;
         }
     }

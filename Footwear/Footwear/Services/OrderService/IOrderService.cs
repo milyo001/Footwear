@@ -8,7 +8,7 @@ namespace Footwear.Services.OrderService
 
     public interface IOrderService
     {
-        void CreateOrder(string token, OrderViewModel order);
+        Task CreateOrderAsync(string token, OrderViewModel order);
 
         Task<string> GetLatestAddedOrderIdAsync(string token);
 
@@ -16,6 +16,6 @@ namespace Footwear.Services.OrderService
 
         void ModifyPaidOrder(string orderId);
 
-        Task<DeliveryInfoViewModel> GetDeliveryData();
+        Task<DeliveryInfoViewModel> GetDeliveryDataAsync();
     }
 }
