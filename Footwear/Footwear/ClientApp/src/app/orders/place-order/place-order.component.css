@@ -15,6 +15,9 @@
   object-fit: cover;
   margin: 10px;
 }
+.delivery-info{
+    width: 100%;
+}
 ul {
   list-style-type: none;
   text-align: right;
