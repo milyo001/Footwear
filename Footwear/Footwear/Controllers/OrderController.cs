@@ -1,11 +1,7 @@
 ﻿namespace Footwear.Controllers
 {
-
-    using Footwear.Data;
     using Footwear.ViewModels;
-    using Footwear.Data.Models;
     using Footwear.Services.OrderService;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
