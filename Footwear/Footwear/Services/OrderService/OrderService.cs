@@ -64,10 +64,10 @@
             this._db.SaveChanges();
         }
 
-        public DeliveryInfoViewModel GetDeliveryData()
+        public async Task<DeliveryInfoViewModel> GetDeliveryData()
         {
-            AppData data = this._db.AppData.FirstOrDefault();
-            DeliveryInfoViewModel result = new DeliveryInfoViewModel
+            AppData data = await this._db.AppData.FirstOrDefaultAsync();
+            DeliveryInfoViewModel result = new()
             {
                 MinDelivery = data.MinDelivery,
                 MaxDelivery = data.MaxDelivery,
