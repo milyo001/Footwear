@@ -1,138 +1,279 @@
-<div class="container mt-2 mr-2 ml-2">
-  <section>
-    <mat-toolbar class="title">
-      <span>Shipping Information</span>
-    </mat-toolbar>
-  </section>
-  <section class="container-fluid mt-2 mr-2 ml-2">
-    <div class="row">
-      <div class="col-lg-6 mb-3">
-        <mat-card>
-          <label class="text-center">
-            Products List:
-          </label>
-          <mat-card-content>
-            <div class="d-flex flex-column justify-content-between">
-              <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
-                <div>
-                  <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
-                </div>
-                <ul class="font-weight-light">
-                  <li>{{item.name}} </li>
-                  <li>Size: {{item.size}}</li>
-                  <li>{{item.quantity}} x</li>
-                  <li>Price: {{item.price}}$</li>
-                  <li class="bold" *ngIf="item.quantity > 1">Total: {{+item.price * item.quantity}}$</li>
-                </ul>
-              </mat-card>
-              <mat-card class="p-2 d-flex text-center mt-2">
-                <mat-card-content class="delivery-info">
-                  <div class="row">
-                    <ul class="col-sm-4 mt-2">
-                      <li><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping aproximate time</li>
-                      <li>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</li>
-                    </ul>
-                    <ul class="col-sm-4">
-                      <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
-                      <li>{{deliveryInfo.deliveryPrice}}$</li>
-                    </ul>
-                    <ul class="col-sm-4">
-                      <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
-                      <li>{{totalPrice}}$</li>
-                    </ul>
-                  </div>
-                </mat-card-content>
-              </mat-card>
-            </div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-      <div class="col-lg-6">
-        <mat-card>
-          <mat-card-content>
-            <section class="example-section">
-              <h5 class="text-center d-block m-1">Please enter delivery address and name for the invoice!</h5>
-              <div class="mt-3 ml-3">
-                <label class="mr-2">Import data from your account? </label>
-                <mat-radio-group [(ngModel)]="labelPosition" (change)="handleImports($event)">
-                  <mat-radio-button class="mr-1 mb-1" value="import">Import</mat-radio-button>
-                  <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
-                </mat-radio-group>
+<mat-horizontal-stepper linear #stepper>
+    <mat-step>
+      <mat-card>
+        <label class="text-center">
+          Products List:
+        </label>
+        <mat-card-content>
+          <div class="d-flex flex-column justify-content-between">
+            <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
+              <div>
+                <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
               </div>
-            </section>
-            <section class="form">
-              <form [formGroup]="form" (ngSubmit)="submitData(form)">
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>First Name</mat-label>
-                  <input matInput formControlName="firstName">
-                  <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>Last Name</mat-label>
-                  <input matInput formControlName="lastName">
-                  <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name cannot be more than 100 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>Phone</mat-label>
-                  <input matInput formControlName="phone">
-                  <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone cannot be more than 20 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">* Phone is invalid!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>Street</mat-label>
-                  <input matInput formControlName="street">
-                  <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>City</mat-label>
-                  <input matInput formControlName="city">
-                  <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.required">* City is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.maxlenght">* City cannot be more than 20 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.minlength">* City cannot be less than 2 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>State</mat-label>
-                  <input matInput formControlName="state">
-                  <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.required">* State is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.maxlenght">* State cannot be more than 20 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.minlength">* State cannot be less than 2 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>Country</mat-label>
-                  <input matInput formControlName="country">
-                  <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.required">* Country is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.maxlenght">* Country cannot be more than 20 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.minlength">* Country cannot be less than 2 symbols!</mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-lg-6" appearance="fill">
-                  <mat-label>Zip/Postal Code</mat-label>
-                  <input matInput formControlName="zipCode">
-                  <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.required">* Zip/Postal code is required!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.maxlenght">* Zip/Postal code cannot be more than 20 symbols!</mat-error>
-                  <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.minlength">* Zip/Postal cannot be less than 2 symbols!</mat-error>
-                </mat-form-field>
-                <div class="row payment-options">
-                  <mat-button-toggle-group name="payment-select" formControlName="payment" aria-label="Font Style">
-                    <mat-button-toggle value="cash"><fa-icon class="cash-icon" [icon]="faMoneyBillWave"></fa-icon>Cash on Delivery</mat-button-toggle>
-                    <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
-                  </mat-button-toggle-group>
+              <ul class="font-weight-light">
+                <li>{{item.name}} </li>
+                <li>Size: {{item.size}}</li>
+                <li>{{item.quantity}} x</li>
+                <li>Price: {{item.price}}$</li>
+                <li class="bold" *ngIf="item.quantity > 1">Total: {{+item.price * item.quantity}}$</li>
+              </ul>
+            </mat-card>
+            <mat-card class="p-2 d-flex text-center mt-2">
+              <mat-card-content class="delivery-info">
+                <div class="row">
+                  <ul class="col-sm-4 mt-2">
+                    <li><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping aproximate time</li>
+                    <li>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</li>
+                  </ul>
+                  <ul class="col-sm-4">
+                    <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
+                    <li>{{deliveryInfo.deliveryPrice}}$</li>
+                  </ul>
+                  <ul class="col-sm-4">
+                    <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
+                    <li>{{totalPrice}}$</li>
+                  </ul>
                 </div>
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </mat-card-content>
+        <div>
+          <button mat-button matStepperNext>Next Page</button>
+        </div>
+      </mat-card>
+    </mat-step>
+    <mat-step [stepControl]="form">
+      <mat-card>
+        <mat-card-content>
+          <section class="example-section">
+            <h5 class="text-center d-block m-1">Please enter delivery address and name for the invoice!</h5>
+            <div class="mt-3 ml-3">
+              <label class="mr-2">Import data from your account? </label>
+              <mat-radio-group [(ngModel)]="labelPosition" (change)="handleImports($event)">
+                <mat-radio-button class="mr-1 mb-1" value="import">Import</mat-radio-button>
+                <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
+              </mat-radio-group>
+            </div>
+          </section>
+          <section class="form">
+            <form [formGroup]="form" (ngSubmit)="submitData(form)">
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+                <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+                <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name cannot be more than 100 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>Phone</mat-label>
+                <input matInput formControlName="phone">
+                <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">* Phone is invalid!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>Street</mat-label>
+                <input matInput formControlName="street">
+                <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>City</mat-label>
+                <input matInput formControlName="city">
+                <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.required">* City is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.maxlenght">* City cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.minlength">* City cannot be less than 2 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>State</mat-label>
+                <input matInput formControlName="state">
+                <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.required">* State is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.maxlenght">* State cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.minlength">* State cannot be less than 2 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>Country</mat-label>
+                <input matInput formControlName="country">
+                <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.required">* Country is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.maxlenght">* Country cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.minlength">* Country cannot be less than 2 symbols!</mat-error>
+              </mat-form-field>
+              <mat-form-field class="col-lg-6" appearance="fill">
+                <mat-label>Zip/Postal Code</mat-label>
+                <input matInput formControlName="zipCode">
+                <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.required">* Zip/Postal code is required!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.maxlenght">* Zip/Postal code cannot be more than 20 symbols!</mat-error>
+                <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.minlength">* Zip/Postal cannot be less than 2 symbols!</mat-error>
+              </mat-form-field>
+              <div class="row payment-options">
+                <mat-button-toggle-group name="payment-select" formControlName="payment" aria-label="Font Style">
+                  <mat-button-toggle value="cash"><fa-icon class="cash-icon" [icon]="faMoneyBillWave"></fa-icon>Cash on Delivery</mat-button-toggle>
+                  <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
+                </mat-button-toggle-group>
+              </div>
 
-                <div class="mt-4 text-center save-btn">
-                  <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
-                </div>
-              </form>
-            </section>
-          </mat-card-content>
-        </mat-card>
+              <div class="mt-4 text-center save-btn">
+                <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
+              </div>
+              <div>
+                <button mat-button matStepperNext>Next Page</button>
+              </div>
+            </form>
+          </section>
+        </mat-card-content>
+      </mat-card>
+    </mat-step>
+  <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
       </div>
-    </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+  <!--<div class="container mt-2 mr-2 ml-2">
+    <section>
+      <mat-toolbar class="title">
+        <span>Shipping Information</span>
+      </mat-toolbar>
+    </section>
+    <section class="container-fluid mt-2 mr-2 ml-2">
+      <div class="row">
+        <div class="col-lg-6 mb-3">
+          <mat-card>
+            <label class="text-center">
+              Products List:
+            </label>
+            <mat-card-content>
+              <div class="d-flex flex-column justify-content-between">
+                <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
+                  <div>
+                    <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
+                  </div>
+                  <ul class="font-weight-light">
+                    <li>{{item.name}} </li>
+                    <li>Size: {{item.size}}</li>
+                    <li>{{item.quantity}} x</li>
+                    <li>Price: {{item.price}}$</li>
+                    <li class="bold" *ngIf="item.quantity > 1">Total: {{+item.price * item.quantity}}$</li>
+                  </ul>
+                </mat-card>
+                <mat-card class="p-2 d-flex text-center mt-2">
+                  <mat-card-content class="delivery-info">
+                    <div class="row">
+                      <ul class="col-sm-4 mt-2">
+                        <li><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping aproximate time</li>
+                        <li>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</li>
+                      </ul>
+                      <ul class="col-sm-4">
+                        <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
+                        <li>{{deliveryInfo.deliveryPrice}}$</li>
+                      </ul>
+                      <ul class="col-sm-4">
+                        <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
+                        <li>{{totalPrice}}$</li>
+                      </ul>
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+        <div class="col-lg-6">
+          <mat-card>
+            <mat-card-content>
+              <section class="example-section">
+                <h5 class="text-center d-block m-1">Please enter delivery address and name for the invoice!</h5>
+                <div class="mt-3 ml-3">
+                  <label class="mr-2">Import data from your account? </label>
+                  <mat-radio-group [(ngModel)]="labelPosition" (change)="handleImports($event)">
+                    <mat-radio-button class="mr-1 mb-1" value="import">Import</mat-radio-button>
+                    <mat-radio-button class="mr-1 mb-1" value="notImport">Do not import</mat-radio-button>
+                  </mat-radio-group>
+                </div>
+              </section>
+              <section class="form">
+                <form [formGroup]="form" (ngSubmit)="submitData(form)">
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="firstName">
+                    <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="lastName">
+                    <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name cannot be more than 100 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>Phone</mat-label>
+                    <input matInput formControlName="phone">
+                    <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone cannot be more than 20 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">* Phone is invalid!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>Street</mat-label>
+                    <input matInput formControlName="street">
+                    <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>City</mat-label>
+                    <input matInput formControlName="city">
+                    <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.required">* City is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.maxlenght">* City cannot be more than 20 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.minlength">* City cannot be less than 2 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>State</mat-label>
+                    <input matInput formControlName="state">
+                    <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.required">* State is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.maxlenght">* State cannot be more than 20 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.minlength">* State cannot be less than 2 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>Country</mat-label>
+                    <input matInput formControlName="country">
+                    <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.required">* Country is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.maxlenght">* Country cannot be more than 20 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.minlength">* Country cannot be less than 2 symbols!</mat-error>
+                  </mat-form-field>
+                  <mat-form-field class="col-lg-6" appearance="fill">
+                    <mat-label>Zip/Postal Code</mat-label>
+                    <input matInput formControlName="zipCode">
+                    <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.required">* Zip/Postal code is required!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.maxlenght">* Zip/Postal code cannot be more than 20 symbols!</mat-error>
+                    <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.minlength">* Zip/Postal cannot be less than 2 symbols!</mat-error>
+                  </mat-form-field>
+                  <div class="row payment-options">
+                    <mat-button-toggle-group name="payment-select" formControlName="payment" aria-label="Font Style">
+                      <mat-button-toggle value="cash"><fa-icon class="cash-icon" [icon]="faMoneyBillWave"></fa-icon>Cash on Delivery</mat-button-toggle>
+                      <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
+                    </mat-button-toggle-group>
+                  </div>
 
-  </section>
+                  <div class="mt-4 text-center save-btn">
+                    <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
+                  </div>
+                </form>
+              </section>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
 
-</div>
+    </section>
+
+  </div>-->

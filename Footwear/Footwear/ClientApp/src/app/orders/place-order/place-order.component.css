@@ -41,3 +41,11 @@ ul {
   margin-right: 2px;
   color: #183963;
 }
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-form-field {
+  margin-top: 16px;
+}
