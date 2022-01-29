@@ -5,7 +5,7 @@
       <label class="text-center">
         All Products:
       </label>
-      <p>Please, reconfirm all products before ordering.</p>
+      <p><small>Please, reconfirm all products before ordering.</small></p>
       <mat-card-content>
         <div class="d-flex flex-column justify-content-between">
           <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
@@ -22,13 +22,13 @@
           </mat-card>
         </div>
       </mat-card-content>
-      <div>
-        <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+      <div class="row justify-content-md-center">
+        <button  mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
       </div>
     </mat-card>
   </mat-step>
   <mat-step>
-    <ng-template matStepLabel>Recap price</ng-template>
+    <ng-template matStepLabel>Price confirm</ng-template>
     <mat-card class="p-2 d-flex text-center mt-2">
       <mat-card-content class="delivery-info">
         <div class="row">

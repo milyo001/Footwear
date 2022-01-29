@@ -49,3 +49,7 @@ ul {
 .mat-form-field {
   margin-top: 16px;
 }
+
+.first-stepper-conf-btn{
+    display:contents;
+}
