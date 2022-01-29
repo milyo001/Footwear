@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatCardModule } from '@angular/material/card';
-
+import { MatStepperModule } from '@angular/material/stepper'; 
 
 const modules = [
   MatToolbarModule,
@@ -20,8 +20,8 @@ const modules = [
   MatCheckboxModule,
   MatRadioModule,
   MatCardModule,
-  MatButtonToggleModule
-  
+  MatButtonToggleModule,
+  MatStepperModule
 ];
 
 @NgModule({
