@@ -1,11 +1,11 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step>
     <ng-template matStepLabel>Products confirm</ng-template>
-
     <mat-card>
       <label class="text-center">
-        Products List:
+        All Products:
       </label>
+      <p>Please, reconfirm all products before ordering.</p>
       <mat-card-content>
         <div class="d-flex flex-column justify-content-between">
           <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
@@ -23,7 +23,7 @@
         </div>
       </mat-card-content>
       <div>
-        <button mat-button matStepperNext>Confirm products</button>
+        <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
       </div>
     </mat-card>
   </mat-step>
@@ -48,8 +48,8 @@
       </mat-card-content>
     </mat-card>
     <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button matStepperNext>Confirm price</button>
+      <button mat-button matStepperPrevious>Go Back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
+      <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
     </div>
   </mat-step>
   <mat-step [stepControl]="form">
@@ -133,7 +133,8 @@
               <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
             </div>
             <div>
-              <button mat-button matStepperNext>Next Page</button>
+              <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
+              <button mat-button matStepperNext>Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
             </div>
           </form>
         </section>

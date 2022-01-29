@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
+    faArrowCircleLeft,
+    faArrowCircleRight,
   faCreditCard,
   faDollarSign,
   faHandHoldingUsd,
@@ -42,6 +44,8 @@ export class PlaceOrderComponent implements OnInit {
   faShippingFast = faShippingFast;
   faDollarSign = faDollarSign;
   faHandFoldingUsd = faHandHoldingUsd;
+  faArrowCircleRight = faArrowCircleRight;
+  faArrowCircleLeft = faArrowCircleLeft;
 
   cartProducts: ICartProduct[];
   order: IOrder;
