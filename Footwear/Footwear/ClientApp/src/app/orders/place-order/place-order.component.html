@@ -22,12 +22,12 @@
           </mat-card>
         </div>
       </mat-card-content>
-      <mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts.length < 3">
+      <mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
         <div class="row justify-content-md-center">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
       </mat-card-footer>
-      <mat-card-footer class="card-footer-without-margin mb-1" *ngIf="cartProducts.length >= 3">
+      <mat-card-footer class="card-footer-without-margin mb-1" *ngIf="cartProducts?.length >= 3">
         <div class="row justify-content-md-center">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
@@ -39,20 +39,8 @@
     <ng-template matStepLabel>Price</ng-template>
     <mat-card class="p-2 d-flex text-center mt-2">
       <mat-card-content class="delivery-info">
-        <div class="row">
-          <ul class="col-sm-4 mt-2">
-            <li><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping aproximate time</li>
-            <li>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</li>
-          </ul>
-          <ul class="col-sm-4">
-            <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
-            <li>{{deliveryInfo.deliveryPrice}}$</li>
-          </ul>
-          <ul class="col-sm-4">
-            <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
-            <li>{{totalPrice}}$</li>
-          </ul>
-        </div>
+
+        <div style="width:100%">
           <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -77,12 +65,36 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table>
+        </div>
+        <div class="row">
+          <ul class="col-sm-4 mt-2">
+            <li><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping aproximate time</li>
+            <li>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</li>
+          </ul>
+          <ul class="col-sm-4">
+            <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
+            <li>{{deliveryInfo.deliveryPrice}}$</li>
+          </ul>
+          <ul class="col-sm-4">
+            <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
+            <li>{{totalPrice}}$</li>
+          </ul>
+        </div>
+        <div class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
+          <div class="row justify-content-md-center">
+            <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
+            <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+          </div>
+        </div>
+        <div class="card-footer-without-margin mb-1" *ngIf="cartProducts?.length >= 3">
+          <div class="row justify-content-md-center">
+            <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+          </div>
+        </div>
       </mat-card-content>
+      
     </mat-card>
-    <div>
-      <button mat-button matStepperPrevious>Go Back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-      <button mat-button matStepperNext>Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
-    </div>
+    
   </mat-step>
   <mat-step [stepControl]="form">
     <ng-template matStepLabel>Address</ng-template>
