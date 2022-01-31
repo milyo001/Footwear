@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { DataSource } from '@angular/cdk/collections';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
     faArrowCircleLeft,
@@ -25,7 +28,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './place-order.component.html',
   styleUrls: ['./place-order.component.css']
 })
-export class PlaceOrderComponent implements OnInit {
+export class PlaceOrderComponent implements OnInit, AfterViewInit {
 
   //Component Properties
   public userData: IUserData = null;
@@ -37,6 +40,10 @@ export class PlaceOrderComponent implements OnInit {
   //Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
+  @ViewChild(MatSort) sort: MatSort;
+  displayedColumns: string[] = ['name', 'size', 'price', 'quantity', 'totalPerItem'];
+  dataSource: MatTableDataSource<ICartProduct>;
+
 
   //Font awesome icons
   faMoneyBillWave = faMoneyBillWave;
@@ -47,6 +54,7 @@ export class PlaceOrderComponent implements OnInit {
   faArrowCircleRight = faArrowCircleRight;
   faArrowCircleLeft = faArrowCircleLeft;
 
+  //HTTP operations properties
   cartProducts: ICartProduct[];
   order: IOrder;
 
@@ -59,18 +67,20 @@ export class PlaceOrderComponent implements OnInit {
     private router: Router
   ) { }
 
+ 
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
       this.deliveryInfo = info;
       this.cartService.getAllCartProducts().subscribe(products => {
         this.cartProducts = products;
+        this.dataSource = new MatTableDataSource(products);
+        console.log("Datasort after init: ", this.dataSource);
         this.GetTotalPrice(products);
         //Gets the min and max delivery days and the cost of the delivery
 
       });
     });
-    
-    
+
     this.form = this.fb.group({
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
       lastName: ["", [Validators.required, Validators.maxLength(100)], []],
@@ -82,8 +92,14 @@ export class PlaceOrderComponent implements OnInit {
       zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
       payment: ["", [Validators.required], []]
     });
-    
   }
+
+  //Add sorting to the dataSource, used for table sorting
+  ngAfterViewInit() {
+    this.dataSource.sort = this.sort;
+    console.log("Datasort after sort set: ", this.dataSource);
+  }
+
 
   //Gets products total price for all products and delivery price and store it in the component property
   GetTotalPrice(products: ICartProduct[]) {

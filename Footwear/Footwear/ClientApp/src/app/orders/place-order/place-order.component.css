@@ -62,3 +62,7 @@ ul {
 .first-stepper-conf-btn{
     display:contents;
 }
+
+table {
+  width: 100%;
+}
