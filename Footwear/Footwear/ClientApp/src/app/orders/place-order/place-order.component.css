@@ -37,11 +37,20 @@ ul {
   margin-right: 2px;
   color: #1e6144;
 }
+
+.card-footer-with-margin {
+  margin-top: 144px;
+}
+.card-footer-without-margin {
+  margin-top: 10px;
+}
 .card-icon {
   margin-right: 2px;
   color: #183963;
 }
-
+.all-products-card{
+    min-height: 70vh;
+}
 .mat-stepper-horizontal {
   margin-top: 8px;
 }

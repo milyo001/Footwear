@@ -1,7 +1,7 @@
 <mat-horizontal-stepper linear #stepper>
   <mat-step>
     <ng-template matStepLabel>Products confirm</ng-template>
-    <mat-card>
+    <mat-card class="all-products-card">
       <label class="text-center">
         All Products:
       </label>
@@ -22,9 +22,16 @@
           </mat-card>
         </div>
       </mat-card-content>
-      <div class="row justify-content-md-center">
-        <button  mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
-      </div>
+      <mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts.length < 3">
+        <div class="row justify-content-md-center">
+          <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+        </div>
+      </mat-card-footer>
+      <mat-card-footer class="card-footer-without-margin mb-1" *ngIf="cartProducts.length >= 3">
+        <div class="row justify-content-md-center">
+          <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+        </div>
+      </mat-card-footer>
     </mat-card>
   </mat-step>
   <mat-step>
