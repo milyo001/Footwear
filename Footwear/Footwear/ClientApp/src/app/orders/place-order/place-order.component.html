@@ -137,12 +137,9 @@
                 <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
               </mat-button-toggle-group>
             </div>
-            <div class="mt-4 text-center save-btn">
-              <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Finalize</button>
-            </div>
             <div class="mt-2">
               <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-              <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm address <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+              <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
             </div>
           </form>
         </section>
