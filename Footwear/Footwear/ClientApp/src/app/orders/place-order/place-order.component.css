@@ -47,6 +47,9 @@ ul {
 .card-footer-without-margin {
   margin-top: 10px;
 }
+.price-card{
+    min-height: 450px;
+}
 .conf-div-centered {
   display: flex;
   align-items: center;
