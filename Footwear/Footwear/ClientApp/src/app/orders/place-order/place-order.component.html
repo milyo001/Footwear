@@ -39,7 +39,7 @@
     <ng-template matStepLabel>Price</ng-template>
     <mat-card class="p-2 d-flex mt-2 mb-2">
       <mat-card-content class="delivery-info">
-        <div style="width:100%">
+        <div class="table-container">
           <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
             <ng-container matColumnDef="name">
               <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
@@ -128,7 +128,7 @@
               <input matInput formControlName="phone">
               <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone is required!</mat-error>
               <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone cannot be more than 20 symbols!</mat-error>
-              <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">er* Phone is invalid!</mat-error>
+              <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">* Phone is invalid!</mat-error>
 
             </mat-form-field>
             <mat-form-field class="col-lg-6" appearance="fill">
@@ -136,7 +136,7 @@
               <input matInput formControlName="street">
               <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
               <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
-              <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">).* Street cannot be less than 2 symbols!</mat-error>
+              <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
             </mat-form-field>
             <mat-form-field class="col-lg-6" appearance="fill">
               <mat-label>City</mat-label>
