@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -27,7 +27,7 @@ import { UserService } from '../../services/user.service';
   templateUrl: './place-order.component.html',
   styleUrls: ['./place-order.component.css']
 })
-export class PlaceOrderComponent implements OnInit, AfterViewInit {
+export class PlaceOrderComponent implements OnInit {
 
   //Component Properties
   public userData: IUserData = null;
@@ -70,13 +70,11 @@ export class PlaceOrderComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
       this.deliveryInfo = info;
+
       this.cartService.getAllCartProducts().subscribe(products => {
         this.cartProducts = products;
-        this.dataSource = new MatTableDataSource(products);
-        console.log("Datasort after init: ", this.dataSource);
+        this.initDataSort(products);
         this.GetTotalPrice(products);
-        //Gets the min and max delivery days and the cost of the delivery
-
       });
     });
 
@@ -93,12 +91,11 @@ export class PlaceOrderComponent implements OnInit, AfterViewInit {
     });
   }
 
-  //Add sorting to the dataSource, used for table sorting
-  ngAfterViewInit() {
+  //Init data source and apply sorting directive to it, used for table sorting
+  initDataSort(products: ICartProduct[]) {
+    this.dataSource = new MatTableDataSource<ICartProduct>(products);
     this.dataSource.sort = this.sort;
-    console.log("Datasort after sort set: ", this.dataSource);
-  }
-
+    }
 
   //Gets products total price for all products and delivery price and store it in the component property
   GetTotalPrice(products: ICartProduct[]) {
@@ -123,7 +120,6 @@ export class PlaceOrderComponent implements OnInit, AfterViewInit {
         }
       })
   }
-
 
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
