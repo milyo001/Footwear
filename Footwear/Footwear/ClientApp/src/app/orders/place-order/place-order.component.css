@@ -44,6 +44,11 @@ ul {
 .card-footer-without-margin {
   margin-top: 10px;
 }
+.conf-div-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .card-icon {
   margin-right: 2px;
   color: #183963;

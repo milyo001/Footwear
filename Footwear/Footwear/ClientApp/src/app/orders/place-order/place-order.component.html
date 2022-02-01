@@ -23,12 +23,12 @@
         </div>
       </mat-card-content>
       <mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
-        <div class="row justify-content-md-center">
+        <div class="conf-div-centered">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
       </mat-card-footer>
       <mat-card-footer class="card-footer-without-margin mb-1" *ngIf="cartProducts?.length >= 3">
-        <div class="row justify-content-md-center">
+        <div class="conf-div-centered">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
       </mat-card-footer>
@@ -80,13 +80,13 @@
           </ul>
         </div>
         <div class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
-          <div class="row justify-content-md-center">
+          <div class="conf-div-centered">
             <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
             <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
           </div>
         </div>
         <div class="card-footer-without-margin mb-1" *ngIf="cartProducts?.length >= 3">
-          <div class="row justify-content-md-center">
+          <div class="conf-div-centered">
             <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
           </div>
         </div>
@@ -172,10 +172,17 @@
                 <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
               </mat-button-toggle-group>
             </div>
-            <div class="mt-2">
+            
+            <div class="mt-3 mb-1">
+              <div class="conf-div-centered">
+                <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
+                <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+              </div>
+            </div>
+            <!--<div class="mt-2">
               <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
               <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
-            </div>
+            </div>-->
           </form>
         </section>
       </mat-card-content>
