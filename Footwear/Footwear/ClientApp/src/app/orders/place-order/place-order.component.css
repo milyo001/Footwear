@@ -41,12 +41,6 @@ ul {
 .content-fixed-min-height {
   min-height:364px;
 }
-.card-footer-with-margin {
-  margin-top: 144px;
-}
-.card-footer-without-margin {
-  margin-top: 10px;
-}
 .price-card{
     min-height: 450px;
 }
