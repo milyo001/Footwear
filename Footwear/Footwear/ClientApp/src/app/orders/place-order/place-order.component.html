@@ -6,9 +6,9 @@
         All Products:
       </label>
       <p><small>Please, reconfirm all products before ordering.</small></p>
-      <mat-card-content>
+      <mat-card-content class="content-fixed-min-height">
         <div class="d-flex flex-column justify-content-between">
-          <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
+          <mat-card class="p-2 d-flex justify-content-between"  *ngFor="let item of cartProducts">
             <div>
               <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
             </div>
@@ -22,7 +22,12 @@
           </mat-card>
         </div>
       </mat-card-content>
-      <mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
+      <mat-card-footer class="card-footer-without-margin mb-1">
+        <div class="conf-div-centered">
+          <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+        </div>
+      </mat-card-footer>
+      <!--<mat-card-footer class="card-footer-with-margin mb-1" *ngIf="cartProducts?.length < 3">
         <div class="conf-div-centered">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
@@ -31,7 +36,7 @@
         <div class="conf-div-centered">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
-      </mat-card-footer>
+      </mat-card-footer>-->
     </mat-card>
   </mat-step>
   
@@ -87,6 +92,7 @@
         </div>
         <div class="card-footer-without-margin mb-1" *ngIf="cartProducts?.length >= 3">
           <div class="conf-div-centered">
+            <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
             <button mat-button matStepperNext>Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
           </div>
         </div>
@@ -176,13 +182,9 @@
             <div class="mt-3 mb-1">
               <div class="conf-div-centered">
                 <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-                <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm price <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+                <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
               </div>
             </div>
-            <!--<div class="mt-2">
-              <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-              <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
-            </div>-->
           </form>
         </section>
       </mat-card-content>

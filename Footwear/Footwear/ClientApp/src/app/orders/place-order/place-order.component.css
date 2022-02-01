@@ -38,6 +38,9 @@ ul {
   color: #1e6144;
 }
 
+.content-fixed-min-height {
+  min-height:364px;
+}
 .card-footer-with-margin {
   margin-top: 144px;
 }
