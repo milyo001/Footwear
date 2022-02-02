@@ -52,11 +52,11 @@
               </ng-container>
               <ng-container matColumnDef="price">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
-                <td mat-cell *matCellDef="let product"> {{product.price}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.price | currency}} </td>
               </ng-container>
               <ng-container matColumnDef="totalPerItem">
                 <th mat-header-cell *matHeaderCellDef> Total Price </th>
-                <td mat-cell *matCellDef="let product"> {{product.price * product.quantity}} </td>
+                <td mat-cell *matCellDef="let product"> {{product.price * product.quantity | currency}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -69,11 +69,11 @@
             </ul>
             <ul class="col-sm-4">
               <li><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</li>
-              <li>{{deliveryInfo.deliveryPrice}}$</li>
+              <li>{{deliveryInfo.deliveryPrice | currency}}</li>
             </ul>
             <ul class="col-sm-4">
               <li><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</li>
-              <li>{{totalPrice}}$</li>
+              <li>{{totalPrice | currency}}</li>
             </ul>
           </div>
         </mat-card>
