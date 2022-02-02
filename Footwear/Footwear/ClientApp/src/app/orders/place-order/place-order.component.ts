@@ -77,7 +77,17 @@ export class PlaceOrderComponent implements OnInit {
         this.GetTotalPrice(products);
       });
     });
+    this.initForm();
+  }
 
+  //Init data source and apply sorting directive to it, used for table sorting
+  initDataSort(products: ICartProduct[]) {
+    this.dataSource = new MatTableDataSource<ICartProduct>(products);
+    this.dataSource.sort = this.sort;
+  }
+
+  //Init the form and set validators
+  initForm(): void  {
     this.form = this.fb.group({
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
       lastName: ["", [Validators.required, Validators.maxLength(100)], []],
@@ -90,12 +100,6 @@ export class PlaceOrderComponent implements OnInit {
       payment: ["", [Validators.required], []]
     });
   }
-
-  //Init data source and apply sorting directive to it, used for table sorting
-  initDataSort(products: ICartProduct[]) {
-    this.dataSource = new MatTableDataSource<ICartProduct>(products);
-    this.dataSource.sort = this.sort;
-    }
 
   //Gets products total price for all products and delivery price and store it in the component property
   GetTotalPrice(products: ICartProduct[]) {
