@@ -53,6 +53,13 @@ ul {
   margin-right: 2px;
   color: #183963;
 }
+td.mat-cell {
+  border-bottom-style: none;
+}
+
+th.mat-header-cell {
+  border-bottom-style: none;
+}
 .all-products-card{
     min-height: 70vh;
 }
