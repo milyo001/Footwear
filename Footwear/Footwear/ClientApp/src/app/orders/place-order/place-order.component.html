@@ -55,7 +55,7 @@
                 <td mat-cell *matCellDef="let product"> {{product.price}} </td>
               </ng-container>
               <ng-container matColumnDef="totalPerItem">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Price </th>
+                <th mat-header-cell *matHeaderCellDef> Total Price </th>
                 <td mat-cell *matCellDef="let product"> {{product.price * product.quantity}} </td>
               </ng-container>
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
