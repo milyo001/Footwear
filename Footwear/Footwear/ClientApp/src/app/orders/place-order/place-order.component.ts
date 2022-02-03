@@ -72,7 +72,7 @@ export class PlaceOrderComponent implements OnInit {
     private router: Router
   ) { }
 
- 
+ //Will populate data into component properties from the database using the services
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
       this.deliveryInfo = info;
@@ -107,7 +107,7 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
-  //Gets products total price for all products and delivery price and store it in the component property
+  //Sum products total price for all products and the delivery price and store it in the component property
   GetTotalPrice(products: ICartProduct[]) {
     let price = products.reduce
       ((total: number, product: ICartProduct) => total + (product.price * product.quantity), 0);
@@ -116,6 +116,7 @@ export class PlaceOrderComponent implements OnInit {
     };
 
 
+  //Finalize order and redirect to stripe API for card payment
   onCheckOut(): void{
     this.orderService.checkOut(this.order).subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
@@ -131,6 +132,7 @@ export class PlaceOrderComponent implements OnInit {
       })
   }
 
+  //Creates an order with diffrent payment options
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
       if (response.cardPayment) {
@@ -145,9 +147,13 @@ export class PlaceOrderComponent implements OnInit {
           this.toastr.error(error.error.message, 'Error,unable to create order!');
           console.log(error);
         }
+        else {
+          this.toastr.error('Error, unable to create order!');
+        }
       })
   }
 
+  //The methid will handle form values if user decides to import user information from account/userData
   handleImports(event)  {
     if (event.value == 'import') {
       //Patch value will set the form fields without validating them
@@ -164,10 +170,11 @@ export class PlaceOrderComponent implements OnInit {
         })
       })
     } else {
-      //You can add this.form.clear() if you want to clear the form when clicked
+      //Optional: You can add this.form.clear() if you want to clear the form when Do not import is clicked
     }
   }
 
+  //Submit the data from the form
   submitData(form) {
     const fvalue = form.value;
     var today = new Date();
@@ -175,7 +182,7 @@ export class PlaceOrderComponent implements OnInit {
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",
-      //user data is the address that user can select and could be different from the account/userdata
+      //user data is the address that user can select and could be different from the account/userdata,
       userData: {
         firstName: fvalue.firstName,
         lastName: fvalue.lastName,
@@ -194,6 +201,7 @@ export class PlaceOrderComponent implements OnInit {
       this.createOrder();
     }
     else {
+      //Create order with default payment type of "cash"
       this.createOrder();
     }
   }
