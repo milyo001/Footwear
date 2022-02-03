@@ -1,4 +1,10 @@
 <mat-horizontal-stepper linear #stepper>
+
+  <!-- change default 'edit' icon -->
+  <ng-template matStepperIcon="edit">
+    <mat-icon><fa-icon class="ml-1" [icon]="faEdit"></fa-icon></mat-icon>
+  </ng-template>
+
   <!--Products step(1)-->
   <mat-step>
     <ng-template matStepLabel>Products</ng-template>
@@ -9,7 +15,7 @@
       <p><small>Please, reconfirm all products before ordering.</small></p>
       <mat-card-content class="content-fixed-min-height">
         <div class="d-flex flex-column justify-content-between">
-          <mat-card class="p-2 d-flex justify-content-between"  *ngFor="let item of cartProducts">
+          <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
             <div>
               <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
             </div>
@@ -30,7 +36,7 @@
       </mat-card-footer>
     </mat-card>
   </mat-step>
-<!--Price details step(2)-->
+  <!--Price details step(2)-->
   <mat-step>
     <ng-template matStepLabel>Price</ng-template>
     <mat-card class="p-2 d-flex mt-2 mb-2 ">
@@ -82,9 +88,9 @@
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
       </mat-card-content>
-      
+
     </mat-card>
-    
+
   </mat-step>
   <mat-step [stepControl]="form">
     <ng-template matStepLabel>Address</ng-template>
@@ -163,7 +169,7 @@
                 <mat-button-toggle value="card"><fa-icon class="card-icon" [icon]="faCreditCard"></fa-icon>Credit Card</mat-button-toggle>
               </mat-button-toggle-group>
             </div>
-            
+
             <div class="mt-3 mb-1">
               <div class="conf-div-centered">
                 <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>

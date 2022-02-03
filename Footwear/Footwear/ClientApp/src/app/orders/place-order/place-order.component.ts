@@ -1,13 +1,15 @@
+import { MAT_STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import {
-    faArrowCircleLeft,
-    faArrowCircleRight,
+  faArrowCircleLeft,
+  faArrowCircleRight,
   faCreditCard,
   faDollarSign,
+  faEdit,
   faHandHoldingUsd,
   faMoneyBillWave,
   faShippingFast
@@ -25,7 +27,11 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
-  styleUrls: ['./place-order.component.css']
+  styleUrls: ['./place-order.component.css'],
+  providers: [{
+    //Used for overriding mat stepper default icons
+    provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+  }]
 })
 export class PlaceOrderComponent implements OnInit {
 
@@ -43,7 +49,6 @@ export class PlaceOrderComponent implements OnInit {
   displayedColumns: string[] = ['name', 'size', 'price', 'quantity', 'totalPerItem'];
   dataSource: MatTableDataSource<ICartProduct>;
 
-
   //Font awesome icons
   faMoneyBillWave = faMoneyBillWave;
   faCreditCard = faCreditCard;
@@ -52,6 +57,7 @@ export class PlaceOrderComponent implements OnInit {
   faHandFoldingUsd = faHandHoldingUsd;
   faArrowCircleRight = faArrowCircleRight;
   faArrowCircleLeft = faArrowCircleLeft;
+  faEdit = faEdit;
 
   //HTTP operations properties
   cartProducts: ICartProduct[];

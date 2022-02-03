@@ -81,3 +81,8 @@ table {
 .table-container{
     width:100%;
 }
+
+:host ::ng-deep .mat-step-header .mat-step-icon-selected, :host ::ng-deep .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+  background-color: wheat;
+  color: white;
+}
