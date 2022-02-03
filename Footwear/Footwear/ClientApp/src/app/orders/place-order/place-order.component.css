@@ -1,95 +1,123 @@
-.container {
-  width: 100%;
+/*form responsive table elements*/
+@media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  .size-td {
+    text-align: center;
+  }
 }
-.title {
-  justify-content: center;
-}
-.user-information {
-  display: flex;
-  width:50%;
-  justify-content: space-between;
-}
-.product-image {
-  height: 85px;
-  width: auto;
-  object-fit: cover;
-  margin: 10px;
-}
-.delivery-info{
+ 
+
+  .container {
     width: 100%;
-}
-ul {
-  list-style-type: none;
-  text-align: right;
-  margin-top: 5px;
-}
-.example-section {
-  margin-bottom: 8px;
-}
-.mat-button-toggle-group {
-  margin-left: 12px;
-}
-.payment-options {
-  align-content: center;
-  justify-content: center;
-}
-.cash-icon {
-  margin-right: 2px;
-  color: #1e6144;
-}
+  }
 
-.content-fixed-min-height {
-  min-height:364px;
-}
-.price-card{
+  .title {
+    justify-content: center;
+  }
+
+  .user-information {
+    display: flex;
+    width: 50%;
+    justify-content: space-between;
+  }
+
+  .product-image {
+    height: 85px;
+    width: auto;
+    object-fit: cover;
+    margin: 10px;
+  }
+
+  .delivery-info {
+    width: 100%;
+  }
+
+  ul {
+    list-style-type: none;
+    text-align: right;
+    margin-top: 5px;
+  }
+
+  .example-section {
+    margin-bottom: 8px;
+  }
+
+  .mat-button-toggle-group {
+    margin-left: 12px;
+  }
+
+  .payment-options {
+    align-content: center;
+    justify-content: center;
+  }
+
+  .cash-icon {
+    margin-right: 2px;
+    color: #1e6144;
+  }
+
+  .content-fixed-min-height {
+    min-height: 364px;
+  }
+
+  .price-card {
     min-height: 450px;
-}
-.conf-div-centered {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.card-icon {
-  margin-right: 2px;
-  color: #183963;
-}
-td.mat-cell {
-  border-bottom-style: none;
-}
+  }
 
-th.mat-header-cell {
-  border-bottom-style: none;
-}
-.all-products-card{
+  .conf-div-centered {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-icon {
+    margin-right: 2px;
+    color: #183963;
+  }
+
+  td.mat-cell {
+    border-bottom-style: none;
+  }
+
+  th.mat-header-cell {
+    border-bottom-style: none;
+  }
+
+  .all-products-card {
     min-height: 70vh;
-}
-.mat-stepper-horizontal {
-  margin-top: 8px;
-}
+  }
 
-.mat-form-field {
-  margin-top: 16px;
-}
+  .mat-stepper-horizontal {
+    margin-top: 8px;
+  }
 
-.first-stepper-conf-btn{
-    display:contents;
-}
+  .mat-form-field {
+    margin-top: 16px;
+  }
 
-table {
-  width: 100%;
-}
-.table-container {
-  width: 100%;
-  min-height: 336px;
-}
-.shipping-info-box {
-  border-top: solid 1px;
-  border-top-style: solid;
-  font-size: 17px;
-  padding-top: 10px;
-}
-/*Using :host ::ng-deep will override the default angular view encapsulation and set new color the the icons background*/
-:host ::ng-deep .mat-step-header .mat-step-icon-selected, :host ::ng-deep .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
-  background-color: wheat;
-  color: white;
-}
+  .first-stepper-conf-btn {
+    display: contents;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .table-container {
+    width: 100%;
+    min-height: 336px;
+    overflow-x: auto;
+  }
+
+  
+
+  .shipping-info-box {
+    border-top: solid 1px;
+    border-top-style: solid;
+    font-size: 17px;
+    padding-top: 10px;
+  }
+  /*Using :host ::ng-deep will override the default angular view encapsulation and set new color the the icons background*/
+  :host ::ng-deep .mat-step-header .mat-step-icon-selected, :host ::ng-deep .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
+    background-color: wheat;
+    color: white;
+  }
