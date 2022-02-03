@@ -78,8 +78,15 @@ th.mat-header-cell {
 table {
   width: 100%;
 }
-.table-container{
-    width:100%;
+.table-container {
+  width: 100%;
+  min-height: 336px;
+}
+.shipping-info-box {
+  border-top: solid 1px;
+  border-top-style: solid;
+  font-size: 17px;
+  padding-top: 10px;
 }
 /*Using :host ::ng-deep will override the default angular view encapsulation and set new color the the icons background*/
 :host ::ng-deep .mat-step-header .mat-step-icon-selected, :host ::ng-deep .mat-step-header .mat-step-icon-state-done, .mat-step-header .mat-step-icon-state-edit {
