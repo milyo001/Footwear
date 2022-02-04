@@ -1,7 +1,7 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first aproach, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
+An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first aproach, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox).The desing patern is MVC. The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
 The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
 # Guide / How to run locally on your machine
@@ -39,11 +39,11 @@ for now it can be done only manually.
 -Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
 ```
 4.For demo payments use this demo card INFO:
-Email: Any*
-Card Number: 4242 4242 4242 4242
-Expiration: Any* / Any*
-CVV: Any*
-Name: Any*
+ Email: Any*
+ Card Number: 4242 4242 4242 4242
+ Expiration: Any* / Any*
+ CVV: Any*
+ Name: Any*
 
 *You can put random information but the number should be the one from above
 
