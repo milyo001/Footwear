@@ -3,7 +3,6 @@ namespace server.Controllers
 {
     using Footwear.ViewModels;
     using Footwear.Services.OrderService;
-    using Footwear.Services.TokenService;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -17,21 +16,17 @@ namespace server.Controllers
     [EnableCors("SiteCorsPolicy")]
     public class PaymentsController : Controller
     {
-        private readonly ITokenService _tokenService;
 
         private readonly IOrderService _orderService;
 
         public IConfiguration Configuration { get; }
 
-        public PaymentsController(IConfiguration configuration, ITokenService tokenService, IOrderService orderService)
+        public PaymentsController(IConfiguration configuration, IOrderService orderService)
         {
-            this._tokenService = tokenService;
             this._orderService = orderService;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
-
-
 
         [HttpPost("create-checkout-session")]
         public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)
