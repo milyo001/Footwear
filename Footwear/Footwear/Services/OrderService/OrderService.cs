@@ -80,13 +80,24 @@
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
-            var orderId = this._db.Orders
+            var orderId =  this._db.Orders
                 .Where(x => x.UserId == user.Id)
                 .OrderByDescending(o => o.CreatedOn)
                 .First()
                 .Id;
 
             return orderId;
+        }
+
+        public async Task<Order> GetLatestAddedOrderAsync(string token)
+        {
+            var user = await this._tokenService.GetUserByIdAsync(token);
+            var order = await this._db.Orders
+                .Where(x => x.UserId == user.Id)
+                .OrderByDescending(o => o.CreatedOn)
+                .FirstAsync();
+                
+            return order;
         }
 
 

@@ -29,9 +29,11 @@ namespace server.Controllers
         }
 
         [HttpGet("get-checkout-session")]
-        public ActionResult GetCheckoutSession()
+        public async Task<ActionResult> GetCheckoutSession()
         {
-            decimal totalPrice = 66666;
+            string authToken = HttpContext.Items["token"].ToString();
+            var latestOrder = await this._orderService.GetLatestAddedOrderIdAsync(authToken);   
+            decimal totalPrice = this._orderService.GetTotalPrice(latestOrder);
             
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 

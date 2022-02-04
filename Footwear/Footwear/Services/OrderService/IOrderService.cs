@@ -12,6 +12,8 @@ namespace Footwear.Services.OrderService
 
         Task<string> GetLatestAddedOrderIdAsync(string token);
 
+        Task<Order> GetLatestAddedOrderAsync(string token);
+
         Task<Order> GetOrderByIdAsync(string id);
 
         void ModifyPaidOrder(string orderId);
