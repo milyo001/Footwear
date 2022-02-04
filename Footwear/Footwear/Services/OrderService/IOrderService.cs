@@ -20,6 +20,8 @@ namespace Footwear.Services.OrderService
 
         Task<DeliveryInfoViewModel> GetDeliveryDataAsync();
 
-        Task<decimal> GetTotalPrice(Order order);
+        double GetTotalPrice(Order order);
+
+        Task<double> GetDeliveryPriceAsync();
     }
 }

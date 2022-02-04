@@ -32,9 +32,10 @@ namespace server.Controllers
         public async Task<ActionResult> GetCheckoutSession()
         {
             string authToken = HttpContext.Items["token"].ToString();
-            var latestOrder = await this._orderService.GetLatestAddedOrderIdAsync(authToken);   
-            decimal totalPrice = this._orderService.GetTotalPrice(latestOrder);
-            
+            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);   
+            double totalPrice = this._orderService.GetTotalPrice(latestOrder);
+            //Add delivery price to the total
+            totalPrice += await this._orderService.GetDeliveryPriceAsync();
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
             //The total price to charge, if you want stripe dashboard statistics use stripe price Id 

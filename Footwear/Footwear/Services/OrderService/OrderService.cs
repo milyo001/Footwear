@@ -94,6 +94,7 @@
             var user = await this._tokenService.GetUserByIdAsync(token);
             var order = await this._db.Orders
                 .Where(x => x.UserId == user.Id)
+                .Include(x => x.Products)
                 .OrderByDescending(o => o.CreatedOn)
                 .FirstAsync();
                 
@@ -107,9 +108,10 @@
             return order;
         }
 
-        public Task<decimal> GetTotalPrice(Order order)
+        public double GetTotalPrice(Order order)
         {
-            throw new NotImplementedException();
+            var totPrice = order.Products.Sum(p => p.Price * p.Quantity);
+            return totPrice;
         }
 
         public void ModifyPaidOrder(string orderId)
@@ -117,6 +119,12 @@
             var order = this.GetOrderByIdAsync(orderId).Result;
             order.Status = Status.DeliveryPaid;
             this._db.SaveChanges();
+        }
+
+        public async Task<double> GetDeliveryPriceAsync()
+        {
+            var data = await this.GetDeliveryDataAsync();
+            return (double)data.DeliveryPrice;
         }
     }
 }
