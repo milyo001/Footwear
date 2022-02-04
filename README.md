@@ -46,7 +46,7 @@ for now it can be done only manually.
  Name: Any*</br>
  </br>
 
-*You can put random information but the number should be the one from above
+*You can put random information but the card number should be the one from above
 
 
 # Addons and Libiries
