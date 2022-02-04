@@ -96,6 +96,11 @@
             return order;
         }
 
+        public Task<decimal> GetTotalPrice(Order order)
+        {
+            throw new NotImplementedException();
+        }
+
         public void ModifyPaidOrder(string orderId)
         {
             var order = this.GetOrderByIdAsync(orderId).Result;

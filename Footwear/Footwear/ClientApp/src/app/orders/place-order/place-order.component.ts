@@ -118,7 +118,7 @@ export class PlaceOrderComponent implements OnInit {
 
   //Finalize order and redirect to stripe API for card payment
   onCheckOut(): void{
-    this.orderService.checkOut(this.order).subscribe((response: any) => {
+    this.orderService.checkOut().subscribe((response: any) => {
       //Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
       //Wait few seconds then redirect

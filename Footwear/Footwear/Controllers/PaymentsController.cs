@@ -28,19 +28,11 @@ namespace server.Controllers
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
-        [HttpPost("create-checkout-session")]
-        public ActionResult CreateCheckoutSession([FromBody] OrderViewModel order)
+        [HttpGet("get-checkout-session")]
+        public ActionResult GetCheckoutSession()
         {
-
             decimal totalPrice = 66666;
-            //foreach (var item in order.Products)
-            //{
-            //    for (int i = 0; i < item.Quantity; i++)
-            //    {
-            //        totalPrice += (decimal)item.Price;
-            //    }
-            //}
-
+            
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
             //The total price to charge, if you want stripe dashboard statistics use stripe price Id 
@@ -73,7 +65,6 @@ namespace server.Controllers
             };
             var service = new SessionService();
             Session session = service.Create(options);
-            var test = session.PaymentStatus;
 
             //Passing the url to the client to redirect user to the prebuild checkout page
             var generatedUrl = new

@@ -16,8 +16,8 @@ export class OrderService {
   }
 
   //Redirect user to the stripe payment page 
-  checkOut(order: IOrder) {
-    return this.http.post(this.baseUrl + "create-checkout-session", order);
+  checkOut() {
+    return this.http.get(this.baseUrl + "get-checkout-session");
   }
 
   //Send the order to the server in the body
