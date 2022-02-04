@@ -38,12 +38,13 @@ for now it can be done only manually.
 ```diff
 -Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
 ```
-4.For demo payments use this demo card INFO:
- Email: Any*
- Card Number: 4242 4242 4242 4242
- Expiration: Any* / Any*
- CVV: Any*
- Name: Any*
+4.For demo payments use this demo card INFO:</br>
+ Email: Any*</br>
+ Card Number: 4242 4242 4242 4242</br>
+ Expiration: Any* / Any*</br>
+ CVV: Any*</br>
+ Name: Any*</br>
+ </br>
 
 *You can put random information but the number should be the one from above
 
