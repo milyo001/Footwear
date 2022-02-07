@@ -27,9 +27,9 @@
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
+        public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
         {
-            var products = this._productService.GetAllProducts();
+            var products = await this._productService.GetAllProductsAsync();
             return Ok(products);
         }
 
@@ -37,24 +37,11 @@
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(int id)
         {
-            var product = await this._db.Products
-                .Select(p => new ProductDto
-                {
-                    Id = p.Id,
-                    Name = p.Name,
-                    Price = p.Price,
-                    Details = p.Details,
-                    ImageUrl = p.ProductImage.ImageUrl,
-                    Gender = p.Gender.ToString(),
-                    ProductType = p.ProductType.ToString()
-                })
-                .FirstOrDefaultAsync(p => p.Id == id);
-
+            var product =  await this._productService.GetProductByIdAsync(id);
             if (product == null)
             {
                 return NotFound();
             }
-
             return product;
         }
 

@@ -1,11 +1,13 @@
-﻿using Footwear.Data;
-using Footwear.ViewModels;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 
 namespace Footwear.Services.ProductService
 {
+    using Footwear.Data;
+    using Footwear.ViewModels;
+    using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _db;
@@ -13,9 +15,11 @@ namespace Footwear.Services.ProductService
         {
             this._db = db;
         }
-        public IEnumerable<ProductDto> GetAllProducts()
+        public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
-            IEnumerable<ProductDto> products = this._db.Products.Select(p => new ProductDto
+            //This query is made without Automapper, Not able to include product image navigation property
+            //TODO: map data to object with automaper
+            var products = await this._db.Products.Select(p => new ProductDto
             {
                 Id = p.Id,
                 Name = p.Name,
@@ -25,9 +29,28 @@ namespace Footwear.Services.ProductService
                 Gender = p.Gender.ToString(),
                 ProductType = p.ProductType.ToString()
             })
-               .ToArray();
-
+                .ToArrayAsync();
             return products;
         }
+
+        public async Task<ProductDto> GetProductByIdAsync(int id)
+        {
+            //TODO: For some reason EF Core is unable to include ImageUrl from ProductImage table with .Include
+            var productDto = await this._db.Products
+                 .Select(p => new ProductDto
+                 {
+                     Id = p.Id,
+                     Name = p.Name,
+                     Price = p.Price,
+                     Details = p.Details,
+                     ImageUrl = p.ProductImage.ImageUrl,
+                     Gender = p.Gender.ToString(),
+                     ProductType = p.ProductType.ToString()
+                 })
+                 .FirstOrDefaultAsync(p => p.Id == id);
+            return productDto;
+        }
+
+
     }
 }

@@ -42,7 +42,7 @@
             var cart = await this.GetCartAsync(cartId);
             //Gets the products that are not ordered yet
             var products = cart.CartProducts
-                 .Where(cp => cp.isOrdered == false)
+                 .Where(cp => cp.IsOrdered == false)
                  .Select(cp => new CartProductViewModel
                  {
                      Id = cp.Id,
@@ -73,7 +73,7 @@
             var dupplicateProduct = cart.CartProducts
                     .Where(x => x.Name == model.Name)
                     .Where(x => x.Size == model.Size)
-                    .Where(x => x.isOrdered == false)
+                    .Where(x => x.IsOrdered == false)
                     .FirstOrDefault();
 
             if (dupplicateProduct == null)
@@ -105,7 +105,7 @@
             var cart = await this.GetCartAsync(cartId);
             var products = cart.CartProducts
                 .Where(cp => cp.CartId == cartId)
-                .Where(cp => cp.isOrdered == false)
+                .Where(cp => cp.IsOrdered == false)
                 .ToList();
             return products;
         }
@@ -154,7 +154,7 @@
         public async Task ChangeOrderStateCartProductsAsync(int cartId)
         {
             var cartProducts = await this.GetCartProductsAsync(cartId);
-            cartProducts.ToList().ForEach(cp => cp.isOrdered = true);
+            cartProducts.ToList().ForEach(cp => cp.IsOrdered = true);
             await this._db.SaveChangesAsync();
         }
 
