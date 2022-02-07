@@ -1,7 +1,8 @@
 ﻿
 namespace Footwear.Services.ProductService
 {
-    interface IProductService
+    public interface IProductService
     {
+
     }
 }

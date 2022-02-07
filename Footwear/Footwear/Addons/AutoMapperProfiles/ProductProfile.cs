@@ -6,7 +6,7 @@
     {
         public ProductProfile()
         {
-            CreateMap<RegisterViewModel, User>()
+            //CreateMap<RegisterViewModel, User>();
         }
     }
 }
