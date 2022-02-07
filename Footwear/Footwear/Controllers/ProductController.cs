@@ -17,17 +17,12 @@
     public class ProductController : ControllerBase
     {
         private readonly ApplicationDbContext _db;
-        private readonly UserManager<User> _userManager;
         private readonly ICartService _cartService;
-        private readonly ITokenService _tokenService;
 
-        public ProductController(ApplicationDbContext db, UserManager<User> userManager, ICartService cartService,
-            ITokenService tokenService)
+        public ProductController(ApplicationDbContext db, ICartService cartService)
         {
-            this._userManager = userManager;
             this._db = db;
             this._cartService = cartService;
-            this._tokenService = tokenService;
         }
 
 
