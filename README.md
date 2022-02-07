@@ -1,8 +1,8 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first design pattern, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox). The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
-The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 5 (ini3.1, upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
+An open source e-commerce web application build with Angular 11 and ASP .NET Core 5 Rest API. The applicaiton is build with desktop first aproach, but it's fully responsive (using bootstrap 4 grid system and CSS Flexbox).The desing patern is MVC. The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
+The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
 # Guide / How to run locally on your machine
 1.Download the repo
@@ -38,6 +38,17 @@ for now it can be done only manually.
 ```diff
 -Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
 ```
+4.For demo payments use this demo card INFO:</br>
+ Email: Any*</br>
+ Card Number: 4242 4242 4242 4242</br>
+ Expiration: Any* / Any*</br>
+ CVV: Any*</br>
+ Name: Any*</br>
+ </br>
+
+*You can put random information but the card number should be the one from above
+
+
 # Addons and Libiries
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
 * AutoMapper 8.1.1
