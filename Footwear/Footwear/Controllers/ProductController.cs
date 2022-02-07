@@ -2,10 +2,7 @@
 {
     using Footwear.Data;
     using Footwear.ViewModels;
-    using Footwear.Data.Models;
     using Footwear.Services.CartService;
-    using Footwear.Services.TokenService;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
@@ -30,21 +27,10 @@
 
 
         [HttpGet]
-        public async Task<IEnumerable<ProductDto>> Get()
+        public ActionResult<IEnumerable<ProductDto>> GetAllProducts()
         {
-            IEnumerable<ProductDto> products = this._db.Products.Select(p => new ProductDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                Details = p.Details,
-                ImageUrl = p.ProductImage.ImageUrl,
-                Gender = p.Gender.ToString(),
-                ProductType = p.ProductType.ToString()
-            })
-               .ToArray();
-
-            return products;
+            var products = this._productService.GetAllProducts();
+            return Ok(products);
         }
 
 
