@@ -2,15 +2,13 @@
 {
     using Footwear.Data;
     using Footwear.ViewModels;
-    using Footwear.Data.Models;
     using Footwear.Services.CartService;
-    using Footwear.Services.TokenService;
-    using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Footwear.Services.ProductService;
 
     [ApiController]
     [Route("[controller]")]
@@ -18,11 +16,13 @@
     {
         private readonly ApplicationDbContext _db;
         private readonly ICartService _cartService;
+        private readonly IProductService _productService;
 
-        public ProductController(ApplicationDbContext db, ICartService cartService)
+        public ProductController(ApplicationDbContext db, ICartService cartService, IProductService productService)
         {
             this._db = db;
             this._cartService = cartService;
+            this._productService = productService;
         }
 
 
