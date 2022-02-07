@@ -98,6 +98,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     })
 
   }
+
   updateProfile(form: any) {
     this.userService.updateUserProfile(form.value).subscribe(
       (response: any) => {
@@ -144,6 +145,9 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       })
   }
 
+  test() {
+    console.log(this.form);
+  }
   
 }
 
