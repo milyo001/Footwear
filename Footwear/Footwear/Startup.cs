@@ -5,6 +5,7 @@ namespace Footwear
     using Footwear.Middlewares;
     using Footwear.Services.CartService;
     using Footwear.Services.OrderService;
+    using Footwear.Services.ProductService;
     using Footwear.Services.TokenService;
     using Footwear.Services.UserService;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -93,11 +94,14 @@ namespace Footwear
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            //Custom Services
+
+            //Scoped services are better option when you want to maintain state within a request.
+            //Transient services are created every time they will use more memory & Resources and can have the negative impact on performance
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IProductService, ProductService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
