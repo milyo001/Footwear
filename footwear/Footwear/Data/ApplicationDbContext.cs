@@ -24,12 +24,14 @@
         public ApplicationDbContext(DbContextOptions options)
             : base(options)
         {
-            this.Database.EnsureCreated();
-        }
 
+        }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+
             //Uncomment the line below if you are starting new project, TODO: automate the process
             //builder.Seed();
         }
