@@ -3,10 +3,8 @@
     using Footwear.Data;
     using Footwear.ViewModels;
     using Footwear.Data.Models;
-    using Footwear.Data.Models.Enums;
     using Footwear.Services.TokenService;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
