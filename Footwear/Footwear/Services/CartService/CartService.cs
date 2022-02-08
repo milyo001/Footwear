@@ -70,18 +70,7 @@
 
             if (dupplicateProduct == null)
             {
-                var cartProduct = new CartProduct
-                {
-                    Name = model.Name,
-                    Details = model.Details,
-                    Size = model.Size,
-                    Gender = (Gender)Enum.Parse(typeof(Gender), model.Gender), //Parse from string to Enum
-                    ProductType = (ProductType)Enum.Parse(typeof(ProductType), model.ProductType),
-                    ImageUrl = model.ImageUrl,
-                    Price = model.Price,
-                    Quantity = model.Quantity,
-                    ProductId = model.ProductId
-                };
+                var cartProduct = this._mapper.Map<CartProductViewModel, CartProduct>(model);
                 cart.CartProducts.Add(cartProduct);
             }
             else
