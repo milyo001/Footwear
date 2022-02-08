@@ -10,16 +10,19 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
 
     public class CartService : ICartService
     {
         private readonly ApplicationDbContext _db;
         private readonly ITokenService _tokenService;
+        private readonly IMapper _mapper;
 
-        public CartService(ApplicationDbContext db, ITokenService tokenService)
+        public CartService(ApplicationDbContext db, ITokenService tokenService, IMapper mapper)
         {
             this._db = db;
             this._tokenService = tokenService;
+            this._mapper = mapper;
         }
 
         //Get the cartId by given user id
@@ -36,6 +39,7 @@
                 .FirstOrDefaultAsync(c => c.Id == cartId);
             return cart;
         }
+
         //Get all cart products and return the view model to send it to the client
         public async Task<IEnumerable<CartProductViewModel>> GetCartProductsViewModelAsync(int cartId)
         {
@@ -43,21 +47,9 @@
             //Gets the products that are not ordered yet
             var products = cart.CartProducts
                  .Where(cp => cp.IsOrdered == false)
-                 .Select(cp => new CartProductViewModel
-                 {
-                     Id = cp.Id,
-                     ProductId = cp.ProductId,
-                     Name = cp.Name,
-                     Size = cp.Size.Value,
-                     Gender = cp.Gender.ToString(),
-                     Details = cp.Details,
-                     ImageUrl = cp.ImageUrl,
-                     Price = cp.Price,
-                     Quantity = cp.Quantity,
-                     ProductType = cp.ProductType.ToString()
-                 })
-                .ToArray();
-
+                 .ToList()
+                 .Select(cp => this._mapper.Map<CartProduct, CartProductViewModel>(cp))
+                 .ToList();
             return products;
         }
 
