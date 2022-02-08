@@ -10,24 +10,27 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using AutoMapper;
 
     public class OrderService : IOrderService
     {
         private readonly ApplicationDbContext _db;
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;
+        private readonly IMapper _mapper;
 
-        public OrderService(ApplicationDbContext db, ITokenService tokenService, ICartService cartService)
+        public OrderService(ApplicationDbContext db, ITokenService tokenService, ICartService cartService, IMapper mapper)
         {
             this._db = db;
             this._tokenService = tokenService;
             this._cartService = cartService;
+            this._mapper = mapper;
         }
 
         public async Task CreateOrderAsync(string token, OrderViewModel orderViewModel)
         {
             //Get the current logged in user
-            var user = this._tokenService.GetUserByIdAsync(token).Result;
+            var user = await this._tokenService.GetUserByIdAsync(token);
             //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
             //Check the payment type and set the data directly in the view model
@@ -39,29 +42,24 @@
             {
                 orderViewModel.Status = "DeliveryCash";
             }
+            var products = await this._cartService.GetCartProductsAsync(cartId);
+            var billingInfo = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
 
-            var order = new Order()
-            {
-                Id = Guid.NewGuid().ToString(),
-                Status = (Status)Enum.Parse(typeof(Status), orderViewModel.Status),
-                CreatedOn = DateTime.UtcNow,
-                Payment = orderViewModel.Payment,
-                Products = await this._cartService.GetCartProductsAsync(cartId),
-                UserData = new BillingInformation
-                {
-                    FirstName = orderViewModel.UserData.FirstName,
-                    LastName = orderViewModel.UserData.LastName,
-                    Phone = orderViewModel.UserData.Phone,
-                    Street = orderViewModel.UserData.Street,
-                    City = orderViewModel.UserData.City,
-                    Country = orderViewModel.UserData.Country,
-                    State = orderViewModel.UserData.State,
-                    ZipCode = orderViewModel.UserData.ZipCode
-                }
-            };
+            var order = this._mapper.Map<OrderViewModel, Order>(orderViewModel);
+            order.Products = products;
+            order.UserData = billingInfo;
+
             //Add order to current user's orders and update database
             user.Orders.Add(order);
-            this._db.SaveChanges();
+            try
+            {
+                this._db.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
         }
 
         public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
