@@ -13,7 +13,7 @@
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
                 .ForMember(dest => dest.Address, opt =>
                 opt.MapFrom(src => new Address { City = "", Street = "", Country = "", State = "", ZipCode = "" }))
-                .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => new Cart { }));
+                .ForMember(dest => dest.Cart, opt => opt.MapFrom(src => new Cart()));
 
             //Get user information
             CreateMap<User, UserProfileDataViewModel>()

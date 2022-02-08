@@ -42,24 +42,16 @@
             {
                 orderViewModel.Status = "DeliveryCash";
             }
-            var products = await this._cartService.GetCartProductsAsync(cartId);
-            var billingInfo = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
+
+            //var billingInfo = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
 
             var order = this._mapper.Map<OrderViewModel, Order>(orderViewModel);
-            order.Products = products;
-            order.UserData = billingInfo;
+            order.UserData = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
+            order.Products = await this._cartService.GetCartProductsAsync(cartId);
 
             //Add order to current user's orders and update database
             user.Orders.Add(order);
-            try
-            {
-                this._db.SaveChanges();
-
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+            this._db.SaveChanges();
         }
 
         public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
