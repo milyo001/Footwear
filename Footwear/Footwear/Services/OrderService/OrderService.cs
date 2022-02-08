@@ -7,7 +7,6 @@
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using AutoMapper;
