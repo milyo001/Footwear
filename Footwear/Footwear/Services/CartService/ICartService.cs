@@ -1,6 +1,4 @@
-﻿
-
-namespace Footwear.Services.CartService
+﻿namespace Footwear.Services.CartService
 {
     using Footwear.ViewModels;
     using Footwear.Data.Models;
@@ -9,7 +7,6 @@ namespace Footwear.Services.CartService
 
     public interface ICartService
     {
-
         int GetCartId(string userId);
         Task<Cart> GetCartAsync(int cartId);
         Task<IEnumerable<CartProductViewModel>> GetCartProductsViewModelAsync(int cartId);
