@@ -19,12 +19,11 @@
             <div>
               <img class="product-image" src="{{item.imageUrl}}" alt="Product Image">
             </div>
-            <ul class="font-weight-light">
+            <ul class="font-weight-light fs">
               <li>{{item.name}} </li>
               <li>Size: {{item.size}}</li>
               <li>{{item.quantity}} x</li>
               <li>Price: {{item.price | currency}}</li>
-              <li class="bold" *ngIf="item.quantity > 1">Total: {{+item.price * item.quantity}}$</li>
             </ul>
           </mat-card>
         </div>
