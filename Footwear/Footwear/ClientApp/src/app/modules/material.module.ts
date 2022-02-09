@@ -12,6 +12,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatSortModule } from '@angular/material/sort';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const modules = [
   MatToolbarModule,
@@ -25,7 +26,8 @@ const modules = [
   MatButtonToggleModule,
   MatStepperModule,
   MatTableModule,
-  MatSortModule
+  MatSortModule,
+  MatTabsModule
 ];
 
 @NgModule({
