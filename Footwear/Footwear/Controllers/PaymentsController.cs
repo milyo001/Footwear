@@ -28,13 +28,13 @@ namespace server.Controllers
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
-        [HttpGet("get-checkout-session")]
-        public async Task<ActionResult> GetCheckoutSession()
+        [HttpGet("create-checkout-session")]
+        public async Task<ActionResult> CreateCheckoutSession()
         {
             string authToken = HttpContext.Items["token"].ToString();
             var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);   
             double totalPrice = this._orderService.GetTotalPrice(latestOrder);
-            //Add delivery price to the total
+            //Add delivery price to the total price
             totalPrice += await this._orderService.GetDeliveryPriceAsync();
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
