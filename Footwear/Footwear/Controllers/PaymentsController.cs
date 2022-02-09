@@ -65,6 +65,7 @@ namespace server.Controllers
                 Mode = "payment",
                 SuccessUrl = domain + "/payment-success/?session_id={CHECKOUT_SESSION_ID}",
                 CancelUrl = domain + "/payment-cancel",
+                
             };
             var service = new SessionService();
             Session session = service.Create(options);
@@ -88,11 +89,16 @@ namespace server.Controllers
                 return BadRequest("Session id invalid");
             }
 
-            string authToken = HttpContext.Items["token"].ToString();
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
             var paymentStatus = session.PaymentStatus;
 
+            if (string.IsNullOrWhiteSpace(paymentStatus))
+            {
+                return BadRequest("Payment not successful! Card declined!");
+            }
+
+            string authToken = HttpContext.Items["token"].ToString();
             //Get latest added order and change the payment status to paid
             var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
             this._orderService.ModifyPaidOrder(orderId);
