@@ -54,10 +54,6 @@ namespace server.Controllers
                     Quantity = 1,
                   },
                 },
-                Metadata = new Dictionary<string, string>
-                {
-                    { "PaymentStatus", "Succeeded" }
-                },
                 PaymentMethodTypes = new List<string>
                 {
                   "card",
@@ -65,8 +61,9 @@ namespace server.Controllers
                 Mode = "payment",
                 SuccessUrl = domain + "/payment-success/?session_id={CHECKOUT_SESSION_ID}",
                 CancelUrl = domain + "/payment-cancel",
-                
             };
+
+
             var service = new SessionService();
             Session session = service.Create(options);
 
