@@ -1,8 +1,26 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Current Orders">
-  No orders.
+    <mat-selection-list #shoes [multiple]="false">
+      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
+        {{shoe}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <p>
+      Option selected: {{shoes.selectedOptions.selected[0]?.value}}
+    </p>
+
   </mat-tab>
   <mat-tab label="Past Orders">
-  No orders.
+    <!--<mat-selection-list #pastOders [multiple]="false">
+      <mat-list-option *ngFor="let order of pastOrders" [value]="order">
+        {{order}}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <p>
+      Option selected: {{pastOrders.selectedOptions.selected[0]?.value}}
+    </p>-->
+
   </mat-tab>
 </mat-tab-group>
