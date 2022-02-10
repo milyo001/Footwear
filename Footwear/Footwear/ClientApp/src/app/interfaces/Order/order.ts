@@ -1,4 +1,4 @@
-import { IUserData } from "./userData";
+import { IUserData } from "../User/userData";
 
 export interface IOrder {
   payment: string;
