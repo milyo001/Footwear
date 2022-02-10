@@ -13,6 +13,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableModule } from '@angular/material/table'; 
 import { MatSortModule } from '@angular/material/sort';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list'; 
 
 const modules = [
   MatToolbarModule,
@@ -27,7 +28,8 @@ const modules = [
   MatStepperModule,
   MatTableModule,
   MatSortModule,
-  MatTabsModule
+  MatTabsModule,
+  MatListModule
 ];
 
 @NgModule({
