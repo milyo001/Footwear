@@ -16,10 +16,10 @@ import {
 }
   from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
-import { ICartProduct } from '../../interfaces/cartProduct';
-import { IDeliveryInfo } from '../../interfaces/deliveryInfo';
-import { IOrder } from '../../interfaces/order';
-import { IUserData } from '../../interfaces/userData';
+import { ICartProduct } from '../../interfaces/Cart/cartProduct';
+import { IDeliveryInfo } from '../../interfaces/Common/deliveryInfo';
+import { IOrder } from '../../interfaces/Order/order';
+import { IUserData } from '../../interfaces/User/userData';
 import { CartService } from '../../services/cart.service';
 import { OrderService } from '../../services/order.service';
 import { UserService } from '../../services/user.service';

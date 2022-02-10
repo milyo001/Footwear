@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IOrder } from '../interfaces/order';
+import { ICompletedOrder } from '../interfaces/Order/completedOrder';
 
 @Component({
   selector: 'app-orders',
@@ -9,7 +9,7 @@ import { IOrder } from '../interfaces/order';
 export class OrdersComponent implements OnInit {
 
   typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-  orders: {};
+  orders: ICompletedOrder[];
 
   constructor() { }
 

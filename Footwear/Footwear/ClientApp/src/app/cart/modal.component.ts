@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { ICartProduct } from '../interfaces/cartProduct';
+import { ICartProduct } from '../interfaces/Cart/cartProduct';
 
 @Component({
   selector: 'modal-confirm',
@@ -29,7 +29,6 @@ export class ModalComponent {
   @Input() public product: ICartProduct;
 
   totalPrice: number;
-
 
   ngOnInit() {
     

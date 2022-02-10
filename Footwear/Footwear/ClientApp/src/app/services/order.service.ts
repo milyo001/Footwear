@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { IDeliveryInfo } from '../interfaces/deliveryInfo';
-import { IOrder } from '../interfaces/order';
+import { IDeliveryInfo } from '../interfaces/Common/deliveryInfo';
+import { IOrder } from '../interfaces/Order/order';
 
 @Injectable({
   providedIn: 'root'

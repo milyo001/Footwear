@@ -1,7 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { IUserData } from '../interfaces/userData';
+import { IUserData } from '../interfaces/User/userData';
 
 @Injectable({
   providedIn: 'root'
