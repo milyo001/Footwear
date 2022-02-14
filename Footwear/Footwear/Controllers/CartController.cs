@@ -44,20 +44,22 @@
             return Ok(new { succeeded = true });
         }
 
+        /// <summary>
+        /// Decrease an cart product quantity when the cart product quantity is more than 1
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         [HttpPut("decreaseProductQuantity")]
         public async Task<IActionResult> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
 
             if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
+            //The base validation is on the client side but the user data cannot be trusted
+            if (cartProduct.Quantity <= 1) return BadRequest(CartErrors.UnableToLowerCartProductQuantity);
 
-            if (cartProduct.Quantity > 1)
-            {
-                await this._cartService.DecreaseQuantityAsync(cartProductId);
-                return Ok(new { succeeded = true });
-            }
-
-            return BadRequest("Error, modifing the data!");
+            await this._cartService.DecreaseQuantityAsync(cartProductId);
+            return Ok(new { succeeded = true });
         }
 
         [HttpPost("deleteCartProduct")]

@@ -78,7 +78,7 @@ export class CartComponent implements OnInit {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
     if (value <= 1) {
-      this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try to delete the item");
+      this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try to delete the item!");
     }
     else {
       this.cartService.decreaseProductQuantity(cartProduct.id).subscribe(
