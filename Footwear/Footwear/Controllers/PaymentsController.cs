@@ -96,8 +96,9 @@ namespace server.Controllers
             }
 
             string authToken = HttpContext.Items["token"].ToString();
-            //Get latest added order and change the payment status to paid
+            //Get latest added order
             var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
+            //Change payment type to paid
             this._orderService.ModifyPaidOrder(orderId);
 
             return Ok(new { paymentStatus });
