@@ -49,10 +49,8 @@
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
 
-            if (cartProduct == null)
-            {
-                return BadRequest("Product do not exists in context");
-            }
+            if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
+
             if (cartProduct.Quantity > 1)
             {
                 await this._cartService.DecreaseQuantityAsync(cartProductId);
