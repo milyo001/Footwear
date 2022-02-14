@@ -7,6 +7,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Footwear.Controllers.ErrorHandler;
 
     [Route("[controller]")]
     [ApiController]
@@ -32,19 +33,15 @@
             var cartId = this._tokenService.GetCartId(authToken);
             var products = await this._cartService.GetCartProductsViewModelAsync(cartId);
             return products;
-
         }
 
         [HttpPut("increaseProductQuantity")]
         public async Task<IActionResult> IncrementCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
-            if (cartProduct != null)
-            {
-                await this._cartService.IncreaseQuantityAsync(cartProductId);
-                return Ok(new { succeeded = true });
-            }
-            return BadRequest("Error, modifing the data!");
+            if (cartProduct == null) return BadRequest(CartErrors.InvalidCartProduct);
+            await this._cartService.IncreaseQuantityAsync(cartProductId);
+            return Ok(new { succeeded = true });
         }
 
         [HttpPut("decreaseProductQuantity")]
@@ -80,8 +77,15 @@
         [HttpDelete("removeCartProducts")]
         public async Task<IActionResult> RemoveCartProducts()
         {
+
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);
+            var cart = await this._cartService.GetCartAsync(cartId);
+
+            if (cart.CartProducts.Count <= 0)
+            {
+                return NoContent();
+            }
             //Change the status of cart products
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
