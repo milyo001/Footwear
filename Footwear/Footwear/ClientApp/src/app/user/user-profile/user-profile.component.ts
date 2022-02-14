@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { validateNewAndConfPass, validateOldAndNewPass, valideEmails } from '../../../shared/validators/user-profile.validators';
-import { IUserData } from '../../interfaces/User/userData';
+import { IUserData } from '../../interfaces/user/userData';
 import { UserService } from '../../services/user.service';
 
 @Component({

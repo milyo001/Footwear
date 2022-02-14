@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { ICartProduct } from '../interfaces/Cart/cartProduct';
+import { ICartProduct } from '../interfaces/cart/cartProduct';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 

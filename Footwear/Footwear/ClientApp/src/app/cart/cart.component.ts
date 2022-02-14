@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './modal.component';
 import { LoadingService } from '../services/loading.service';
-import { ICartProduct } from '../interfaces/Cart/cartProduct';
+import { ICartProduct } from '../interfaces/cart/cartProduct';
 
 @Component({
   selector: 'app-cart',

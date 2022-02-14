@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
-import { IProduct } from '../../interfaces/Product/product';
+import { IProduct } from '../../interfaces/product/product';
 import { SortingOptions } from '../sortingOptions';
 import { LoadingService } from '../../services/loading.service';
 

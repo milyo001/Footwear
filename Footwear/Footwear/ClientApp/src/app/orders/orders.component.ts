@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICompletedOrder } from '../interfaces/Order/completedOrder';
+import { ICompletedOrder } from '../interfaces/order/completedOrder';
 
 @Component({
   selector: 'app-orders',

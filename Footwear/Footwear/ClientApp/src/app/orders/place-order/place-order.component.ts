@@ -17,7 +17,7 @@ import {
   from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/Cart/cartProduct';
-import { IDeliveryInfo } from '../../interfaces/Common/deliveryInfo';
+import { IDeliveryInfo } from '../../interfaces/order/deliveryInfo';
 import { IOrder } from '../../interfaces/Order/order';
 import { IUserData } from '../../interfaces/User/userData';
 import { CartService } from '../../services/cart.service';
