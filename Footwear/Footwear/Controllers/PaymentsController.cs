@@ -1,7 +1,6 @@
 ﻿
 namespace server.Controllers
 {
-    using Footwear.ViewModels;
     using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
