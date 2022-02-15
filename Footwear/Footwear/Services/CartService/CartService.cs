@@ -23,13 +23,22 @@
             this._mapper = mapper;
         }
 
-        //Get the cartId by given user id
+        /// <summary>
+        /// Returns the cart id by given user id.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
         public int GetCartId(string userId)
         {
             var cartId = this._db.Cart.FirstOrDefault(x => x.UserId == userId).Id;
             return cartId;
         }
 
+        /// <summary>
+        /// Gets the cart model by given cart id.
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task<Cart> GetCartAsync(int cartId)
         {
             var cart = await this._db.Cart
@@ -38,7 +47,11 @@
             return cart;
         }
 
-        //Get all cart products and return the view model to send it to the client
+        /// <summary>
+        /// Get all cart products and return the view model.
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task<IEnumerable<CartProductViewModel>> GetCartProductsViewModelAsync(int cartId)
         {
             var cart = await this.GetCartAsync(cartId);
@@ -52,8 +65,12 @@
         }
 
 
-        //Check if the product name already exists and have the same size in the CartProducts table
-        //and change the quantity of that dupplicate cartProduct, instead of adding additional instance of CartProduct
+        /// <summary>
+        /// Add a product to the user's cart.Also check if the product name already exists and have the same size in the CartProducts and change the quantity of that dupplicate cartProduct, instead of adding additional instance of CartProduct
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="model"></param>
+        /// <returns></returns>
         public async Task AddCartProductAsync(string token, CartProductViewModel model)
         {
             var cartId = this._tokenService.GetCartId(token);
@@ -78,7 +95,11 @@
             await this._db.SaveChangesAsync();
         }
 
-        //Get all cart products to add them to order
+        /// <summary>
+        /// Gets all cart products by given cart id.
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task<ICollection<CartProduct>> GetCartProductsAsync(int cartId)
         {
             var cart = await this.GetCartAsync(cartId);
@@ -89,7 +110,11 @@
             return products;
         }
 
-        //Get a single cart product by given cart product id
+        /// <summary>
+        /// Gets a cart product by given cart product id.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         public async Task<CartProduct> GetCartProductByIdAsync(int cartProductId)
         {
             var product = await this._db.CartProducts
@@ -97,7 +122,11 @@
             return product;
         }
 
-        //Increases the given cart product quantity
+        /// <summary>
+        /// Increases the given cart product quantity.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         public async Task IncreaseQuantityAsync(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
@@ -105,7 +134,11 @@
             await this._db.SaveChangesAsync();
         }
 
-        //Decreases the given cart product quantity
+        /// <summary>
+        /// Decreases the given cart product quantity.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         public async Task DecreaseQuantityAsync(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
@@ -113,7 +146,11 @@
             await this._db.SaveChangesAsync();
         }
 
-        //Removes the cart product by given id
+        /// <summary>
+        /// Removes the cart product by given cart product id.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         public async Task DeleteCartProductAsync(int cartProductId)
         {
             var cartProduct = this.GetCartProductByIdAsync(cartProductId).Result;
@@ -121,7 +158,11 @@
             await this._db.SaveChangesAsync();
         }
 
-        //Removes all cart products
+        /// <summary>
+        /// Removes all cart products by given cart id.
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task DeleteCartProductsAsync(int cartId)
         {
             var cartProducts = this._db.CartProducts.Where(x => x.CartId == cartId);
@@ -129,14 +170,16 @@
             await this._db.SaveChangesAsync();
         }
 
-        //Change isOrdered property all cart products after order is finished
+        /// <summary>
+        /// Change IsOrdered property all cart products after order is ordered.
+        /// </summary>
+        /// <param name="cartId"></param>
+        /// <returns></returns>
         public async Task ChangeOrderStateCartProductsAsync(int cartId)
         {
             var cartProducts = await this.GetCartProductsAsync(cartId);
             cartProducts.ToList().ForEach(cp => cp.IsOrdered = true);
             await this._db.SaveChangesAsync();
         }
-
-
     }
 }
