@@ -25,7 +25,10 @@
             this._cartService = cartService;
         }
 
-
+        /// <summary>
+        /// Get a IEnumerable collection of the view models and return it to the client.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("getCartItems")]
         public async Task<IEnumerable<CartProductViewModel>> GetItemsAsync()
         {
@@ -35,17 +38,22 @@
             return products;
         }
 
+        /// <summary>
+        /// Increase a cart product quantity or returns BadRequest if cart product is invalid.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         [HttpPut("increaseProductQuantity")]
         public async Task<IActionResult> IncrementCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
-            if (cartProduct == null) return BadRequest(CartErrors.InvalidCartProduct);
+            if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
             await this._cartService.IncreaseQuantityAsync(cartProductId);
             return Ok(new { succeeded = true });
         }
 
         /// <summary>
-        /// Decrease an cart product quantity if possible, otherwise returns BadRquest status code.
+        /// Decrease a cart product quantity if possible, otherwise returns BadRquest status code.
         /// </summary>
         /// <param name="cartProductId"></param>
         /// <returns></returns>
@@ -83,13 +91,10 @@
         [HttpDelete("removeCartProducts")]
         public async Task<IActionResult> RemoveCartProducts()
         {
-
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);
             var cart = await this._cartService.GetCartAsync(cartId);
-
             if (cart.CartProducts.Count <= 0) return NoContent();
-            
             //Change the status of cart products
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
