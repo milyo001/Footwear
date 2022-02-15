@@ -78,35 +78,40 @@
             return Ok(new { token });
         }
 
+
+        /// <summary>
+        /// Gets user profile data from database and send the view model to the client.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
-            }
+            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
+
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             var userData = this._userService.GetUserData(user);
             return userData;
         }
 
+        /// <summary>
+        /// Updates user data from input data after few validations.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("updateUserProfile")]
         public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
+            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
+            
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             var result = await this._userService.UpdateUserDataAsync(user, model);
-            if (!result.Succeeded)
-            {
-                return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
-            }
+            if (!result.Succeeded) 
+            return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
+            
             return Accepted(new { succeeded = true });
         }
 
