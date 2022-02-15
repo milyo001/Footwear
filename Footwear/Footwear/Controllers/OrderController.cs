@@ -39,7 +39,7 @@
         }
 
         /// <summary>
-        /// Get all the information about the delivery.
+        /// Get all the information about the delivery. Send the view model to the client.
         /// </summary>
         /// <returns></returns>
         [Route("getDeliveryInfo")]
