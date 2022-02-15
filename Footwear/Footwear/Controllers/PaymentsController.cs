@@ -71,7 +71,7 @@ namespace server.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
 
-            //Passing the url to the client to redirect user to the prebuild checkout page
+            //Pass the url to the client to redirect user to the prebuild checkout page
             var generatedUrl = new
             {
                 Url = session.Url
@@ -81,14 +81,15 @@ namespace server.Controllers
             return Ok(jsonString);
         }
 
-
+        /// <summary>
+        /// Handle a successfull payment.Make order status paid with card.
+        /// </summary>
+        /// <param name="session_id"></param>
+        /// <returns></returns>
         [HttpGet("order/payment-success")]
         public async Task<ActionResult> OrderSuccess([FromQuery] string session_id)
         {
-            if (session_id == null)
-            {
-                return BadRequest("Session id invalid");
-            }
+            if (session_id == null) return BadRequest("Session id invalid");
 
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
