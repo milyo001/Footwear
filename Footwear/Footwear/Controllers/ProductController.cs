@@ -49,7 +49,11 @@
             return product;
         }
 
-
+        /// <summary>
+        /// Add the selected product to a cart.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("addToCart")]
         public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
