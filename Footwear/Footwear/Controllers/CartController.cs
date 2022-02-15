@@ -17,7 +17,6 @@
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;
 
-
         public CartController(ApplicationDbContext db, ITokenService tokenService, ICartService cartService)
         {
             this._db = db;
@@ -100,7 +99,5 @@
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
         }
-
-
     }
 }
