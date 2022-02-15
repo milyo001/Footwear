@@ -15,16 +15,14 @@
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
 
-        public UserController(ApplicationDbContext db, UserManager<User> userManager,
+        public UserController(UserManager<User> userManager,
              ITokenService tokenService, IUserService userService, ICartService cartService)
         {
-            this._db = db;
             this._userManager = userManager;
             this._userService = userService;
             this._tokenService = tokenService;
@@ -115,6 +113,12 @@
             return Accepted(new { succeeded = true });
         }
 
+
+        /// <summary>
+        /// Updates user email.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("updateEmail")]
         public async Task<IActionResult> UpdateEmail(EmailViewModel model)
@@ -123,22 +127,17 @@
             var confEmail = model.ConfirmEmail;
             string authToken = HttpContext.Items["token"].ToString();
 
-            if (email != confEmail || !ModelState.IsValid)
-            {
+            if (email != confEmail || !ModelState.IsValid) 
                 return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
+            
             if (this._userService.isUsernameInUse(email))
-            {
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
-            }
-
+            
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
             if (!result.Succeeded)
-            {
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateEmail });
-            }
 
             return Accepted(new { succeeded = true });
         }
