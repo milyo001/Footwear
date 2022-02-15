@@ -1,6 +1,7 @@
 ﻿
 namespace server.Controllers
 {
+    using Footwear.Controllers.ErrorHandler;
     using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
@@ -89,19 +90,16 @@ namespace server.Controllers
         [HttpGet("order/payment-success")]
         public async Task<ActionResult> OrderSuccess([FromQuery] string session_id)
         {
-            if (session_id == null) return BadRequest("Session id invalid");
+            if (session_id == null) return BadRequest(PaymentErrors.InvalidSession);
 
             var sessionService = new SessionService();
             Session session = sessionService.Get(session_id);
             var paymentStatus = session.PaymentStatus;
 
-            if (string.IsNullOrWhiteSpace(paymentStatus))
-            {
-                return BadRequest("Payment not successful! Card declined!");
-            }
+            if (string.IsNullOrWhiteSpace(paymentStatus)) return BadRequest(PaymentErrors.PaymentDeclined);
 
             string authToken = HttpContext.Items["token"].ToString();
-            //Get latest added order
+            //Get latest added order id
             var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
             //Change payment type to paid
             this._orderService.ModifyPaidOrder(orderId);
