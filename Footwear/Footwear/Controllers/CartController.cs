@@ -30,7 +30,7 @@
         /// </summary>
         /// <returns></returns>
         [HttpGet("getCartItems")]
-        public async Task<IEnumerable<CartProductViewModel>> GetItemsAsync()
+        public async Task<IEnumerable<CartProductViewModel>> GetCartProductsAsync()
         {
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);
@@ -85,7 +85,8 @@
         }
 
         /// <summary>
-        /// "Clean up" the cart by changing all cart products IsOrdered property to true.
+        /// "Clean up" the cart by changing all cart products IsOrdered property to true. Returns status 204
+        /// (No Content) if cart is empty.
         /// </summary>
         /// <returns></returns>
         [HttpDelete("removeCartProducts")]
