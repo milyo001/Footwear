@@ -20,23 +20,28 @@
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
+        /// <summary>
+        /// Creates an order and returns cardPayment property to validate if payment is with a card,
+        /// so the client can handle the card payment session.
+        /// </summary>
+        /// <param name="order"></param>
+        /// <returns></returns>
         [Route("create-order")]
         public async Task<ActionResult> CreateOrder([FromBody] OrderViewModel order)
         {
-            //Check if data is invalid or model was not bound successfully
-            if (order == null || !ModelState.IsValid)
-            {
-                return BadRequest(new { message = "Invalid product data!" });
-            }
-            string authToken = HttpContext.Items["token"].ToString();
+            if (order == null || !ModelState.IsValid) return BadRequest(new { message = "Invalid product data!" });
 
-            //Check if payment is with card so the client can handle card payment session
-            var cardPayment = order.Payment == "card" ? true : false;
+            string authToken = HttpContext.Items["token"].ToString();
+            var cardPayment = order.Payment == "card";
             await this._orderService.CreateOrderAsync(authToken, order);
 
             return Ok(new { cardPayment });
         }
 
+        /// <summary>
+        /// Get all the information about the delivery.
+        /// </summary>
+        /// <returns></returns>
         [Route("getDeliveryInfo")]
         public async Task<ActionResult<DeliveryInfoViewModel>> GetDeliveryData()
         {
