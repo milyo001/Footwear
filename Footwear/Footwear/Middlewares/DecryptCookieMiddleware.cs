@@ -30,8 +30,7 @@ namespace Footwear.Middlewares
     public static class DecryptCookieMiddlewareExtensions
     {
         /// <summary>
-        /// Decrypt the token cookie value already stored in browser and store it in HttpContext.Items,where
-        /// key is "token" and value is the decrypted cookie value. With this middleware the application is protected against stolen token claims(JWT tokens are decodable)
+        /// Decrypt the token value already stored in browser cookies and store it in the dictionary<string, string> collection HttpContext.Items, where key is "token" and valure is the decrypted cookie value. With this middleware the application is protected against stolen token claims(JWT tokens are decodable and should not be exposed to the user in browser).
         /// </summary>
         /// <param name="builder"></param>
         /// <returns></returns>
