@@ -61,6 +61,11 @@
             return Ok(new { succeeded = true });
         }
 
+        /// <summary>
+        /// Remove cart product in the database or return BadRequest if product doesn't exist.
+        /// </summary>
+        /// <param name="cartProductId"></param>
+        /// <returns></returns>
         [HttpPost("deleteCartProduct")]
         public async Task<IActionResult> DeleteCartProduct([FromBody] int cartProductId)
         {
@@ -71,6 +76,10 @@
             return Ok(new { succeeded = true });
         }
 
+        /// <summary>
+        /// "Clean up" the cart by changing all cart products IsOrdered property to true.
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("removeCartProducts")]
         public async Task<IActionResult> RemoveCartProducts()
         {
@@ -79,10 +88,8 @@
             var cartId = this._tokenService.GetCartId(authToken);
             var cart = await this._cartService.GetCartAsync(cartId);
 
-            if (cart.CartProducts.Count <= 0)
-            {
-                return NoContent();
-            }
+            if (cart.CartProducts.Count <= 0) return NoContent();
+            
             //Change the status of cart products
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
