@@ -45,7 +45,7 @@
         }
 
         /// <summary>
-        /// Decrease an cart product quantity when the cart product quantity is more than 1
+        /// Decrease an cart product quantity if possible, otherwise returns BadRquest status code.
         /// </summary>
         /// <param name="cartProductId"></param>
         /// <returns></returns>
@@ -53,7 +53,6 @@
         public async Task<IActionResult> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
-
             if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
             //The base validation is on the client side but the user data cannot be trusted
             if (cartProduct.Quantity <= 1) return BadRequest(CartErrors.UnableToLowerCartProductQuantity);
@@ -65,12 +64,10 @@
         [HttpPost("deleteCartProduct")]
         public async Task<IActionResult> DeleteCartProduct([FromBody] int cartProductId)
         {
-            if (await this._cartService.GetCartProductByIdAsync(cartProductId) == null)
-            {
-                return BadRequest("Product do not exists in cart");
-            }
-            await this._cartService.DeleteCartProductAsync(cartProductId);
+            var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
+            if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
 
+            await this._cartService.DeleteCartProductAsync(cartProductId);
             return Ok(new { succeeded = true });
         }
 
