@@ -31,52 +31,50 @@
             this._cartService = cartService;
         }
 
-        //A method for validating the data from client and register new user in the database
+        /// <summary>
+        /// A method for register a new user in the database after validation the data send from the model.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("register")]
         public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
             bool isUserDupplicate = this._userService.isUsernameInUse(model.Email);
 
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
-            if (isUserDupplicate)
-            {
-                return Conflict(new { message = IdentityErrors.UserIsInUse });
-            }
+            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
+            if (isUserDupplicate) return Conflict(new { message = IdentityErrors.UserIsInUse });
 
             //Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
-
-            if (!result.Succeeded)
-            {
-                return BadRequest(new { message = IdentityErrors.CannotRegister });
-            }
+             
+            if (!result.Succeeded) return BadRequest(new { message = IdentityErrors.CannotRegister });
             return Ok(new { succeeded = true });
         }
 
-        //A method for validating the data from client and generate auth token, also will generate JWT token
-        //For JWT token configuration go to StartUp.cs and find the service for token auth
+        /// <summary>
+        /// Validating the data from client and generate auth token.
+        /// For JWT token configuration go to StartUp.cs and find the service for token auth
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login(LoginViewModel model)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
+            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
+
             //Check if user exists in the database
             var user = await _userManager.FindByNameAsync(model.Email);
             var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
-            if (user == null || !passwordMatch)
-            {
-                return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
-            }
+
+            if (user == null || !passwordMatch) 
+            return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
+
             var cartId = this._cartService.GetCartId(user.Id);
-            //Store userId and cartId as claims in the token for better accesibility
+
             var token = this._tokenService.GenerateToken(user.Id, cartId);
+
             return Ok(new { token });
         }
 
