@@ -4,9 +4,7 @@
     using Footwear.ViewModels;
     using Footwear.Services.CartService;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Footwear.Services.ProductService;
 
@@ -26,6 +24,10 @@
         }
 
 
+        /// <summary>
+        /// Get all products from the database.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductDto>>> GetAllProducts()
         {
@@ -34,14 +36,16 @@
         }
 
 
+        /// <summary>
+        /// Get a specific product by given id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(int id)
         {
             var product =  await this._productService.GetProductByIdAsync(id);
-            if (product == null)
-            {
-                return NotFound();
-            }
+            if (product == null) return NotFound();
             return product;
         }
 
