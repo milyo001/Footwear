@@ -20,8 +20,7 @@
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
 
-        public UserController(UserManager<User> userManager,
-             ITokenService tokenService, IUserService userService, ICartService cartService)
+        public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService)
         {
             this._userManager = userManager;
             this._userService = userService;
@@ -113,10 +112,9 @@
             return Accepted(new { succeeded = true });
         }
 
-
         /// <summary>
         /// Updates user email and and return status 202(Accepted) when succeeded. Validation errors will return status
-        /// 400 (BadRequest).
+        /// 400(BadRequest).
         /// status.
         /// </summary>
         /// <param name="model"></param>
@@ -146,7 +144,7 @@
 
         /// <summary>
         /// Updates user password and returns status 202(Accepted) when succeeded. Validation errors will return status
-        /// 400 (BadRequest).
+        /// 400(BadRequest).
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
