@@ -115,7 +115,9 @@
 
 
         /// <summary>
-        /// Updates user email.
+        /// Updates user email and and return status 202(Accepted) when succeeded. Validation errors will return status
+        /// 400 (BadRequest).
+        /// status.
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -142,19 +144,21 @@
             return Accepted(new { succeeded = true });
         }
 
-
+        /// <summary>
+        /// Updates user password and returns status 202(Accepted) when succeeded. Validation errors will return status
+        /// 400 (BadRequest).
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
         [HttpPut]
         [Route("updatePassword")]
         public async Task<IActionResult> UpdatePassword(PasswordViewModel model)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest(new { message = IdentityErrors.InvalidData });
-            }
+
             if (model.NewPassword != model.ConfirmPassword)
-            {
                 return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
-            }
 
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
@@ -162,15 +166,12 @@
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
             
             if (!isPassValid)
-            {
                 return BadRequest(new { message = IdentityErrors.InvalidPassword });
-            }
-            var result = await this._userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
+
+            IdentityResult result = await this._userManager.ChangePasswordAsync(user, model.Password, model.NewPassword);
 
             if (!result.Succeeded)
-            {
                 return BadRequest(new { message = IdentityErrors.UnableToUpdatePassword });
-            }
 
             return Accepted(new { succeeded = true });
         }
