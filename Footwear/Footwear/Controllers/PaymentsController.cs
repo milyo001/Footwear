@@ -27,6 +27,11 @@ namespace server.Controllers
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
 
+        /// <summary>
+        /// Create new checkout session to prepare the client to be redirected to stripe.com for 
+        /// card payment.The session url contains all the options meta data below.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet("create-checkout-session")]
         public async Task<ActionResult> CreateCheckoutSession()
         {
