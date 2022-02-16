@@ -1,7 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
     using Footwear.Controllers.ErrorHandler;
-    using Footwear.Data;
     using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
