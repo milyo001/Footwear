@@ -20,6 +20,7 @@
             this._mapper = mapper;
         }
 
+        //Creates new user in the database
         public async Task<IdentityResult> CreateUserAsync(RegisterViewModel model)
         {
             var user = this._mapper.Map<User>(model);
@@ -27,18 +28,20 @@
             return result;
         }
 
-        //Check if user already exist
+        //Check if user already exist in the database
         public bool isUsernameInUse(string email)
         {
             return this._db.Users.Any(user => user.Email == email.ToUpper());
         }
 
+        //Returns the user data from the database
         public UserProfileDataViewModel GetUserData(User user)
         {
             var userData = this._mapper.Map<UserProfileDataViewModel>(user);
             return userData;
         }
         
+        //Updates the user data by given user and model
         public async Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model)
         {
             var modifiedUser = this._mapper.Map(model, user);
@@ -47,6 +50,7 @@
             return result;
         }
 
+        //Updates username(by default the email address) in the database
         public async Task<IdentityResult> UpdateEmailAsync(User user, string email)
         {
             user.Email = email;
