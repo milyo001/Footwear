@@ -17,6 +17,8 @@
 
             CreateMap<UserProfileDataViewModel, BillingInformation>();
 
+            CreateMap<AppData, DeliveryInfoViewModel>();
+
         }
     }
 }

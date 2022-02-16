@@ -58,12 +58,7 @@
         public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
         {
             AppData data = await this._db.AppData.FirstOrDefaultAsync();
-            DeliveryInfoViewModel result = new()
-            {
-                MinDelivery = data.MinDelivery,
-                MaxDelivery = data.MaxDelivery,
-                DeliveryPrice = data.DeliveryPrice
-            };
+            var result = this._mapper.Map<DeliveryInfoViewModel>(data);
             return result;
         }
 
