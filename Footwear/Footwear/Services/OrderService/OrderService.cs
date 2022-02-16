@@ -26,6 +26,7 @@
             this._mapper = mapper;
         }
 
+        //Creates new order 
         public async Task CreateOrderAsync(string token, OrderViewModel orderViewModel)
         {
             //Get the current logged in user
@@ -53,6 +54,7 @@
             this._db.SaveChanges();
         }
 
+        //Gets the delivery data (AppData) and return it
         public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
         {
             AppData data = await this._db.AppData.FirstOrDefaultAsync();
@@ -65,7 +67,7 @@
             return result;
         }
 
-        //A method that will return the last added user order id
+        //Get the latest added order id from the database and return it
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
@@ -78,6 +80,7 @@
             return orderId;
         }
 
+        //Get the latest added order from the database and return it
         public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
@@ -90,19 +93,21 @@
             return order;
         }
 
-
+        //Gets and returns the order entity
         public async Task<Order> GetOrderByIdAsync(string id)
         {
             var order = await this._db.Orders.FirstOrDefaultAsync(o => o.Id == id);
             return order;
         }
 
+        //Calculates and returns the total price of all cart products
         public double GetTotalPrice(Order order)
         {
             var totPrice = order.Products.Sum(p => p.Price * p.Quantity);
             return totPrice;
         }
 
+        //Change payment status of order to paid.
         public void ModifyPaidOrder(string orderId)
         {
             var order = this.GetOrderByIdAsync(orderId).Result;
@@ -110,6 +115,7 @@
             this._db.SaveChanges();
         }
 
+        //Gets only the delivery price from the AppData model
         public async Task<double> GetDeliveryPriceAsync()
         {
             var data = await this.GetDeliveryDataAsync();
