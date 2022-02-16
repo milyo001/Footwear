@@ -29,8 +29,6 @@
 
         [Required, MaxLength(20)]
         public string ZipCode { get; set; }
-
     }
-
 }
 

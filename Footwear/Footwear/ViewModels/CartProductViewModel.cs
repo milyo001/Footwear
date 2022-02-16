@@ -1,6 +1,4 @@
-﻿
-
-namespace Footwear.ViewModels
+﻿namespace Footwear.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 

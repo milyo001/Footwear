@@ -15,6 +15,5 @@
 
         [Required]
         public UserProfileDataViewModel UserData { get; set; }
-
     }
 }

@@ -1,6 +1,4 @@
-﻿
-
-namespace Footwear.ViewModels
+﻿namespace Footwear.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -11,6 +9,5 @@ namespace Footwear.ViewModels
         [Required]
         public string Password { get; set; }
     }
-
 }
 
