@@ -27,7 +27,6 @@ import { LoaderInterceptor } from './interceptors/loader.interceptor';
 import { MaterialModule } from './modules/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { UserModule } from './user/user.module';
 import { OrdersComponent } from './orders/orders.component';
 import { PlaceOrderComponent } from './orders/place-order/place-order.component';
 import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
