@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { ProductComponent } from '../product/product/product.component';
 import { ProductSelectComponent } from '../product/product-select/product-select.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const routes: Routes = [
   { path: '', component: ProductComponent },
@@ -10,9 +11,17 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ProductComponent,
+    ProductSelectComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(routes),
+    NgxPaginationModule
+  ],
+  exports: [
+    RouterModule
   ]
 })
 export class ProductModule { }

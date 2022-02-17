@@ -3,16 +3,13 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { ProductComponent } from './product/product/product.component';
 import { AboutComponent } from './about/about.component';
-import { ProductSelectComponent } from './product/product-select/product-select.component';
 import { CartComponent } from './cart/cart.component';
 import { FooterComponent } from './footer/footer.component';
 
@@ -40,9 +37,7 @@ import { OrderService } from './services/order.service';
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    ProductComponent,
     AboutComponent,
-    ProductSelectComponent,
     CartComponent,
     FooterComponent,
     ModalComponent,
@@ -63,7 +58,6 @@ import { OrderService } from './services/order.service';
     ToastrModule.forRoot({ progressBar: true, positionClass: 'toast-top-left' }),
     NgbModule,
     CdkAccordionModule,
-    NgxPaginationModule,
     FontAwesomeModule
   ],
   providers:[
