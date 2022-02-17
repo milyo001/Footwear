@@ -78,7 +78,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   }
 
   //Loads already filled data from user if any, otherwise form fields will remain blank
-  async loadDataAsync(): Promise<void> {
+    async loadDataAsync(): Promise<void> {
     await this.userService.getUserProfile()
       .then(data => {
       this.userData = data as IUserData;

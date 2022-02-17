@@ -4,7 +4,16 @@ import { LoginComponent } from '../user/login/login.component';
 import { RegisterComponent } from '../user/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserProfileComponent } from '../user/user-profile/user-profile.component';
-import { MaterialModule } from './material.module';
+import { MaterialModule } from '../modules/material.module';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../interceptors/auth.guard';
+
+
+const routes: Routes = [
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'userProfile', component: UserProfileComponent, canActivate: [AuthGuard] }
+];
 
 @NgModule({
   declarations: [
@@ -14,12 +23,13 @@ import { MaterialModule } from './material.module';
   ],
   imports: [
     CommonModule,
+    MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    RouterModule.forChild(routes)
   ],
   exports: [
-    LoginComponent, RegisterComponent, UserProfileComponent
+    LoginComponent, RegisterComponent, UserProfileComponent, RouterModule
   ]
   
 })

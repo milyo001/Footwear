@@ -22,7 +22,10 @@ export class ProductComponent {
   public pageIndex: number;
 
 
-  constructor(private productService: ProductService, private sortingOptions: SortingOptions, public loader: LoadingService) { }
+  constructor(
+    private productService: ProductService,
+    private sortingOptions: SortingOptions,
+    public loader: LoadingService) { }
 
   ngOnInit(): void {
     this.productService.getAllProducts().subscribe(productsList => {

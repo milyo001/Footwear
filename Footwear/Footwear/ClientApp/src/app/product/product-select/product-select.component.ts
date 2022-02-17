@@ -27,8 +27,8 @@ export class ProductSelectComponent {
     private toastr: ToastrService,
     private cookieService: CookieService,
     private _location: Location,
-    public loader: LoadingService
-  ) { 
+    public loader: LoadingService )
+  { 
     let id: number = 0;
     //Get the product id from the URL parameters
     this.activatedRoute.params.subscribe(data => {
@@ -37,7 +37,6 @@ export class ProductSelectComponent {
     productService.getProductById(id).subscribe(product => {
       this.selectedProduct = product;
     });
-    
   }
 
   ngOnInit() {
