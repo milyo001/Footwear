@@ -78,7 +78,7 @@ for now it can be done only manually.
 | Facebook/Google login  | &#10060; | Log in with social network API |
 | Add forget password option | &#10060; | Add forget password option, send email or text message on the phone to reset |
 | Add user token id interceptor | &#10004; | Validate if user token data is valid |
-
+| Implement lazy loading | &#10004; | Lazy-load the user module |
 ## Product Features 
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
@@ -91,6 +91,7 @@ for now it can be done only manually.
 | Add Product To Cart | &#10004; | Add the selected product to cart stored in the database |
 | Search For Product by Name | &#10060; | Search for specific product |
 | Check Available Products | &#10060; | Check if product size is available in the database |
+| Implement lazy loading | &#10004; | Lazy-load the product module |
 
 ## Cart Features 
 | Feature  | Coded? | Description |
@@ -102,6 +103,7 @@ for now it can be done only manually.
 | Remove Cart Product | &#10004; | Remove cart product |
 | View Cart Product | &#10004; | View Cart Product directly from the cart page |
 | Checkout  | &#10004; | Checkout functionality |
+| Implement lazy loading | &#10004; | Lazy-load the cart module |
 
 ## Order Features
 | Feature  | Coded? | Description |
@@ -110,6 +112,7 @@ for now it can be done only manually.
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
+| Implement Lazy loading | &#10004; | Lazy-load the orders module |
 
 ## Tests
 | Feature  | Coded? | Description |
