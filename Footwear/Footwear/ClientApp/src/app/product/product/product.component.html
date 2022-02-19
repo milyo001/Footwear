@@ -44,8 +44,7 @@
     </div>
   </section>
 </section>
-
-
-
-
-
+<!--This section is for an empty products list,also will show blank white page (with min-height style)if there are no products or
+  products are still fetching from the API,the min height style will prevent user to see the footer of the page right below
+  to the first nav tag "product-filter"-->
+<section class="products" *ngIf="!products?.length"></section>
