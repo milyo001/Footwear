@@ -1,7 +1,7 @@
 ﻿namespace Footwear.Controllers
 {
-    using Footwear.ViewModels;
     using Footwear.Services.OrderService;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;

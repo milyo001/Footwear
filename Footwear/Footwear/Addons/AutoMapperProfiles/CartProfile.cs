@@ -10,7 +10,7 @@
     {
         public CartProfile()
         {
-            
+
             CreateMap<CartProduct, CartProductViewModel>()
                 .ForMember(dest => dest.Size, opt => opt.MapFrom(src => src.Size.Value))
                 .ForMember(dest => dest.Gender, opt => opt.MapFrom(src => src.Gender.ToString()))

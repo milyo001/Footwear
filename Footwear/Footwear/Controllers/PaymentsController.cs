@@ -37,7 +37,7 @@ namespace server.Controllers
         public async Task<ActionResult> CreateCheckoutSession()
         {
             string authToken = HttpContext.Items["token"].ToString();
-            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);   
+            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);
             double totalPrice = this._orderService.GetTotalPrice(latestOrder);
             //Add delivery price to the total price
             totalPrice += await this._orderService.GetDeliveryPriceAsync();
@@ -99,9 +99,11 @@ namespace server.Controllers
             if (string.IsNullOrWhiteSpace(paymentStatus)) return BadRequest(PaymentErrors.PaymentDeclined);
 
             string authToken = HttpContext.Items["token"].ToString();
-            //Get latest added order id
+
+            // Get latest added order id
             var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
-            //Change payment type to paid
+
+            // Change payment type to paid
             this._orderService.ModifyPaidOrder(orderId);
 
             return Ok(new { paymentStatus });

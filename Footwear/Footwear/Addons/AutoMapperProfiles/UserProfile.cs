@@ -1,8 +1,8 @@
 ﻿namespace Footwear.Addons
 {
     using AutoMapper;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
+    using Footwear.ViewModels;
 
     public class UserProfile : Profile
     {

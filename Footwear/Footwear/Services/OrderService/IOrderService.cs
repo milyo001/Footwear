@@ -2,8 +2,8 @@
 namespace Footwear.Services.OrderService
 {
 
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
+    using Footwear.ViewModels;
     using System.Threading.Tasks;
 
     public interface IOrderService

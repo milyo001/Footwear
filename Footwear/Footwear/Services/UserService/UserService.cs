@@ -2,8 +2,8 @@
 {
     using AutoMapper;
     using Footwear.Data;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -40,7 +40,7 @@
             var userData = this._mapper.Map<UserProfileDataViewModel>(user);
             return userData;
         }
-        
+
         //Updates the user data by given user and model
         public async Task<IdentityResult> UpdateUserDataAsync(User user, ProfileUpdateViewModel model)
         {

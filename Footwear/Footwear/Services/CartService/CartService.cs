@@ -1,15 +1,15 @@
 ﻿namespace Footwear.Services.CartService
 {
+    using AutoMapper;
     using Footwear.Data;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Services.TokenService;
+    using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper;
-    
+
     public class CartService : ICartService
     {
         private readonly ApplicationDbContext _db;

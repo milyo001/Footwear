@@ -10,7 +10,7 @@
         /// Returns IEnumerable collection of all products in the database
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<ProductDto>>GetAllProductsAsync();
+        Task<IEnumerable<ProductDto>> GetAllProductsAsync();
 
         /// <summary>
         /// Returns specific product by given product id

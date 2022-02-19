@@ -1,15 +1,15 @@
 ﻿namespace Footwear.Services.OrderService
 {
+    using AutoMapper;
     using Footwear.Data;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
+    using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
     using System.Linq;
     using System.Threading.Tasks;
-    using AutoMapper;
 
     public class OrderService : IOrderService
     {
@@ -66,7 +66,7 @@
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByIdAsync(token);
-            var orderId =  this._db.Orders
+            var orderId = this._db.Orders
                 .Where(x => x.UserId == user.Id)
                 .OrderByDescending(o => o.CreatedOn)
                 .First()
@@ -84,7 +84,7 @@
                 .Include(x => x.Products)
                 .OrderByDescending(o => o.CreatedOn)
                 .FirstAsync();
-                
+
             return order;
         }
 

@@ -11,7 +11,7 @@
 //        {
 //            CreateMap<Product, ProductDto>()
 //                .ForPath(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ProductImage.ImageUrl ));
-            
+
 //        }
 //    }
 //}

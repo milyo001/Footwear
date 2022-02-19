@@ -1,11 +1,11 @@
 ﻿namespace Footwear.Controllers
 {
     using Footwear.Controllers.ErrorHandler;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
     using Footwear.Services.UserService;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
@@ -43,7 +43,7 @@
 
             //Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
-             
+
             if (!result.Succeeded) return BadRequest(new { message = IdentityErrors.CannotRegister });
             return Ok(new { succeeded = true });
         }
@@ -64,8 +64,8 @@
             var user = await _userManager.FindByNameAsync(model.Email);
             var passwordMatch = await _userManager.CheckPasswordAsync(user, model.Password);
 
-            if (user == null || !passwordMatch) 
-            return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
+            if (user == null || !passwordMatch)
+                return BadRequest(new { message = IdentityErrors.InvalidUsernamePassword });
 
             var cartId = this._cartService.GetCartId(user.Id);
 
@@ -101,13 +101,13 @@
         public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
-            
+
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             var result = await this._userService.UpdateUserDataAsync(user, model);
-            if (!result.Succeeded) 
-            return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
-            
+            if (!result.Succeeded)
+                return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
+
             return Accepted(new { succeeded = true });
         }
 
@@ -126,12 +126,12 @@
             var confEmail = model.ConfirmEmail;
             string authToken = HttpContext.Items["token"].ToString();
 
-            if (email != confEmail || !ModelState.IsValid) 
+            if (email != confEmail || !ModelState.IsValid)
                 return BadRequest(new { message = IdentityErrors.InvalidData });
-            
+
             if (this._userService.isUsernameInUse(email))
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
-            
+
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
@@ -159,9 +159,9 @@
 
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
-            
+
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
-            
+
             if (!isPassValid)
                 return BadRequest(new { message = IdentityErrors.InvalidPassword });
 

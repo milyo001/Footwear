@@ -1,13 +1,13 @@
 ﻿namespace Footwear.Controllers
 {
+    using Footwear.Controllers.ErrorHandler;
     using Footwear.Data;
-    using Footwear.ViewModels;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Footwear.Controllers.ErrorHandler;
 
     [Route("[controller]")]
     [ApiController]

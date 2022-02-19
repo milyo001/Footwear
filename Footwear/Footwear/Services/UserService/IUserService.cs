@@ -1,7 +1,7 @@
 ﻿namespace Footwear.Services.UserService
 {
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using System.Threading.Tasks;
 

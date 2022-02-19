@@ -1,10 +1,10 @@
 ﻿namespace Footwear.Addons
 {
     using AutoMapper;
-    using Footwear.ViewModels;
     using Footwear.Data.Models;
-    using System;
     using Footwear.Data.Models.Enums;
+    using Footwear.ViewModels;
+    using System;
 
     public class OrderProfile : Profile
     {
