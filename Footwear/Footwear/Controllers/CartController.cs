@@ -47,6 +47,7 @@
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
             if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
+
             await this._cartService.IncreaseQuantityAsync(cartProductId);
             return Ok(new { succeeded = true });
         }
@@ -60,7 +61,9 @@
         public async Task<IActionResult> DecreaseCartProductQuantity([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
+
             if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
+
             //The base validation is on the client side but the user data cannot be trusted
             if (cartProduct.Quantity <= 1) return BadRequest(CartErrors.UnableToLowerCartProductQuantity);
 
@@ -77,6 +80,7 @@
         public async Task<IActionResult> DeleteCartProduct([FromBody] int cartProductId)
         {
             var cartProduct = await this._cartService.GetCartProductByIdAsync(cartProductId);
+
             if (cartProduct == null) return BadRequest(CartErrors.ProductDoNotExists);
 
             await this._cartService.DeleteCartProductAsync(cartProductId);
@@ -94,7 +98,9 @@
             string authToken = HttpContext.Items["token"].ToString();
             var cartId = this._tokenService.GetCartId(authToken);
             var cart = await this._cartService.GetCartAsync(cartId);
+
             if (cart.CartProducts.Count <= 0) return NoContent();
+
             //Change the status of cart products
             await this._cartService.ChangeOrderStateCartProductsAsync(cartId);
             return Ok();
