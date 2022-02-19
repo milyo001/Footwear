@@ -126,6 +126,7 @@ label {
 .products {
   display: flex;
   flex-wrap: wrap;
+  min-height: 770px;
 }
 
 .products-empty-list {
