@@ -1,12 +1,12 @@
 ﻿namespace Footwear.Controllers
 {
     using Footwear.Data;
-    using Footwear.ViewModels;
     using Footwear.Services.CartService;
+    using Footwear.Services.ProductService;
+    using Footwear.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Footwear.Services.ProductService;
 
     [ApiController]
     [Route("[controller]")]
@@ -23,7 +23,6 @@
             this._productService = productService;
         }
 
-
         /// <summary>
         /// Get all products from the database.
         /// </summary>
@@ -35,7 +34,6 @@
             return Ok(products);
         }
 
-
         /// <summary>
         /// Get a specific product by given id.
         /// </summary>
@@ -44,7 +42,7 @@
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductDto>> GetProductById(int id)
         {
-            var product =  await this._productService.GetProductByIdAsync(id);
+            var product = await this._productService.GetProductByIdAsync(id);
             if (product == null) return NotFound();
             return product;
         }
