@@ -14,7 +14,6 @@ import { FooterComponent } from './footer/footer.component';
 
 import { UserService } from './services/user.service';
 import { AuthInterceptor } from './interceptors/auth.interceptor ';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppRoutingModule } from './modules/routing.module';
 import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
