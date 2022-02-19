@@ -73,11 +73,11 @@
 <section class="col mb-2 finalize-buttons" *ngIf="cartProducts?.length">
   <div class="row">
     <div class="col-sm-12  col-md-6">
-      <button class="btn btn-block" mat-stroked-button color="warn" [routerLinkActive]="['link-active']" [routerLink]="['/products']">Continue Shopping</button>
+      <button class="btn btn-block" mat-stroked-button color="warn" [routerLink]="['/products']">Continue Shopping</button>
     </div>
     <form method="post" class="col-sm-12 col-md-6 text-right">
       <div>
-        <button class="btn btn-block" mat-stroked-button color="success" [routerLink]="['/placeOrder']">Place order</button>
+        <button class="btn btn-block" mat-stroked-button color="success" [routerLink]="['/orders/placeOrder']">Place order</button>
       </div>
     </form>
   </div>

@@ -4,7 +4,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
-import { CdkAccordionModule } from '@angular/cdk/accordion';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -21,14 +20,10 @@ import { CookieService } from 'ngx-cookie-service';
 import { ModalComponent } from './cart/modal.component';
 import { LoadingService } from './services/loading.service';
 import { LoaderInterceptor } from './interceptors/loader.interceptor';
-import { MaterialModule } from './modules/material.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
-import { OrdersComponent } from './orders/orders.component';
-import { PlaceOrderComponent } from './orders/place-order/place-order.component';
 import { PaymentSuccessComponent } from './payment/payment-success/payment-success.component';
 import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.component';
 import { OrderService } from './services/order.service';
+import { SharedModule } from './modules/shared.module';
 
 
 
@@ -41,24 +36,17 @@ import { OrderService } from './services/order.service';
     CartComponent,
     FooterComponent,
     ModalComponent,
-    OrdersComponent,
-    PlaceOrderComponent,
     PaymentSuccessComponent,
     PaymentCancelComponent
   ],
   imports: [
     BrowserModule,
-    CommonModule,
-    MaterialModule,
-    FormsModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
     HttpClientModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
     ToastrModule.forRoot({ progressBar: true, positionClass: 'toast-top-left' }),
     NgbModule,
-    CdkAccordionModule,
-    FontAwesomeModule
+    SharedModule
   ],
   providers:[
     UserService,
