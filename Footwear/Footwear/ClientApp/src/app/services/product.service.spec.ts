@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { ProductService } from './product.service';
 
-describe('ProductService', () => {
+describe('ProductService (with spies)', () => {
 
   const service: ProductService = TestBed.get(ProductService);
 
@@ -15,12 +15,13 @@ describe('ProductService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('Method getAllProducts should be created', () => {
+  it('#getAllProducts should be created', () => {
     expect(service.getAllProducts).toBeTruthy();
   });
 
-  it('Method getProductById should be created', () => {
+  it('#getProductById should be created', () => {
     expect(service.getProductById).toBeTruthy();
   });
+
 
 });
