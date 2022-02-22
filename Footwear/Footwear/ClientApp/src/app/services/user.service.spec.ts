@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { getBaseUrl } from '../../environments/environment.test';
@@ -7,6 +7,7 @@ import { SharedModule } from '../modules/shared.module';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let service: UserService;
   const baseUrl = getBaseUrl();
 
@@ -45,4 +46,7 @@ describe('UserService', () => {
   it('#updateUserProfile should be created', () => {
     expect(service.updateUserProfile).toBeTruthy();
   });
+
+  
+
 });
