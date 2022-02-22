@@ -29,4 +29,20 @@ describe('UserService', () => {
   it('#register should be created', () => {
     expect(service.register).toBeTruthy();
   });
+
+  it('#getUserProfile should be created', () => {
+    expect(service.getUserProfile).toBeTruthy();
+  });
+
+  it('#updateEmail should be created', () => {
+    expect(service.updateEmail).toBeTruthy();
+  });
+
+  it('#updatePassword should be created', () => {
+    expect(service.updatePassword).toBeTruthy();
+  });
+
+  it('#updateUserProfile should be created', () => {
+    expect(service.updateUserProfile).toBeTruthy();
+  });
 });
