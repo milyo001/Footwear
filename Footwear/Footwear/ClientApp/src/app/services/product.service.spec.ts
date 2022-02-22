@@ -10,17 +10,21 @@ describe('ProductService', () => {
   let service: ProductService;
   const baseUrl = getBaseUrl();
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
+
   const expectedProducts: IProduct[] =
     [{
-      id: 1, name: "Shoe", size: 22, price: 225.22, details: "Cool shoe", gender: "kids",
+      id: 1, name: "Shoe", size: 22, price: 225.22,
+      details: "Cool shoe", gender: "kids",
       imageUrl: "fa.net/img/ss2", productType: "hiking"
     },
     {
-      id: 2, name: "Karate Sneakers", size: 42, price: 205.22, details: "Awesome sneakers", gender: "man",
+      id: 2, name: "Karate Sneakers", size: 42, price: 205.22,
+      details: "Awesome sneakers", gender: "man",
       imageUrl: "fa.test/img/ss2", productType: "climbing"
     }];
   const expectedProduct: IProduct = {
-    id: 1, name: "Shoe", size: 22, price: 225.22, details: "Cool shoe", gender: "kids",
+    id: 1, name: "Shoe", size: 22, price: 225.22,
+    details: "Cool shoe", gender: "kids",
     imageUrl: "fa.net/img/ss2", productType: "hiking"
   };
 
