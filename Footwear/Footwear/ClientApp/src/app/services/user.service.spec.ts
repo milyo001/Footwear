@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { getBaseUrl } from '../../environments/environment.test';
+import { IRegisterData } from '../interfaces/user/registerData';
 import { IUserData } from '../interfaces/user/userData';
 import { SharedModule } from '../modules/shared.module';
 import { asyncData } from '../testing/async-observable-helpers';
@@ -81,7 +82,7 @@ describe('UserService', () => {
   it('#register should return expected status code (HttpClient called just once)', (done: DoneFn) => {
 
     var expectedResponse = { succeeded: true };
-    const fakeRegisterData = {
+    const fakeRegisterData: IRegisterData = {
       email: "rare@email.test",
       password: "123456789_10",
       firstName:"Johny",

@@ -14,16 +14,8 @@ export class UserService {
     this.baseUrl = baseUrl;
   }
 
-  register(formData) {
-    var body : IRegisterData= {
-      email: formData.email,
-      password: formData.passwords.password,
-      firstName: formData.firstName,
-      lastName: formData.lastName,
-      phone: formData.phone
-    };
-
-    return this.http.post(this.baseUrl + 'user/register', body);
+  register(registerData: IRegisterData) {
+    return this.http.post(this.baseUrl + 'user/register', registerData);
   }
 
   login(formData: any) {

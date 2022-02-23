@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../services/loading.service';
+import { IRegisterData } from '../../interfaces/user/registerData';
 
 
 @Component({
@@ -42,7 +43,14 @@ export class RegisterComponent implements OnInit {
     };
 
   onSubmit(formData) {
-    this.userService.register(formData).subscribe(
+    const registerData: IRegisterData = {
+      email: formData.email,
+      password: formData.passwords.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone
+    };
+    this.userService.register(registerData).subscribe(
       (response: any) => {
         if (response.succeeded) {
           this.form.reset();
