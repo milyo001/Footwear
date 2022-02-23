@@ -9,15 +9,11 @@ import { asyncData } from '../testing/async-observable-helpers';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
-  let httpClientSpy: jasmine.SpyObj<HttpClient>;
+  let httpClientSpyGet: jasmine.SpyObj<HttpClient>;
+  let httpClientSpyPost: jasmine.SpyObj<HttpClient>;
+
   let service: UserService;
   const baseUrl = getBaseUrl();
-
-  const userProfileData: IUserData = {
-    firstName: "Miroslav", lastName: "Ilyovski", street: "Rakovska 3",
-    state: "Sofia", city: "Sofia", country: "Bulgaria",
-    email: "miroslavilyovski@gmail.net", phone: "089422123565", zipCode: "1022"
-  };
 
   //Test if methods are created
   beforeEach(() => {
@@ -57,13 +53,19 @@ describe('UserService', () => {
   });
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new UserService(httpClientSpy, getBaseUrl());
+    httpClientSpyGet = jasmine.createSpyObj('HttpClient', ['get']);
+    service = new UserService(httpClientSpyGet, getBaseUrl());
   });
 
   it('#getUserProfile should return expected user data (HttpClient called just once)', (done: DoneFn) => {
 
-    httpClientSpy.get.and.returnValue(asyncData(userProfileData));
+    const userProfileData: IUserData = {
+      firstName: "Miroslav", lastName: "Ilyovski", street: "Rakovska 3",
+      state: "Sofia", city: "Sofia", country: "Bulgaria",
+      email: "miroslavilyovski@gmail.net", phone: "089422123565", zipCode: "1022"
+    };
+
+    httpClientSpyGet.get.and.returnValue(asyncData(userProfileData));
 
     service.getUserProfile()
       .then(data => {
@@ -73,14 +75,14 @@ describe('UserService', () => {
         done();
       })
       .catch(err => done.fail);
-    expect(httpClientSpy.get.calls.count())
+    expect(httpClientSpyGet.get.calls.count())
       .withContext('one call')
       .toBe(1);
   });
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['post']);
-    service = new UserService(httpClientSpy, getBaseUrl());
+    httpClientSpyPost = jasmine.createSpyObj('HttpClient', ['post']);
+    service = new UserService(httpClientSpyPost, getBaseUrl());
   });
 
 
