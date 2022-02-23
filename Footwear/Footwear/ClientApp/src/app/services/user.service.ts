@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { IUserData } from '../interfaces/user/userData';
 import { IRegisterData } from '../interfaces/user/registerData';
 import { ILoginData } from '../interfaces/user/loginData';
+import { IEmailData } from '../interfaces/user/emailData';
+import { IPasswordData } from '../interfaces/user/passwordData';
 
 @Injectable({
   providedIn: 'root'
@@ -31,11 +33,11 @@ export class UserService {
     return this.http.put(this.baseUrl + 'user/updateUserProfile', formData);
   }
 
-  updateEmail(formData: any) {
-    return this.http.put(this.baseUrl + 'user/updateEmail', formData);
+  updateEmail(emailData: IEmailData) {
+    return this.http.put(this.baseUrl + 'user/updateEmail', emailData);
   }
 
-  updatePassword(formData: any) {
-    return this.http.put(this.baseUrl + 'user/updatePassword', formData);
+  updatePassword(passwordData: IPasswordData) {
+    return this.http.put(this.baseUrl + 'user/updatePassword', passwordData);
   }
 }

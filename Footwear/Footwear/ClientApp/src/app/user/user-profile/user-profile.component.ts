@@ -2,6 +2,8 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { validateNewAndConfPass, validateOldAndNewPass, valideEmails } from '../../../shared/validators/user-profile.validators';
+import { IEmailData } from '../../interfaces/user/emailData';
+import { IPasswordData } from '../../interfaces/user/passwordData';
 import { IUserData } from '../../interfaces/user/userData';
 import { UserService } from '../../services/user.service';
 
@@ -115,7 +117,8 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   }
 
   changePassword(passwordForm: any, passFormDirective: FormGroupDirective): void {
-    this.userService.updatePassword(passwordForm.passwords).subscribe((response: any) => {
+    const passwordData: IPasswordData = passwordForm.passwords;
+    this.userService.updatePassword(passwordData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
         this.passwordForm.reset();
@@ -130,7 +133,8 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   }
 
   changeEmail(emailForm, emailFormDirective: FormGroupDirective) {
-    this.userService.updateEmail(emailForm).subscribe((response: any) => {
+    const emailData: IEmailData = emailForm;
+    this.userService.updateEmail(emailData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your email!");
         this.email = emailForm.email;

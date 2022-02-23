@@ -112,8 +112,7 @@
         }
 
         /// <summary>
-        /// Updates user email and and return status 202(Accepted) when succeeded. Validation errors will return status
-        /// 400(BadRequest).
+        /// Updates user email and and return status 202(Accepted) when succeeded. Validation errors will return status 400(BadRequest).
         /// status.
         /// </summary>
         /// <param name="model"></param>

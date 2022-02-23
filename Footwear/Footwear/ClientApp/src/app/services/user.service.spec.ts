@@ -2,7 +2,9 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { getBaseUrl } from '../../environments/environment.test';
+import { IEmailData } from '../interfaces/user/emailData';
 import { ILoginData } from '../interfaces/user/loginData';
+import { IPasswordData } from '../interfaces/user/passwordData';
 import { IRegisterData } from '../interfaces/user/registerData';
 import { IUserData } from '../interfaces/user/userData';
 import { SharedModule } from '../modules/shared.module';
@@ -54,7 +56,7 @@ describe('UserService', () => {
   });
 
   beforeEach(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put']);
     service = new UserService(httpClientSpy, getBaseUrl());
   });
 
@@ -125,6 +127,53 @@ describe('UserService', () => {
       }), (err => done.fail());
 
     expect(httpClientSpy.post.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
+
+  it('#updateEmail should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
+
+    const expectedResponse = { succeeded: true };
+    const fakeLoginData: IEmailData = {
+      email: "rare@email.test",
+      confirmEmail: "rate@email.test"
+    };
+
+    httpClientSpy.put.and.returnValue(asyncData(expectedResponse));
+
+    service.updateEmail(fakeLoginData)
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail());
+
+    expect(httpClientSpy.put.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
+
+  it('#updatePassword should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
+
+    const expectedResponse = { succeeded: true };
+    const fakePassData: IPasswordData = {
+      password: "trytobullforceME22$@!",
+      confirmPassword: "trytobullforceME22$@!",
+      newPassword: "trytobullforceME22$@!"
+    };
+
+    httpClientSpy.put.and.returnValue(asyncData(expectedResponse));
+
+    service.updatePassword(fakePassData)
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail());
+
+    expect(httpClientSpy.put.calls.count())
       .withContext('one call')
       .toBe(1);
   });
