@@ -105,5 +105,31 @@ describe('UserService', () => {
       .toBe(1);
   });
 
+  it('#login should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
+
+    var expectedResponse = { succeeded: true };
+    const fakeRegisterData: IRegisterData = {
+      email: "rare@email.test",
+      password: "123456789_10",
+      firstName: "Johny",
+      lastName: "Bravo",
+      phone: "21312331555"
+    }
+
+    httpClientSpy.post.and.returnValue(asyncData(expectedResponse));
+
+    service.register(fakeRegisterData)
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail());
+
+    expect(httpClientSpy.post.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
 
 });
+

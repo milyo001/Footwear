@@ -29,6 +29,9 @@ export class LoginComponent implements OnInit {
 
   //Send the token to the Web API to authenticate
   onSubmit(form: NgForm) {
+
+    console.log(form.value);
+
     this.userService.login(form.value).subscribe(
       (response: any) => {
         this.cookieService.set('token', response.token)
