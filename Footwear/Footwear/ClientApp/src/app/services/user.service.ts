@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUserData } from '../interfaces/user/userData';
 import { IRegisterData } from '../interfaces/user/registerData';
+import { ILoginData } from '../interfaces/user/loginData';
 
 @Injectable({
   providedIn: 'root'
@@ -18,8 +19,8 @@ export class UserService {
     return this.http.post(this.baseUrl + 'user/register', registerData);
   }
 
-  login(formData: any) {
-    return this.http.post(this.baseUrl + 'user/login', formData);
+  login(loginData: ILoginData) {
+    return this.http.post(this.baseUrl + 'user/login', loginData);
   }
 
   getUserProfile(): Promise<IUserData> {

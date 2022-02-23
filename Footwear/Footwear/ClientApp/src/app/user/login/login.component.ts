@@ -5,6 +5,7 @@ import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
 import { LoadingService } from '../../services/loading.service';
+import { ILoginData } from '../../interfaces/user/loginData';
 
 @Component({
   selector: 'app-login',
@@ -29,10 +30,8 @@ export class LoginComponent implements OnInit {
 
   //Send the token to the Web API to authenticate
   onSubmit(form: NgForm) {
-
-    console.log(form.value);
-
-    this.userService.login(form.value).subscribe(
+    const loginData: ILoginData = form.value;
+    this.userService.login(loginData).subscribe(
       (response: any) => {
         this.cookieService.set('token', response.token)
         this.router.navigateByUrl('/');
