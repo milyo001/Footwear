@@ -178,5 +178,28 @@ describe('UserService', () => {
       .toBe(1);
   });
 
+  it('#updateUserProfile should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
+
+    const expectedResponse = { succeeded: true };
+    const fakePassData: IPasswordData = {
+      password: "trytobullforceME22$@!",
+      confirmPassword: "trytobullforceME22$@!",
+      newPassword: "trytobullforceME22$@!"
+    };
+
+    httpClientSpy.put.and.returnValue(asyncData(expectedResponse));
+
+    service.updateUserProfile(fakePassData)
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail());
+
+    expect(httpClientSpy.put.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
 });
 

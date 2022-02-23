@@ -5,6 +5,7 @@ import { IRegisterData } from '../interfaces/user/registerData';
 import { ILoginData } from '../interfaces/user/loginData';
 import { IEmailData } from '../interfaces/user/emailData';
 import { IPasswordData } from '../interfaces/user/passwordData';
+import { IUser } from '../interfaces/user/user';
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,8 @@ export class UserService {
     return this.http.get<IUserData>(this.baseUrl + 'user/getProfileData').toPromise();
   }
 
-  updateUserProfile(formData: any) {
-    return this.http.put(this.baseUrl + 'user/updateUserProfile', formData);
+  updateUserProfile(userData: IUserData) {
+    return this.http.put(this.baseUrl + 'user/updateUserProfile', userData);
   }
 
   updateEmail(emailData: IEmailData) {
