@@ -9,8 +9,7 @@ import { asyncData } from '../testing/async-observable-helpers';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
-  let httpClientSpyGet: jasmine.SpyObj<HttpClient>;
-  let httpClientSpyPost: jasmine.SpyObj<HttpClient>;
+  let httpClientSpy: jasmine.SpyObj<HttpClient>;
 
   let service: UserService;
   const baseUrl = getBaseUrl();
@@ -53,8 +52,8 @@ describe('UserService', () => {
   });
 
   beforeEach(() => {
-    httpClientSpyGet = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new UserService(httpClientSpyGet, getBaseUrl());
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
+    service = new UserService(httpClientSpy, getBaseUrl());
   });
 
   it('#getUserProfile should return expected user data (HttpClient called just once)', (done: DoneFn) => {
@@ -64,8 +63,7 @@ describe('UserService', () => {
       state: "Sofia", city: "Sofia", country: "Bulgaria",
       email: "miroslavilyovski@gmail.net", phone: "089422123565", zipCode: "1022"
     };
-
-    httpClientSpyGet.get.and.returnValue(asyncData(userProfileData));
+    httpClientSpy.get.and.returnValue(asyncData(userProfileData));
 
     service.getUserProfile()
       .then(data => {
@@ -75,14 +73,38 @@ describe('UserService', () => {
         done();
       })
       .catch(err => done.fail);
-    expect(httpClientSpyGet.get.calls.count())
+    expect(httpClientSpy.get.calls.count())
       .withContext('one call')
       .toBe(1);
   });
 
-  beforeEach(() => {
-    httpClientSpyPost = jasmine.createSpyObj('HttpClient', ['post']);
-    service = new UserService(httpClientSpyPost, getBaseUrl());
+  it('#register should return expected status code (HttpClient called just once)', (done: DoneFn) => {
+
+    var expectedResponse = { succeeded: true };
+    const fakeRegisterData = {
+      email: "rare@email.test",
+      password: "123456789_10",
+      firstName:"Johny",
+      lastName: "Bravo",
+      phone: "21312331555"
+    }
+
+    httpClientSpy.post.and.returnValue(asyncData(expectedResponse));
+
+    service.register(fakeRegisterData)
+      .subscribe(data => {
+        console.log(data);
+        console.log(fakeRegisterData);
+
+        expect(expectedResponse)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => console.log(err));
+
+    expect(httpClientSpy.get.calls.count())
+      .withContext('one call')
+      .toBe(1);
   });
 
 

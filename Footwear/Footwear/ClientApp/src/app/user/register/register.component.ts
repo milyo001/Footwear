@@ -39,8 +39,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.reset();
-    }
-;
+    };
 
   onSubmit(formData) {
     this.userService.register(formData).subscribe(

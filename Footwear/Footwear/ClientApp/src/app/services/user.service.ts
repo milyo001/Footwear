@@ -1,6 +1,7 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IUserData } from '../interfaces/user/userData';
+import { IRegisterData } from '../interfaces/user/registerData';
 
 @Injectable({
   providedIn: 'root'
@@ -14,13 +15,14 @@ export class UserService {
   }
 
   register(formData) {
-    var body = {
-      Email: formData.email,
-      Password: formData.passwords.password,
-      FirstName: formData.firstName,
-      LastName: formData.lastName,
-      Phone: formData.phone
+    var body : IRegisterData= {
+      email: formData.email,
+      password: formData.passwords.password,
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      phone: formData.phone
     };
+
     return this.http.post(this.baseUrl + 'user/register', body);
   }
 
