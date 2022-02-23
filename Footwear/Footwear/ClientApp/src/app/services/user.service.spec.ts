@@ -2,6 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { getBaseUrl } from '../../environments/environment.test';
+import { ILoginData } from '../interfaces/user/loginData';
 import { IRegisterData } from '../interfaces/user/registerData';
 import { IUserData } from '../interfaces/user/userData';
 import { SharedModule } from '../modules/shared.module';
@@ -107,21 +108,18 @@ describe('UserService', () => {
 
   it('#login should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
 
-    var expectedResponse = { succeeded: true };
-    const fakeRegisterData: IRegisterData = {
+    const expectedResponse = { token: "testtestesttesttest" };
+    const fakeLoginData: ILoginData = {
       email: "rare@email.test",
       password: "123456789_10",
-      firstName: "Johny",
-      lastName: "Bravo",
-      phone: "21312331555"
-    }
+    };
 
     httpClientSpy.post.and.returnValue(asyncData(expectedResponse));
 
-    service.register(fakeRegisterData)
+    service.login(fakeLoginData)
       .subscribe(data => {
         expect(expectedResponse)
-          .withContext('expected succeeded property')
+          .withContext('expected token property')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail());
