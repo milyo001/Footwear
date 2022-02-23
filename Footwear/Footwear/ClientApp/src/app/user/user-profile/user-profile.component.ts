@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { validateNewAndConfPass, validateOldAndNewPass, valideEmails } from '../../../shared/validators/user-profile.validators';
+import { validateNewAndConfPass, validateOldAndNewPass, validateEmails } from '../../../shared/validators/user-profile.validators';
 import { IEmailData } from '../../interfaces/user/emailData';
 import { IPasswordData } from '../../interfaces/user/passwordData';
 import { IUserData } from '../../interfaces/user/userData';
@@ -36,18 +36,20 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     this.setPasswordFormValidation();
     //Initialize email form validators
     this.setEmailFormValidation();
-  }
+  };
 
   ngAfterViewInit(): void {
      this.loadDataAsync();
-  }
+  };
 
   setEmailFormValidation(): void {
     this.emailForm = this.fb.group({
       email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
-      confirmEmail: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30), valideEmails], []]
+      confirmEmail:
+        ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30),
+          validateEmails], []]
     });
-  }
+  };
 
   setPasswordFormValidation(): void {
     this.passwordForm = this.fb.group({
@@ -64,7 +66,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         confirmPassword: new FormControl('', [Validators.required, validateNewAndConfPass])
       })
     });
-  }
+  };
 
   setUserFormValidation(): void {
     this.form = this.fb.group({
@@ -77,27 +79,27 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       city: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
       zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []]
     });
-  }
+  };
 
   //Loads already filled data from user if any, otherwise form fields will remain blank
     async loadDataAsync(): Promise<void> {
-    await this.userService.getUserProfile()
-      .then(data => {
-      this.userData = data as IUserData;
-      this.form.patchValue({
-        firstName: data.firstName,
-        lastName: data.lastName,
-        phone: data.phone,
-        street: data.street,
-        state: data.state,
-        country: data.country,
-        city: data.city,
-        zipCode: data.zipCode
-      });
-      //Set first name and email properties to visualize about the currently logged in user
-      this.firstName = this.form.get("firstName").value;
-      this.email = data.email;
-    })
+      await this.userService.getUserProfile()
+        .then(data => {
+          this.userData = data as IUserData;
+          this.form.patchValue({
+            firstName: data.firstName,
+            lastName: data.lastName,
+            phone: data.phone,
+            street: data.street,
+            state: data.state,
+            country: data.country,
+            city: data.city,
+            zipCode: data.zipCode
+          });
+          //Set first name and email properties in component to visualize the currently logged in user
+          this.firstName = this.form.get("firstName").value;
+          this.email = data.email;
+        });
 
   }
 
