@@ -94,16 +94,13 @@ describe('UserService', () => {
 
     service.register(fakeRegisterData)
       .subscribe(data => {
-        console.log(data);
-        console.log(fakeRegisterData);
-
         expect(expectedResponse)
           .withContext('expected succeeded property')
           .toEqual(expectedResponse);
         done();
-      }), (err => console.log(err));
+      }), (err => done.fail());
 
-    expect(httpClientSpy.get.calls.count())
+    expect(httpClientSpy.post.calls.count())
       .withContext('one call')
       .toBe(1);
   });
