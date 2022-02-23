@@ -27,7 +27,7 @@ export function validateNewAndConfPass(control: FormControl) {
 /**
  * A custom validator used to return 'emailMismatch' error property when email and confirm email fields are different
  */
-export function valideEmails(control: FormControl) {
+export function validateEmails(control: FormControl) {
   if (control.parent == null) {
     return null;
   }

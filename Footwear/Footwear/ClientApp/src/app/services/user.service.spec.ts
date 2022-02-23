@@ -178,18 +178,24 @@ describe('UserService', () => {
       .toBe(1);
   });
 
-  it('#updateUserProfile should return expected auth token (HttpClient called just once)', (done: DoneFn) => {
+  it('#updateUserProfile should return expected succeeded property (HttpClient called just once)', (done: DoneFn) => {
 
     const expectedResponse = { succeeded: true };
-    const fakePassData: IPasswordData = {
-      password: "trytobullforceME22$@!",
-      confirmPassword: "trytobullforceME22$@!",
-      newPassword: "trytobullforceME22$@!"
+    const fakeUserData: IUserData = {
+      email: "test@yahoo.com",
+      city: "Blagoevgrad",
+      country: "Bulgaria",
+      firstName: "Nasakoto",
+      lastName: "Qkata",
+      phone: "089437729",
+      state: "Blagoevgrad",
+      street: "ul Lenovo  37A",
+      zipCode: "2700"
     };
 
     httpClientSpy.put.and.returnValue(asyncData(expectedResponse));
 
-    service.updateUserProfile(fakePassData)
+    service.updateUserProfile(fakeUserData)
       .subscribe(data => {
         expect(expectedResponse)
           .withContext('expected succeeded property')
