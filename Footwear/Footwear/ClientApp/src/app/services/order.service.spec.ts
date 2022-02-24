@@ -63,7 +63,8 @@ describe('OrderService', () => {
     httpClientSpy.post.and.returnValue(asyncData(order));
 
     service.createOrder(order)
-      .subscribe(data => {
+      .subscribe((data: any) => {
+        console.log(data)
         expect(expectedResult)
           .withContext('expected boolean property cardPayment')
           .toEqual(expectedResult);
@@ -72,5 +73,26 @@ describe('OrderService', () => {
     expect(httpClientSpy.post.calls.count())
       .withContext('one call')
       .toBe(1);
+    expect()
   });
+
+  it('#checkOut should return expected to return boolean property cardPayment (HttpClient called just once)', (done: DoneFn) => {
+
+    const expectedResponse = { url: "stripe.com/session=?skdasklad213asjkdaskjk_sajaj" };
+
+    httpClientSpy.get.and.returnValue(asyncData(expectedResponse));
+
+    service.checkOut()
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected json object with url before redirection')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail);
+    expect(httpClientSpy.get.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
+
+
 });
