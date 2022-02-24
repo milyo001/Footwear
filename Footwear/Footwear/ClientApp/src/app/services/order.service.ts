@@ -9,7 +9,7 @@ import { IOrder } from '../interfaces/order/order';
 })
 export class OrderService {
 
-   baseUrl: string;
+   private baseUrl: string;
 
   constructor(private http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
     this.baseUrl = baseUrl;
