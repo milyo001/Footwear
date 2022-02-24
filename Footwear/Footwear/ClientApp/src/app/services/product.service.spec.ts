@@ -64,7 +64,7 @@ describe('ProductService', () => {
           .toEqual(expectedProducts);
         done();
       },
-      error: done.fail
+      error: done.fail 
     });
     expect(httpClientSpy.get.calls.count())
       .withContext('one call')
