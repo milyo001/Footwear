@@ -17,8 +17,24 @@ describe('OrderService', () => {
     service = TestBed.inject(OrderService);
   });
 
-  it('should be created', () => {
+  it('Service should be created', () => {
     expect(service).toBeTruthy();
   });
 
+  it('#createOrder should be created', () => {
+    expect(service.createOrder).toBeTruthy();
+  });
+
+  it('#validatePayment should be created', () => {
+    expect(service.validatePayment).toBeTruthy();
+  });
+
+  it('#getDeliveryPricingData should be created', () => {
+    expect(service.getDeliveryPricingData).toBeTruthy();
+  });
+
+  it('#checkOut should be created', () => {
+    expect(service.checkOut).toBeTruthy();
+  });
+  
 });
