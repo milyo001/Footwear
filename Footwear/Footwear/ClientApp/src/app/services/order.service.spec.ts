@@ -1,6 +1,7 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { getBaseUrl } from '../../environments/environment.test';
+import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
 import { IOrder } from '../interfaces/order/order';
 import { IUserData } from '../interfaces/user/userData';
 import { asyncData } from '../testing/async-observable-helpers';
@@ -76,7 +77,7 @@ describe('OrderService', () => {
     expect()
   });
 
-  it('#checkOut should return expected to return boolean property cardPayment (HttpClient called just once)', (done: DoneFn) => {
+  it('#checkOut should return expected to return json object with url (HttpClient called just once)', (done: DoneFn) => {
 
     const expectedResponse = { url: "stripe.com/session=?skdasklad213asjkdaskjk_sajaj" };
 
@@ -86,6 +87,47 @@ describe('OrderService', () => {
       .subscribe(data => {
         expect(expectedResponse)
           .withContext('expected json object with url before redirection')
+          .toEqual(expectedResponse);
+        done();
+      }), (err => done.fail);
+    expect(httpClientSpy.get.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
+
+
+  it('#getDeliveryPricingData should return IDeliveryInfo (HttpClient called just once)', (done: DoneFn) => {
+
+    const expectedInfo: IDeliveryInfo = {
+      deliveryPrice: 2.99,
+      minDelivery: 1,
+      maxDelivery: 3
+    }
+    httpClientSpy.get.and.returnValue(asyncData(expectedInfo));
+
+    service.getDeliveryPricingData()
+      .subscribe(data => {
+        expect(expectedInfo)
+          .withContext('expected delivery info')
+          .toEqual(expectedInfo);
+        done();
+      }), (err => done.fail);
+    expect(httpClientSpy.get.calls.count())
+      .withContext('one call')
+      .toBe(1);
+  });
+
+  it('#validatePayment should return paymentStatus: paid (HttpClient called just once)', (done: DoneFn) => {
+
+    const testSessionId = 'ajasjdajdsksdakdajkdda23_sjid=22';
+    const expectedResponse = { paymentStatus: 'paid' };
+
+    httpClientSpy.get.and.returnValue(asyncData(expectedResponse));
+
+    service.validatePayment(testSessionId)
+      .subscribe(data => {
+        expect(expectedResponse)
+          .withContext('expected paymentStatus to be paid')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail);
