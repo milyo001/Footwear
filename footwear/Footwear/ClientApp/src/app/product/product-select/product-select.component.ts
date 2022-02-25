@@ -49,7 +49,7 @@ export class ProductSelectComponent {
       const size: number = +((document.getElementById('size') as HTMLInputElement).value);
       const id: number = this.selectedProduct.id;
 
-      this.cartService.addToCart(id, size).subscribe(
+      this.cartService.addToCart(this.selectedProduct).subscribe(
         (response: any) => {
           if (response.succeeded) {
             this.toastr.success('Product successfully added to cart.', 'Product added.')
