@@ -12,13 +12,11 @@
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
 
-        public ProductController(ApplicationDbContext db, ICartService cartService, IProductService productService)
+        public ProductController(ICartService cartService, IProductService productService)
         {
-            this._db = db;
             this._cartService = cartService;
             this._productService = productService;
         }
@@ -54,10 +52,13 @@
         /// <returns></returns>
         [HttpPost]
         [Route("addToCart")]
-        public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
+        public async Task<IActionResult> AddCartProduct(AddToCartModel model)
         {
+
             string authToken = HttpContext.Items["token"].ToString();
-            await this._cartService.AddCartProductAsync(authToken, model);
+            var product = await this._productService.GetProductByIdAsync(model.Id);
+
+            await this._cartService.AddCartProductAsync(authToken, product, model);
             return Ok(new { succeeded = true });
         }
     }

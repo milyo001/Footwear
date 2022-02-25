@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Services.ProductService
 {
+    using Footwear.Data.Models;
     using Footwear.ViewModels;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -13,10 +14,17 @@
         Task<IEnumerable<ProductDto>> GetAllProductsAsync();
 
         /// <summary>
+        /// Returns specific product view model by given product id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Task<ProductDto> GetProductDtoByIdAsync(int id);
+
+        /// <summary>
         /// Returns specific product by given product id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        Task<ProductDto> GetProductByIdAsync(int id);
+        Task<Product> GetProductByIdAsync(int id);
     }
 }
