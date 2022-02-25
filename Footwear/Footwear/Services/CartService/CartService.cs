@@ -59,7 +59,7 @@
             var cartId = this._tokenService.GetCartId(token);
             var cart = await this.GetCartAsync(cartId);
 
-            //Check if product with same name and size already exists, check if product is unordered
+            //Check if product with same name and size already exists, check if product is not ordered
             var dupplicateProduct = cart.CartProducts
                     .Where(x => x.Name == model.Name)
                     .Where(x => x.Size == model.Size)

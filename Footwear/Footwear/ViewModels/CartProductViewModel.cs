@@ -4,11 +4,8 @@
 
     public class CartProductViewModel
     {
-        [Key]
-        public int Id { get; set; }
-
         [Required]
-        public int ProductId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }

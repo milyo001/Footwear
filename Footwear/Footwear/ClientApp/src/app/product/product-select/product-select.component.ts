@@ -46,8 +46,9 @@ export class ProductSelectComponent {
 
   addToCart(product): void {
     if (this.cookieService.get('token')) {
-      let size: number = +((document.getElementById('size') as HTMLInputElement).value);
-      this.selectedProduct.size = size;
+      const size: number = +((document.getElementById('size') as HTMLInputElement).value);
+      const id: number = this.selectedProduct.id;
+
       this.cartService.addToCart(this.selectedProduct).subscribe(
         (response: any) => {
           if (response.succeeded) {
