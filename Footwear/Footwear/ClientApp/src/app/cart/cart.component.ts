@@ -98,6 +98,7 @@ export class CartComponent implements OnInit {
       );
     }
   }
+
   //Ask for confirmation with modal and if user confirms removes item from database and the document
   deleteProduct(item: ICartProduct, index: number) {
     const modalRef = this.modal.open(ModalComponent);
@@ -127,19 +128,23 @@ export class CartComponent implements OnInit {
     var value = parseInt(quantityElement.textContent);
     quantityElement.textContent = (++value).toString();
   }
+
   increaseDomTotPrice(index: number, price: number) {
     var totalPrice = document.getElementById("totalPrice" + index);
     var totPriceElValue = parseFloat(totalPrice.textContent);
     totalPrice.textContent = (totPriceElValue + price).toFixed(2);
   }
+
   decreaseDomQuantity(quantityElement: HTMLElement, value) {
     quantityElement.textContent = (--value).toString();
   }
+
   decreaseDomTotPrice(index: number, price: number) {
     var totalPrice = document.getElementById("totalPrice" + index);
     var totPriceElValue = parseFloat(totalPrice.textContent);
     totalPrice.textContent = (totPriceElValue - price).toFixed(2);
   }
+
   deleteCartProductEl(index: number) {
     const element = document.getElementById("accordion-header-" + index);
     element.remove();
