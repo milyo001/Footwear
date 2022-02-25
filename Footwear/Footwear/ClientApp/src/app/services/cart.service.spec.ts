@@ -28,18 +28,29 @@ describe('CartService', () => {
     expect(service.defaultQuantity).toBeTruthy();
   });
 
-  it('should be created', () => {
+  it('#decreaseProductQuantity should be created', () => {
     const service: CartService = TestBed.get(CartService);
-    expect(service).toBeTruthy();
+    expect(service.decreaseProductQuantity).toBeTruthy();
   });
 
-  it('should be created', () => {
+  it('#increaseProductQuantity should be created', () => {
     const service: CartService = TestBed.get(CartService);
-    expect(service).toBeTruthy();
+    expect(service.increaseProductQuantity).toBeTruthy();
   });
 
-  it('should be created', () => {
+  it('#deleteCartProduct should be created', () => {
     const service: CartService = TestBed.get(CartService);
-    expect(service).toBeTruthy();
+    expect(service.deleteCartProduct).toBeTruthy();
   });
+
+  it('#getAllCartProducts should be created', () => {
+    const service: CartService = TestBed.get(CartService);
+    expect(service.getAllCartProducts).toBeTruthy();
+  });
+
+  it('#removeAllCartProduts should be created', () => {
+    const service: CartService = TestBed.get(CartService);
+    expect(service.removeAllCartProduts).toBeTruthy();
+  });
+  
 });
