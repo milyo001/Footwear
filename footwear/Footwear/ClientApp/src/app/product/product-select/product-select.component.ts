@@ -34,16 +34,22 @@ export class ProductSelectComponent {
     this.activatedRoute.params.subscribe(data => {
       id = data['id'];
     });
-    productService.getProductById(id).subscribe(product => {
-      this.selectedProduct = product;
+    productService.getProductById(id).subscribe((data: any) => {
+      this.selectedProduct = data;
+    }, err => {
+      if (err.error.status == 404) {
+        this.notFoundHandler();
+      }
+      console.log(err);
     });
   }
 
   ngOnInit() {
-    //When page is loaded scroll to the product view for better user experience
+    // When page is loaded scroll to the product view for better user experience
     document.getElementById("productFocus").scrollIntoView();
   }
 
+  // Add product to user's cart
   addToCart(product): void {
     if (this.cookieService.get('token')) {
       const size: number = +((document.getElementById('size') as HTMLInputElement).value);
@@ -67,5 +73,11 @@ export class ProductSelectComponent {
 
   goBack(): void {
     this._location.back();
+  }
+
+  // Redirect user to products when product is not found
+  notFoundHandler(): void {
+    this.toastr.error('Oops! Product not found!', 'Invalid product id.');
+    this.router.navigate(['products']);
   }
 }
