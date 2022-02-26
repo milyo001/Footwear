@@ -12,13 +12,11 @@
     [Route("[controller]")]
     public class ProductController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
 
-        public ProductController(ApplicationDbContext db, ICartService cartService, IProductService productService)
+        public ProductController(ICartService cartService, IProductService productService)
         {
-            this._db = db;
             this._cartService = cartService;
             this._productService = productService;
         }
@@ -40,9 +38,9 @@
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDto>> GetProductById(int id)
+        public async Task<ActionResult<ProductDto>> GetProductDtoById(int id)
         {
-            var product = await this._productService.GetProductByIdAsync(id);
+            var product = await this._productService.GetProductDtoByIdAsync(id);
             if (product == null) return NotFound();
             return product;
         }
@@ -54,10 +52,18 @@
         /// <returns></returns>
         [HttpPost]
         [Route("addToCart")]
-        public async Task<IActionResult> AddCartProduct(CartProductViewModel model)
+        public async Task<IActionResult> AddCartProduct(AddToCartModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Invalid product id." });
+
             string authToken = HttpContext.Items["token"].ToString();
-            await this._cartService.AddCartProductAsync(authToken, model);
+            var product = await this._productService.GetProductByIdAsync(model.Id);
+
+            if (product == null)
+                return BadRequest(new { message = "Error, invalid product!" });
+
+            await this._cartService.AddCartProductAsync(authToken, product, model.Size);
             return Ok(new { succeeded = true });
         }
     }

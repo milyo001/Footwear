@@ -41,10 +41,11 @@
         /// <param name="token"></param>
         /// <param name="model"></param>
         /// <returns></returns>
-        Task AddCartProductAsync(string token, CartProductViewModel product, AddToCartModel model);
+        Task AddCartProductAsync(string token, Product product, int size);
 
         /// <summary>
-        /// Increases the given cart product quantity by given cart product id.
+        /// Increases the given cart product 
+        /// by given cart product id.
         /// </summary>
         /// <param name="cartProductId"></param>
         /// <returns></returns>
