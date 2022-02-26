@@ -41,8 +41,7 @@
         public async Task<ActionResult<ProductDto>> GetProductDtoById(int id)
         {
             var product = await this._productService.GetProductDtoByIdAsync(id);
-            if (product == null) return NotFound();
-            return product;
+            return product == null ? NotFound() : product;
         }
 
         /// <summary>
