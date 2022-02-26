@@ -3,11 +3,13 @@
 namespace Footwear.Services.ProductService
 {
     using Footwear.Data;
+    using Footwear.Data.Models;
     using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _db;
@@ -33,7 +35,15 @@ namespace Footwear.Services.ProductService
             return products;
         }
 
-        public async Task<ProductDto> GetProductByIdAsync(int id)
+        public async Task<Product> GetProductByIdAsync(int id)
+        {
+            var product = await this._db.Products
+                .Include(p => p.ProductImage)
+                .FirstOrDefaultAsync(p => p.Id == id);
+            return product;
+        }
+
+        public async Task<ProductDto> GetProductDtoByIdAsync(int id)
         {
             //TODO: For some reason EF Core is unable to include ImageUrl from ProductImage table with .Include
             var productDto = await this._db.Products

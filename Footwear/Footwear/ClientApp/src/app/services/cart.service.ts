@@ -16,20 +16,21 @@ export class CartService {
     this.baseUrl = baseUrl;
   }
 
-  addToCart(product): Observable<Object> {
-    //const body = { id, size };
-    console.log(product);
-    const body: ICartProduct = {
-      productId: product.id,
-      name: product.name,
-      size: product.size,
-      details: product.details,
-      imageUrl: product.imageUrl,
-      gender: product.gender,
-      productType: product.productType,
-      price: product.price,
-      quantity: this.defaultQuantity
-    }
+  addToCart(id: number, size: number): Observable<Object> {
+
+    const body = { id, size };
+
+    //const body: ICartProduct = {
+    //  productId: product.id,
+    //  name: product.name,
+    //  size: product.size,
+    //  details: product.details,
+    //  imageUrl: product.imageUrl,
+    //  gender: product.gender,
+    //  productType: product.productType,
+    //  price: product.price,
+    //  quantity: this.defaultQuantity
+    //}
     return this.http.post(this.baseUrl + 'product/addToCart', body);
   }
   getAllCartProducts(): Observable<ICartProduct[]> {

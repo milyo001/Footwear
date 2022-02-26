@@ -38,9 +38,9 @@
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDto>> GetProductById(int id)
+        public async Task<ActionResult<ProductDto>> GetProductDtoById(int id)
         {
-            var product = await this._productService.GetProductByIdAsync(id);
+            var product = await this._productService.GetProductDtoByIdAsync(id);
             if (product == null) return NotFound();
             return product;
         }
@@ -54,11 +54,16 @@
         [Route("addToCart")]
         public async Task<IActionResult> AddCartProduct(AddToCartModel model)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { message = "Invalid product id." });
 
             string authToken = HttpContext.Items["token"].ToString();
             var product = await this._productService.GetProductByIdAsync(model.Id);
 
-            await this._cartService.AddCartProductAsync(authToken, product, model);
+            if (product == null)
+                return BadRequest(new { message = "Error, invalid product!" });
+
+            await this._cartService.AddCartProductAsync(authToken, product, model.Size);
             return Ok(new { succeeded = true });
         }
     }

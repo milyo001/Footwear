@@ -49,14 +49,14 @@ export class ProductSelectComponent {
       const size: number = +((document.getElementById('size') as HTMLInputElement).value);
       const id: number = this.selectedProduct.id;
 
-      this.cartService.addToCart(this.selectedProduct).subscribe(
+      this.cartService.addToCart(id, size).subscribe(
         (response: any) => {
           if (response.succeeded) {
             this.toastr.success('Product successfully added to cart.', 'Product added.')
           }
         },
-        err => {
-          console.log(err);
+        error => {
+          this.toastr.error(error.error.message, 'Unable to add product!');
         }
       );
     } else {

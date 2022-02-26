@@ -21,7 +21,8 @@
 
         [ForeignKey("ProductImage")]
         public int ImageId { get; set; }
-        public ProductImage ProductImage { get; set; } = new ProductImage();
+
+        public virtual ProductImage ProductImage { get; set; }
 
         //Used to filter results by type
         public Gender Gender { get; set; }

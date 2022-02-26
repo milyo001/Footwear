@@ -6,6 +6,7 @@
     using Footwear.Services.TokenService;
     using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -54,20 +55,27 @@
 
 
         // Add a product to the user's cart.Also check if the product name already exists and have the same size in the CartProducts and change the quantity of that dupplicate cartProduct, instead of adding additional instance of CartProduct
-        public async Task AddCartProductAsync(string token, CartProductViewModel product, AddToCartModel model)
+        public async Task AddCartProductAsync(string token, Product product, int size)
         {
+            
             var cartId = this._tokenService.GetCartId(token);
             var cart = await this.GetCartAsync(cartId);
 
-            //Check if product with same name and size already exists, check if product is not ordered
+            // Check if product with same name and size exists and if product is not ordered
             var dupplicateProduct = cart.CartProducts
                     .Where(x => x.Name == product.Name)
+                    .Where(x => x.Size == size)
                     .Where(x => x.IsOrdered == false)
                     .FirstOrDefault();
 
             if (dupplicateProduct == null)
             {
-                var cartProduct = this._mapper.Map<CartProductViewModel, CartProduct>(product);
+                // Var cartProduct = this._mapper.Map<CartProductViewModel, CartProduct>(product);
+                var cartProduct = this._mapper.Map<Product, CartProduct>(product);
+                // Set the product size recieved from the client after mapping
+                cartProduct.Size = size;
+                
+                
                 cart.CartProducts.Add(cartProduct);
             }
             else
