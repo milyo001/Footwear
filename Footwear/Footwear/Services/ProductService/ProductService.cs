@@ -2,6 +2,7 @@
 
 namespace Footwear.Services.ProductService
 {
+    using AutoMapper;
     using Footwear.Data;
     using Footwear.Data.Models;
     using Footwear.ViewModels;
@@ -13,26 +14,26 @@ namespace Footwear.Services.ProductService
     public class ProductService : IProductService
     {
         private readonly ApplicationDbContext _db;
-        public ProductService(ApplicationDbContext db)
+        private readonly IMapper _mapper;
+
+        public ProductService(ApplicationDbContext db, IMapper mapper)
         {
+            this._mapper = mapper;
             this._db = db;
         }
         public async Task<IEnumerable<ProductDto>> GetAllProductsAsync()
         {
-            //This query is made without Automapper, Not able to include product image navigation property
-            //TODO: map data to object with automaper
-            var products = await this._db.Products.Select(p => new ProductDto
-            {
-                Id = p.Id,
-                Name = p.Name,
-                Price = p.Price,
-                Details = p.Details,
-                ImageUrl = p.ProductImage.ImageUrl,
-                Gender = p.Gender.ToString(),
-                ProductType = p.ProductType.ToString()
-            })
-                .ToArrayAsync();
-            return products;
+            // Get products from DB async
+            var products = await this._db.Products
+                .Include(p => p.ProductImage)
+                .ToListAsync();
+            
+            // Map products from DB to Dto obeject
+            var productsDtos =  products
+                .Select(p => this._mapper.Map<Product, ProductDto>(p))
+                .ToList();
+
+            return productsDtos;
         }
 
         public async Task<Product> GetProductByIdAsync(int id)

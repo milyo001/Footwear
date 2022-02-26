@@ -2,6 +2,7 @@
 {
     using AutoMapper;
     using Footwear.Data.Models;
+    using Footwear.ViewModels;
 
     public class ProductProfile : Profile
     {
@@ -15,7 +16,9 @@
                 .ForMember(x => x.ImageUrl, opt => opt.MapFrom(p => p.ProductImage.ImageUrl))
                 .ForMember(x => x.ProductId, opt => opt.MapFrom(p => p.Id))
                 .ForMember(x => x.Quantity, opt => opt.MapFrom(src => defaultItemQuantity));
-            
+
+            CreateMap<Product, ProductDto>()
+                .ForMember(p => p.ImageUrl, opt => opt.MapFrom(p => p.ProductImage.ImageUrl));
         }
     }
 }
