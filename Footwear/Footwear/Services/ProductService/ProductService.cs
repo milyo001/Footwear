@@ -46,19 +46,10 @@ namespace Footwear.Services.ProductService
 
         public async Task<ProductDto> GetProductDtoByIdAsync(int id)
         {
-            //TODO: For some reason EF Core is unable to include ImageUrl from ProductImage table with .Include
-            var productDto = await this._db.Products
-                 .Select(p => new ProductDto
-                 {
-                     Id = p.Id,
-                     Name = p.Name,
-                     Price = p.Price,
-                     Details = p.Details,
-                     ImageUrl = p.ProductImage.ImageUrl,
-                     Gender = p.Gender.ToString(),
-                     ProductType = p.ProductType.ToString()
-                 })
+            var product = await this._db.Products
+                 .Include(p => p.ProductImage)
                  .FirstOrDefaultAsync(p => p.Id == id);
+            var productDto = this._mapper.Map<Product, ProductDto>(product);
             return productDto;
         }
 
