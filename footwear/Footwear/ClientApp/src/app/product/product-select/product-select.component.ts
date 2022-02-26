@@ -50,7 +50,7 @@ export class ProductSelectComponent {
   }
 
   // Add product to user's cart
-  addToCart(product): void {
+  addToCart(): void {
     if (this.cookieService.get('token')) {
       const size: number = +((document.getElementById('size') as HTMLInputElement).value);
       const id: number = this.selectedProduct.id;

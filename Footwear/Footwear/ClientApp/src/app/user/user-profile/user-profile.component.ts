@@ -105,7 +105,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
 
   updateProfile(form: any) {
     const userData: IUserData = form.value;
-    this.userService.updateUserProfile(form).subscribe(
+    this.userService.updateUserProfile(userData).subscribe(
       (response: any) => {
         if (response.succeeded) {
           this.toastr.success("Successfully updated user information!");
