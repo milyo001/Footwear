@@ -39,18 +39,18 @@ export class ProductSelectComponent {
     }, err => {
       if (err.error.status == 404) {
         this.notFoundHandler();
-
       }
       console.log(err);
     });
   }
 
   ngOnInit() {
-    //When page is loaded scroll to the product view for better user experience
+    // When page is loaded scroll to the product view for better user experience
     document.getElementById("productFocus").scrollIntoView();
   }
 
-  addToCart(product): void {
+  // Add product to user's cart
+  addToCart(): void {
     if (this.cookieService.get('token')) {
       const size: number = +((document.getElementById('size') as HTMLInputElement).value);
       const id: number = this.selectedProduct.id;
