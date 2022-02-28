@@ -61,33 +61,25 @@ describe('CartService', () => {
     service = new CartService(httpClientSpy, getBaseUrl());
   });
 
-  it('#getAllProducts should return expected products (HttpClient called just once)', (done: DoneFn) => {
+  it('#addToCart should return succeeded property(HttpClient called just once)', (done: DoneFn) => {
 
-    //const expectedBody: ICartProduct = {
-    //  productId: 1,
-    //  name: "Product",
-    //  size: product.size,
-    //  details: product.details,
-    //  imageUrl: product.imageUrl,
-    //  gender: product.gender,
-    //  productType: product.productType,
-    //  price: product.price,
-    //  quantity: this.defaultQuantity
-    //}
+    const expectedResponse = { succeeded: true };
+    const testId: number = 1;
+    const testSize: number = 43;
 
-    /*httpClientSpy.get.and.returnValue(asyncData(expectedProducts));*/
+    httpClientSpy.post.and.returnValue(asyncData(expectedResponse));
 
-    //service.getAllProducts().subscribe({
-    //  next: products => {
-    //    expect(products)
-    //      .withContext('expected products')
-    //      .toEqual(expectedProducts);
-    //    done();
-    //  },
-    //  error: done.fail
-    //});
-    //expect(httpClientSpy.get.calls.count())
-    //  .withContext('one call')
-    //  .toBe(1);
+    service.addToCart(testId, testSize).subscribe({
+      next: (response: any) => {
+        expect(response.succeeded)
+          .withContext('expected succeeded property')
+          .toEqual(expectedResponse.succeeded);
+        done();
+      },
+      error: done.fail
+    });
+    expect(httpClientSpy.post.calls.count())
+      .withContext('one call')
+      .toBe(1);
   });
 });
