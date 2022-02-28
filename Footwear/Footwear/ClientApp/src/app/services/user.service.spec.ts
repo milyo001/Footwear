@@ -72,7 +72,7 @@ describe('UserService', () => {
     service.getUserProfile()
       .then(data => {
         expect(userProfileData)
-          .withContext('expected user data')
+          .withContext('expected object with user data')
           .toEqual(userProfileData);
         done();
       })
@@ -97,7 +97,7 @@ describe('UserService', () => {
 
     service.register(fakeRegisterData)
       .subscribe(data => {
-        expect(expectedResponse)
+        expect(data)
           .withContext('expected succeeded property')
           .toEqual(expectedResponse);
         done();
@@ -120,8 +120,8 @@ describe('UserService', () => {
 
     service.login(fakeLoginData)
       .subscribe(data => {
-        expect(expectedResponse)
-          .withContext('expected token property')
+        expect(data)
+          .withContext('expected object with token property')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail());
@@ -143,8 +143,8 @@ describe('UserService', () => {
 
     service.updateEmail(fakeLoginData)
       .subscribe(data => {
-        expect(expectedResponse)
-          .withContext('expected succeeded property')
+        expect(data)
+          .withContext('expected object with succeeded property')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail());
@@ -167,8 +167,8 @@ describe('UserService', () => {
 
     service.updatePassword(fakePassData)
       .subscribe(data => {
-        expect(expectedResponse)
-          .withContext('expected succeeded property')
+        expect(data)
+          .withContext('expected object with succeeded property')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail());
@@ -197,8 +197,8 @@ describe('UserService', () => {
 
     service.updateUserProfile(fakeUserData)
       .subscribe(data => {
-        expect(expectedResponse)
-          .withContext('expected succeeded property')
+        expect(data)
+          .withContext('expected object with succeeded property')
           .toEqual(expectedResponse);
         done();
       }), (err => done.fail());
