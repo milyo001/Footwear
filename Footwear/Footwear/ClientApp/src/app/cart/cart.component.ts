@@ -118,11 +118,14 @@ export class CartComponent implements OnInit {
         );
       }
     },
-      (reason) => { /*Handle rejection or leave blank*/ });
+      (reason) => {
+        console.log(reason);
+        this.toastr.error("Unable to delete item.", reason);
+      });
 
   }
 
-  //DOM Manipulation Helpers
+  //DOM Helpers
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
