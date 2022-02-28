@@ -61,12 +61,12 @@ describe('OrderService', () => {
     };
     const expectedResult = { cardPayment: true };
 
-    httpClientSpy.post.and.returnValue(asyncData(order));
+    httpClientSpy.post.and.returnValue(asyncData(expectedResult));
 
     service.createOrder(order)
       .subscribe((data: any) => {
-        console.log(data)
-        expect(expectedResult)
+        console.log(data);
+        expect(data)
           .withContext('expected boolean property cardPayment')
           .toEqual(expectedResult);
         done();
@@ -85,7 +85,7 @@ describe('OrderService', () => {
 
     service.checkOut()
       .subscribe(data => {
-        expect(expectedResponse)
+        expect(data)
           .withContext('expected json object with url before redirection')
           .toEqual(expectedResponse);
         done();
@@ -107,7 +107,7 @@ describe('OrderService', () => {
 
     service.getDeliveryPricingData()
       .subscribe(data => {
-        expect(expectedInfo)
+        expect(data)
           .withContext('expected delivery info')
           .toEqual(expectedInfo);
         done();
@@ -126,7 +126,7 @@ describe('OrderService', () => {
 
     service.validatePayment(testSessionId)
       .subscribe(data => {
-        expect(expectedResponse)
+        expect(data)
           .withContext('expected paymentStatus to be paid')
           .toEqual(expectedResponse);
         done();
