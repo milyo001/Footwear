@@ -26,12 +26,12 @@ describe('UserProfileComponent', () => {
       declarations: [UserProfileComponent],
       imports: [BrowserAnimationsModule, HttpClientTestingModule, SharedModule, ToastrModule.forRoot()],
       providers: [
-      { provide: 'BASE_URL', useValue: baseUrl },
-       ToastrService,
+        { provide: 'BASE_URL', useValue: baseUrl },
+        ToastrService,
         { provide: UserService, userValue: mockUserService }
       ]
-    })
-      .compileComponents();
+    }).compileComponents();
+
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
