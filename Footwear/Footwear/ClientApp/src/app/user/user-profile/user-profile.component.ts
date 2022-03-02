@@ -135,12 +135,11 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       });
   }
 
-  changeEmail(emailForm, emailFormDirective: FormGroupDirective) {
-    const emailData: IEmailData = emailForm;
+  changeEmail(emailData: IEmailData, emailFormDirective: FormGroupDirective) {
     this.userService.updateEmail(emailData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your email!");
-        this.email = emailForm.email;
+        this.email = emailData.email;
         this.emailForm.reset();
         //<mat-error> check the validity of FormGroupDirective,
         //not FormGroup and resetting FormGroup does not reset FormGroupDirective.

@@ -9,6 +9,9 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { IUserData } from '../../interfaces/user/userData';
 import { HttpRequestUserInterceptor } from '../../testing/MockInterceptors/mock-user-interceptor';
+import { IEmailData } from '../../interfaces/user/emailData';
+import { FormGroupDirective } from '@angular/forms';
+import { never } from 'rxjs';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -21,6 +24,11 @@ export const fakeUserData: IUserData = {
   lastName: "Tomahawka",
   phone: "2231312321",
   zipCode: "22311"
+};
+
+export const fakeEmailData: IEmailData = {
+  email: "test@test.test",
+  confirmEmail: "test@test.test"
 };
 
 describe('UserProfileComponent', () => {
@@ -100,5 +108,11 @@ describe('UserProfileComponent', () => {
   it('should #loadDataAsync() on init', async () => {
     const userData = component.userData;
     expect(userData).toEqual(fakeUserData);
+  });
+
+  it('#changeEmail() should change email', async () => {
+    const directive = new FormGroupDirective([], []);
+    component.changeEmail(fakeEmailData, directive);
+    expect(component.email).toEqual(fakeEmailData.email);
   });
 });
