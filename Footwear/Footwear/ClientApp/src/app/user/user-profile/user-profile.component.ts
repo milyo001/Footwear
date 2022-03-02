@@ -152,9 +152,6 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       })
   }
 
-  test() {
-    console.log(this.form);
-  }
   
 }
 

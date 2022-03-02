@@ -41,32 +41,36 @@ describe('UserProfileComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('#changeEmail should create', () => {
+  it('#changeEmail() should create', () => {
     expect(component.changeEmail).toBeTruthy();
   });
 
-  it('#changePassword should create', () => {
+  it('#changePassword() should create', () => {
     expect(component.changePassword).toBeTruthy();
   });
 
-  it('#loadDataAsync should create', () => {
+  it('#loadDataAsync() should create', () => {
     expect(component.loadDataAsync).toBeTruthy();
   });
 
-  it('#ngAfterViewInit should be inherited and created', () => {
+  it('#ngAfterViewInit() should be inherited and created', () => {
     expect(component.ngAfterViewInit).toBeTruthy();
   });
 
-  it('#ngOnInit should be inherited and created', () => {
+  it('#ngOnInit() should be inherited and created', () => {
     expect(component.ngOnInit).toBeTruthy();
   });
 
-  it('#setEmailFormValidation should be created', () => {
+  it('#setEmailFormValidation() should be created', () => {
     expect(component.setEmailFormValidation).toBeTruthy();
   });
 
-  it('#setPasswordFormValidation should be created', () => {
+  it('#setPasswordFormValidation() should be created', () => {
     expect(component.setPasswordFormValidation).toBeTruthy();
+  });
+
+  it('#updateProfile() should be created', () => {
+    expect(component.updateProfile).toBeTruthy();
   });
 
 });
