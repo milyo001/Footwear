@@ -25,6 +25,9 @@ export class HttpRequestUserInterceptor implements HttpInterceptor {
         .indexOf(`${this.baseUrl}user/updateEmail`) > -1) {
         const headers = new HttpHeaders();
         headers.set("succeeded", "true");
+
+        // After email is changed in the API, the client will reload the userData from the API,
+        // calling the loadDataAsync()
         fakeUserData.email = fakeEmailData.email;
         return of(new HttpResponse({
           status: 200, body: fakeEmailData, headers
