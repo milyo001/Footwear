@@ -15,7 +15,7 @@ export class HttpRequestUserInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler):
     Observable<HttpEvent<any>> {
     if (request.url && request.url
-      .indexOf(`${this.baseUrl}/user/getProfileData`) > -1) {
+      .indexOf(`${this.baseUrl}user/getProfileData`) > -1) {
       return of(new HttpResponse({
         status: 200, body: fakeUserData
       }));

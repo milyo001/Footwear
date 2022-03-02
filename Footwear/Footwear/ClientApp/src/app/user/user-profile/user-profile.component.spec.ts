@@ -97,7 +97,8 @@ describe('UserProfileComponent', () => {
     expect(component.updateProfile).toBeTruthy();
   });
 
-  //it('#loadDataAsync() should work', () => {
-    
-  //});
+  it('should #loadDataAsync() on init', async () => {
+    const userData = component.userData;
+    expect(userData).toEqual(fakeUserData);
+  });
 });
