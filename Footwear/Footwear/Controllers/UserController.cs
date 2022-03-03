@@ -101,8 +101,8 @@
         public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
-
             string authToken = HttpContext.Items["token"].ToString();
+
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             var result = await this._userService.UpdateUserDataAsync(user, model);
             if (!result.Succeeded)

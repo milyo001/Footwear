@@ -28,7 +28,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   public passSectionToggle: boolean = false;
 
   constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
-    
+
   ngOnInit(): void {
     //Initialize user data form validators
     this.setUserFormValidation();
@@ -39,7 +39,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   };
 
   ngAfterViewInit(): void {
-     this.loadDataAsync();
+    this.loadDataAsync();
   };
 
   setEmailFormValidation(): void {
@@ -53,18 +53,10 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
 
   setPasswordFormValidation(): void {
     this.passwordForm = this.fb.group({
-      passwords: this.fb.group({
-        password: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(6)]),
-        newPassword: new FormControl('',
-          [
-            Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(100),
-            validateOldAndNewPass
-          ]
-        ),
-        confirmPassword: new FormControl('', [Validators.required, validateNewAndConfPass])
-      })
+      password: new FormControl('', [Validators.required, Validators.maxLength(100), Validators.minLength(6)]),
+      newPassword: new FormControl('', [ Validators.required, Validators.minLength(6), Validators.maxLength(100),
+          validateOldAndNewPass ]),
+      confirmPassword: new FormControl('', [Validators.required, validateNewAndConfPass])
     });
   };
 
@@ -82,24 +74,24 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   };
 
   //Loads already filled data from user if any, otherwise form fields will remain blank
-    async loadDataAsync(): Promise<void> {
-      await this.userService.getUserProfile()
-        .then(data => {
-          this.userData = data as IUserData;
-          this.form.patchValue({
-            firstName: data.firstName,
-            lastName: data.lastName,
-            phone: data.phone,
-            street: data.street,
-            state: data.state,
-            country: data.country,
-            city: data.city,
-            zipCode: data.zipCode
-          });
-          //Set first name and email properties in component to visualize the currently logged in user
-          this.firstName = this.form.get("firstName").value;
-          this.email = data.email;
+  async loadDataAsync(): Promise<void> {
+    await this.userService.getUserProfile()
+      .then(data => {
+        this.userData = data as IUserData;
+        this.form.patchValue({
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: data.phone,
+          street: data.street,
+          state: data.state,
+          country: data.country,
+          city: data.city,
+          zipCode: data.zipCode
         });
+        //Set first name and email properties in component to visualize the currently logged in user
+        this.firstName = this.form.get("firstName").value;
+        this.email = data.email;
+      });
 
   }
 
@@ -107,9 +99,10 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     const userData: IUserData = form.value;
     this.userService.updateUserProfile(userData).subscribe(
       (response: any) => {
+        console.log(response);
         if (response.succeeded) {
           this.toastr.success("Successfully updated user information!");
-          this.loadDataAsync();
+          this.userData = userData;
         }
       },
       error => {
@@ -119,8 +112,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     );
   }
 
-  changePassword(passwordForm: any, passFormDirective: FormGroupDirective): void {
-    const passwordData: IPasswordData = passwordForm.passwords;
+  changePassword(passwordData: IPasswordData, passFormDirective: FormGroupDirective): void {
     this.userService.updatePassword(passwordData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
@@ -151,7 +143,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       })
   }
 
-  
+
 }
 
 
