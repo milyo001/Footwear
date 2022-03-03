@@ -121,7 +121,7 @@ for now it can be done only manually.
 | Test ASP .NET Models | &#10060; | Test the validation in models  |
 | Test ASP .NET Services | &#10060; | Test the methods in the services  |
 | Test ASP .NET StartUp class | &#10060; | Test the application composition root  |
-| Test Angular components | &#10060; | Test the all components logic |
-| Test Angular services | &#10004; | Test the all http services and application services |
+| Test Angular components | &#10060; | Test all components logic |
+| Test Angular services | &#10004; | Test all http and application services |
 | Test Angular attribute directives | &#10060; | Test all attribute directives |
 | Test Angular pipes | &#10060; | Test all Angular pipes |
