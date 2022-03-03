@@ -1,5 +1,5 @@
 import { TestBed } from '@angular/core/testing';
-import { Router  } from '@angular/router';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { CookieService } from 'ngx-cookie-service';
 import { IndividualConfig, ToastrModule, ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { AuthGuard } from './auth.guard';
 
 describe('AuthGuard', () => {
     let guard: AuthGuard;
+
     // Make test toastr service to inject it into TestBed
     const toastrService = {
         success: (
