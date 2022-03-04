@@ -6,7 +6,6 @@ import { IProduct } from '../../interfaces/product/product';
 import { CartService } from '../../services/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
-import { LoadingService } from '../../services/loading.service';
 
 @Component({
   selector: 'app-product-select',
@@ -17,7 +16,6 @@ import { LoadingService } from '../../services/loading.service';
 export class ProductSelectComponent {
 
   public selectedProduct: IProduct = null;
-  loading = this.loader.loading;
 
   constructor(
     private productService: ProductService,
@@ -26,15 +24,19 @@ export class ProductSelectComponent {
     private router: Router,
     private toastr: ToastrService,
     private cookieService: CookieService,
-    private _location: Location,
-    public loader: LoadingService) {
+    private _location: Location ) { }
+
+  ngOnInit(): void {
+    // When page is loaded scroll to the product view for better user experience
+    document.getElementById("productFocus").scrollIntoView();
 
     let id: number = 0;
     //Get the product id from the URL parameters
     this.activatedRoute.params.subscribe(params => {
-      id = params['id']; });
+      id = params['id'];
+    });
 
-    productService.getProductById(id).subscribe((data: any) => {
+    this.productService.getProductById(id).subscribe((data: any) => {
       this.selectedProduct = data;
 
     }, err => {
@@ -42,15 +44,10 @@ export class ProductSelectComponent {
         this.notFoundHandler();
       }
       else {
-        toastr.error("Unknow error!", err.error.message);
+        this.toastr.error("Unknow error!", err.error.message);
         console.log(err.error);
       }
     });
-  }
-
-  ngOnInit() {
-    // When page is loaded scroll to the product view for better user experience
-    document.getElementById("productFocus").scrollIntoView();
   }
 
   // Add product to user's cart
