@@ -42,8 +42,7 @@ export class ProductSelectComponent {
     }, err => {
       if (err.error.status == 404) {
         this.notFoundHandler();
-      }
-      else {
+      } else {
         this.toastr.error("Unknow error!", err.error.message);
         console.log(err.error);
       }
