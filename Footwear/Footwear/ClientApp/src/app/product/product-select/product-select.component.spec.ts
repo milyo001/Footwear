@@ -16,10 +16,12 @@ import { ProductSelectComponent } from './product-select.component';
 describe('ProductSelectComponent', () => {
   let component: ProductSelectComponent;
   let fixture: ComponentFixture<ProductSelectComponent>;
+
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
   let productServiceSpy: ProductService;
   let cartServiceSpy: CartService;
 
+  const expectedResponse = { succeeded: true };
   const testProduct: IProduct = {
     size: 1,
     details: 'test',
@@ -31,14 +33,13 @@ describe('ProductSelectComponent', () => {
     productType: 'hiking'
   }
 
-
   beforeEach(async(() => {
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
+    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
     productServiceSpy = new ProductService(httpClientSpy, getBaseUrl());
-    httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
     cartServiceSpy = new CartService(httpClientSpy, getBaseUrl());
 
     spyOn(productServiceSpy, 'getProductById').and.returnValue(Observable.of(testProduct));
+    spyOn(cartServiceSpy, 'addToCart').and.returnValue(Observable.of(expectedResponse));
 
     TestBed.configureTestingModule({
       declarations: [ProductSelectComponent],
@@ -50,7 +51,8 @@ describe('ProductSelectComponent', () => {
             params: of({
               product: 1,
             }),
-          } },
+          }
+        },
         { provide: CartService, useValue: cartServiceSpy },
         RouterTestingModule,
         { provide: ToastrService, useValue: toastrService }
@@ -90,5 +92,14 @@ describe('ProductSelectComponent', () => {
     expect(component.selectedProduct).toBeTruthy();
   });
 
+  it('#addToCart should function properly', () => {
+    cartServiceSpy.addToCart(1, 1).subscribe(data => {
+      expect(data).toEqual(expectedResponse);
+    })
+  });
+
+  it('#ngOnInit to have been called getProductById', () => {
+    expect(productServiceSpy.getProductById).toHaveBeenCalled();
+  });
 
 });
