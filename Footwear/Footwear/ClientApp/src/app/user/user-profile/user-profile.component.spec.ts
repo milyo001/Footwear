@@ -47,13 +47,15 @@ describe('UserProfileComponent', () => {
 
     let component: UserProfileComponent;
     let fixture: ComponentFixture<UserProfileComponent>;
-
+    let testService: UserService;
+    let testHttpClient = jasmine.createSpyObj('HttpClient', ['get', 'post', 'delete', 'put']);
     // Mock User service properties
     const baseUrl = getBaseUrl();
     let mockUserService;
 
     beforeEach(async () => {
-        mockUserService = jasmine.createSpyObj(['updateProfile', 'changeEmail']);
+        testService = new UserService(testHttpClient, baseUrl);
+        /*mockUserService = jasmine.createSpyObj(['updateProfile', 'changeEmail']);*/
 
         await TestBed.configureTestingModule({
             declarations: [UserProfileComponent],
@@ -120,23 +122,6 @@ describe('UserProfileComponent', () => {
     it('should #loadDataAsync() on init', async () => {
         const userData = component.userData;
         expect(userData).toEqual(fakeUserData);
-    });
-
-    it('#changeEmail() should change email', async () => {
-        const directive = new FormGroupDirective([], []);
-        mockUserService.changeEmail.and.returnValue({ succeeded: true });
-
-        const result = mockUserService.changeEmail(fakeEmailData, directive);
-        component.email = fakeEmailData.email;
-        expect(result).toEqual(component.email);
-    });
-
-    it('#updateProfile() should change user data', async () => {
-        mockUserService.updateProfile.and.returnValue({ succeeded: true });
-        const expectedResult = { succeeded: true };
-        
-        const result = mockUserService.updateProfile(fakeUpdateUserData);
-        expect(result).toEqual(expectedResult);
     });
 
 });
