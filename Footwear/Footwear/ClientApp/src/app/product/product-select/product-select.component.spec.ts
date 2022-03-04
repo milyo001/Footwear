@@ -70,5 +70,25 @@ describe('ProductSelectComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('#addToCart should create', () => {
+    expect(component.addToCart).toBeTruthy();
+  });
+
+  it('#goBack should create', () => {
+    expect(component.goBack).toBeTruthy();
+  });
+
+  it('#ngOnInit should create', () => {
+    expect(component.ngOnInit).toBeTruthy();
+  });
+
+  it('#notFoundHandler should create', () => {
+    expect(component.notFoundHandler).toBeTruthy();
+  });
+
+  it('#selectedProduct should create', () => {
+    expect(component.selectedProduct).toBeTruthy();
+  });
+
 
 });
