@@ -3,7 +3,7 @@ import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest, Http
 
 import { Observable, of } from 'rxjs';
 import { getBaseUrl } from '../../../environments/environment.test';
-import { fakeEmailData, fakeUpdateUserData, fakeUserData } from '../../user/user-profile/user-profile.component.spec'
+import { fakeUserData } from '../../user/user-profile/user-profile.component.spec'
 
 @Injectable()
 export class HttpRequestUserInterceptor implements HttpInterceptor {
@@ -21,25 +21,8 @@ export class HttpRequestUserInterceptor implements HttpInterceptor {
           status: 200, body: fakeUserData
         }));
       }
-      if (request.url
-        .indexOf(`${this.baseUrl}user/updateEmail`) > -1) {
-        // After email is changed in the API, the client will reload the userData from the API,
-        // calling the loadDataAsync()
-        return of(new HttpResponse({
-            status: 200, body: { succeeded: true }
-        }));
-      }
-      if (request.url
-        .indexOf(`${this.baseUrl}'user/updateUserProfile'`) > -1) {
-        return of(new HttpResponse({
-          status: 202, body: { succeeded: true }
-        }));
-      }
-
+      // Add more fake API calls if needed
     }
-    
-    
-
     return next.handle(request);
   }
 }

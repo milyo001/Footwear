@@ -25,23 +25,6 @@ export const fakeUserData: IUserData = {
     zipCode: "22311"
 };
 
-export const fakeUpdateUserData: IUserData = {
-    state: "Pernik",
-    street: "koritarova 22",
-    city: "Pernik",
-    country: "Pernik",
-    email: "",
-    firstName: "Huski",
-    lastName: "Jingibi",
-    phone: "293293292333",
-    zipCode: "11111"
-};
-
-export const fakeEmailData: IEmailData = {
-    email: "test@test.test",
-    confirmEmail: "test@test.test"
-};
-
 
 describe('UserProfileComponent', () => {
 
@@ -124,4 +107,5 @@ describe('UserProfileComponent', () => {
         expect(userData).toEqual(fakeUserData);
     });
 
+    
 });
