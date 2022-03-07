@@ -8,6 +8,7 @@
     using Footwear.ViewModels;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
+    using Moq;
     using System.Threading.Tasks;
 
     [ApiController]
