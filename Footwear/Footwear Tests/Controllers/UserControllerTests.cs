@@ -18,23 +18,11 @@ namespace Footwear_Tests.Controllers
 
     public class UserControllerTests
     {
-        public Mock<IUserStore<User>> UserStore { get; set; }
-        //UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService
-        public Mock<UserManager<User>>  UserManager { get; set; }
-
-        public Mock<ITokenService> TokenService { get; set; }
-
-        public Mock<IUserService> UserService { get; set; }
-
-        public Mock<ICartService> CartService { get; set; }
+        
 
         public UserControllerTests()
         {
-            this.UserStore = new Mock<IUserStore<User>>();
-            this.UserManager = new Mock<UserManager<User>>
-                (this.UserStore.Object, null, null, null, null, null, null, null, null);
-            this.TokenService = new Mock<ITokenService>();
-            this.CartService = new Mock<ICartService>();
+            
         }
 
         private static DbContextOptions<ApplicationDbContext> CreateNewContextOptions()

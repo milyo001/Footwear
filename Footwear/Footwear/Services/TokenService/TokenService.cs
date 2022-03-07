@@ -38,7 +38,7 @@
             return userId;
         }
 
-        //Get CartId from token's claims
+        // Get CartId from token's claims
         public int GetCartId(string token)
         {
             var handler = new JwtSecurityTokenHandler();
