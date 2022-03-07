@@ -181,3 +181,6 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\net5.0\ref\Footwear Tests.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\net5.0\Footwear Tests.pdb
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\net5.0\Footwear Tests.genruntimeconfig.cache
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
