@@ -71,5 +71,15 @@ namespace Footwear_Tests.Controllers
 
             Assert.IsAssignableFrom<Task<IActionResult>>(result);
         }
+
+        [Fact]
+        public void TestReturnTypeOfGetProfileDataMethod()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+            var result = testController.GetProfileData();
+
+            Assert.IsAssignableFrom<Task<ActionResult<UserProfileDataViewModel>>>(result);
+        }
     }
 }
