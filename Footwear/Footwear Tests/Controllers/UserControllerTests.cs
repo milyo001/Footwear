@@ -81,5 +81,35 @@ namespace Footwear_Tests.Controllers
 
             Assert.IsAssignableFrom<Task<ActionResult<UserProfileDataViewModel>>>(result);
         }
+
+        [Fact]
+        public void TestReturnTypeOfUpdateProfileDataMethod()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+            var result = testController.UpdateProfileData(new ProfileUpdateViewModel { });
+
+            Assert.IsAssignableFrom<Task<IActionResult>>(result);
+        }
+
+        [Fact]
+        public void TestReturnTypeOfUpdateEmailMethod()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+            var result = testController.UpdateEmail(new EmailViewModel { });
+
+            Assert.IsAssignableFrom<Task<IActionResult>>(result);
+        }
+
+        [Fact]
+        public void TestReturnTypeOfUpdatePasswordMethod()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+            var result = testController.UpdatePassword(new PasswordViewModel { });
+
+            Assert.IsAssignableFrom<Task<IActionResult>>(result);
+        }
     }
 }
