@@ -36,12 +36,13 @@
         [Route("register")]
         public async Task<IActionResult> RegisterUser(RegisterViewModel model)
         {
+            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
+
             bool isUserDupplicate = this._userService.isUsernameInUse(model.Email);
 
-            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
             if (isUserDupplicate) return Conflict(new { message = IdentityErrors.UserIsInUse });
 
-            //Create user with blank address, user can modify his profile later and add address or modify the account information
+            // Create user with blank address, user can modify his profile later and add address or modify the account information
             IdentityResult result = await this._userService.CreateUserAsync(model);
 
             if (!result.Succeeded) return BadRequest(new { message = IdentityErrors.CannotRegister });
