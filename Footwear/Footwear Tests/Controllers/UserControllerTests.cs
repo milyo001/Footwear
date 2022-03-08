@@ -2,15 +2,9 @@
 namespace Footwear_Tests.Controllers
 {
     using Footwear.Controllers;
-    using Footwear.Data;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
     using Moq;
-    using MyTested.AspNetCore.Mvc;
     using Xunit;
     using Footwear.Data.Models;
-    using Microsoft.EntityFrameworkCore.InMemory;
-    using System;
     using Microsoft.AspNetCore.Identity;
     using Footwear.Services.TokenService;
     using Footwear.Services.UserService;
@@ -111,5 +105,28 @@ namespace Footwear_Tests.Controllers
 
             Assert.IsAssignableFrom<Task<IActionResult>>(result);
         }
+
+        [Fact]
+        public void TestIfBadRequestIsReturnedWhenEmailIsInvalid()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+
+            var response = testController.Login(new LoginViewModel { Email = "", Password = "23sdadsadad@#" });
+
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
+        [Fact]
+        public void TestIfBadRequestIsReturnedWhenPasswordIsInvalid()
+        {
+            var testController = new UserController(this.MockUserManagerService, this.MockTokenService,
+                this.MockUserService, this.MockCartService);
+
+            var response = testController.Login(new LoginViewModel { Email = "cindy22@test.test", Password = "" });
+
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
     }
 }
