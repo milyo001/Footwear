@@ -139,13 +139,6 @@ namespace Footwear_Tests.Controllers
         }
 
         [Fact]
-        public void TestIfRegisterMethodIsRegisteringUserCorrectly()
-        {
-
-        }
-
-
-        [Fact]
         public void TestIfLoginWorksCorrectly()
         {
             var testUser = new User
@@ -172,10 +165,29 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<OkObjectResult>(response.Result);
         }
 
+        [Fact]
+        public void TestIfLoginMethodReturnsBadRequestWhenErrorIsHit()
+        {
+            var testUser = new User
+            {
+                Id = "213213kdsakd",
+                UserName = "testUser@test.com"
+            };
 
-        //mock.Setup(p => p.GetEmployeebyId(1)).ReturnsAsync("JK");
-        //EmployeeController emp = new EmployeeController(mock.Object);
-        //string result = await emp.GetEmployeeById(1);
-        //Assert.Equal("JK", result);  
+            this.UserManagerServiceMock.Setup(u => u.FindByNameAsync("testUser@test.com"))
+                .Returns(Task.FromResult(testUser));
+
+            this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(false));
+
+            var testController = new UserController(this.UserManagerServiceMock.Object, this.TokenService,
+                this.UserService, this.CartService);
+
+            var response = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123" });
+
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
+
     }
 }
