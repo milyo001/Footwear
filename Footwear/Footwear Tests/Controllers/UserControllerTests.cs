@@ -139,37 +139,37 @@ namespace Footwear_Tests.Controllers
         }
 
         [Fact]
-        public void TestIfRegisterMethodIsRegisteringUserCorrectlly()
+        public void TestIfRegisterMethodIsRegisteringUserCorrectly()
         {
 
         }
 
 
         [Fact]
-        public void  Test49()
+        public void TestIfLoginWorksCorrectly()
         {
             var testUser = new User
             {
                 Id = "213213kdsakd",
-                UserName = "testUser@test.com",
-                Email = "testUser@test.com",
-                
+                UserName = "testUser@test.com"
             };
 
             this.UserManagerServiceMock.Setup(u => u.FindByNameAsync("testUser@test.com"))
                 .Returns(Task.FromResult(testUser));
 
-            var user = this.UserManagerServiceMock.Object.FindByNameAsync("testUser@test.com").Result;
+            this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(true));
 
-            this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(user, "12345678910"))
-                .Returns(Task.FromResult(testUser));
+            this.CartServiceMock.Setup(c => c.GetCartId(It.IsAny<string>())).Returns(1);
 
+            this.TokenServiceMock.Setup(t => t.GenerateToken(It.IsAny<string>(), It.IsAny<int>())).Returns("testsadladkalsdklakd");
 
             var testController = new UserController(this.UserManagerServiceMock.Object, this.TokenService,
                 this.UserService, this.CartService);
 
             var response = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123"});
-            Assert.IsType<ActionResult>(response.Result);
+
+            Assert.IsType<OkObjectResult>(response.Result);
         }
 
 
