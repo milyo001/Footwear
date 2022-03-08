@@ -127,14 +127,16 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<BadRequestObjectResult>(response.Result);
         }
 
+        // Login 
         [Fact]
         public void TestIfBadRequestIsReturnedWhenLoginViewModelIsInvalid()
         {
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService);
+            testController.ModelState.AddModelError("fakeError", "fakeMessage");
 
             var response = testController.Login(new LoginViewModel());
-
+            
             Assert.IsType<BadRequestObjectResult>(response.Result);
         }
 
@@ -188,6 +190,20 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<BadRequestObjectResult>(response.Result);
         }
 
+        // Register
 
+        [Fact]
+        public void TestIfBadRequestIsReturnedWhenRegisterViewModelIsInvalid()
+        {
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+            
+                this.UserService, this.CartService);
+
+            testController.ModelState.AddModelError("testError", "testMessage");
+
+            var response = testController.RegisterUser(new RegisterViewModel() { });
+
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
     }
 }
