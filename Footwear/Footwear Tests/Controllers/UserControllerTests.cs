@@ -205,5 +205,50 @@ namespace Footwear_Tests.Controllers
 
             Assert.IsType<BadRequestObjectResult>(response.Result);
         }
+
+        [Fact]
+        public void TestIfConflictIsReturnedWhenDupplicateUser()
+        {
+            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(true);
+
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+
+                this.UserService, this.CartService);
+
+            var response = testController.RegisterUser(new RegisterViewModel() { });
+
+            Assert.IsType<ConflictObjectResult>(response.Result);
+        }
+
+        [Fact]
+        public void TestIfBadRequestIsReturnedWhenUnableToCreateUser()
+        {
+            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
+            this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
+                .Returns(Task.FromResult(Task.FromResult(IdentityResult.Failed()).Result));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+                this.UserService, this.CartService);
+
+            var response = testController.RegisterUser(new RegisterViewModel() { });
+
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
+        [Fact]
+        public void TestIfRegisterIsWorkingCorrectly()
+        {
+            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
+            this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
+                .Returns(Task.FromResult(Task.FromResult(IdentityResult.Success).Result));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+                this.UserService, this.CartService);
+
+            var response = testController.RegisterUser(new RegisterViewModel() { });
+
+            Assert.IsType<OkObjectResult>(response.Result);
+        }
+
     }
 }
