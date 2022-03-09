@@ -8,7 +8,6 @@ namespace Footwear.Controllers.ErrorHandler
         public const string UserIsInUse = "User already exists!";
         public const string CannotRegister = "Unable to register! Please contact administrator!";
         public const string InvalidUsernamePassword = "Username or password is incorrect.";
-        public const string UnableToGetUserInfo = "Unable to get user information. Please contact administrator!";
         public const string UnableToUpdateUserInfo = "Unable to update user information. Please contact administrator!";
         public const string EmailInUse = "Email already in use.";
         public const string UnableToUpdateEmail = "Unable to update user email. Please contact administrator!";
