@@ -184,3 +184,6 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll

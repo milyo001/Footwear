@@ -13,6 +13,7 @@ namespace Footwear_Tests.Controllers
     using Footwear_Tests.Mocks;
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Http;
 
     public class UserControllerTests
     {
@@ -26,6 +27,9 @@ namespace Footwear_Tests.Controllers
         public Mock<UserManager<User>> UserManagerServiceMock { get; set; }
         public Mock<ITokenService> TokenServiceMock { get; set; }
         public Mock<ICartService> CartServiceMock { get; set; }
+
+        private readonly string ApiDomain = "https://localhost:44323";
+
 
 
         public UserControllerTests()
@@ -43,7 +47,7 @@ namespace Footwear_Tests.Controllers
         }
         
         
-
+        // Return Types
 
         [Fact]
         public void TestReturnTypeOfRegisterUserMethod()
@@ -105,6 +109,8 @@ namespace Footwear_Tests.Controllers
             Assert.IsAssignableFrom<Task<IActionResult>>(result);
         }
 
+
+        // Log in
         [Fact]
         public void TestIfBadRequestIsReturnedWhenEmailIsInvalid()
         {
@@ -249,6 +255,7 @@ namespace Footwear_Tests.Controllers
 
             Assert.IsType<OkObjectResult>(response.Result);
         }
+
 
     }
 }

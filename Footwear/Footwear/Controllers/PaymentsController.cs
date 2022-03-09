@@ -19,7 +19,7 @@ namespace server.Controllers
 
         private readonly IOrderService _orderService;
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public PaymentsController(IConfiguration configuration, IOrderService orderService)
         {
