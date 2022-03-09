@@ -14,6 +14,7 @@ namespace Footwear_Tests.Controllers
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
     using Microsoft.AspNetCore.Http;
+    using System;
 
     public class UserControllerTests
     {
@@ -262,16 +263,24 @@ namespace Footwear_Tests.Controllers
         [Fact]
         public void TestIfGetProfileDataIsWorkingCorrectly()
         {
-            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
-            this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
-                .Returns(Task.FromResult(Task.FromResult(IdentityResult.Success).Result));
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
 
-            var testController = new UserController(this.UserManagerService, this.TokenService,
-                this.UserService, this.CartService);
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User {}));
+            this.UserServiceMock.Setup(u => u.GetUserData(It.IsAny<User>()))
+                .Returns(new UserProfileDataViewModel {});
 
-            var response = testController.RegisterUser(new RegisterViewModel() { });
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext()
+                {
+                    HttpContext = httpContext
+                }
+            };
 
-            Assert.IsType<OkObjectResult>(response.Result);
+            var response = testController.GetProfileData();
+
+            Assert.IsType<ActionResult<UserProfileDataViewModel>>(response.Result);
         }
 
 
