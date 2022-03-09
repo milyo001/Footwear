@@ -84,8 +84,6 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.UnableToGetUserInfo });
-
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
             var userData = this._userService.GetUserData(user);

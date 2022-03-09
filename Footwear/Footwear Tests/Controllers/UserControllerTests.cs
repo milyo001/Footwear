@@ -256,6 +256,25 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<OkObjectResult>(response.Result);
         }
 
+        // GetProfileData
+
+
+        [Fact]
+        public void TestIfGetProfileDataIsWorkingCorrectly()
+        {
+            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
+            this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
+                .Returns(Task.FromResult(Task.FromResult(IdentityResult.Success).Result));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+                this.UserService, this.CartService);
+
+            var response = testController.RegisterUser(new RegisterViewModel() { });
+
+            Assert.IsType<OkObjectResult>(response.Result);
+        }
+
+
 
     }
 }
