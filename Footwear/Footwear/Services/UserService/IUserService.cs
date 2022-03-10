@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="email"></param>
         /// <returns></returns>
-        bool isUsernameInUse(string email);
+        bool IsUsernameInUse(string email);
 
         /// <summary>
         /// Create user in the database with given RegisterViewModel

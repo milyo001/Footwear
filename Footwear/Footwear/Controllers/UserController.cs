@@ -134,7 +134,7 @@
             if (email != confEmail)
                 return BadRequest(new { message = IdentityErrors.EmailAndConfEmailAreNotTheSame });
 
-            if (this._userService.isUsernameInUse(email))
+            if (this._userService.IsUsernameInUse(email))
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
 
             var user = await this._tokenService.GetUserByIdAsync(authToken);

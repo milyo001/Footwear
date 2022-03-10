@@ -29,7 +29,7 @@
         }
 
         //Check if user already exist in the database
-        public bool isUsernameInUse(string email)
+        public bool IsUsernameInUse(string email)
         {
             return this._db.Users.Any(user => user.Email == email.ToUpper());
         }

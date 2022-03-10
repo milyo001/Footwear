@@ -341,8 +341,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
-            this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
+            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
                 .ReturnsAsync(IdentityResult.Failed());
 
             var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
