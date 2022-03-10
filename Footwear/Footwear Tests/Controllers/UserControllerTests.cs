@@ -298,23 +298,35 @@ namespace Footwear_Tests.Controllers
             httpContext.Items.Add("token", "test");
 
             this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
+                .ReturnsAsync(IdentityResult.Success);
 
             var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
             {
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
+            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
+            Assert.IsType<AcceptedResult>(response.Result);
+        }
 
-            //if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
-            //string authToken = HttpContext.Items["token"].ToString();
+        [Fact]
+        public void TestIfUpdateUserDataReturnsBadRequestWhenIdentityResultIsFalse()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
 
-            //var user = await this._tokenService.GetUserByIdAsync(authToken);
-            //var result = await this._userService.UpdateUserDataAsync(user, model);
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
+                .ReturnsAsync(IdentityResult.Failed());
 
-            //if (!result.Succeeded)
-            //    return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
 
-            //return Accepted(new { succeeded = true });
+            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
+            Assert.IsType<BadRequestObjectResult>(response.Result);
         }
     }
 }
