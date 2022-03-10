@@ -328,5 +328,33 @@ namespace Footwear_Tests.Controllers
             var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
             Assert.IsType<BadRequestObjectResult>(response.Result);
         }
+
+        [Fact]
+        public void TestIfUpdateEmailWorksCorrectly()
+        {
+            var testViewModel = new EmailViewModel
+            {
+                Email = "test@gmail.com",
+                ConfirmEmail = "test@gmail.com"
+            };
+
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
+                .ReturnsAsync(IdentityResult.Failed());
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
+
+            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
+
+
     }
 }

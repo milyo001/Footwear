@@ -128,8 +128,11 @@
             var confEmail = model.ConfirmEmail;
             string authToken = HttpContext.Items["token"].ToString();
 
-            if (email != confEmail || !ModelState.IsValid)
+            if (!ModelState.IsValid)
                 return BadRequest(new { message = IdentityErrors.InvalidData });
+
+            if (email != confEmail)
+                return BadRequest(new { message = IdentityErrors.EmailAndConfEmailAreNotTheSame });
 
             if (this._userService.isUsernameInUse(email))
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
