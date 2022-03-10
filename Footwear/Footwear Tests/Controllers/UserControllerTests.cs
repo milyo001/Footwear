@@ -352,6 +352,45 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<AcceptedResult>(response.Result);
         }
 
+        [Fact]
+        public void TestIfUpdateEmailReturnsBadRequestWhenModelStateIsInvalid()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
+            testController.ModelState.AddModelError("fakeError", "fakeMessage");
+
+            var response = testController.UpdateEmail(new EmailViewModel());
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
+
+        [Theory]
+        [InlineData("test@gmail.com", "wrongEmailTest@gmail.com")]
+        [InlineData("wrongEmailTest@gmail.com", "test@gmail.com")]
+        public void TestIfUpdateEmailReturnsBadRequestWhenEmailsAreNotTheSame(string email, string confEmail)
+        {
+            var testViewModel = new EmailViewModel
+            {
+                Email = email,
+                ConfirmEmail = confEmail
+            };
+
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
+            testController.ModelState.AddModelError("fakeError", "fakeMessage");
+
+            var response = testController.UpdateEmail(testViewModel);
+            Assert.IsType<BadRequestObjectResult>(response.Result);
+        }
 
 
     }
