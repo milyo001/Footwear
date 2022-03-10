@@ -42,7 +42,7 @@ namespace Footwear_Tests.Controllers
             this.TokenService = this.TokenServiceMock.Object;
             this.CartService = this.CartServiceMock.Object;
         }
-        
+
         // Return Types
 
         [Fact]
@@ -113,9 +113,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.Login(new LoginViewModel { Email = "", Password = "23sdadsadad@#" });
+            var testResult = testController.Login(new LoginViewModel { Email = "", Password = "23sdadsadad@#" });
 
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -124,9 +124,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.Login(new LoginViewModel { Email = "cindy22@test.test", Password = "" });
+            var testResult = testController.Login(new LoginViewModel { Email = "cindy22@test.test", Password = "" });
 
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         // Login 
@@ -137,9 +137,9 @@ namespace Footwear_Tests.Controllers
                 this.UserService, this.CartService);
             testController.ModelState.AddModelError("fakeError", "fakeMessage");
 
-            var response = testController.Login(new LoginViewModel());
-            
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.Login(new LoginViewModel());
+
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -164,9 +164,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerServiceMock.Object, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123"});
+            var testResult = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123" });
 
-            Assert.IsType<OkObjectResult>(response.Result);
+            Assert.IsType<OkObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -187,9 +187,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerServiceMock.Object, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123" });
+            var testResult = testController.Login(new LoginViewModel { Email = "testUser@test.com", Password = "2134123123" });
 
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         // Register
@@ -198,14 +198,14 @@ namespace Footwear_Tests.Controllers
         public void TestIfBadRequestIsReturnedWhenRegisterViewModelIsInvalid()
         {
             var testController = new UserController(this.UserManagerService, this.TokenService,
-            
+
                 this.UserService, this.CartService);
 
             testController.ModelState.AddModelError("testError", "testMessage");
 
-            var response = testController.RegisterUser(new RegisterViewModel() { });
+            var testResult = testController.RegisterUser(new RegisterViewModel() { });
 
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -217,9 +217,9 @@ namespace Footwear_Tests.Controllers
 
                 this.UserService, this.CartService);
 
-            var response = testController.RegisterUser(new RegisterViewModel() { });
+            var testResult = testController.RegisterUser(new RegisterViewModel() { });
 
-            Assert.IsType<ConflictObjectResult>(response.Result);
+            Assert.IsType<ConflictObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -232,9 +232,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.RegisterUser(new RegisterViewModel() { });
+            var testResult = testController.RegisterUser(new RegisterViewModel() { });
 
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -247,9 +247,9 @@ namespace Footwear_Tests.Controllers
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService);
 
-            var response = testController.RegisterUser(new RegisterViewModel() { });
+            var testResult = testController.RegisterUser(new RegisterViewModel() { });
 
-            Assert.IsType<OkObjectResult>(response.Result);
+            Assert.IsType<OkObjectResult>(testResult.Result);
         }
 
         // GetProfileData
@@ -260,18 +260,18 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User {}));
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.GetUserData(It.IsAny<User>()))
-                .Returns(new UserProfileDataViewModel {});
+                .Returns(new UserProfileDataViewModel { });
 
             var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
             {
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.GetProfileData();
-            
-            Assert.IsType<ActionResult<UserProfileDataViewModel>>(response.Result);
+            var testResult = testController.GetProfileData();
+
+            Assert.IsType<ActionResult<UserProfileDataViewModel>>(testResult.Result);
         }
 
         // UpdateProfileData
@@ -301,8 +301,8 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
-            Assert.IsType<AcceptedResult>(response.Result);
+            var testResult = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
+            Assert.IsType<AcceptedResult>(testResult.Result);
         }
 
         [Fact]
@@ -320,8 +320,8 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -348,8 +348,8 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateEmail(testViewModel);
-            Assert.IsType<AcceptedResult>(response.Result);
+            var testResult = testController.UpdateEmail(testViewModel);
+            Assert.IsType<AcceptedResult>(testResult.Result);
         }
 
         [Fact]
@@ -364,8 +364,8 @@ namespace Footwear_Tests.Controllers
             };
             testController.ModelState.AddModelError("fakeError", "fakeMessage");
 
-            var response = testController.UpdateEmail(new EmailViewModel());
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.UpdateEmail(new EmailViewModel());
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Theory]
@@ -387,8 +387,8 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateEmail(testViewModel);
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.UpdateEmail(testViewModel);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
         [Fact]
@@ -411,8 +411,8 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateEmail(testViewModel);
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.UpdateEmail(testViewModel);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
 
 
@@ -440,8 +440,72 @@ namespace Footwear_Tests.Controllers
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateEmail(testViewModel);
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var testResult = testController.UpdateEmail(testViewModel);
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
+        }
+
+        [Fact]
+        public void TestIfChangePasswordWorksCorrectly()
+        {
+            var passViewModel = new PasswordViewModel
+            {
+                Password = "123456",
+                NewPassword = "1234567",
+                ConfirmPassword = "1234567"
+            };
+
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new User { }));
+            this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(true));
+            this.UserManagerServiceMock.Setup(u => u.ChangePasswordAsync
+                (It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()))
+                    .Returns(Task.FromResult(IdentityResult.Success));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
+
+            var testResult = testController.UpdatePassword(passViewModel);
+
+            Assert.IsType<AcceptedResult>(testResult.Result);
+        }
+
+        [Fact]
+        public void TestUpdatePasswordIfBadRequestIsReturnedWhenModelStateIsInvalid()
+        {
+
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+                this.UserService, this.CartService);
+            testController.ModelState.AddModelError("fakeError", "fakeMessage");
+
+            var testResult = testController.UpdatePassword(new PasswordViewModel());
+
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
+        }
+
+        [Theory]
+        [InlineData("eazyPassword", "hardPa$$word_2*@", "antiBruteForcePassword#$$$@!99212312355$")]
+        [InlineData("eazyPassword", "antiBruteForcePassword#$$$@!99212312355$", "hardPa$$word_2*@")]
+        public void TestIfChangePassword_PasswordAndConfirmPasswordAreEqual(string pass, string newPass, string confNewPass)
+        {
+            var passViewModel = new PasswordViewModel
+            {
+                Password = pass,
+                NewPassword = newPass,
+                ConfirmPassword = confNewPass
+            };
+            
+            var testController = new UserController(this.UserManagerService, this.TokenService,
+                this.UserService, this.CartService) { };
+
+            var testResult = testController.UpdatePassword(passViewModel);
+
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
         }
     }
 }
