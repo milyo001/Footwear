@@ -291,5 +291,30 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<BadRequestObjectResult>(resposne.Result);
         }
 
+        [Fact]
+        public void TestIfUpdateUserDataWorksCorrectly()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
+
+
+            //if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
+            //string authToken = HttpContext.Items["token"].ToString();
+
+            //var user = await this._tokenService.GetUserByIdAsync(authToken);
+            //var result = await this._userService.UpdateUserDataAsync(user, model);
+
+            //if (!result.Succeeded)
+            //    return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
+
+            //return Accepted(new { succeeded = true });
+        }
     }
 }

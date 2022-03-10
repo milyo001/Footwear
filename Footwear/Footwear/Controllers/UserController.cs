@@ -106,7 +106,7 @@
             string authToken = HttpContext.Items["token"].ToString();
 
             var user = await this._tokenService.GetUserByIdAsync(authToken);
-            var result = await this._userService.UpdateUserDataAsync(user, model);
+            IdentityResult result = await this._userService.UpdateUserDataAsync(user, model);
 
             if (!result.Succeeded)
                 return BadRequest(new { message = IdentityErrors.UnableToUpdateUserInfo });
