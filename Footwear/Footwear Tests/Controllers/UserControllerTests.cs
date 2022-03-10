@@ -259,7 +259,6 @@ namespace Footwear_Tests.Controllers
 
         // GetProfileData
 
-
         [Fact]
         public void TestIfGetProfileDataIsWorkingCorrectly()
         {
@@ -272,18 +271,25 @@ namespace Footwear_Tests.Controllers
 
             var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
             {
-                ControllerContext = new ControllerContext()
-                {
-                    HttpContext = httpContext
-                }
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
             var response = testController.GetProfileData();
-
+            
             Assert.IsType<ActionResult<UserProfileDataViewModel>>(response.Result);
         }
 
+        // UpdateProfileData
 
+        [Fact]
+        public void TestIfUpdateUserDataBindingReturnBadRequest()
+        {
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService);
+            testController.ModelState.AddModelError("fakeError", "fakeMessage");
+
+            var resposne = testController.UpdateProfileData(new ProfileUpdateViewModel());
+            Assert.IsType<BadRequestObjectResult>(resposne.Result);
+        }
 
     }
 }
