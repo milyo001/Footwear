@@ -23,14 +23,10 @@ namespace Footwear_Tests.Controllers
         public ITokenService TokenService { get; set; }
         public ICartService CartService { get; set; }
 
-
         public Mock<IUserService> UserServiceMock { get; set; }
         public Mock<UserManager<User>> UserManagerServiceMock { get; set; }
         public Mock<ITokenService> TokenServiceMock { get; set; }
         public Mock<ICartService> CartServiceMock { get; set; }
-
-        private readonly string ApiDomain = "https://localhost:44323";
-
 
 
         public UserControllerTests()
@@ -46,7 +42,6 @@ namespace Footwear_Tests.Controllers
             this.TokenService = this.TokenServiceMock.Object;
             this.CartService = this.CartServiceMock.Object;
         }
-        
         
         // Return Types
 
@@ -216,7 +211,7 @@ namespace Footwear_Tests.Controllers
         [Fact]
         public void TestIfConflictIsReturnedWhenDupplicateUser()
         {
-            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(true);
+            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>())).Returns(true);
 
             var testController = new UserController(this.UserManagerService, this.TokenService,
 
@@ -230,7 +225,7 @@ namespace Footwear_Tests.Controllers
         [Fact]
         public void TestIfBadRequestIsReturnedWhenUnableToCreateUser()
         {
-            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
+            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>())).Returns(false);
             this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
                 .Returns(Task.FromResult(Task.FromResult(IdentityResult.Failed()).Result));
 
@@ -245,7 +240,7 @@ namespace Footwear_Tests.Controllers
         [Fact]
         public void TestIfRegisterIsWorkingCorrectly()
         {
-            this.UserServiceMock.Setup(u => u.isUsernameInUse(It.IsAny<string>())).Returns(false);
+            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>())).Returns(false);
             this.UserServiceMock.Setup(u => u.CreateUserAsync(It.IsAny<RegisterViewModel>()))
                 .Returns(Task.FromResult(Task.FromResult(IdentityResult.Success).Result));
 
@@ -341,16 +336,20 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
-                .ReturnsAsync(IdentityResult.Failed());
+            this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>()))
+                .Returns(false);
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new User { }));
+            this.UserServiceMock.Setup(u => u.UpdateEmailAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .ReturnsAsync(IdentityResult.Success);
 
             var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
             {
                 ControllerContext = new ControllerContext() { HttpContext = httpContext }
             };
 
-            var response = testController.UpdateProfileData(new ProfileUpdateViewModel() { Street = "test" });
-            Assert.IsType<BadRequestObjectResult>(response.Result);
+            var response = testController.UpdateEmail(testViewModel);
+            Assert.IsType<AcceptedResult>(response.Result);
         }
 
 

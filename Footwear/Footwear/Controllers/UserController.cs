@@ -38,7 +38,7 @@
         {
             if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
 
-            bool isUserDupplicate = this._userService.isUsernameInUse(model.Email);
+            bool isUserDupplicate = this._userService.IsUsernameInUse(model.Email);
 
             if (isUserDupplicate) return Conflict(new { message = IdentityErrors.UserIsInUse });
 
