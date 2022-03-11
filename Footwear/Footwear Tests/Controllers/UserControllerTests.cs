@@ -491,7 +491,7 @@ namespace Footwear_Tests.Controllers
         [Theory]
         [InlineData("eazyPassword", "hardPa$$word_2*@", "antiBruteForcePassword#$$$@!99212312355$")]
         [InlineData("eazyPassword", "antiBruteForcePassword#$$$@!99212312355$", "hardPa$$word_2*@")]
-        public void TestIfChangePassword_PasswordAndConfirmPasswordAreEqual(string pass, string newPass, string confNewPass)
+        public void TestIfChangePassword_IfPasswordAndConfirmPasswordAreEqual(string pass, string newPass, string confNewPass)
         {
             var passViewModel = new PasswordViewModel
             {
@@ -502,6 +502,37 @@ namespace Footwear_Tests.Controllers
             
             var testController = new UserController(this.UserManagerService, this.TokenService,
                 this.UserService, this.CartService) { };
+
+            var testResult = testController.UpdatePassword(passViewModel);
+
+            Assert.IsType<BadRequestObjectResult>(testResult.Result);
+        }
+
+        [Fact]
+        public void TestIfChangePasswordReturnBadRequestWhenUnableToUpdateDatabase()
+        {
+            var passViewModel = new PasswordViewModel
+            {
+                Password = "123456",
+                NewPassword = "1234567",
+                ConfirmPassword = "1234567"
+            };
+
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+                .Returns(Task.FromResult(new User { }));
+            this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
+                .Returns(Task.FromResult(true));
+            this.UserManagerServiceMock.Setup(u => u.ChangePasswordAsync
+                (It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()))
+                    .Returns(Task.FromResult(IdentityResult.Failed()));
+
+            var testController = new UserController(this.UserManagerService, this.TokenService, this.UserService, this.CartService)
+            {
+                ControllerContext = new ControllerContext() { HttpContext = httpContext }
+            };
 
             var testResult = testController.UpdatePassword(passViewModel);
 
