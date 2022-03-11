@@ -59,5 +59,17 @@
             var result = testController.GetProductDtoById(1);
             Assert.IsType<ActionResult<ProductDto>>(result.Result);
         }
+
+        [Fact]
+        public void Test_Test_GetProductDtoByIdAsync_Returns_NotFound_When_Null()
+        {
+            var testProducts = new ProductDto();
+            this.ProductServiceMock.Setup(p => p.GetProductDtoByIdAsync(1))
+                .ReturnsAsync((ProductDto)null);
+
+            var testController = new ProductController(this.CartServiceMock.Object, this.ProductServiceMock.Object);
+            var result = testController.GetProductDtoById(1).Result;
+            Assert.IsType<NotFoundResult>(result.Result);
+        }
     }
 }

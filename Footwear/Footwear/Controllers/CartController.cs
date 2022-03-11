@@ -24,6 +24,7 @@
             this._cartService = cartService;
         }
 
+
         /// <summary>
         /// Get a IEnumerable collection of the view models and return it to the client.
         /// </summary>
