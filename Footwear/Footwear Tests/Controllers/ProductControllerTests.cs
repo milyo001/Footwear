@@ -38,5 +38,26 @@
 
             Assert.IsAssignableFrom<Task<ActionResult<ProductDto>>>(result);
         }
+
+        [Fact]
+        public void Test_GetAllProducts_WorksCorrectly()
+        {
+            var testProducts = new List<ProductDto>();
+            this.ProductServiceMock.Setup(p => p.GetAllProductsAsync()).ReturnsAsync(testProducts);
+            var testController = new ProductController(this.CartServiceMock.Object, this.ProductServiceMock.Object);
+            var result = testController.GetAllProducts();
+            Assert.IsType<ActionResult<IEnumerable<ProductDto>>>(result.Result);
+        }
+
+        [Fact]
+        public void Test_GetProductDtoByIdAsync_WorksCorrectly()
+        {
+            var testProducts = new ProductDto();
+            this.ProductServiceMock.Setup(p => p.GetProductDtoByIdAsync(1))
+                .Returns(Task.FromResult(testProducts));
+            var testController = new ProductController(this.CartServiceMock.Object, this.ProductServiceMock.Object);
+            var result = testController.GetProductDtoById(1);
+            Assert.IsType<ActionResult<ProductDto>>(result.Result);
+        }
     }
 }
