@@ -13,13 +13,11 @@
     [ApiController]
     public class CartController : ControllerBase
     {
-        private readonly ApplicationDbContext _db;
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;
 
-        public CartController(ApplicationDbContext db, ITokenService tokenService, ICartService cartService)
+        public CartController(ITokenService tokenService, ICartService cartService)
         {
-            this._db = db;
             this._tokenService = tokenService;
             this._cartService = cartService;
         }
