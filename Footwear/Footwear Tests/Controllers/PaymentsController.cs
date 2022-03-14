@@ -39,7 +39,7 @@ namespace Footwear_Tests.Controllers
             // This is a public test secret API key used only for testing 
             this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns(MockData.TestStripeApiKey);
 
-            this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns("https://footwear.com");
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns(MockData.TestClientUrl);
 
             this.OrderServiceMock.Setup(x => x.GetTotalPrice(It.IsAny<Order>())).Returns(250.55);
 
@@ -53,5 +53,28 @@ namespace Footwear_Tests.Controllers
             Assert.IsType<OkObjectResult>(result.Result);
         }
 
+
+        [Fact]
+        public void Test_CreateCheckOutSession_Return_Value()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            // This is a public test secret API key used only for testing 
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns(MockData.TestStripeApiKey);
+
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns(MockData.TestClientUrl);
+
+            this.OrderServiceMock.Setup(x => x.GetTotalPrice(It.IsAny<Order>())).Returns(250.55);
+
+            var testController = new PaymentsController(this.ConfigurationMock.Object, this.OrderServiceMock.Object)
+            {
+                ControllerContext = new ControllerContext { HttpContext = httpContext }
+            };
+
+            var result = testController.CreateCheckoutSession();
+
+            Assert.IsAssignableFrom<Task<ActionResult>>(result);
+        }
     }
 }

@@ -78,22 +78,8 @@ namespace Footwear.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
 
-            try
-            {
-            }
-            catch (System.Exception e)
-            {
-                var test = e.ToString();
-                throw;
-            }
-
-
             // Pass the url to the client, so the client can redirect user to the prebuild stripe checkout page
-            var generatedUrl = new
-            {
-                Url = session.Url
-            };
-
+            var generatedUrl = new { Url = session.Url };
             string jsonString = JsonSerializer.Serialize(generatedUrl);
 
             return Ok(jsonString);
