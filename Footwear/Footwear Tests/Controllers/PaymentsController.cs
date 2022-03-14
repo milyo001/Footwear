@@ -35,8 +35,10 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns("klaslkdasknk_213adlaskd_213123");
-            this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns("localhost.com");
+            // This is a public test secret API key used only for testing 
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns("sk_test_z6Wgj3W5n3eYSLEKPRJ4OrE900vpjOnFhP");
+
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns("https://footwear.com");
 
             var testController = new PaymentsController(this.ConfigurationMock.Object, this.OrderServiceMock.Object)
             {
