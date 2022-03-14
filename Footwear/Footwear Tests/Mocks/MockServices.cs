@@ -3,12 +3,12 @@ namespace Footwear_Tests.Mocks
 {
     using Footwear.Data.Models;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.Extensions.Configuration;
     using Moq;
-    using System.Collections.Generic;
 
     public static class MockServices
     {
+        
+
         public static Mock<UserManager<User>> MockUserService()
         {
             var userStore = new Mock<IUserStore<User>>();
@@ -16,24 +16,8 @@ namespace Footwear_Tests.Mocks
             return mockUserService;
         }
 
-        //public static IConfiguration MockConfiguration()
-        //{
-        //    var inMemorySettings = new Dictionary<string, Dictionary<string, string>>
-        //    {
-        //        {
-        //            "ApplicationSettings:",
-        //            new Dictionary<string, string> 
-        //           {
-        //                { "Stripe_Secret", "secret23213123" }
-        //           }
-        //        }
-        //    };
 
-        //    IConfiguration configuration = new ConfigurationBuilder()
-        //        .AddInMemoryCollection(inMemorySettings)
-        //        .Build();
-        //    return configuration;
-        //}
+
 
         //private static DbContextOptions<ApplicationDbContext> CreateNewContextOptions()
         //{

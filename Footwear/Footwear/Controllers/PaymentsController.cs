@@ -76,27 +76,27 @@ namespace Footwear.Controllers
             };
 
             var service = new SessionService();
+            Session session = service.Create(options);
+
             try
             {
-                Session session = service.Create(options);
             }
             catch (System.Exception e)
             {
                 var test = e.ToString();
                 throw;
             }
-            
 
-            //// Pass the url to the client, so the client can redirect user to the prebuild stripe checkout page
-            //var generatedUrl = new
-            //{
-            //    Url = session.Url
-            //};
 
-            //string jsonString = JsonSerializer.Serialize(generatedUrl);
+            // Pass the url to the client, so the client can redirect user to the prebuild stripe checkout page
+            var generatedUrl = new
+            {
+                Url = session.Url
+            };
 
-            //return Ok(jsonString);
-            return NotFound();
+            string jsonString = JsonSerializer.Serialize(generatedUrl);
+
+            return Ok(jsonString);
         }
 
         /// <summary>

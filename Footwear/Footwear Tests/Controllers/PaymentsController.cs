@@ -16,6 +16,7 @@ namespace Footwear_Tests.Controllers
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Xunit;
+    using Footwear_Tests.Mocks;
 
     public class PaymentsControllerTests
     {
@@ -30,15 +31,17 @@ namespace Footwear_Tests.Controllers
         }
 
         [Fact]
-        public void Test123 ()
+        public void Test_If_CreateCheckoutSession_Is_Working_Correctly()
         {
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
             // This is a public test secret API key used only for testing 
-            this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns("sk_test_z6Wgj3W5n3eYSLEKPRJ4OrE900vpjOnFhP");
+            this.ConfigurationMock.Setup(x => x["ApplicationSettings:Stripe_Secret"]).Returns(MockData.TestStripeApiKey);
 
             this.ConfigurationMock.Setup(x => x["ApplicationSettings:ClientUrl"]).Returns("https://footwear.com");
+
+            this.OrderServiceMock.Setup(x => x.GetTotalPrice(It.IsAny<Order>())).Returns(250.55);
 
             var testController = new PaymentsController(this.ConfigurationMock.Object, this.OrderServiceMock.Object)
             {
@@ -47,7 +50,7 @@ namespace Footwear_Tests.Controllers
 
             var result = testController.CreateCheckoutSession();
 
-            Assert.IsType<Task<ActionResult>>(result.Result);
+            Assert.IsType<OkObjectResult>(result.Result);
         }
 
     }
