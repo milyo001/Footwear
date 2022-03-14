@@ -1,5 +1,5 @@
 ﻿
-namespace server.Controllers
+namespace Footwear.Controllers
 {
     using Footwear.Controllers.ErrorHandler;
     using Footwear.Services.OrderService;
@@ -30,21 +30,29 @@ namespace server.Controllers
 
         /// <summary>
         /// Create new checkout session to prepare the client to be redirected to stripe.com for 
-        /// card payment.The session url contains all the options meta data below.
+        /// card payment.This method will generate session URL which contains all the meta data for the session object.
         /// </summary>
         /// <returns></returns>
         [HttpGet("create-checkout-session")]
         public async Task<ActionResult> CreateCheckoutSession()
         {
             string authToken = HttpContext.Items["token"].ToString();
-            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);
-            double totalPrice = this._orderService.GetTotalPrice(latestOrder);
-            //Add delivery price to the total price
-            totalPrice += await this._orderService.GetDeliveryPriceAsync();
+
+            // Gets the domain of the app, which is used later to generate payment-success and payment-failed URL
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
-            //The total price to charge, if you want stripe dashboard statistics use stripe price Id 
-            //See https://stripe.com/docs/api/prices for details
+            // Will get the latest order(with 'isOrdered' property == false) to pay for
+            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);
+
+            // Calculate the total price for all items in cart 
+            double totalPrice = this._orderService.GetTotalPrice(latestOrder);
+
+            // Add the delivery price to the total price of products
+            totalPrice += await this._orderService.GetDeliveryPriceAsync();
+            
+
+            // The total price to charge, if you want stripe dashboard statistics use stripe price Id 
+            // See https://stripe.com/docs/api/prices for details
             var options = new SessionCreateOptions
             {
                 LineItems = new List<SessionLineItemOptions>
@@ -68,11 +76,10 @@ namespace server.Controllers
                 CancelUrl = domain + "/payment-cancel",
             };
 
-
             var service = new SessionService();
             Session session = service.Create(options);
 
-            //Pass the url to the client to redirect user to the prebuild checkout page
+            // Pass the url to the client to redirect user to the prebuild checkout page
             var generatedUrl = new
             {
                 Url = session.Url
