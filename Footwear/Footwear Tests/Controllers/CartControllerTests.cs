@@ -135,5 +135,73 @@ namespace Footwear_Tests.Controllers
             var result = testController.DecreaseCartProductQuantity(1);
             Assert.IsType<BadRequestObjectResult>(result.Result);
         }
+
+        [Fact]
+        public void Test_DecreaseCartProductQuantity_Returns_BadRequest_When_CartProduct_Quantity_Is_Less_Than_One()
+        {
+            var cartProduct = new CartProduct() { Quantity = 1 };
+
+            this.CartServiceMock.Setup(c => c.GetCartProductByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(cartProduct);
+
+            var testController = new CartController(this.TokenServiceMock.Object, this.CartServiceMock.Object) { };
+
+            var result = testController.DecreaseCartProductQuantity(1);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void Test_RemoveCartProducts_Works_As_Expected()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            var cart = new Cart()
+            {
+                CartProducts = new List<CartProduct>()
+            };
+
+            var testCartProduct = new CartProduct();
+
+            cart.CartProducts.Add(testCartProduct);
+
+            this.CartServiceMock.Setup(c => c.GetCartProductByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(new CartProduct());
+            this.TokenServiceMock.Setup(t => t.GetCartId(It.IsAny<string>())).Returns(1);
+            this.CartServiceMock.Setup(c => c.GetCartAsync(1)).ReturnsAsync(cart);
+
+            var testController = new CartController(this.TokenServiceMock.Object, this.CartServiceMock.Object)
+            {
+                ControllerContext = new ControllerContext { HttpContext = httpContext }
+            };
+
+            var result = testController.RemoveCartProducts();
+            Assert.IsType<OkResult>(result.Result);
+        }
+
+        [Fact]
+        public void Test_RemoveCartProducts_Returns_BadRequest_When_Cart_Is_Empty()
+        {
+            var httpContext = new DefaultHttpContext();
+            httpContext.Items.Add("token", "test");
+
+            var cart = new Cart()
+            {
+                CartProducts = new List<CartProduct>()
+            };
+
+            this.CartServiceMock.Setup(c => c.GetCartProductByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(new CartProduct());
+            this.TokenServiceMock.Setup(t => t.GetCartId(It.IsAny<string>())).Returns(1);
+            this.CartServiceMock.Setup(c => c.GetCartAsync(1)).ReturnsAsync(cart);
+
+            var testController = new CartController(this.TokenServiceMock.Object, this.CartServiceMock.Object) 
+            {
+                ControllerContext = new ControllerContext { HttpContext = httpContext }
+            };
+
+            var result = testController.RemoveCartProducts();
+            Assert.IsType<NoContentResult>(result.Result);
+        }
     }
 }
