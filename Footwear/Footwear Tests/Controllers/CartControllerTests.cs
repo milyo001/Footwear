@@ -203,5 +203,30 @@ namespace Footwear_Tests.Controllers
             var result = testController.RemoveCartProducts();
             Assert.IsType<NoContentResult>(result.Result);
         }
+
+        [Fact]
+        public void Test_DeleteCartProduct_Works_As_Expected()
+        {
+            this.CartServiceMock.Setup(c => c.GetCartProductByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(new CartProduct());
+
+            var testController = new CartController(this.TokenServiceMock.Object, this.CartServiceMock.Object) { };
+
+            var result = testController.DeleteCartProduct(1);
+            Assert.IsType<OkObjectResult>(result.Result);
+        }
+
+        [Fact]
+        public void Test_DeleteCartProduct_Returns_BadRequest_When_CartProducts_Is_Null()
+        {
+            this.CartServiceMock.Setup(c => c.GetCartProductByIdAsync(It.IsAny<int>()))
+                .ReturnsAsync(null as CartProduct);
+
+            var testController = new CartController(this.TokenServiceMock.Object, this.CartServiceMock.Object) { };
+
+            var result = testController.DeleteCartProduct(1);
+            Assert.IsType<BadRequestObjectResult>(result.Result);
+        }
+
     }
 }
