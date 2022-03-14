@@ -117,7 +117,7 @@ for now it can be done only manually.
 ## Tests
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| Test ASP .NET Controller logic | &#10060; | Test the api controllers logic |
+| Test ASP .NET Controller logic | &#10004; | Test the api controllers logic |
 | Test ASP .NET Models | &#10060; | Test the validation in models  |
 | Test ASP .NET Services | &#10060; | Test the methods in the services  |
 | Test ASP .NET StartUp class | &#10060; | Test the application composition root  |
