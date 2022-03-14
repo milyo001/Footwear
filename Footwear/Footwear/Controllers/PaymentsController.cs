@@ -3,7 +3,6 @@ namespace Footwear.Controllers
 {
     using Footwear.Controllers.ErrorHandler;
     using Footwear.Services.OrderService;
-    using Microsoft.AspNetCore.Cors;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
@@ -13,7 +12,6 @@ namespace Footwear.Controllers
     using System.Threading.Tasks;
 
 
-    [EnableCors("SiteCorsPolicy")]
     public class PaymentsController : Controller
     {
 
@@ -49,9 +47,8 @@ namespace Footwear.Controllers
 
             // Add the delivery price to the total price of products
             totalPrice += await this._orderService.GetDeliveryPriceAsync();
-            
 
-            // The total price to charge, if you want stripe dashboard statistics use stripe price Id 
+            // Configure session options below, if you want stripe dashboard statistics use stripe price index 
             // See https://stripe.com/docs/api/prices for details
             var options = new SessionCreateOptions
             {
@@ -61,8 +58,10 @@ namespace Footwear.Controllers
                   {
                     Name = "Total amount for all products:",
                     Currency = "usd",
-                    //Sripe api expects a number as the given example: 20$ in decimal/double = 2000 or
-                    //45.50$ in decimal/double = 4550
+
+                    // Stripe API expects a number as the given example:
+                    // Example 1: 20 USD($) in decimal/double will equal 2000
+                    // Example 2: 45.59 USD($) in decimal/double will equal 4559
                     Amount = (long)(totalPrice * 100),
                     Quantity = 1,
                   },
@@ -79,11 +78,12 @@ namespace Footwear.Controllers
             var service = new SessionService();
             Session session = service.Create(options);
 
-            // Pass the url to the client to redirect user to the prebuild checkout page
+            // Pass the url to the client, so the client can redirect user to the prebuild stripe checkout page
             var generatedUrl = new
             {
                 Url = session.Url
             };
+
             string jsonString = JsonSerializer.Serialize(generatedUrl);
 
             return Ok(jsonString);
