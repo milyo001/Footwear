@@ -52,7 +52,8 @@
             var userId = this.GetUserId(token);
             var user = await this._db.Users
                 .Where(u => u.Id == userId)
-                .Include(a => a.Address)
+                .Include(u => u.Address)
+                .Include(u => u.Orders)
                 .FirstOrDefaultAsync();
             return user;
         }

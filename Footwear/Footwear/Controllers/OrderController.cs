@@ -1,6 +1,7 @@
 ﻿namespace Footwear.Controllers
 {
     using Footwear.Services.OrderService;
+    using Footwear.Services.TokenService;
     using Footwear.ViewModels;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -13,9 +14,12 @@
     {
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
-        public OrderController(IConfiguration configuration, IOrderService orderService)
+        private readonly ITokenService _tokenService;
+
+        public OrderController(IConfiguration configuration, IOrderService orderService, ITokenService tokenService)
         {
             this._orderService = orderService;
+            this._tokenService = tokenService;
             Configuration = configuration;
             StripeConfiguration.ApiKey = Configuration["ApplicationSettings:Stripe_Secret"].ToString();
         }
@@ -42,11 +46,22 @@
         /// Get all the information about the delivery. Send the view model to the client.
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         [Route("getDeliveryInfo")]
         public async Task<ActionResult<DeliveryInfoViewModel>> GetDeliveryData()
         {
             var result = await this._orderService.GetDeliveryDataAsync();
             return result;
+        }
+
+        [HttpGet]
+        [Route("getAllOrders")]
+        public async Task<OrderViewModel> GetAllOrders()
+        {
+            string authToken = HttpContext.Items["token"].ToString();
+            var user = await this._tokenService.GetUserByIdAsync(authToken);
+            var orders = await this._orderService.GetOrdersViewModel(user);
+            return null;
         }
     }
 }

@@ -4,6 +4,7 @@ namespace Footwear.Services.OrderService
 
     using Footwear.Data.Models;
     using Footwear.ViewModels;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IOrderService
@@ -62,5 +63,11 @@ namespace Footwear.Services.OrderService
         /// </summary>
         /// <returns></returns>
         Task<double> GetDeliveryPriceAsync();
+
+        /// <summary>
+        /// Gets the order view model by given cart.
+        /// </summary>
+        /// <returns></returns>
+        Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user);
     }
 }

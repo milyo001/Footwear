@@ -8,6 +8,7 @@
     using Footwear.Services.TokenService;
     using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -115,6 +116,13 @@
         {
             var data = await this.GetDeliveryDataAsync();
             return (double)data.DeliveryPrice;
+        }
+
+        public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user)
+        {
+            var orders = new List<OrderViewModel>();
+            
+            return orders;
         }
     }
 }
