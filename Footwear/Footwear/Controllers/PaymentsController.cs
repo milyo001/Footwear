@@ -100,7 +100,8 @@ namespace Footwear.Controllers
             Session session = sessionService.Get(session_id);
             var paymentStatus = session.PaymentStatus;
 
-            if (string.IsNullOrWhiteSpace(paymentStatus)) return BadRequest(PaymentErrors.PaymentDeclined);
+            if (string.IsNullOrWhiteSpace(paymentStatus) || paymentStatus == "unpaid")
+                return BadRequest(PaymentErrors.PaymentDeclined);
 
             string authToken = HttpContext.Items["token"].ToString();
 
