@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ICompletedOrder } from '../interfaces/order/completedOrder';
 
 import { LoadingService } from '../services/loading.service';
-import { UserService } from '../services/user.service';
+import { OrderService } from '../services/order.service';
 
 @Component({
   selector: 'app-home',
@@ -12,10 +12,14 @@ import { UserService } from '../services/user.service';
 export class HomeComponent {
 
   loading = this.loader.loading;
+  orders: ICompletedOrder[] = [];
 
-  constructor(public loader: LoadingService, private userService: UserService) { }
+  constructor(public loader: LoadingService, private ordersService: OrderService) { }
 
-  
-  
-  
+  testFunct() {
+    this.ordersService.getAllOrders().subscribe(orders => {
+      this.orders = orders;
+      console.log(this.orders);
+    })
+  }
 }

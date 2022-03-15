@@ -34,7 +34,7 @@
             var user = await this._tokenService.GetUserByIdAsync(token);
             //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
-            //Check the payment type and set the data directly in the view model
+            // Check the payment type and set the data directly in the view model
             if (orderViewModel.Payment == "card")
             {
                 orderViewModel.Status = "Pending";
@@ -44,18 +44,16 @@
                 orderViewModel.Status = "DeliveryCash";
             }
 
-            //var billingInfo = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
-
             var order = this._mapper.Map<OrderViewModel, Order>(orderViewModel);
             order.UserData = this._mapper.Map<UserProfileDataViewModel, BillingInformation>(orderViewModel.UserData);
             order.Products = await this._cartService.GetCartProductsAsync(cartId);
 
-            //Add order to current user's orders and update database
+            // Add order to current user's orders and update database
             user.Orders.Add(order);
             this._db.SaveChanges();
         }
 
-        //Gets the delivery data (AppData) and return it
+        // Gets the delivery data (AppData) and return it
         public async Task<DeliveryInfoViewModel> GetDeliveryDataAsync()
         {
             AppData data = await this._db.AppData.FirstOrDefaultAsync();
@@ -120,9 +118,15 @@
 
         public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user)
         {
-            var orders = new List<OrderViewModel>();
-            
-            return orders;
+            var orders = user.Orders.ToList();
+            foreach (var order in orders)
+            {
+                order.Products = new List<CartProduct>();
+
+                
+            }
+
+            return null;
         }
     }
 }

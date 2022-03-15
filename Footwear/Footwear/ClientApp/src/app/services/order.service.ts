@@ -40,7 +40,7 @@ export class OrderService {
   }
 
   // Get all orders and all products for the orders
-  getAllOrders(): Observable<ICompletedOrder> {
-    return this.http.get<ICompletedOrder>(this.baseUrl + 'order/getAllOrders');
+  getAllOrders(): Observable<ICompletedOrder[]> {
+    return this.http.get<ICompletedOrder[]>(this.baseUrl + 'order/getAllOrders');
   }
 }
