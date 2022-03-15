@@ -34,4 +34,8 @@ export class OrderService {
   getDeliveryPricingData(): Observable<IDeliveryInfo> {
     return this.http.get<IDeliveryInfo>(this.baseUrl + 'order/getDeliveryInfo');
   }
+
+  getAllOrders(): Observable<IOrder> {
+    return this.http.get<IOrder>(this.baseUrl + 'order/getAllOrders');
+  }
 }
