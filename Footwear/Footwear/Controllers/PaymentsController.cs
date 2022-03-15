@@ -86,12 +86,13 @@ namespace Footwear.Controllers
         }
 
         /// <summary>
-        /// Handle a successfull payment.Make order status paid with card.
+        /// Handle a successfull payment.Make order status paid with card. Stripe API will redirect user to
+        /// this route '[host]/order/payment-success/[session_id]>'
         /// </summary>
         /// <param name="session_id"></param>
         /// <returns></returns>
         [HttpGet("order/payment-success")]
-        public async Task<ActionResult> OrderSuccess([FromQuery] string session_id)
+        public async Task<ActionResult> PaymentSuccess([FromQuery] string session_id)
         {
             if (session_id == null) return BadRequest(PaymentErrors.InvalidSession);
 
