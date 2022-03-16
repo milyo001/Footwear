@@ -117,35 +117,21 @@
             return (double)data.DeliveryPrice;
         }
 
-        public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(string userId)
+        public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModelAsync(string userId)
         {
-            var ordersViewModel = new List<OrderViewModel>();
-            
-            var orders = this._db.Orders
-                .Where(o => o.UserId == userId)
-                .Include(o => o.UserData)
-                .Include(o => o.Products)
-                .ToList();
-
+            var orders = await this.GetAllOrderProductsByUserIdAsync(userId);
             List<OrderViewModel> viewModel = this._mapper.Map<List<Order>, List<OrderViewModel>>(orders);
-
-            foreach (var order in orders)
-            {
-                var orderViewModel = this._mapper.Map<Order, OrderViewModel>(order);
-                ordersViewModel.Add(orderViewModel);
-            }
-
             return viewModel;
         }
 
-        public async Task<IEnumerable<CartProductViewModel>> GetAllOrderProductsByIdAsync(string orderId)
+        public async Task<List<Order>> GetAllOrderProductsByUserIdAsync(string userId)
         {
-            var cartProductsView = await this._db.CartProducts
-                .Where(cp => cp.OrderId == orderId)
-                .Select(cp => this._mapper.Map<CartProduct, CartProductViewModel>(cp))
+            var orders = await this._db.Orders
+                .Where(o => o.UserId == userId)
+                .Include(o => o.UserData)
+                .Include(o => o.Products)
                 .ToListAsync();
-
-            return cartProductsView;
+            return orders;
         }
     }
 }

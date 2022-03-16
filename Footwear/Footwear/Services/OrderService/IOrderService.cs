@@ -65,16 +65,17 @@ namespace Footwear.Services.OrderService
         Task<double> GetDeliveryPriceAsync();
 
         /// <summary>
-        /// Gets the order view model by given cart.
+        /// Returns collection of OrderViewModel for all user orders.
         /// </summary>
+        /// <param name="userId"></param>
         /// <returns></returns>
         Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(string userId);
 
         /// <summary>
-        /// Returns of List<CartProductViewModel> by given id.
+        /// Returns of List<Order> by given user id.
         /// </summary>
-        /// <param name="orderId"></param>
+        /// <param name="userId"></param>
         /// <returns></returns>
-        Task<IEnumerable<CartProductViewModel>> GetAllOrderProductsByIdAsync(string orderId);
+        Task<List<CartProductViewModel>> GetAllOrderProductsByUserIdAsync(string userId);
     }
 }
