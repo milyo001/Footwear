@@ -6,6 +6,7 @@
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
     using Stripe;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     [Route("[controller]")]
@@ -56,12 +57,12 @@
 
         [HttpGet]
         [Route("getAllOrders")]
-        public async Task<OrderViewModel> GetAllOrders()
+        public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAllOrders()
         {
             string authToken = HttpContext.Items["token"].ToString();
             var user = await this._tokenService.GetUserByIdAsync(authToken);
-            var orders = await this._orderService.GetOrdersViewModel(user);
-            return null;
+            IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModel(user);
+            return Ok(orders);
         }
     }
 }
