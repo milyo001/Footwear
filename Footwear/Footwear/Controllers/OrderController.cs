@@ -60,8 +60,8 @@
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAllOrders()
         {
             string authToken = HttpContext.Items["token"].ToString();
-            var user = await this._tokenService.GetUserByIdAsync(authToken);
-            IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModel(user);
+            var userId = this._tokenService.GetUserId(authToken);
+            IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModel(userId);
             return Ok(orders);
         }
     }

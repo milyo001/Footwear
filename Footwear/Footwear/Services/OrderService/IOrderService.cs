@@ -68,7 +68,7 @@ namespace Footwear.Services.OrderService
         /// Gets the order view model by given cart.
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user);
+        Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(string userId);
 
         /// <summary>
         /// Returns of List<CartProductViewModel> by given id.
