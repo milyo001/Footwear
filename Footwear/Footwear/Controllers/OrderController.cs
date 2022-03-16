@@ -61,7 +61,7 @@
         {
             string authToken = HttpContext.Items["token"].ToString();
             var userId = this._tokenService.GetUserId(authToken);
-            IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModel(userId);
+            IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModelAsync(userId);
             return Ok(orders);
         }
     }
