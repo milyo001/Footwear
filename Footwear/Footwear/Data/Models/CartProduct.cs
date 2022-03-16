@@ -36,5 +36,7 @@
 
         public bool IsOrdered { get; set; }
 
+        public string OrderId { get; set; }
+
     }
 }

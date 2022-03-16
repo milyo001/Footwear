@@ -8,6 +8,7 @@
     using Footwear.Services.TokenService;
     using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -118,15 +119,39 @@
 
         public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user)
         {
+            var ordersViewModel = new List<OrderViewModel>();
+
             var orders = user.Orders.ToList();
+
             foreach (var order in orders)
             {
-                order.Products = new List<CartProduct>();
+                var orderProducts = await this.GetAllOrderProductsByIdAsync(order.Id);
+                var orderViewModel = new OrderViewModel
+                {
+                    Status = order.Status.ToString(),
+                    CreatedOn = order.CreatedOn.ToString(),
+                    Payment = order.Payment,
+                    UserData = new UserProfileDataViewModel { },
+                    CartProducts = orderProducts.ToList()
+                };
 
-                
+                // Get products for order with an ID
+                var testOrders = order.Products.ToList();
+
+                ordersViewModel.Add(orderViewModel);
             }
 
-            return null;
+            return ordersViewModel;
+        }
+
+        public async Task<IEnumerable<CartProductViewModel>> GetAllOrderProductsByIdAsync(string orderId)
+        {
+            var cartProductsView = await this._db.CartProducts
+                .Where(cp => cp.OrderId == orderId)
+                .Select(cp => this._mapper.Map<CartProduct, CartProductViewModel>(cp))
+                .ToListAsync();
+
+            return cartProductsView;
         }
     }
 }

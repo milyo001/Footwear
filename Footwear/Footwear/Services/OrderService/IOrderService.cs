@@ -69,5 +69,12 @@ namespace Footwear.Services.OrderService
         /// </summary>
         /// <returns></returns>
         Task<IEnumerable<OrderViewModel>> GetOrdersViewModel(User user);
+
+        /// <summary>
+        /// Returns of List<CartProductViewModel> by given id.
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        Task<IEnumerable<CartProductViewModel>> GetAllOrderProductsByIdAsync(string orderId);
     }
 }
