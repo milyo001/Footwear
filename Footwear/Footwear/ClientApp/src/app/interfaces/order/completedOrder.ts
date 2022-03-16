@@ -1,7 +1,7 @@
-import { IProduct } from "../Product/product";
+import { ICartProduct } from "../cart/cartProduct";
 import { IOrder } from "./order";
 
 
 export interface ICompletedOrder extends IOrder {
-  products: IProduct[];
+  products: ICartProduct[];
 }
