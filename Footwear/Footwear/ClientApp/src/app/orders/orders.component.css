@@ -1,3 +1,6 @@
 #mat-selection-list{
     min-height: 400px;
 }
+#mat-list-text{
+    display: block;
+}

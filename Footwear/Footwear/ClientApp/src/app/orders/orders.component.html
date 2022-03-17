@@ -1,13 +1,18 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Current Orders">
-    <mat-selection-list #shoes [multiple]="false">
-      <mat-list-option *ngFor="let shoe of typesOfShoes" [value]="shoe">
-        {{shoe}}
+    <mat-selection-list #ordersList [multiple]="false">
+      <mat-list-option *ngFor="let order of orders" [value]="order">
+        <div class="mat-list-row" style="display:block;">
+          Order with <span [innerHtml]="order.cartProducts.length | bold"></span>
+          Created on <span [innerHtml]="order.createdOn | bold"></span>
+          Payment method: <span [innerHtml]="order.status | bold"></span>
+        </div>
+        
       </mat-list-option>
     </mat-selection-list>
 
     <p>
-      Option selected: {{shoes.selectedOptions.selected[0]?.value}}
+      Selected order - {{ordersList.selectedOptions.selected[0]?.value}}
     </p>
 
   </mat-tab>

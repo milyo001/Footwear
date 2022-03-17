@@ -4,6 +4,7 @@ import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "../interceptors/auth.guard";
 import { OrdersComponent } from "../orders/orders.component";
 import { PlaceOrderComponent } from "../orders/place-order/place-order.component";
+import { BoldPipe } from "../pipes/bold.pipe";
 import { SharedModule } from "./shared.module";
 
 
@@ -15,12 +16,16 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     PlaceOrderComponent,
-    OrdersComponent
+    OrdersComponent,
+    BoldPipe
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild(routes),
+  ],
+  providers: [
+    BoldPipe
   ],
   exports: [
     RouterModule

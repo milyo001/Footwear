@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
+import { OrderService } from '../services/order.service';
+import { BoldPipe } from '../pipes/bold.pipe';
 
 @Component({
   selector: 'app-orders',
@@ -15,10 +17,15 @@ export class OrdersComponent implements OnInit {
 
   orders: ICompletedOrder[];
 
-  constructor() { }
+  constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
+    this.orderService.getAllOrders().subscribe(orders => {
+      this.orders = orders;
+      console.log(orders);
+    })
+  };
 
-  }
+
 
 }
