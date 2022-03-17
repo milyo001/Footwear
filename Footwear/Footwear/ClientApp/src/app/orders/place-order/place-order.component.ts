@@ -35,21 +35,23 @@ import { UserService } from '../../services/user.service';
 })
 export class PlaceOrderComponent implements OnInit {
 
-  //Component Properties
-  public userData: IUserData = null;
-  public deliveryInfo: IDeliveryInfo = null;
+  // Component Properties
+  userData: IUserData = null;
+  deliveryInfo: IDeliveryInfo = null;
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
-  public totalPrice: number;
+  totalPrice: number;
+ 
 
-  //Document properties
+  // Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns: string[] = ['name', 'size', 'price', 'quantity', 'totalPerItem'];
+  waitForRedirect: boolean = false;
   dataSource: MatTableDataSource<ICartProduct>;
 
-  //Font awesome icons
+  // Font awesome icons
   faMoneyBillWave = faMoneyBillWave;
   faCreditCard = faCreditCard;
   faShippingFast = faShippingFast;
@@ -72,7 +74,7 @@ export class PlaceOrderComponent implements OnInit {
     private router: Router
   ) { }
 
- //Will populate data into component properties from the database using the services
+ // Will populate data into component properties from the database using the services
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
       this.deliveryInfo = info;
@@ -86,7 +88,7 @@ export class PlaceOrderComponent implements OnInit {
     this.initForm();
   }
 
-  //Init data source and apply sorting directive to it, used for table sorting
+  // Init data source and apply sorting directive to it, used for table sorting
   initDataSort(products: ICartProduct[]) {
     this.dataSource = new MatTableDataSource<ICartProduct>(products);
     this.dataSource.sort = this.sort;
@@ -107,7 +109,7 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
-  //Sum products total price for all products and the delivery price and store it in the component property
+  // Sum products total price for all products and the delivery price and store it in the component property
   GetTotalPrice(products: ICartProduct[]) {
     let price = products.reduce
       ((total: number, product: ICartProduct) => total + (product.price * product.quantity), 0);
@@ -116,12 +118,13 @@ export class PlaceOrderComponent implements OnInit {
     };
 
 
-  //Finalize order and redirect to stripe API for card payment
+  // Finalize order and redirect to stripe API for card payment
   onCheckOut(): void{
     this.orderService.checkOut().subscribe((response: any) => {
-      //Show success message and then redirect user to the pre-build payment page
+      // Show success message and then redirect user to the pre-build payment page
       this.toastr.success("Redirecting, please wait!");
-      //Wait few seconds then redirect
+
+      // Wait few seconds then redirect
       setTimeout(() => { window.location.href = response.Url }, 1000);
     },
       error => {
@@ -132,7 +135,7 @@ export class PlaceOrderComponent implements OnInit {
       })
   }
 
-  //Creates an order with diffrent payment options
+  // Creates an order with diffrent payment options
   createOrder(): void {
     this.orderService.createOrder(this.order).subscribe((response: any) => {
       if (response.cardPayment) {
@@ -176,13 +179,16 @@ export class PlaceOrderComponent implements OnInit {
 
   //Submit the data from the form
   submitData(form) {
+    // Disable form submit button to prevent dupplicate orders when double clicking
+    this.waitForRedirect = true;
+
     const fvalue = form.value;
     var today = new Date();
     this.order = {
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",
-      //user data is the address that user can select and could be different from the account/userdata,
+      // User data is the address that user can select and could be different from the account/userdata,
       userData: {
         firstName: fvalue.firstName,
         lastName: fvalue.lastName,

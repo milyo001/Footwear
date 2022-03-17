@@ -173,7 +173,7 @@
             <div class="mt-3 mb-1">
               <div class="conf-div-centered">
                 <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-                <button mat-button matStepperNext [disabled]="form.invalid" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+                <button mat-button matStepperNext [disabled]="form.invalid ||  waitForRedirect" type="submit">Confirm order <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
               </div>
             </div>
           </form>
