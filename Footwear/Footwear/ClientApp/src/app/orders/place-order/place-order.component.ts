@@ -156,10 +156,10 @@ export class PlaceOrderComponent implements OnInit {
       })
   }
 
-  //The methid will handle form values if user decides to import user information from account/userData
+  // The methid will handle form values if user decides to import user information from account/userData
   handleImports(event)  {
     if (event.value == 'import') {
-      //Patch value will set the form fields without validating them
+      // Patch value will set the form fields without validating them
       this.userService.getUserProfile().then(response => {
         this.form.patchValue({
           firstName: response.firstName,
@@ -173,41 +173,32 @@ export class PlaceOrderComponent implements OnInit {
         })
       })
     } else {
-      //Optional: You can add this.form.clear() if you want to clear the form when Do not import is clicked
+      // Optional: You can add this.form.clear() if you want to clear the form when Do not import is clicked
     }
   }
 
-  //Submit the data from the form
+  // Submit the data from the form sent form the html template
   submitData(form) {
     // Disable form submit button to prevent dupplicate orders when double clicking
     this.waitForRedirect = true;
 
-    const fvalue = form.value;
     var today = new Date();
     this.order = {
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",
-      // User data is the address that user can select and could be different from the account/userdata,
-      userData: {
-        firstName: fvalue.firstName,
-        lastName: fvalue.lastName,
-        email: fvalue.email,
-        phone: fvalue.phone,
-        street: fvalue.street,
-        city: fvalue.city,
-        state: fvalue.state,
-        country: fvalue.country,
-        zipCode: fvalue.zipCode
-      }
+      // User data is the information about the delivery address, which can be diffrent
+      // from the user data in Account/UserData 
+      userData: form.value
     }
-    //Set the payment type and send the order to the API
+
+    // Set the payment type and send the order to the API
     if (form.value.payment == "card") {
       this.order.payment = "card";
       this.createOrder();
     }
     else {
-      //Create order with default payment type of "cash"
+      // Create order with default payment type of "cash"
       this.createOrder();
     }
   }
