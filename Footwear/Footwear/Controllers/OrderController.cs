@@ -55,6 +55,10 @@
             return result;
         }
 
+        /// <summary>
+        /// Get past and pending orders(all) for the currently logged in user.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Route("getAllOrders")]
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAllOrders()
