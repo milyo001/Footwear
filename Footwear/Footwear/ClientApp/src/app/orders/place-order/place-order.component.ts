@@ -42,7 +42,6 @@ export class PlaceOrderComponent implements OnInit {
   private phoneRegex: string = '[- +()0-9]+';
   totalPrice: number;
  
-
   // Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
@@ -61,7 +60,7 @@ export class PlaceOrderComponent implements OnInit {
   faArrowCircleLeft = faArrowCircleLeft;
   faEdit = faEdit;
 
-  //HTTP operations properties
+  // HTTP operations properties
   cartProducts: ICartProduct[];
   order: IOrder;
 
@@ -77,6 +76,7 @@ export class PlaceOrderComponent implements OnInit {
  // Will populate data into component properties from the database using the services
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
+
       this.deliveryInfo = info;
 
       this.cartService.getAllCartProducts().subscribe(products => {
@@ -89,12 +89,12 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   // Init data source and apply sorting directive to it, used for table sorting
-  initDataSort(products: ICartProduct[]) {
+  initDataSort(products: ICartProduct[]): void {
     this.dataSource = new MatTableDataSource<ICartProduct>(products);
     this.dataSource.sort = this.sort;
   }
 
-  //Init the form and set validators
+  // Init the form and set validators
   initForm(): void  {
     this.form = this.fb.group({
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
