@@ -10,10 +10,9 @@
       </mat-list-option>
     </mat-selection-list>
 
-    <p *ngIf="ordersList.selectedOptions.selected[0]?.value">
-      Selected order -
-      <button>View</button>
-      <button>Delete</button>
+    <p class="mt-3" *ngIf="ordersList.selectedOptions.selected[0]?.value">
+      Order controls
+      <button>View details</button>
     </p>
 
   </mat-tab>
