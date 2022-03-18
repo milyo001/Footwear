@@ -3,9 +3,9 @@
     <mat-selection-list #ordersList [multiple]="false">
       <mat-list-option *ngFor="let order of orders" [value]="order">
         <div class="mat-list-row" style="display:block;">
-          Order with <span [innerHtml]="order.cartProducts.length | bold"></span>
-          Created on <span [innerHtml]="order.createdOn | bold"></span>
-          Payment method: <span [innerHtml]="order.status | bold"></span>
+          Order made on<span [innerHtml]="order.createdOn | bold"></span>
+          for <span [innerHtml]="order.cartProducts.length | bold"> products</span>
+          with payment status: <span [innerHtml]="order.status | bold"></span>
         </div>
         
       </mat-list-option>
