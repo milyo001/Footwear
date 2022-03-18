@@ -13,7 +13,7 @@ export class OrderStatusPipe implements PipeTransform {
     switch (value) {
       // When order is created but not paid for
       case "Pending": {
-        result = "Pending";
+        result = "Order is made, but payment is still pending";
         break;
       }
       case "DeliveryPaid": {

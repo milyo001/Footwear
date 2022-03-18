@@ -10,8 +10,10 @@
       </mat-list-option>
     </mat-selection-list>
 
-    <p>
-      Selected order - {{ordersList.selectedOptions.selected[0]?.value}}
+    <p *ngIf="ordersList.selectedOptions.selected[0]?.value">
+      Selected order -
+      <button>View</button>
+      <button>Delete</button>
     </p>
 
   </mat-tab>
