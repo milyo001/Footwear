@@ -22,8 +22,14 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(orders => {
 
-      this.currentOrders = orders.filter((order: ICompletedOrder) => order.status != "Completed");
-      this.completedOrders = orders.filter((order: ICompletedOrder) => order.status == "Completed");
+      // Use "deconstruction" style assignment
+      [this.currentOrders, this.completedOrders] =                             
+        orders
+        .reduce((result, element) => {
+          result[element.status == "Completed" ? 1 : 0].push(element); // Determine and push to current/completed orders array
+            return result;
+          },
+          [[], []]); // By default return empty array
     })
   };
 
