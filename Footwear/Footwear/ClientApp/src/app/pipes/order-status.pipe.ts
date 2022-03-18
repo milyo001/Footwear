@@ -1,8 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'order-status'
+  name: 'orderStatus'
 })
+
 // This pipe will handle the response for the order's status property in order to visualize
 // different values
 export class OrderStatusPipe implements PipeTransform {

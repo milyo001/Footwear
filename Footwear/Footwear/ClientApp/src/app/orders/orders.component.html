@@ -5,9 +5,8 @@
         <div class="mat-list-row" style="display:block;">
           Order made on<span [innerHtml]="order.createdOn | bold"></span>
           for <span [innerHtml]="order.cartProducts.length | bold"> products</span>
-          with payment status: <span [innerHtml]="order.status | bold"></span>
+          with payment status: <span [innerHtml]="order.status | orderStatus| bold "></span>
         </div>
-        
       </mat-list-option>
     </mat-selection-list>
 

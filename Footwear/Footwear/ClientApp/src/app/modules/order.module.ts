@@ -5,6 +5,7 @@ import { AuthGuard } from "../interceptors/auth.guard";
 import { OrdersComponent } from "../orders/orders.component";
 import { PlaceOrderComponent } from "../orders/place-order/place-order.component";
 import { BoldPipe } from "../pipes/bold.pipe";
+import { OrderStatusPipe } from "../pipes/order-status.pipe";
 import { SharedModule } from "./shared.module";
 
 
@@ -17,7 +18,8 @@ const routes: Routes = [
   declarations: [
     PlaceOrderComponent,
     OrdersComponent,
-    BoldPipe
+    BoldPipe,
+    OrderStatusPipe
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   providers: [
-    BoldPipe
+    BoldPipe,
+    OrderStatusPipe
   ],
   exports: [
     RouterModule
