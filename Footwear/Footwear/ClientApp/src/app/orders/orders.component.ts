@@ -9,11 +9,6 @@ import { OrderService } from '../services/order.service';
 })
 export class OrdersComponent implements OnInit {
 
-  typesOfShoes: string[] = ['Boots', 'Clogs', 'Loafers', 'Moccasins', 'Sneakers'];
-  name: string = "2198983298132981";
-  productsCount: number = 5;
-  status: string = "pending";
-
   currentOrders: ICompletedOrder[];
   completedOrders: ICompletedOrder[];
 
@@ -21,22 +16,14 @@ export class OrdersComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(orders => {
-
       // Use "deconstruction" style assignment
-      [this.currentOrders, this.completedOrders] =                             
+      [this.currentOrders, this.completedOrders] =
         orders
-        .reduce((result, element) => {
-          result[element.status == "Completed" ? 1 : 0].push(element); // Determine and push to current/completed orders array
+          .reduce((result, element) => {
+            result[element.status == "Completed" ? 1 : 0].push(element); // Determine and push to current/completed orders array
             return result;
           },
-          [[], []]); // By default return empty array
-    })
+            [[], []]); // By default return empty array, can be further chained with map() or other functions.
+    });
   };
-
-  // Filters all order to current and past orders
-  filerOrders(): void {
-
-  }
-
-
 }
