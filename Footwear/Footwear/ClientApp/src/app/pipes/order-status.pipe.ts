@@ -27,8 +27,8 @@ export class OrderStatusPipe implements PipeTransform {
         break;
       }
       case "Completed": {
-        // When order is created and recieved and completed
-        result = "Order is recieved";
+        // When order is created, paid, recieved and completed
+        result = "Order is completed";
         break;
       }
     }

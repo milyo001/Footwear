@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
-import { BoldPipe } from '../pipes/bold.pipe';
 
 @Component({
   selector: 'app-orders',
@@ -15,17 +14,23 @@ export class OrdersComponent implements OnInit {
   productsCount: number = 5;
   status: string = "pending";
 
-  orders: ICompletedOrder[];
+  currentOrders: ICompletedOrder[];
+  completedOrders: ICompletedOrder[];
 
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(orders => {
-      this.orders = orders;
-      console.log(orders);
+
+      this.currentOrders = orders.filter((order: ICompletedOrder) => order.status != "Completed");
+      this.completedOrders = orders.filter((order: ICompletedOrder) => order.status == "Completed");
     })
   };
 
+  // Filters all order to current and past orders
+  filerOrders(): void {
+
+  }
 
 
 }

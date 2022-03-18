@@ -1,11 +1,11 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Current Orders">
     <mat-selection-list #ordersList [multiple]="false">
-      <mat-list-option *ngFor="let order of orders" [value]="order">
+      <mat-list-option *ngFor="let order of currentOrders" [value]="order">
         <div class="mat-list-row" style="display:block;">
-          Order made on<span [innerHtml]="order.createdOn | bold"></span>
-          for <span [innerHtml]="order.cartProducts.length | bold"> products</span>
-          with payment status: <span [innerHtml]="order.status | orderStatus| bold "></span>
+          Order made on <span [innerHtml]="order.createdOn | bold"></span>
+          for <span [innerHtml]="order.cartProducts.length | bold"></span> products 
+          with status: <span [innerHtml]="order.status | orderStatus| bold "></span>
         </div>
       </mat-list-option>
     </mat-selection-list>
