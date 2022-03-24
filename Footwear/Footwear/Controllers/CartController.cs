@@ -14,13 +14,13 @@
     {
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;
+        private string AuthToken => HttpContext.Items["token"].ToString();
 
         public CartController(ITokenService tokenService, ICartService cartService)
         {
             this._tokenService = tokenService;
             this._cartService = cartService;
         }
-
 
         /// <summary>
         /// Get a IEnumerable collection of the view models and return it to the client.
@@ -29,8 +29,7 @@
         [HttpGet("getCartItems")]
         public async Task<IEnumerable<CartProductViewModel>> GetCartProductsAsync()
         {
-            string authToken = HttpContext.Items["token"].ToString();
-            var cartId = this._tokenService.GetCartId(authToken);
+            var cartId = this._tokenService.GetCartId(this.AuthToken);
             var products = await this._cartService.GetCartProductsViewModelAsync(cartId);
             return products;
         }
@@ -93,8 +92,7 @@
         [HttpDelete("removeCartProducts")]
         public async Task<IActionResult> RemoveCartProducts()
         {
-            string authToken = HttpContext.Items["token"].ToString();
-            var cartId = this._tokenService.GetCartId(authToken);
+            var cartId = this._tokenService.GetCartId(this.AuthToken);
             var cart = await this._cartService.GetCartAsync(cartId);
 
             if (cart.CartProducts.Count <= 0) return NoContent();
