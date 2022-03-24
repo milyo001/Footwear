@@ -18,7 +18,7 @@
         private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
-        private string _authToken { get => HttpContext.Items["token"].ToString();  }
+        private string AuthToken { get => HttpContext.Items["token"].ToString(); }
 
         public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService)
         {
@@ -43,7 +43,7 @@
 
             if (isUserDupplicate) return Conflict(new { message = IdentityErrors.UserIsInUse });
 
-            // Create user with blank address, user can modify his profile later and add address or modify the account information
+            // Create user with blank address, user can modify his profile later and add address or modify the account information the Account page
             IdentityResult result = await this._userService.CreateUserAsync(model);
 
             if (!result.Succeeded) return BadRequest(new { message = IdentityErrors.CannotRegister });
@@ -85,7 +85,7 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            var user = await this._tokenService.GetUserByTokenAsync(_authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(this.AuthToken);
             var userData = this._userService.GetUserData(user);
             return userData;
         }
@@ -100,9 +100,8 @@
         public async Task<IActionResult> UpdateProfileData(ProfileUpdateViewModel model)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
-            string authToken = HttpContext.Items["token"].ToString();
 
-            var user = await this._tokenService.GetUserByTokenAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(this.AuthToken);
             IdentityResult result = await this._userService.UpdateUserDataAsync(user, model);
 
             if (!result.Succeeded)
@@ -123,7 +122,6 @@
         {
             var email = model.Email;
             var confEmail = model.ConfirmEmail;
-            string authToken = HttpContext.Items["token"].ToString();
 
             if (!ModelState.IsValid)
                 return BadRequest(new { message = IdentityErrors.InvalidData });
@@ -134,7 +132,7 @@
             if (this._userService.IsUsernameInUse(email))
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
 
-            var user = await this._tokenService.GetUserByTokenAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(this.AuthToken);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
             if (!result.Succeeded)
@@ -159,8 +157,7 @@
             if (model.NewPassword != model.ConfirmPassword)
                 return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
 
-            string authToken = HttpContext.Items["token"].ToString();
-            var user = await this._tokenService.GetUserByTokenAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(this.AuthToken);
 
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
 
