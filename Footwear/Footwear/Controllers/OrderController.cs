@@ -16,6 +16,8 @@
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
         private readonly ITokenService _tokenService;
+        private string AuthToken => HttpContext.Items["token"].ToString();
+
 
         public OrderController(IConfiguration configuration, IOrderService orderService, ITokenService tokenService)
         {
@@ -36,9 +38,8 @@
         {
             if (order == null || !ModelState.IsValid) return BadRequest(new { message = "Invalid product data!" });
 
-            string authToken = HttpContext.Items["token"].ToString();
             var cardPayment = order.Payment == "card";
-            await this._orderService.CreateOrderAsync(authToken, order);
+            await this._orderService.CreateOrderAsync(this.AuthToken, order);
 
             return Ok(new { cardPayment });
         }
@@ -63,8 +64,7 @@
         [Route("getAllOrders")]
         public async Task<ActionResult<IEnumerable<OrderViewModel>>> GetAllOrders()
         {
-            string authToken = HttpContext.Items["token"].ToString();
-            var userId = this._tokenService.GetUserId(authToken);
+            var userId = this._tokenService.GetUserId(this.AuthToken);
             IEnumerable<OrderViewModel> orders = await this._orderService.GetOrdersViewModelAsync(userId);
             return Ok(orders);
         }
