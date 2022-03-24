@@ -1,12 +1,13 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (return only data, not view). The applicaiton is build with desktop first aproach, but it's fully responsive (used bootstrap 4 grid system and CSS Flexbox).The architecture desing patern is MVC. The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
+An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (returning only data, not views). 
+The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system and CSS Flexbox).The architecture desing patern is MVC. The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
 The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (started to building it on .NET Core 3.1 and upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
 # Guide / How to run locally on your machine
-1.Download the repo
-2.Create appsettings.json. Example below:
+1.Download/Clone the repository
+2.Create appsettings.json. (present in .gitignore file so you have to create one manually) Example below (replace <<>> with empty value):
 ```
 {
   "Logging": {
@@ -20,7 +21,7 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
     "DefaultConnection": "Server=<<EXAMPLE: DESKTOP-PM1111111111M\\SQLEXPRESS>>;Database=<<Example: FootwearTestDb2323>>;Trusted_Connection=True;"
   },
   "AllowedHosts": "*",
-  "AllowedOrigins": [ "https://checkout.stripe.com/", "<<Example: https://localhost:2323232332322323>>" ],
+  "AllowedOrigins": [ "https://checkout.stripe.com/", "<<https://localhost:2323232332322323>>" ], // For CorsPolicy
   "ApplicationSettings": {
     "ApiUrl": "<<YOUR LOCALHOST API URL HERE Example: https://localhost:2323232332322323>>",
     "ClientUrl": "<<YOUR ANGULAR URL HERE Example: https://localhost:2323232332322323>>",
