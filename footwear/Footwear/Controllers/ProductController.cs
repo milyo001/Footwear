@@ -13,6 +13,7 @@
     {
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
+        private string AuthToken => HttpContext.Items["token"].ToString();
 
         public ProductController(ICartService cartService, IProductService productService)
         {
@@ -55,13 +56,12 @@
             if (!ModelState.IsValid)
                 return BadRequest(new { message = "Invalid product id." });
 
-            string authToken = HttpContext.Items["token"].ToString();
             var product = await this._productService.GetProductByIdAsync(model.Id);
 
             if (product == null)
                 return BadRequest(new { message = "Error, invalid product!" });
 
-            await this._cartService.AddCartProductAsync(authToken, product, model.Size);
+            await this._cartService.AddCartProductAsync(this.AuthToken, product, model.Size);
             return Ok(new { succeeded = true });
         }
     }

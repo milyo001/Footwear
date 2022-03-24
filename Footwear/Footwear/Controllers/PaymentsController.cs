@@ -11,13 +11,14 @@ namespace Footwear.Controllers
     using System.Text.Json;
     using System.Threading.Tasks;
 
-
-    public class PaymentsController : Controller
+    public class PaymentsController : ControllerBase
     {
 
         private readonly IOrderService _orderService;
 
         private IConfiguration Configuration { get; }
+        private string AuthToken => HttpContext.Items["token"].ToString();
+
 
         public PaymentsController(IConfiguration configuration, IOrderService orderService)
         {
@@ -34,13 +35,11 @@ namespace Footwear.Controllers
         [HttpGet("create-checkout-session")]
         public async Task<ActionResult> CreateCheckoutSession()
         {
-            string authToken = HttpContext.Items["token"].ToString();
-
             // Gets the domain of the app, which is used later to generate payment-success and payment-failed URL
             var domain = Configuration["ApplicationSettings:ClientUrl"].ToString();
 
             // Will get the latest order(with 'isOrdered' property == false) to pay for
-            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(authToken);
+            var latestOrder = await this._orderService.GetLatestAddedOrderAsync(this.AuthToken);
 
             // Calculate the total price for all items in cart 
             double totalPrice = this._orderService.GetTotalPrice(latestOrder);
@@ -103,10 +102,8 @@ namespace Footwear.Controllers
             if (string.IsNullOrWhiteSpace(paymentStatus) || paymentStatus == "unpaid")
                 return BadRequest(PaymentErrors.PaymentDeclined);
 
-            string authToken = HttpContext.Items["token"].ToString();
-
             // Get latest added order id
-            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(authToken);
+            var orderId = await this._orderService.GetLatestAddedOrderIdAsync(this.AuthToken);
 
             // Change payment type to paid
             this._orderService.ModifyPaidOrder(orderId);
