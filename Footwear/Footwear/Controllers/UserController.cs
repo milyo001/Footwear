@@ -18,6 +18,7 @@
         private readonly ITokenService _tokenService;
         private readonly IUserService _userService;
         private readonly ICartService _cartService;
+        private string _authToken { get => HttpContext.Items["token"].ToString();  }
 
         public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService)
         {
@@ -50,8 +51,8 @@
         }
 
         /// <summary>
-        /// Validating the data from client and generate auth token.
-        /// For JWT token configuration go to StartUp.cs and find the service for token auth
+        /// ValidatE the data from the client and generate auth token.
+        /// For JWT token configuration go to StartUp.cs and find the service for the token auth
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
@@ -84,12 +85,8 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
         {
-            string authToken = HttpContext.Items["token"].ToString();
-
-            var user = await this._tokenService.GetUserByIdAsync(authToken);
-
+            var user = await this._tokenService.GetUserByTokenAsync(_authToken);
             var userData = this._userService.GetUserData(user);
-
             return userData;
         }
 
@@ -105,7 +102,7 @@
             if (!ModelState.IsValid) return BadRequest(new { message = IdentityErrors.InvalidData });
             string authToken = HttpContext.Items["token"].ToString();
 
-            var user = await this._tokenService.GetUserByIdAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(authToken);
             IdentityResult result = await this._userService.UpdateUserDataAsync(user, model);
 
             if (!result.Succeeded)
@@ -137,7 +134,7 @@
             if (this._userService.IsUsernameInUse(email))
                 return BadRequest(new { message = IdentityErrors.EmailInUse });
 
-            var user = await this._tokenService.GetUserByIdAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(authToken);
             IdentityResult result = await this._userService.UpdateEmailAsync(user, email);
 
             if (!result.Succeeded)
@@ -163,7 +160,7 @@
                 return BadRequest(new { message = IdentityErrors.PasswordsNotMatch });
 
             string authToken = HttpContext.Items["token"].ToString();
-            var user = await this._tokenService.GetUserByIdAsync(authToken);
+            var user = await this._tokenService.GetUserByTokenAsync(authToken);
 
             var isPassValid = await this._userManager.CheckPasswordAsync(user, model.Password);
 

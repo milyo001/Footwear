@@ -260,7 +260,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.GetUserData(It.IsAny<User>()))
                 .Returns(new UserProfileDataViewModel { });
 
@@ -292,7 +292,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
                 .ReturnsAsync(IdentityResult.Success);
 
@@ -311,7 +311,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>())).Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.UpdateUserDataAsync(It.IsAny<User>(), It.IsAny<ProfileUpdateViewModel>()))
                 .ReturnsAsync(IdentityResult.Failed());
 
@@ -338,7 +338,7 @@ namespace Footwear_Tests.Controllers
 
             this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>()))
                 .Returns(false);
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.UpdateEmailAsync(It.IsAny<User>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Success);
@@ -430,7 +430,7 @@ namespace Footwear_Tests.Controllers
 
             this.UserServiceMock.Setup(u => u.IsUsernameInUse(It.IsAny<string>()))
                 .Returns(false);
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(new User { }));
             this.UserServiceMock.Setup(u => u.UpdateEmailAsync(It.IsAny<User>(), It.IsAny<string>()))
                 .ReturnsAsync(IdentityResult.Failed());
@@ -457,7 +457,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(new User { }));
             this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
                 .Returns(Task.FromResult(true));
@@ -521,7 +521,7 @@ namespace Footwear_Tests.Controllers
             var httpContext = new DefaultHttpContext();
             httpContext.Items.Add("token", "test");
 
-            this.TokenServiceMock.Setup(t => t.GetUserByIdAsync(It.IsAny<string>()))
+            this.TokenServiceMock.Setup(t => t.GetUserByTokenAsync(It.IsAny<string>()))
                 .Returns(Task.FromResult(new User { }));
             this.UserManagerServiceMock.Setup(u => u.CheckPasswordAsync(It.IsAny<User>(), It.IsAny<string>()))
                 .Returns(Task.FromResult(true));

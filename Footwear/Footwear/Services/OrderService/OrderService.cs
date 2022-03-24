@@ -32,7 +32,7 @@
         public async Task CreateOrderAsync(string token, OrderViewModel orderViewModel)
         {
             //Get the current logged in user
-            var user = await this._tokenService.GetUserByIdAsync(token);
+            var user = await this._tokenService.GetUserByTokenAsync(token);
             //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
             // Check the payment type and set the data directly in the view model
@@ -65,7 +65,7 @@
         //Get the latest added order id from the database and return it
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
-            var user = await this._tokenService.GetUserByIdAsync(token);
+            var user = await this._tokenService.GetUserByTokenAsync(token);
             var orderId = this._db.Orders
                 .Where(x => x.UserId == user.Id)
                 .OrderByDescending(o => o.CreatedOn)
@@ -78,7 +78,7 @@
         //Get the latest added order from the database and return it
         public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
-            var user = await this._tokenService.GetUserByIdAsync(token);
+            var user = await this._tokenService.GetUserByTokenAsync(token);
             var order = await this._db.Orders
                 .Where(x => x.UserId == user.Id)
                 .Include(x => x.Products)

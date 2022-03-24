@@ -47,7 +47,7 @@
             return cartId;
         }
 
-        public async Task<User> GetUserByIdAsync(string token)
+        public async Task<User> GetUserByTokenAsync(string token)
         {
             var userId = this.GetUserId(token);
             var user = await this._db.Users

@@ -24,7 +24,7 @@
         /// </summary>
         /// <param name="token"></param>
         /// <returns></returns>
-        Task<User> GetUserByIdAsync(string token);
+        Task<User> GetUserByTokenAsync(string token);
 
         /// <summary>
         /// Generate login token 
