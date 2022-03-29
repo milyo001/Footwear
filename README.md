@@ -37,6 +37,7 @@ for now it can be done only manually.
 //builder.Seed();
 ```
 4.Type command 'dotnet restore' to install all missing packages
+
 5.For demo payments use this demo card INFO:</br>
  Email: Any*</br>
  Card Number: 4242 4242 4242 4242</br>
