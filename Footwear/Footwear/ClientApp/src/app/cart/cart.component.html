@@ -53,8 +53,9 @@
             <p>Description: {{item.details}}</p>
             <p>Good for: {{item.productType}} </p>
             <p class="quantity-paragraph"> Total price:</p>
-            <p id="{{'totalPrice' + index}}" style="display:inline">{{item.price * item.quantity}}</p>
-            <p style="display:inline">$</p>
+            <!--id="{{'totalPrice' + index}}"-->
+          <p style="display:inline">{{(item.price * item.quantity) | currency}}</p>
+            <p style="display:inline"></p>
           </div>
           <div class=".accordion-actions-menu">
             <button class="action-button btn btn-light" (click)="viewProduct(item.productId)">View product</button>

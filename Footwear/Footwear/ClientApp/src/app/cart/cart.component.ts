@@ -56,16 +56,12 @@ export class CartComponent implements OnInit {
     }
   }
 
-  // When clicked increase the quantity of a given item in cart.component.html and database
-  // Increase the total price in the document
+  // Increase the quantity of item in the document and server
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
       (response: any) => {
         if (response.succeeded) {
-          this.increaseDomQuantity(index);
-          this.increaseDomTotPrice(index, cartProduct.price);
           this.cartProducts[index].quantity++;
-          console.log(this.cartProducts);
         }
       },
       err => {
@@ -128,9 +124,11 @@ export class CartComponent implements OnInit {
 
   // DOM Helpers
   increaseDomQuantity(index: number) {
-    var quantityElement = document.getElementById("quantity" + index);
-    var value = parseInt(quantityElement.textContent);
-    quantityElement.textContent = (++value).toString();
+    
+
+    //var quantityElement = document.getElementById("quantity" + index);
+    //var value = parseInt(quantityElement.textContent);
+    //quantityElement.textContent = (++value).toString();
   }
 
   increaseDomTotPrice(index: number, price: number) {
