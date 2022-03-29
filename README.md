@@ -6,7 +6,7 @@ The applicaiton is build with desktop first aproach, but it's fully responsive (
 The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (started to building it on .NET Core 3.1 and upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
 # Guide / How to run locally on your machine
-1.Download/Clone the repository
+1.Download/Clone the repository <br/>
 2.Create appsettings.json. (present in .gitignore file so you have to create one manually) Example below (replace <<>> with empty value):
 ```
 {
