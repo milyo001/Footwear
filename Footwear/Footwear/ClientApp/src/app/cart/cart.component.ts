@@ -57,40 +57,35 @@ export class CartComponent implements OnInit {
   }
 
   // Increase the quantity of item in the document and server
-  incrementQuantity(cartProduct: ICartProduct, index: number): void {
+  incrementQuantity(cartProduct: ICartProduct): void {
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
       (response: any) => {
         if (response.succeeded) {
-          this.cartProducts[index].quantity++;
+          cartProduct.quantity++;
         }
       },
       err => {
         console.log(err);
+        this.toastr.error("Cannot increase quantity!", "Internal server error!");
       }
     );
   }
-  // When clicked decrease the quantity of a given item in the document and database
-  // Decrease the total price in the document
-  decrementQuantity(cartProduct: ICartProduct, index: number): void {
-    var quantityElement = document.getElementById("quantity" + index);
-    var value = parseInt(quantityElement.textContent);
-    if (value <= 1) {
+
+  // Decrease the quantity of item in the document and server
+  decrementQuantity(cartProduct: ICartProduct): void {
+    if (cartProduct.quantity <= 1) {
       this.toastr.warning("Cannot lower quantity.", "Quantity cannot be zero, try to delete the item!");
     }
     else {
       this.cartService.decreaseProductQuantity(cartProduct.id).subscribe(
         (response: any) => {
           if (response.succeeded) {
-            if (value > 1) {
-              this.decreaseDomQuantity(quantityElement, value);
-              this.decreaseDomTotPrice(index, cartProduct.price);
-              this.cartProducts[index].quantity--;
-              console.log(this.cartProducts);
-            }
+            cartProduct.quantity--;
           }
         },
         err => {
           console.log(err);
+          this.toastr.error("Cannot decrease quantity!", "Internal server error!");
         }
       );
     }
@@ -100,51 +95,26 @@ export class CartComponent implements OnInit {
   deleteProduct(item: ICartProduct, index: number) {
     const modalRef = this.modal.open(ModalComponent);
     modalRef.componentInstance.product = item;
+
     modalRef.result.then(result => {
-      if (result == "confirm") {
-        this.cartService.deleteCartProduct(item.id).subscribe(
-          (response: any) => {
-            if (response.succeeded) {
-              this.deleteCartProductEl(index);
+      if (result === "confirm") {
+        this.cartService.deleteCartProduct(item.id).subscribe((response: any) => {
+          if (response.succeeded) {
               this.cartProducts.splice(index, 1);
             }
           },
           err => {
             console.log(err);
+            this.toastr.error("Unable to remove item.", "Server error!");
           }
         );
       }
     },
-      (reason) => {
-        console.log(reason);
-        this.toastr.error("Unable to delete item.", reason);
+      (err) => {
+        console.log(err);
+        this.toastr.error("Unable to remove item.", err);
       });
 
-  }
-
-  // DOM Helpers
-  increaseDomQuantity(index: number) {
-    
-
-    //var quantityElement = document.getElementById("quantity" + index);
-    //var value = parseInt(quantityElement.textContent);
-    //quantityElement.textContent = (++value).toString();
-  }
-
-  increaseDomTotPrice(index: number, price: number) {
-    var totalPrice = document.getElementById("totalPrice" + index);
-    var totPriceElValue = parseFloat(totalPrice.textContent);
-    totalPrice.textContent = (totPriceElValue + price).toFixed(2);
-  }
-
-  decreaseDomQuantity(quantityElement: HTMLElement, value) {
-    quantityElement.textContent = (--value).toString();
-  }
-
-  decreaseDomTotPrice(index: number, price: number) {
-    var totalPrice = document.getElementById("totalPrice" + index);
-    var totPriceElValue = parseFloat(totalPrice.textContent);
-    totalPrice.textContent = (totPriceElValue - price).toFixed(2);
   }
 
   deleteCartProductEl(index: number) {
