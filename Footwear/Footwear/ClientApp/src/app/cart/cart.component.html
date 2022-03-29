@@ -19,7 +19,7 @@
   <cdk-accordion class="example-accordion">
     <cdk-accordion-item *ngFor="let item of cartProducts; let index = index;"
                         #accordionItem="cdkAccordionItem"
-                        class="example-accordion-item" 
+                        class="example-accordion-item"
                         role="button"
                         tabindex="0"
                         [attr.id]="'accordion-header-' + index"
@@ -53,9 +53,7 @@
             <p>Description: {{item.details}}</p>
             <p>Good for: {{item.productType}} </p>
             <p class="quantity-paragraph"> Total price:</p>
-            <!--id="{{'totalPrice' + index}}"-->
-          <p style="display:inline">{{(item.price * item.quantity) | currency}}</p>
-            <p style="display:inline"></p>
+            <p style="display:inline">{{(item.price * item.quantity) | currency}}</p>
           </div>
           <div class=".accordion-actions-menu">
             <button class="action-button btn btn-light" (click)="viewProduct(item.productId)">View product</button>
