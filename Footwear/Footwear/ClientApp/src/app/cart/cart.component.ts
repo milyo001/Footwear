@@ -13,6 +13,7 @@ import { ICartProduct } from '../interfaces/cart/cartProduct';
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
+
 export class CartComponent implements OnInit {
 
   cartProducts: ICartProduct[];
@@ -29,25 +30,25 @@ export class CartComponent implements OnInit {
     private router: Router,
     public modal: NgbModal,
     public loader: LoadingService
-  ) {}
+  ) { }
 
 
-  //Load all the products from the dabase or display a notification (error message)
+  // Load all the products from the dabase or display a notification (error message)
   ngOnInit() {
       this.cartService.getAllCartProducts().subscribe(productsList => {
         this.cartProducts = productsList;
       })
   };
 
-  //View product by given product id
+  // View product by given product id
   viewProduct(id: number) {
     this.router.navigate(['products/' + id]);
   }
 
-  //This method will scroll the window to the accordion, when the accordion is closed
+  // This method will scroll the window to the accordion, when the accordion is closed
   scrollToAccordion(index, accordionItem) {
     if (accordionItem._expanded) {
-      //Slow down the method so the accordion could close itself before scrolling the window
+      // Slow down the method execution so the accordion could close itself before scrolling the window
       setTimeout(() => {
         const element = document.getElementById("accordion-header-" + index);
         element.scrollIntoView({ behavior: 'smooth' });
@@ -55,8 +56,8 @@ export class CartComponent implements OnInit {
     }
   }
 
-  //When clicked increase the quantity of a given item in cart.component.html and database
-  //Increase the total price in the document
+  // When clicked increase the quantity of a given item in cart.component.html and database
+  // Increase the total price in the document
   incrementQuantity(cartProduct: ICartProduct, index: number): void {
     this.cartService.increaseProductQuantity(cartProduct.id).subscribe(
       (response: any) => {
@@ -72,8 +73,8 @@ export class CartComponent implements OnInit {
       }
     );
   }
-  //When clicked decrease the quantity of a given item in the document and database
-  //Decrease the total price in the document
+  // When clicked decrease the quantity of a given item in the document and database
+  // Decrease the total price in the document
   decrementQuantity(cartProduct: ICartProduct, index: number): void {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
@@ -99,7 +100,7 @@ export class CartComponent implements OnInit {
     }
   }
 
-  //Ask for confirmation with modal and if user confirms removes item from database and the document
+  // Ask for confirmation with modal and if user confirms removes item from database and the document
   deleteProduct(item: ICartProduct, index: number) {
     const modalRef = this.modal.open(ModalComponent);
     modalRef.componentInstance.product = item;
@@ -125,7 +126,7 @@ export class CartComponent implements OnInit {
 
   }
 
-  //DOM Helpers
+  // DOM Helpers
   increaseDomQuantity(index: number) {
     var quantityElement = document.getElementById("quantity" + index);
     var value = parseInt(quantityElement.textContent);
