@@ -110,15 +110,10 @@ export class CartComponent implements OnInit {
         );
       }
     },
-      (err) => {
-        console.log(err);
-        this.toastr.error("Unable to remove item.", err);
+      (reason) => {
+        console.log(reason);
+        this.toastr.error("Unable to remove item.", reason);
       });
 
-  }
-
-  deleteCartProductEl(index: number) {
-    const element = document.getElementById("accordion-header-" + index);
-    element.remove();
   }
 }
