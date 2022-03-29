@@ -19,7 +19,7 @@ export class CartComponent implements OnInit {
   cartProducts: ICartProduct[];
   totalAmount: number;
   expandedIndex = 0;
-  
+
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
   faInfoCircle = faInfoCircle;
@@ -35,9 +35,9 @@ export class CartComponent implements OnInit {
 
   // Load all the products from the dabase or display a notification (error message)
   ngOnInit() {
-      this.cartService.getAllCartProducts().subscribe(productsList => {
-        this.cartProducts = productsList;
-      })
+    this.cartService.getAllCartProducts().subscribe(productsList => {
+      this.cartProducts = productsList;
+    })
   };
 
   // View product by given product id
@@ -100,20 +100,18 @@ export class CartComponent implements OnInit {
       if (result === "confirm") {
         this.cartService.deleteCartProduct(item.id).subscribe((response: any) => {
           if (response.succeeded) {
-              this.cartProducts.splice(index, 1);
-            }
-          },
+            this.cartProducts.splice(index, 1);
+          }
+        },
           err => {
             console.log(err);
             this.toastr.error("Unable to remove item.", "Server error!");
           }
         );
       }
-    },
-      (reason) => {
-        console.log(reason);
-        this.toastr.error("Unable to remove item.", reason);
-      });
-
+    }, (reason) => {
+      console.log(reason);
+      this.toastr.error("Unable to remove item.", reason);
+    });
   }
 }
