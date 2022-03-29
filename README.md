@@ -36,10 +36,8 @@ for now it can be done only manually.
 ```
 //builder.Seed();
 ```
-```diff
--Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
-```
-4.For demo payments use this demo card INFO:</br>
+4.Type command 'dotnet restore' to install all missing packages
+5.For demo payments use this demo card INFO:</br>
  Email: Any*</br>
  Card Number: 4242 4242 4242 4242</br>
  Expiration: Any* / Any*</br>
