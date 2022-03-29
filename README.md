@@ -108,7 +108,7 @@ for now it can be done only manually.
 ## Order Features
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| View Orders | &#10060; | View all orders |
+| View Orders | &#10004; | View all orders |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
