@@ -4,11 +4,11 @@
     using Footwear.Data.Models.Enums;
     using Microsoft.EntityFrameworkCore;
 
-    //An extention of ModelBuilder class. "this" keyword tells the compiler that this particular Extension Method should be added to objects of type ModelBuilder
+    // An extention of ModelBuilder
     public static class ModelBuilderExtentions
     {
         ///<summary>
-        ///Seed the database with data
+        /// Seed the database with data
         ///</summary>
         public static void Seed(this ModelBuilder builder)
         {
@@ -197,6 +197,13 @@
                 }
                 );
 
+            builder.Entity<AppData>().HasData(
+                new AppData
+                {
+                    DeliveryPrice = 5,
+                    MinDelivery = 1,
+                    MaxDelivery = 3
+                });
         }
 
 
