@@ -31,9 +31,8 @@
         {
             base.OnModelCreating(builder);
 
-
             //Uncomment the line below if you are starting new project, TODO: automate the process
-            //builder.Seed();
+            builder.Seed();
         }
 
     }
