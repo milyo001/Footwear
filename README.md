@@ -6,7 +6,7 @@ The applicaiton is build with desktop first aproach, but it's fully responsive (
 The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (started to building it on .NET Core 3.1 and upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
 
 # Guide / How to run locally on your machine
-1.Download/Clone the repository
+1.Download/Clone the repository <br/>
 2.Create appsettings.json. (present in .gitignore file so you have to create one manually) Example below (replace <<>> with empty value):
 ```
 {
@@ -36,10 +36,9 @@ for now it can be done only manually.
 ```
 //builder.Seed();
 ```
-```diff
--Warning: The seeding code should not be part of the normal app execution would require the app having permission to modify the database schema. 
-```
-4.For demo payments use this demo card INFO:</br>
+4.Type command 'dotnet restore' to install all missing packages
+
+5.For demo payments use this demo card INFO:</br>
  Email: Any*</br>
  Card Number: 4242 4242 4242 4242</br>
  Expiration: Any* / Any*</br>
@@ -109,7 +108,7 @@ for now it can be done only manually.
 ## Order Features
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| View Orders | &#10060; | View all orders |
+| View Orders | &#10004; | View all orders |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
