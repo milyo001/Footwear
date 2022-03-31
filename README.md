@@ -31,14 +31,10 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
   }
 }
 ```
-3.Go to Data/ApplicationDbContext.cs - OnModelCreating method and uncomment (I am using already populated DB) then run the application. Later I will automate the process,
-for now it can be done only manually.
-```
-//builder.Seed();
-```
-4.Type command 'dotnet restore' to install all missing packages
 
-5.For demo payments use this demo card INFO:</br>
+3.Type command 'dotnet restore' to install all missing packages
+
+4.For demo payments use this demo card INFO:</br>
  Email: Any*</br>
  Card Number: 4242 4242 4242 4242</br>
  Expiration: Any* / Any*</br>
