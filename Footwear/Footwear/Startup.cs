@@ -45,10 +45,10 @@ namespace Footwear
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "../ClientApp/dist";
             });
 
-            //CORS configuration
+            // CORS configuration
             var corsBuilder = new CorsPolicyBuilder();
             corsBuilder.AllowAnyHeader();
             corsBuilder.AllowAnyMethod();
@@ -59,9 +59,10 @@ namespace Footwear
                 options.AddPolicy("FootwearCorsPolicy", corsBuilder.Build());
             });
 
-            //Database confirguration and identity
+            // Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var test = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -74,7 +75,7 @@ namespace Footwear
                 options.Password.RequireDigit = false;
             });
 
-            //Auth token configuration
+            // Auth token configuration
             var signingKey = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secret"].ToString());
             services.AddAuthentication(x =>
             {
@@ -95,8 +96,8 @@ namespace Footwear
                 };
             });
 
-            //Scoped services are better option when you want to maintain state within a request.
-            //Transient services are created every time they will use more memory & Resources and can have the negative impact on performance
+            // Scoped services are better option when you want to maintain state within a request.
+            // Transient services are created every time they will use more memory & Resources and can have the negative impact on performance
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<ICartService, CartService>();
             services.AddScoped<IOrderService, OrderService>();
@@ -140,16 +141,16 @@ namespace Footwear
 
             });
 
-            app.UseSpa(spa =>
-            {
+            //app.UseSpa(spa =>
+            //{
 
-                spa.Options.SourcePath = "../ClientApp";
+            //    spa.Options.SourcePath = "../ClientApp";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
-            });
+            //    if (env.IsDevelopment())
+            //    {
+            //        spa.UseAngularCliServer(npmScript: "start");
+            //    }
+            //});
         }
     }
 }

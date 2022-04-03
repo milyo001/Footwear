@@ -2,9 +2,6 @@
   "version": 3,
   "targets": {
     "net5.0": {
-      "AngularJS.Core/1.8.2": {
-        "type": "package"
-      },
       "AutoMapper/10.1.1": {
         "type": "package",
         "dependencies": {
@@ -3175,7 +3172,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v5.0",
         "dependencies": {
-          "AngularJS.Core": "1.8.2",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "5.0.13",
           "Microsoft.AspNetCore.Cors": "2.2.0",
@@ -3185,7 +3181,6 @@
           "Microsoft.EntityFrameworkCore": "5.0.0",
           "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
           "Moq": "4.16.1",
-          "MyTested.AspNetCore.Mvc": "5.0.0",
           "Stripe.net": "39.77.0"
         },
         "compile": {
@@ -3201,21 +3196,6 @@
     }
   },
   "libraries": {
-    "AngularJS.Core/1.8.2": {
-      "sha512": "XqWsLLPPF8KDFYbVPbtpbae1claPLcjyxZgYThdXQri3I2O8SDdMzNafnhIi9nGgg3X6zsu1W0Qj0u5p1wr5mA==",
-      "type": "package",
-      "path": "angularjs.core/1.8.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "angularjs.core.1.8.2.nupkg.sha512",
-        "angularjs.core.nuspec",
-        "content/Scripts/angular-mocks.js",
-        "content/Scripts/angular.js",
-        "content/Scripts/angular.min.js",
-        "content/Scripts/angular.min.js.map"
-      ]
-    },
     "AutoMapper/10.1.1": {
       "sha512": "uMgbqOdu9ZG5cIOty0C85hzzayBH2i9BthnS5FlMqKtMSHDv4ts81a2jS1VFaDBVhlBeIqJ/kQKjQY95BZde9w==",
       "type": "package",

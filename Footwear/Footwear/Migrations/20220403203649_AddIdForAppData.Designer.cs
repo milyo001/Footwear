@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Footwear.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210331192400_AddUsersTable")]
-    partial class AddUsersTable
+    [Migration("20220403203649_AddIdForAppData")]
+    partial class AddIdForAppData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,6 +21,106 @@ namespace Footwear.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.0");
 
+            modelBuilder.Entity("Footwear.Data.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("Footwear.Data.Models.AppData", b =>
+                {
+                    b.Property<decimal>("DeliveryPrice")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MaxDelivery")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MinDelivery")
+                        .HasColumnType("int");
+
+                    b.ToTable("AppData");
+                });
+
+            modelBuilder.Entity("Footwear.Data.Models.BillingInformation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ZipCode")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("BillingInformation");
+                });
+
             modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
                 {
                     b.Property<int>("Id")
@@ -28,7 +128,14 @@ namespace Footwear.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
 
                     b.ToTable("Cart");
                 });
@@ -40,7 +147,7 @@ namespace Footwear.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int?>("CartId")
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("Details")
@@ -51,15 +158,24 @@ namespace Footwear.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("int");
 
-                    b.Property<int>("ImageId")
-                        .HasColumnType("int");
+                    b.Property<string>("ImageUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsOrdered")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("OrderId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
 
                     b.Property<int>("ProductType")
                         .HasColumnType("int");
@@ -74,7 +190,7 @@ namespace Footwear.Migrations
 
                     b.HasIndex("CartId");
 
-                    b.HasIndex("ImageId");
+                    b.HasIndex("OrderId");
 
                     b.ToTable("CartProducts");
                 });
@@ -84,24 +200,26 @@ namespace Footwear.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Address")
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Payment")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CreatedOn")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrderStatus")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("UserDataId")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserDataId");
 
                     b.HasIndex("UserId");
 
@@ -130,25 +248,139 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrderId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
                     b.Property<int>("ProductType")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Size")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("ImageId");
 
-                    b.HasIndex("OrderId");
-
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Details = "Perfect for running all day and night.Designed with love!",
+                            Gender = 0,
+                            ImageId = 1,
+                            Name = "Nice Ultimate Edition",
+                            Price = 185.88,
+                            ProductType = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Details = "For Ultimate Performace.",
+                            Gender = 0,
+                            ImageId = 2,
+                            Name = "Abibas Pure Joy",
+                            Price = 124.66,
+                            ProductType = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Details = "Limited edition, perfect for baseketball and hiking!",
+                            Gender = 0,
+                            ImageId = 3,
+                            Name = "Abibas Razerblade 10x",
+                            Price = 299.99000000000001,
+                            ProductType = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Details = "Comfort and durable all day sneaker.",
+                            Gender = 0,
+                            ImageId = 4,
+                            Name = "Nice Air 2020 Urban White",
+                            Price = 325.99000000000001,
+                            ProductType = 3
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Details = "Model, still reliable tho.",
+                            Gender = 1,
+                            ImageId = 5,
+                            Name = "Nice RedDragon",
+                            Price = 255.99000000000001,
+                            ProductType = 1
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Details = "Great choise for ladies.",
+                            Gender = 1,
+                            ImageId = 6,
+                            Name = "Pumaa Lady 5.0",
+                            Price = 188.99000000000001,
+                            ProductType = 3
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Details = "Good for running.",
+                            Gender = 2,
+                            ImageId = 7,
+                            Name = "Balvethica",
+                            Price = 110.15000000000001,
+                            ProductType = 0
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Details = "Legendary as the media player.",
+                            Gender = 2,
+                            ImageId = 8,
+                            Name = "VLC MAX ",
+                            Price = 49.990000000000002,
+                            ProductType = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Details = "Definitely not made in China.",
+                            Gender = 1,
+                            ImageId = 9,
+                            Name = "Legion Smart",
+                            Price = 35.990000000000002,
+                            ProductType = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Details = "A mexican style sneakers for you kids.",
+                            Gender = 2,
+                            ImageId = 10,
+                            Name = "Keeddo",
+                            Price = 75.219999999999999,
+                            ProductType = 0
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Details = "Only for serious hikers.",
+                            Gender = 0,
+                            ImageId = 11,
+                            Name = "Legion V12",
+                            Price = 35.990000000000002,
+                            ProductType = 1
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Details = "Perfect for the gym and park walk.",
+                            Gender = 0,
+                            ImageId = 12,
+                            Name = "Abdulas",
+                            Price = 155.49000000000001,
+                            ProductType = 3
+                        });
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.ProductImage", b =>
@@ -164,6 +396,68 @@ namespace Footwear.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProductsImage");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2016/11/21/15/54/countryside-1846093_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2017/07/30/15/49/adidas-2554690_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2017/07/13/02/53/shoe-2498994_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2020/05/03/19/09/nike-5126389_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2016/04/12/14/08/shoe-1324431_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ImageUrl = "https://cdn.pixabay.com/photo/2018/09/30/21/30/puma-3714734_1280.jpg"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ImageUrl = "https://images.footlocker.com/is/image/FLEU/315240315002_01?wid=763&hei=538&fmt=png-alpha"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ImageUrl = "https://static.nike.com/a/images/t_PDP_1280_v1/f_auto,q_auto:eco/fb5fdd9f-a9d0-4bcc-8258-d4fbf6751de0/jordan-ma2-shoe-dmkgC9.png"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ImageUrl = "https://m.media-amazon.com/images/I/711BXI98hKL._AC_SR255,340_.jpg"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ImageUrl = "https://pyxis.nymag.com/v1/imgs/72a/06b/e8ae5bc2097f7531dfdc690095c55e319c-25-kids-sneakers-1.2x.rsquare.w600.jpg"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ImageUrl = "https://assets.hermes.com/is/image/hermesproduct/avatar-sneaker--201463ZH01-front-1-300-0-1000-1000.jpg"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ImageUrl = "https://footwearnews.com/wp-content/uploads/2019/03/m20324_01_standard-e1551720111734.jpg?w=700&h=437&crop=1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -312,7 +606,7 @@ namespace Footwear.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasMaxLength(128)
@@ -376,11 +670,7 @@ namespace Footwear.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CartId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
@@ -395,31 +685,46 @@ namespace Footwear.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CartId");
+                    b.HasIndex("AddressId");
 
                     b.HasDiscriminator().HasValue("User");
+                });
+
+            modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
+                {
+                    b.HasOne("Footwear.Data.Models.User", null)
+                        .WithOne("Cart")
+                        .HasForeignKey("Footwear.Data.Models.Cart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.CartProduct", b =>
                 {
                     b.HasOne("Footwear.Data.Models.Cart", null)
                         .WithMany("CartProducts")
-                        .HasForeignKey("CartId");
-
-                    b.HasOne("Footwear.Data.Models.ProductImage", "ProductImage")
-                        .WithMany()
-                        .HasForeignKey("ImageId")
+                        .HasForeignKey("CartId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("ProductImage");
+                    b.HasOne("Footwear.Data.Models.Order", null)
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Order", b =>
                 {
+                    b.HasOne("Footwear.Data.Models.BillingInformation", "UserData")
+                        .WithMany()
+                        .HasForeignKey("UserDataId");
+
                     b.HasOne("Footwear.Data.Models.User", null)
                         .WithMany("Orders")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("UserData");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Product", b =>
@@ -429,10 +734,6 @@ namespace Footwear.Migrations
                         .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Footwear.Data.Models.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
 
                     b.Navigation("ProductImage");
                 });
@@ -490,11 +791,11 @@ namespace Footwear.Migrations
 
             modelBuilder.Entity("Footwear.Data.Models.User", b =>
                 {
-                    b.HasOne("Footwear.Data.Models.Cart", "Cart")
+                    b.HasOne("Footwear.Data.Models.Address", "Address")
                         .WithMany()
-                        .HasForeignKey("CartId");
+                        .HasForeignKey("AddressId");
 
-                    b.Navigation("Cart");
+                    b.Navigation("Address");
                 });
 
             modelBuilder.Entity("Footwear.Data.Models.Cart", b =>
@@ -509,6 +810,8 @@ namespace Footwear.Migrations
 
             modelBuilder.Entity("Footwear.Data.Models.User", b =>
                 {
+                    b.Navigation("Cart");
+
                     b.Navigation("Orders");
                 });
 #pragma warning restore 612, 618

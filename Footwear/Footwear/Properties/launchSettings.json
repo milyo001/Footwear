@@ -1,4 +1,17 @@
-﻿{
+//{
+//  "profiles": {
+//    "Footwear": {
+//      "commandName": "Project",
+//      "launchBrowser": true,
+//      "environmentVariables": {
+//        "ASPNETCORE_ENVIRONMENT": "Development"
+//      },
+//      "applicationUrl": "https://localhost:11505;http://localhost:11506"
+//    }
+//  }
+//}
+
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,

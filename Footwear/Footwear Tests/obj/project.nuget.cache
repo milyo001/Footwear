@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "dgSpecHash": "gHmH1nJepLDaeeLmWuzFj5XeCHG3ogFgtuWXDRrs9ADb7ysnLfi98bJHPmsmXfJoPFcmF2/jdHPn8oFTfMKN6w==",
+  "dgSpecHash": "btEvk/RORVPJAZsci4W7+RHFNlmtX7/0aCQz7pZGjLjiNUvr2IsMz4Y67ETO2o+WmRaXvRdXrIB/oerQyl39XQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Miroslav Ilyovski\\Desktop\\Footshop\\Footwear\\Footwear Tests\\Footwear Tests.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\angularjs.core\\1.8.2\\angularjs.core.1.8.2.nupkg.sha512",
     "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\automapper\\10.1.1\\automapper.10.1.1.nupkg.sha512",
     "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\8.1.1\\automapper.extensions.microsoft.dependencyinjection.8.1.1.nupkg.sha512",
     "C:\\Users\\Miroslav Ilyovski\\.nuget\\packages\\castle.core\\4.4.0\\castle.core.4.4.0.nupkg.sha512",

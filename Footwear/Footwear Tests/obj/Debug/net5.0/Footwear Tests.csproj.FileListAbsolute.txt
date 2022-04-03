@@ -9,16 +9,7 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear.runtimeconfig.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear.runtimeconfig.dev.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear.StaticWebAssets.xml
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\appsettings.Development.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\appsettings.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\angular.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\e2e\tsconfig.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\package-lock.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\package.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\tsconfig.app.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\tsconfig.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\tsconfig.spec.json
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ClientApp\tslint.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear.exe
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\testhost.exe
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.TestPlatform.PlatformAbstractions.dll
@@ -29,7 +20,6 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear Tests.runtimeconfig.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear Tests.runtimeconfig.dev.json
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear Tests.dll
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\ref\Footwear Tests.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Footwear Tests.pdb
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\AutoMapper.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
@@ -184,6 +174,4 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.InMemory.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Net.Http.Formatting.dll
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Web.Http.dll
-C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\net5.0\refint\Footwear Tests.dll

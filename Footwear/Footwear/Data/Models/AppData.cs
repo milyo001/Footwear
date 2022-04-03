@@ -1,12 +1,14 @@
 ﻿
 namespace Footwear.Data.Models
 {
-    using Microsoft.EntityFrameworkCore;
+    using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    [Keyless]
     public class AppData
     {
+        [Key]
+        public int Id { get; set; }
+
         //The minimal delivery days example 1 days
         public int MinDelivery { get; set; }
 
