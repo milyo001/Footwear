@@ -13,6 +13,7 @@ namespace Footwear
     using Microsoft.AspNetCore.Cors.Infrastructure;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.SpaServices.AngularCli;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -132,6 +133,8 @@ namespace Footwear
                 app.UseSpaStaticFiles();
             }
 
+            // A middleware used for decrypting the cookie send from client, the cookie value is encrypted token generated
+            // in UserController/Login
             app.UseDecryptCookieMiddleware();
             app.UseHttpsRedirection();
 
@@ -147,16 +150,17 @@ namespace Footwear
 
             });
 
-            //app.UseSpa(spa =>
-            //{
+            // Will execute the client start script to run the front-end framework. For localhost usage only, do not
+            // use when hosting the API, use only in production
+            if(CurrentEnvironment.IsDevelopment())
+            {
+                app.UseSpa(spa =>
+                {
+                    spa.Options.SourcePath = "../ClientApp";
+                    spa.UseAngularCliServer(npmScript: "start");
+                });
+            }
 
-            //    spa.Options.SourcePath = "../ClientApp";
-
-            //    if (env.IsDevelopment())
-            //    {
-            //        spa.UseAngularCliServer(npmScript: "start");
-            //    }
-            //});
         }
     }
 }
