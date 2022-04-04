@@ -42,12 +42,6 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Gets data from ApplicationSettings path in appsettings.<enviroment>.json,
-            // pass in constructor with IOptions interface declaration,
-            // example constructor(IOptions<ApplicationSettings> appSettings) Usefull for storing data without exposing
-            // secrets
-            services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
 
