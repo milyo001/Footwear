@@ -3,6 +3,7 @@
     using Footwear.Data;
     using Footwear.Data.Models;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.Options;
     using Microsoft.IdentityModel.Tokens;
     using System;
@@ -15,12 +16,12 @@
     public class TokenService : ITokenService
     {
         private readonly ApplicationDbContext _db;
-        private readonly ApplicationSettings _appSettings;
+        private readonly IConfiguration _configuration;
 
-        public TokenService(ApplicationDbContext db, IOptions<ApplicationSettings> appSettings)
+        public TokenService(ApplicationDbContext db, IConfiguration configuration)
         {
             this._db = db;
-            this._appSettings = appSettings.Value;
+            this._configuration = configuration;
         }
 
         //Encrypt the token to hide all the claims from user (JWT token is encoded, but can easily be decoded)
@@ -60,6 +61,8 @@
 
         public string GenerateToken(string userId, int cartId)
         {
+            // The secret is stored in appsetting<enviroment>.json, for more info visit https://jwt.io/
+            var secret = this._configuration["ApplicationSettings:JWT_Secret"];
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 //Add new Claims for the user and add encoding to the token
@@ -69,7 +72,7 @@
                         new Claim("CartId", cartId.ToString())
                 }),
                 Expires = DateTime.UtcNow.AddDays(3),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret)), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -78,7 +81,5 @@
             var encryptedToken = this.EncryptToken(encodedToken);
             return encryptedToken;
         }
-
-
     }
 }

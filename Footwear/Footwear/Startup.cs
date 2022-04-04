@@ -32,16 +32,20 @@ namespace Footwear
         }
 
         private IWebHostEnvironment CurrentEnvironment { get; set; }
+
         public IConfiguration Configuration { get; }
+
+        // A static configuration for static members
         public static IConfiguration StaticConfig { get; private set; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var test = CurrentEnvironment.EnvironmentName;
-
-            // Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration,
-            // example constructor(IOptions<ApplicationSettings> appSettings)
+            // Gets data from ApplicationSettings path in appsettings.<enviroment>.json,
+            // pass in constructor with IOptions interface declaration,
+            // example constructor(IOptions<ApplicationSettings> appSettings) Usefull for storing data without exposing
+            // secrets
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddControllersWithViews();
@@ -152,7 +156,7 @@ namespace Footwear
 
             // Will execute the client start script to run the front-end framework. For localhost usage only, do not
             // use when hosting the API, use only in production
-            if(CurrentEnvironment.IsDevelopment())
+            if (CurrentEnvironment.IsDevelopment())
             {
                 app.UseSpa(spa =>
                 {
