@@ -13,7 +13,6 @@ namespace Footwear
     using Microsoft.AspNetCore.Cors.Infrastructure;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity;
-    using Microsoft.AspNetCore.SpaServices.AngularCli;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
@@ -63,7 +62,6 @@ namespace Footwear
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             var test = Configuration.GetConnectionString("DefaultConnection");
-
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
@@ -112,13 +110,16 @@ namespace Footwear
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
+            else if (env.IsStaging())
+            {
+                // Used for testing the development and mirror an actual production environment
+            }
+            else if (env.IsProduction())
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-
 
             app.UseStaticFiles();
             if (!env.IsDevelopment())
