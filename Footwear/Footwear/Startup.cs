@@ -23,18 +23,22 @@ namespace Footwear
 
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
             StaticConfig = configuration;
+            CurrentEnvironment = env;
         }
 
+        private IWebHostEnvironment CurrentEnvironment { get; set; }
         public IConfiguration Configuration { get; }
         public static IConfiguration StaticConfig { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var test = CurrentEnvironment.EnvironmentName;
+
             // Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration,
             // example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
@@ -61,7 +65,6 @@ namespace Footwear
             // Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            var test = Configuration.GetConnectionString("DefaultConnection");
 
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -105,18 +108,18 @@ namespace Footwear
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
             // You can change enviroment in Properties/launchSettings.json
-            if (env.IsDevelopment())
+            if (CurrentEnvironment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else if (env.IsStaging())
+            else if (CurrentEnvironment.IsStaging())
             {
                 // Used for testing the development and mirror an actual production environment
             }
-            else if (env.IsProduction())
+            else if (CurrentEnvironment.IsProduction())
             {
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
@@ -124,7 +127,7 @@ namespace Footwear
             }
 
             app.UseStaticFiles();
-            if (!env.IsDevelopment())
+            if (!CurrentEnvironment.IsDevelopment())
             {
                 app.UseSpaStaticFiles();
             }
