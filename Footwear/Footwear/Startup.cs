@@ -35,13 +35,13 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration, example constructor(IOptions<ApplicationSettings> appSettings)
+            // Injects ApplicationSettings in appsettings.json, pass in constructor with IOptions interface declaration,
+            // example constructor(IOptions<ApplicationSettings> appSettings)
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
 
-            // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "../ClientApp/dist";
@@ -62,6 +62,7 @@ namespace Footwear
             services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             var test = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddDefaultIdentity<User>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.Configure<IdentityOptions>(options =>
@@ -106,6 +107,7 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // You can change enviroment in Properties/launchSettings.json
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
