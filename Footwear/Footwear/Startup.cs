@@ -12,12 +12,12 @@ namespace Footwear
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Cors.Infrastructure;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.SpaServices.AngularCli;
     using Microsoft.EntityFrameworkCore;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
-    using Microsoft.Extensions.Hosting;
     using Microsoft.IdentityModel.Tokens;
     using System;
     using System.Text;
@@ -31,7 +31,7 @@ namespace Footwear
             CurrentEnvironment = env;
         }
 
-        private IWebHostEnvironment CurrentEnvironment { get; set; }
+        private IWebHostEnvironment CurrentEnvironment { get; }
 
         public IConfiguration Configuration { get; }
 
