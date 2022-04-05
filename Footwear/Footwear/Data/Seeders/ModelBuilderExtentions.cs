@@ -200,7 +200,6 @@
             builder.Entity<AppData>().HasData(
                 new AppData
                 {
-                    Id = 1,
                     DeliveryPrice = 5,
                     MinDelivery = 1,
                     MaxDelivery = 3

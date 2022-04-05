@@ -175,3 +175,5 @@ C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\ne
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
 C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\obj\Debug\net5.0\refint\Footwear Tests.dll
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\appsettings.Development.json
+C:\Users\Miroslav Ilyovski\Desktop\Footshop\Footwear\Footwear Tests\bin\Debug\net5.0\appsettings.Production.json

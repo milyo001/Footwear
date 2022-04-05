@@ -1,6 +1,7 @@
 ﻿namespace Footwear.Data
 {
     using Footwear.Data.Models;
+    using Footwear.Data.Seeders;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
@@ -30,21 +31,28 @@
             : base(options)
         {
             this.CurrentEnvironment = env;
-            this.Database.EnsureCreated();
+
+            if (!env.IsDevelopment())
+            {
+                SeedProductionData.Seed(this);
+            }
+            else
+            {
+                this.Database.EnsureCreated();
+            }
+           
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<AppData>().HasNoKey();
 
             if (this.CurrentEnvironment.IsDevelopment())
             {
                 builder.Seed();
             }
-            else
-            {
-                
-            }
+            
             
         }
 
