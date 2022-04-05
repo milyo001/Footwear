@@ -225,9 +225,17 @@ namespace Footwear.Data.Seeders
             context.Products.AddRange(products);
             context.SaveChanges();
         }
+
         private static void SeedAppData(ApplicationDbContext context)
         {
-
+            var appData = new AppData
+            {
+                Id = 1,
+                DeliveryPrice = 5,
+                MinDelivery = 1,
+                MaxDelivery = 3
+            };
+            context.AppData.Add(appData);
         }
     }
 }
