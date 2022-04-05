@@ -4,7 +4,7 @@
     using Footwear.Data.Models.Enums;
     using Microsoft.EntityFrameworkCore;
 
-    // An extention of ModelBuilder
+    // An extention of ModelBuilder class
     public static class ModelBuilderExtentions
     {
         ///<summary>
