@@ -4,6 +4,7 @@ namespace Footwear.Data.Seeders
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
     using System.Collections.Generic;
+    using System.Linq;
 
     /// <summary>
     /// A class used for seeding test data in staging/production/hosting enviroment
@@ -12,9 +13,18 @@ namespace Footwear.Data.Seeders
     {
         public static void Seed(ApplicationDbContext context)
         {
-            SeedImages(context);
-            SeedProducts(context);
-            SeedAppData(context);
+            if (!context.ProductsImage.Any())
+            {
+                SeedImages(context);
+            }
+            if (!context.Products.Any())
+            {
+                SeedProducts(context);
+            }
+            if (!context.AppData.Any())
+            {
+                SeedAppData(context);
+            }
         }
 
 
