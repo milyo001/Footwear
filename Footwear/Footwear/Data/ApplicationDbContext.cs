@@ -1,8 +1,10 @@
 ﻿namespace Footwear.Data
 {
     using Footwear.Data.Models;
+    using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
     using Microsoft.EntityFrameworkCore;
+    using Microsoft.Extensions.Hosting;
 
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -22,9 +24,12 @@
 
         public DbSet<ProductImage> ProductsImage { get; set; }
 
-        public ApplicationDbContext(DbContextOptions options)
+        private IWebHostEnvironment CurrentEnvironment { get; }
+
+        public ApplicationDbContext(DbContextOptions options, IWebHostEnvironment env)
             : base(options)
         {
+            this.CurrentEnvironment = env;
             this.Database.EnsureCreated();
         }
 
@@ -32,7 +37,15 @@
         {
             base.OnModelCreating(builder);
 
-            builder.Seed();
+            if (this.CurrentEnvironment.IsDevelopment())
+            {
+                builder.Seed();
+            }
+            else
+            {
+                
+            }
+            
         }
 
     }

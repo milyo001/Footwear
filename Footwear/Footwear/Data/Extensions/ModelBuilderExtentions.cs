@@ -8,7 +8,7 @@
     public static class ModelBuilderExtentions
     {
         ///<summary>
-        /// Seed the database with data
+        /// Seed the database with data, used only in development mode with local DB for testing
         ///</summary>
         public static void Seed(this ModelBuilder builder)
         {
