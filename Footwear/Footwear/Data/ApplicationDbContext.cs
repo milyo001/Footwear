@@ -31,25 +31,28 @@
             : base(options)
         {
             this.CurrentEnvironment = env;
-            if (env.IsDevelopment())
+
+            if (!env.IsDevelopment())
+            {
+                SeedProductionData.Seed(this);
+            }
+            else
             {
                 this.Database.EnsureCreated();
             }
-
+           
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+            builder.Entity<AppData>().HasNoKey();
 
             if (this.CurrentEnvironment.IsDevelopment())
             {
                 builder.Seed();
             }
-            if(this.CurrentEnvironment.IsProduction() || this.CurrentEnvironment.IsStaging())
-            {
-                SeedProductionData.Seed(this);
-            }
+            
             
         }
 
