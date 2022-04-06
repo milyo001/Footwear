@@ -1,7 +1,9 @@
 ﻿namespace Footwear.Data.Models
 {
+    using Microsoft.EntityFrameworkCore;
     using System.ComponentModel.DataAnnotations.Schema;
 
+    [Keyless]
     public class AppData
     {
 

@@ -3,6 +3,7 @@ namespace Footwear.Data.Seeders
 {
     using Footwear.Data.Models;
     using Footwear.Data.Models.Enums;
+    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
     using System.Linq;
 
@@ -27,7 +28,6 @@ namespace Footwear.Data.Seeders
                 SeedAppData(context);
             }
         }
-
 
         private static void SeedImages(ApplicationDbContext context)
         {
@@ -85,6 +85,7 @@ namespace Footwear.Data.Seeders
             context.ProductsImage.AddRange(images);
             context.SaveChanges();
         }
+
         private static void SeedProducts(ApplicationDbContext context)
         {
             var products = new List<Product>
@@ -206,15 +207,10 @@ namespace Footwear.Data.Seeders
 
         private static void SeedAppData(ApplicationDbContext context)
         {
-            var appData = new AppData
-            {
-                DeliveryPrice = 5,
-                MinDelivery = 1,
-                MaxDelivery = 3
-            };
-
-            context.AppData.Add(appData);
-            context.SaveChanges();
+            // Seed the application data with Raw SQL query, because the AppData Entity is marked as KeyLess, which is 
+            // not supported by EF Core 
+            context.Database
+                  .ExecuteSqlRaw(@"INSERT INTO AppData(MinDelivery, MaxDelivery, DeliveryPrice) VALUES (1, 3, 5)");
         }
     }
 }
