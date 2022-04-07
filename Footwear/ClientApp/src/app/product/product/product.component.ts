@@ -12,7 +12,7 @@ import { LoadingService } from '../../services/loading.service';
 export class ProductComponent implements OnInit {
 
   // Array used for sorting and filtering all the products
-  public products: IProduct[] = [];
+  products: IProduct[] = [];
 
   // All products in their original state, fetched from the API
   untouchedProducts: IProduct[] = [];
@@ -56,8 +56,9 @@ export class ProductComponent implements OnInit {
     this.pageIndex = 1;
   }
 
-  // Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
+  
   filterProducts(event: any): void {
+    // Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
     const dropdownValue = event.target.value;
     if (dropdownValue === 'Default') {
       this.products = [];
