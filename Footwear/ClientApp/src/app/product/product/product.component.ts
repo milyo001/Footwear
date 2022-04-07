@@ -14,7 +14,7 @@ export class ProductComponent implements OnInit {
   // Array used for sorting and filtering all the products
   public products: IProduct[] = [];
 
-  // All products in their original state
+  // All products in their original state, fetched from the API
   untouchedProducts: IProduct[] = [];
   showContent: boolean = false;
 
@@ -32,7 +32,7 @@ export class ProductComponent implements OnInit {
       });
     };
   
-  // Sorting methods:
+  // Sorting options methods
   sortingAdvanced(event: any): void {
     const target: string = event.target.value;
     switch (target) {
