@@ -7,6 +7,7 @@ import { PaymentSuccessComponent } from '../payment/payment-success/payment-succ
 import { PaymentCancelComponent } from '../payment/payment-cancel/payment-cancel.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: 'products', loadChildren: () => import('../modules/product.module').then(m => m.ProductModule) },
   { path: 'about', component: AboutComponent }, 
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
