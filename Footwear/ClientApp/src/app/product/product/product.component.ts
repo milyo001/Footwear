@@ -25,13 +25,13 @@ export class ProductComponent implements OnInit {
     private sortingOptions: SortingOptions,
     public loader: LoadingService) { }
 
-    ngOnInit(): void {
-      this.productService.getAllProducts().subscribe(productsList => {
-        this.products = productsList,
+  ngOnInit(): void {
+    this.productService.getAllProducts().subscribe(productsList => {
+      this.products = productsList,
         this.untouchedProducts = productsList
-      });
-    };
-  
+    });
+  }
+
   // Sorting options methods
   sortingAdvanced(event: any): void {
     const target: string = event.target.value;
@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
     this.pageIndex = 1;
   }
 
-  
+
   filterProducts(event: any): void {
     // Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
     const dropdownValue = event.target.value;
