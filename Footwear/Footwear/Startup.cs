@@ -10,7 +10,6 @@ namespace Footwear
     using Footwear.Services.UserService;
     using Microsoft.AspNetCore.Authentication.JwtBearer;
     using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Cors.Infrastructure;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Hosting;
     using Microsoft.AspNetCore.Identity;
@@ -159,7 +158,7 @@ namespace Footwear
             });
 
             // Will execute the client start script to run the front-end framework. For localhost usage only, do not
-            // use when hosting the API, use only in production
+            // use when hosting the API, use only in development enviroment
             if (CurrentEnvironment.IsDevelopment())
             {
                 app.UseSpa(spa =>
