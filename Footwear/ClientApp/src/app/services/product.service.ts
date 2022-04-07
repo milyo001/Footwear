@@ -1,25 +1,29 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { IProduct } from '../interfaces/product/product';
 import { Observable } from 'rxjs';
+import { getEnvAPIUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProductService {
 
-  private baseUrl: string;
+  private apiUrl: string = getEnvAPIUrl();
+ private headers = new HttpHeaders({
+  'Content-Type': 'application/json',
+  'Access-Control-Allow-Origin': '*' 
+  });
 
-  constructor(public http: HttpClient, @Inject('BASE_URL') baseUrl: string) {
-    this.baseUrl = baseUrl;
-  }
+  constructor(public http: HttpClient) { }
 
   getAllProducts(): Observable<IProduct[]>{
-    return this.http.get<IProduct[]>(this.baseUrl + "product")
+    return this.http.get<IProduct[]>(this.apiUrl + "product")
   }
 
   getProductById(id: number): Observable<IProduct> {
-    return this.http.get<IProduct>(this.baseUrl + "product/" + id)
+    return this.http.get<IProduct>(this.apiUrl + "product/" + id)
   }
 
 }

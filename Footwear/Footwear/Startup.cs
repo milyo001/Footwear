@@ -51,15 +51,17 @@ namespace Footwear
             });
 
             // CORS configuration
-            var corsBuilder = new CorsPolicyBuilder();
-            corsBuilder.AllowAnyHeader();
-            corsBuilder.AllowAnyMethod();
-            // Gets the allowed origins in appsettings.json (persist in .gitignore file)
-            corsBuilder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString());
             services.AddCors(options =>
             {
-                options.AddPolicy("FootwearCorsPolicy", corsBuilder.Build());
+                options.AddDefaultPolicy(
+                    builder =>
+                    {
+                        builder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString())
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod();
+                    });
             });
+
 
             // Database confirguration and identity
             services.AddDbContext<ApplicationDbContext>(options =>
@@ -135,11 +137,18 @@ namespace Footwear
             // A middleware used for decrypting the cookie send from client, the cookie value is encrypted token generated
             // in UserController/Login
             app.UseDecryptCookieMiddleware();
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            app.UseCors("FootwearCorsPolicy");
+            app.UseCors(builder =>
+            {
+                builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader();
+            });
 
             app.UseEndpoints(endpoints =>
             {

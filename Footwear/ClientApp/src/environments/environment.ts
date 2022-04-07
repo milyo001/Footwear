@@ -1,11 +1,19 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-// The list of properties is hidden in GitHub because of the GitIgnore file
+
 export const environment = {
   production: false
 };
 
+export function getEnvAPIUrl(): string {
+  const url: string = "";
+  if(environment.production){
+    // Return prod url 
+    return '';
+  }
+  return 'https://localhost:44365/';
+}
 
 /*
  * For easier debugging in development mode, you can import the following file
