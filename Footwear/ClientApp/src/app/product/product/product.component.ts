@@ -11,13 +11,13 @@ import { LoadingService } from '../../services/loading.service';
 })
 export class ProductComponent {
 
-  //Array used for sorting and filtering all the products
+  // Array used for sorting and filtering all the products
   public products: IProduct[] = [];
 
-  //All products in their original state
+  // All products in their original state
   public untouchedProducts: IProduct[] = [];
   public showContent: boolean = false;
-  //A declaration for the index for the ngx pagination package(used to render the first page of the list
+  // A declaration for the index for the ngx pagination package(used to render the first page of the list
   //when one of the sorting/filter methods are applied)
   public pageIndex: number;
 
@@ -33,11 +33,11 @@ export class ProductComponent {
       this.untouchedProducts = productsList
     });
 
-    //The default number of pagination page is 1
+    // The default number of pagination page is 1
     this.pageIndex = 1;
   };
 
-  //Sorting methods:
+  // Sorting methods:
   sortingAdvanced(event: any): void {
     const target: string = event.target.value;
     switch (target) {
@@ -54,19 +54,19 @@ export class ProductComponent {
         this.products = this.sortingOptions.sortProductsByPriceDescending(this.products)
         break;
       default:
-        //Make a copy of the original array
+        // Make a copy of the original array
         this.products = this.untouchedProducts.filter(() => true);
         break;
     }
     this.pageIndex = 1;
   }
 
-  //Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
+  // Options values in HTML should be in PascalCase because the mapped Enums are PascalCase
   filterProducts(event: any): void {
     const dropdownValue = event.target.value;
     if (dropdownValue === 'Default') {
       this.products = [];
-      //Make a copy of the original array
+      // Make a copy of the original array
       this.products = this.untouchedProducts.filter(() => true);
     }
     else {
