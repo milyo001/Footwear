@@ -7,7 +7,6 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { CartComponent } from './cart/cart.component';
 import { FooterComponent } from './footer/footer.component';
@@ -31,7 +30,6 @@ import { BoldPipe } from './pipes/bold.pipe';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
     AboutComponent,
     CartComponent,
     FooterComponent,

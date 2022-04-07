@@ -3,12 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { AboutComponent } from '../about/about.component';
 import { AuthGuard } from '../interceptors/auth.guard';
 import { CartComponent } from '../cart/cart.component';
-import { HomeComponent } from '../home/home.component';
 import { PaymentSuccessComponent } from '../payment/payment-success/payment-success.component';
 import { PaymentCancelComponent } from '../payment/payment-cancel/payment-cancel.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'products', loadChildren: () => import('../modules/product.module').then(m => m.ProductModule) },
   { path: 'about', component: AboutComponent }, 
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },

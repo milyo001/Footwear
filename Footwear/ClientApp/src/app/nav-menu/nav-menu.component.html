@@ -3,25 +3,14 @@
     <span class="navbar-border"></span>
     <div class="container">
       <a class="navbar-brand" [routerLink]="['/']">Footwear</a>
-      <button class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target=".navbar-collapse"
-              aria-label="Toggle navigation"
-              [attr.aria-expanded]="isExpanded"
-              (click)="toggle()">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse"
+        aria-label="Toggle navigation" [attr.aria-expanded]="isExpanded" (click)="toggle()">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse"
-           [ngClass]="{ show: isExpanded }">
+      <div class="navbar-collapse collapse d-lg-inline-flex flex-lg-row-reverse" [ngClass]="{ show: isExpanded }">
         <ul class="navbar-nav flex-grow">
-          <li class="nav-item"
-              [routerLinkActive]="['link-active']"
-              [routerLinkActiveOptions]="{ exact: true }">
-            <a class="nav-link" [routerLink]="['/']" (click)="toggle()">Home</a>
-          </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-black" routerLink="/products" routerLinkActive="active" [routerLinkActive]="['link-active']" (click)="toggle()">
+            <a class="nav-link text-black" routerLink="/products" (click)="toggle()">
               Products
             </a>
           </li>
@@ -29,7 +18,9 @@
             <a class="nav-link" [routerLink]="['/about']" (click)="toggle()">About</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link" [routerLink]="['/cart']" (click)="toggle()"><fa-icon [icon]="faShoppingCart"></fa-icon>Cart</a>
+            <a class="nav-link" [routerLink]="['/cart']" (click)="toggle()">
+              <fa-icon [icon]="faShoppingCart"></fa-icon>Cart
+            </a>
           </li>
           <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/register']" (click)="toggle()">
@@ -50,10 +41,11 @@
               <fa-icon [icon]="faUser"></fa-icon>Account
             </a>
           <li *ngIf="isAuthenticated()" class="nav-item">
-            <a class="logout-link nav-link" (click)="onLogout(); toggle();"><fa-icon [icon]="faSignOutAlt"></fa-icon>Logout</a>
+            <a class="logout-link nav-link" (click)="onLogout(); toggle();">
+              <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout
+            </a>
         </ul>
       </div>
     </div>
   </nav>
 </header>
-
