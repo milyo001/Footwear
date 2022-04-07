@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { IProduct } from '../../interfaces/product/product';
 import { SortingOptions } from '../sortingOptions';
@@ -9,34 +9,29 @@ import { LoadingService } from '../../services/loading.service';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent {
+export class ProductComponent implements OnInit {
 
   // Array used for sorting and filtering all the products
   public products: IProduct[] = [];
 
   // All products in their original state
-  public untouchedProducts: IProduct[] = [];
-  public showContent: boolean = false;
-  // A declaration for the index for the ngx pagination package(used to render the first page of the list
-  //when one of the sorting/filter methods are applied)
-  public pageIndex: number;
+  untouchedProducts: IProduct[] = [];
+  showContent: boolean = false;
 
+  pageIndex: number = 1;
 
   constructor(
     private productService: ProductService,
     private sortingOptions: SortingOptions,
     public loader: LoadingService) { }
 
-  ngOnInit(): void {
-    this.productService.getAllProducts().subscribe(productsList => {
-      this.products = productsList,
-      this.untouchedProducts = productsList
-    });
-
-    // The default number of pagination page is 1
-    this.pageIndex = 1;
-  };
-
+    ngOnInit(): void {
+      this.productService.getAllProducts().subscribe(productsList => {
+        this.products = productsList,
+        this.untouchedProducts = productsList
+      });
+    };
+  
   // Sorting methods:
   sortingAdvanced(event: any): void {
     const target: string = event.target.value;
@@ -76,7 +71,12 @@ export class ProductComponent {
     this.pageIndex = 1;
   }
 
- 
+  // Once page is changed scroll to the top of the page
+  scrollToTop(): void {
+    document.querySelector('#all-products').scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
 }
 
 

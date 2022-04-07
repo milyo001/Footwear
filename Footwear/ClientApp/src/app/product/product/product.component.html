@@ -1,6 +1,6 @@
 
 <nav class="product-filter">
-  <h1>All products</h1>
+  <h1 id="all-products">All products</h1>
   <div class="sort">
     <div class="collection-sort">
       <label>Filter by:</label>
@@ -39,6 +39,7 @@
   <section class="row justify-content-md-center pagination-section">
     <div id="pagination" class="row-md-center">
       <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event"
+                          (pageChange)="scrollToTop()"
                            previousLabel=""
                            nextLabel=""></pagination-controls>
     </div>
@@ -47,4 +48,4 @@
 <!--This section is for an empty products list,also will show blank white page (with min-height style)if there are no products or
   products are still fetching from the API,the min height style will prevent user to see the footer of the page right below
   to the first nav tag "product-filter"-->
-<section class="products" *ngIf="!products?.length"></section>
+<section class="products-empty-list " *ngIf="!products?.length"></section>
