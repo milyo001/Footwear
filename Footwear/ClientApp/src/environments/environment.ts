@@ -6,12 +6,7 @@ export const environment = {
   production: false
 };
 
-export function getEnvAPIUrl(): string {
-  const url: string = "";
-  if(environment.production){
-    // Return prod url 
-    return '';
-  }
+export function getAPIUrl(): string {
   return 'https://localhost:44365/';
 }
 

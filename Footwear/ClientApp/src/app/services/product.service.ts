@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IProduct } from '../interfaces/product/product';
 import { Observable } from 'rxjs';
-import { getEnvAPIUrl } from 'src/environments/environment';
+import { getAPIUrl } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +10,7 @@ import { getEnvAPIUrl } from 'src/environments/environment';
 
 export class ProductService {
 
-  private apiUrl: string = getEnvAPIUrl();
+  private apiUrl: string = getAPIUrl();
 
   constructor(public http: HttpClient) { }
 
