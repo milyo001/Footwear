@@ -50,16 +50,15 @@ namespace Footwear
             });
 
             // CORS configuration
-            services.AddCors(options =>
+            services.AddCors(opt => opt.AddPolicy("FootwearCorsPolicy", builder =>
             {
-                options.AddDefaultPolicy(
-                    builder =>
-                    {
-                        builder.WithOrigins(Configuration.GetSection("AllowedOrigins").ToString())
-                                            .AllowAnyHeader()
-                                            .AllowAnyMethod();
-                    });
-            });
+                string stripeUrl = Configuration.GetSection("AllowedOrigins:StripeUrl").Value;
+                string clientUrl = Configuration.GetSection("AllowedOrigins:ClientUrl").Value;
+
+                builder.WithOrigins(stripeUrl, clientUrl)
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
 
 
             // Database confirguration and identity
@@ -125,7 +124,9 @@ namespace Footwear
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
+
             }
+
 
             app.UseStaticFiles();
             if (!CurrentEnvironment.IsDevelopment())
@@ -137,17 +138,11 @@ namespace Footwear
             // in UserController/Login
             app.UseDecryptCookieMiddleware();
 
+            app.UseCors("FootwearCorsPolicy");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
-            app.UseCors(builder =>
-            {
-                builder
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader();
-            });
 
             app.UseEndpoints(endpoints =>
             {

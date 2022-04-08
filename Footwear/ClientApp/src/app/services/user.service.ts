@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { IUserData } from '../interfaces/user/userData';
 import { IRegisterData } from '../interfaces/user/registerData';
 import { ILoginData } from '../interfaces/user/loginData';

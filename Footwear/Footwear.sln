@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30611.23
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Footwear", "Footwear\Footwear.csproj", "{7D01F629-C48F-4D5B-A6C4-D8254D6D2F8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Footwear Tests", "Footwear Tests\Footwear Tests.csproj", "{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Footwear Tests", "Footwear Tests\Footwear Tests.csproj", "{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

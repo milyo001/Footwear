@@ -15,12 +15,16 @@ namespace Footwear.Middlewares
             _next = next;
         }
 
+        
         public async Task InvokeAsync(HttpContext context)
         {
-            var token = context.Request.Cookies["token"];
+            var token = context.Request.Headers["Authorization"];
+
+            // This check will prevent NUllReferanceExp in some controller, becase I am using 
+            // getter for AuthToken
             if (!string.IsNullOrWhiteSpace(token))
             {
-                context.Items.Add("token", AesOperations.DecryptToken(token));
+                context.Items.Add("Authorization", AesOperations.DecryptToken(token));
             }
 
             await _next(context);

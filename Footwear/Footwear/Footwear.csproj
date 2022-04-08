@@ -42,5 +42,9 @@
     </Content>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers\Helpers\" />
+  </ItemGroup>
+
 
 </Project>
