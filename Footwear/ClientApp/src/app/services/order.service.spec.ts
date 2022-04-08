@@ -43,7 +43,7 @@ describe('OrderService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
-    service = new OrderService(httpClientSpy, getBaseUrl());
+    service = new OrderService(httpClientSpy);
   });
 
   it('#createOrder should return expected to return boolean property cardPayment (HttpClient called just once)', (done: DoneFn) => {

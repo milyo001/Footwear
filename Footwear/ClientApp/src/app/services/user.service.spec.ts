@@ -57,7 +57,7 @@ describe('UserService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put']);
-    service = new UserService(httpClientSpy, getBaseUrl());
+    service = new UserService(httpClientSpy);
   });
 
   it('#getUserProfile should return expected user data (HttpClient called just once)', (done: DoneFn) => {

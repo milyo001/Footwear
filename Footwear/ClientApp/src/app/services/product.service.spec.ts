@@ -50,7 +50,7 @@ describe('ProductService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new ProductService(httpClientSpy, getBaseUrl());
+    service = new ProductService(httpClientSpy);
   });
 
   it('#getAllProducts should return expected products (HttpClient called just once)', (done: DoneFn) => {
