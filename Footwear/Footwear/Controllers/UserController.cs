@@ -20,7 +20,6 @@
         private readonly ICartService _cartService;
         private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
-
         public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService)
         {
             this._userManager = userManager;
@@ -86,7 +85,6 @@
         [Route("getProfileData")]
         public async Task<ActionResult<UserProfileDataViewModel>> GetProfileData()
          {
-            var test22 = HttpContext.Request.Headers;
             var user = await this._tokenService.GetUserByTokenAsync(this.AuthToken);
             var userData = this._userService.GetUserData(user);
             return userData;

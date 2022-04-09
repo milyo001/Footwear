@@ -14,7 +14,7 @@
     {
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;
-        private string AuthToken => HttpContext.Items["token"].ToString();
+        private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
         public CartController(ITokenService tokenService, ICartService cartService)
         {

@@ -17,7 +17,7 @@ namespace Footwear.Controllers
         private readonly IOrderService _orderService;
 
         private IConfiguration Configuration { get; }
-        private string AuthToken => HttpContext.Items["token"].ToString();
+        private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
 
         public PaymentsController(IConfiguration configuration, IOrderService orderService)

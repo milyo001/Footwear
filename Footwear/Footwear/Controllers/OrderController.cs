@@ -16,7 +16,7 @@
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
         private readonly ITokenService _tokenService;
-        private string AuthToken => HttpContext.Items["token"].ToString();
+        private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
 
         public OrderController(IConfiguration configuration, IOrderService orderService, ITokenService tokenService)
