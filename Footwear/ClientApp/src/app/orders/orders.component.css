@@ -7,3 +7,20 @@
 .mat-body, .mat-body-1, .mat-typography, .custom-height{
     min-height: 55vh;
 }
+
+.custom-pagination /deep/ .ngx-pagination .current {
+    background-color: wheat;
+}
+
+.pagination-section{
+    width:100%;
+    justify-content: center;
+    padding-top: 5px;
+}
+
+#pagination {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}

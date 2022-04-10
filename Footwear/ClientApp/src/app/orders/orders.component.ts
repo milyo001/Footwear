@@ -12,7 +12,8 @@ export class OrdersComponent implements OnInit {
   currentOrders: ICompletedOrder[];
   completedOrders: ICompletedOrder[];
   pageIndex: number = 1;
-  
+  ordersPerPage: number = 10;
+
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
