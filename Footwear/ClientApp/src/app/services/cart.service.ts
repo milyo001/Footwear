@@ -25,6 +25,7 @@ export class CartService {
   increaseProductQuantity(cartProductId: number): Observable<Object> {
     return this.http.put(this.apiUrl + 'cart/increaseProductQuantity', cartProductId);
   }
+
   decreaseProductQuantity(cartProductId: number): Observable<Object> {
     return this.http.put(this.apiUrl + 'cart/decreaseProductQuantity', cartProductId);
   }
@@ -33,7 +34,7 @@ export class CartService {
     return this.http.post<ICartProduct>(this.apiUrl + "cart/deleteCartProduct", cartProductId);
   }
 
-  //Change the cart product isOrdered property to true, keep the cart products in the database
+  // Change the cart product isOrdered property to true, keep the cart products in the database
   removeAllCartProduts() {
     return this.http.delete(this.apiUrl + 'cart/removeCartProducts');
   }
