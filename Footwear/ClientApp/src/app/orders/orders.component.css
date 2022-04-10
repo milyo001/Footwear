@@ -4,3 +4,6 @@
 #mat-list-text{
     display: block;
 }
+.mat-body, .mat-body-1, .mat-typography, .custom-height{
+    min-height: 55vh;
+}

@@ -1,6 +1,6 @@
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="Current Orders">
-    <mat-selection-list #ordersList [multiple]="false">
+  <mat-tab id="current-orders" label="Current Orders">
+    <mat-selection-list class="custom-height" #ordersList [multiple]="false">
       <mat-list-option *ngFor="let order of currentOrders" [value]="order">
         <div class="mat-list-row" style="display:block;">
           Order made on <span [innerHtml]="order.createdOn | bold"></span>
@@ -9,23 +9,17 @@
         </div>
       </mat-list-option>
     </mat-selection-list>
-    <!-- adas -->
     <p class="mt-3" *ngIf="ordersList.selectedOptions.selected[0]?.value">
       Order controls
       <button>View details</button>
     </p>
 
   </mat-tab>
-  <mat-tab label="Past Orders">
-    <!--<mat-selection-list #pastOders [multiple]="false">
-      <mat-list-option *ngFor="let order of orders.pastOrders" [value]="order">
+  <mat-tab class="past-orders" label="Past Orders">
+    <mat-selection-list class="custom-height" #pastOders [multiple]="false">
+      <!-- <mat-list-option *ngFor="let order of pastOders" [value]="order">
         
-      </mat-list-option>
+      </mat-list-option> -->
     </mat-selection-list>
-
-    <p>
-      Option selected: {{pastOrders.selectedOptions.selected[0]?.value}}
-    </p>-->
-
   </mat-tab>
 </mat-tab-group>
