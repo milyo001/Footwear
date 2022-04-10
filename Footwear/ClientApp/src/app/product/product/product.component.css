@@ -110,7 +110,6 @@ h6 {
   display: flex;
   flex-direction: column;
 }
-
   .collection-sort:first-child {
     padding-right: 20px;
   }
@@ -126,11 +125,11 @@ label {
 .products {
   display: flex;
   flex-wrap: wrap;
-  min-height: 770px;
+  min-height: 68vh;
 }
 
 .products-empty-list {
-  min-height: 27vh;
+  min-height: 68vh;
 }
 
 .mat-toolbar {
