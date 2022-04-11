@@ -14,16 +14,17 @@ export class PaymentSuccessComponent implements OnInit {
   sessionId: string;
 
   constructor(private orderService: OrderService, private cartService: CartService, private toastr: ToastrService,
-    private route: ActivatedRoute, private router: Router  ) { }
+    private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    //Check if session exists in the URL, if present return session id, if not return undefined
+    // Check if session exists in the URL, if present return session id, if not return undefined
     this.route.queryParams.subscribe(params => { this.sessionId = params['session_id'] });
 
-    //Extra validation for card payment
+    // Extra validation for card payment
     if (this.sessionId) {
       this.orderService.validatePayment(this.sessionId).subscribe((response: any) => {
         if (response.paymentStatus == 'paid') {
+          this.toastr.success("Thank you!", "Order status: paind with card, expect delivery!");
         }
         else {
           this.router.navigate(['/', 'payment-cancel'])
@@ -32,10 +33,10 @@ export class PaymentSuccessComponent implements OnInit {
       });
     }
     else {
-      //Handle cash payment 
+      // Handle cash payment 
+      this.toastr.success("Thank you!", "Order status: paid, expect delivery!");
     }
-    this.toastr.success("Thank you!", "Order created. Order status: delivery!");
-    //Change cart products isOrdered property to true, cart products won't be visible in cart component anymore
+    // Change cart products isOrdered property to true, cart products won't be visible in cart component anymore
     this.cartService.removeAllCartProduts().subscribe();
   }
 
