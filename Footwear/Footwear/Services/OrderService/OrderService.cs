@@ -28,13 +28,15 @@
             this._mapper = mapper;
         }
 
-        //Creates new order 
+        // Creates new order 
         public async Task CreateOrderAsync(string token, OrderViewModel orderViewModel)
         {
             //Get the current logged in user
             var user = await this._tokenService.GetUserByTokenAsync(token);
+
             //Get the user cart
             var cartId = this._tokenService.GetCartId(token);
+
             // Check the payment type and set the data directly in the view model
             if (orderViewModel.Payment == "card")
             {
@@ -62,7 +64,7 @@
             return result;
         }
 
-        //Get the latest added order id from the database and return it
+        // Get the latest added order id from the database and return it
         public async Task<string> GetLatestAddedOrderIdAsync(string token)
         {
             var user = await this._tokenService.GetUserByTokenAsync(token);
@@ -75,7 +77,7 @@
             return orderId;
         }
 
-        //Get the latest added order from the database and return it
+        // Get the latest added order from the database and return it
         public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
             var user = await this._tokenService.GetUserByTokenAsync(token);
@@ -88,21 +90,21 @@
             return order;
         }
 
-        //Gets and returns the order entity
+        // Gets and returns the order entity
         public async Task<Order> GetOrderByIdAsync(string id)
         {
             var order = await this._db.Orders.FirstOrDefaultAsync(o => o.Id == id);
             return order;
         }
 
-        //Calculates and returns the total price of all cart products
+        // Calculates and returns the total price of all cart products
         public double GetTotalPrice(Order order)
         {
             var totPrice = order.Products.Sum(p => p.Price * p.Quantity);
             return totPrice;
         }
 
-        //Change payment status of order to paid.
+        // Change payment status of order to paid.
         public void ModifyPaidOrder(string orderId)
         {
             var order = this.GetOrderByIdAsync(orderId).Result;
@@ -110,13 +112,14 @@
             this._db.SaveChanges();
         }
 
-        //Gets only the delivery price from the AppData model
+        // Gets only the delivery price from the AppData model
         public async Task<double> GetDeliveryPriceAsync()
         {
             var data = await this.GetDeliveryDataAsync();
             return (double)data.DeliveryPrice;
         }
 
+        // Returns all orders view models by given user id
         public async Task<IEnumerable<OrderViewModel>> GetOrdersViewModelAsync(string userId)
         {
             var orders = await this.GetAllOrderProductsByUserIdAsync(userId);
@@ -124,6 +127,7 @@
             return viewModel;
         }
 
+        // Returns a collection of order entity by given user id
         public async Task<List<Order>> GetAllOrderProductsByUserIdAsync(string userId)
         {
             var orders = await this._db.Orders
