@@ -30,7 +30,6 @@ export class CartComponent implements OnInit {
     public loader: LoadingService
   ) { }
 
-
   // Load all the products from the dabase or display a notification (error message)
   ngOnInit() {
     this.cartService.getAllCartProducts().subscribe(productsList => {

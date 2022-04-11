@@ -13,7 +13,7 @@
     {
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
-        private string AuthToken => HttpContext.Items["token"].ToString();
+        private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
         public ProductController(ICartService cartService, IProductService productService)
         {

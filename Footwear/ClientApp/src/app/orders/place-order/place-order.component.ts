@@ -29,8 +29,8 @@ import { UserService } from '../../services/user.service';
   templateUrl: './place-order.component.html',
   styleUrls: ['./place-order.component.css'],
   providers: [{
-    //Used for overriding mat stepper default icons
-    provide: MAT_STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
+    // Used for overriding mat stepper default icons
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
   }]
 })
 export class PlaceOrderComponent implements OnInit {
