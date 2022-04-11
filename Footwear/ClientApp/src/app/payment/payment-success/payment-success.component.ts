@@ -24,7 +24,7 @@ export class PaymentSuccessComponent implements OnInit {
     if (this.sessionId) {
       this.orderService.validatePayment(this.sessionId).subscribe((response: any) => {
         if (response.paymentStatus == 'paid') {
-          this.toastr.success("Thank you!", "Order status: paind with card, expect delivery!");
+          this.toastr.success("Order status: paid with card, expect delivery!", "Thank you!");
         }
         else {
           this.router.navigate(['/', 'payment-cancel'])
@@ -34,7 +34,7 @@ export class PaymentSuccessComponent implements OnInit {
     }
     else {
       // Handle cash payment 
-      this.toastr.success("Thank you!", "Order status: paid, expect delivery!");
+      this.toastr.success("Order status: paid on arrival, expect delivery!", "Thank you!");
     }
     // Change cart products isOrdered property to true, cart products won't be visible in cart component anymore
     this.cartService.removeAllCartProduts().subscribe();
