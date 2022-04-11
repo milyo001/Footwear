@@ -45,4 +45,10 @@ export class OrdersComponent implements OnInit {
             [[], []]); 
     });
   };
+
+  viewOrder(value: any){
+    console.log(value);
+    console.log(value.toString());
+    
+  }
 }
