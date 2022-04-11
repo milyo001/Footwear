@@ -3,10 +3,15 @@
     <mat-selection-list class="custom-height" #ordersList [multiple]="false">
       <mat-list-option *ngFor="let order of currentOrders | paginate: 
       { itemsPerPage: ordersPerPage, currentPage: pageIndex }" [value]="order">
-        <div class="mat-list-row" style="display:block;">
-          Order made on <span [innerHtml]="order.createdOn | bold"></span>
+        <div class="mat-list-row">
+          <!-- Order made on <span [innerHtml]="order.createdOn | bold"></span>
           for <span [innerHtml]="order.cartProducts.length | bold"></span> products
-          with status: <span [innerHtml]="order.status | orderStatus| bold "></span>
+          with status: <span [innerHtml]="order.status | orderStatus| bold "></span> -->
+          <ol class="mat-list-content">
+            <li>Made on: <span [innerHtml]="order.createdOn | bold"></span></li>
+            <li>Products: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
+            <li><span [innerHtml]="order.status | orderStatus| bold "></span></li>
+          </ol>
         </div>
       </mat-list-option>
       
@@ -24,12 +29,12 @@
 
   </mat-tab>
   <mat-tab class="past-orders" label="Past Orders">
-    <mat-selection-list class="custom-height" #pastOders [multiple]="false">
+    <mat-selection-list class="custom-height" #completedOrders [multiple]="false">
       <!-- <mat-list-option *ngFor="let order of pastOders" [value]="order">
         
       </mat-list-option> -->
     </mat-selection-list>
-    <section *ngIf="pastOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
+    <section *ngIf="completedOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
       <div id="pagination" class="row-md-center">
         <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel=""
           nextLabel=""></pagination-controls>

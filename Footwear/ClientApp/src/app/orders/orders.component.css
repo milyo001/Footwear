@@ -8,6 +8,11 @@
     min-height: 55vh;
 }
 
+.mat-list-content{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+}
 .custom-pagination /deep/ .ngx-pagination .current {
     background-color: wheat;
 }
