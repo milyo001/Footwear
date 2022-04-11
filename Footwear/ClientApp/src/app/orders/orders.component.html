@@ -8,13 +8,21 @@
           for <span [innerHtml]="order.cartProducts.length | bold"></span> products
           with status: <span [innerHtml]="order.status | orderStatus| bold "></span> -->
           <ol class="mat-list-content">
-            <li> <fa-icon [icon]="faCalendarDay"></fa-icon> Created: <span [innerHtml]="order.createdOn | bold"></span></li>
-            <li><fa-icon [icon]="faBox"></fa-icon> Items: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
-            <li><fa-icon [icon]="faCreditCard"></fa-icon> <span [innerHtml]="order.status | orderStatus| bold "></span></li>
+            <li>
+              <fa-icon class="calendar-icon" [icon]="faCalendarDay"></fa-icon> Created: <span [innerHtml]="order.createdOn | bold"></span>
+            </li>
+            <li>
+              <fa-icon class="item-icon" [icon]="faBox"></fa-icon> Items: <span [innerHtml]="order.cartProducts.length | bold"></span>
+            </li>
+            <li>
+              <fa-icon class="payment-icons-cash" *ngIf="order.status === cashPayment"  [icon]="faMoneyBill"></fa-icon>
+              <fa-icon class="payment-icons-card" *ngIf="order.status === cardPayment" [icon]="faCreditCard"></fa-icon>
+              &nbsp;<span [innerHtml]="order.status | orderStatus | bold "></span>
+            </li>
           </ol>
         </div>
       </mat-list-option>
-      
+
     </mat-selection-list>
     <p class="mt-3" *ngIf="ordersList.selectedOptions.selected[0]?.value">
       Order controls
@@ -22,8 +30,8 @@
     </p>
     <section *ngIf="currentOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
       <div id="pagination" class="row-md-center">
-        <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel=""
-          nextLabel=""></pagination-controls>
+        <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel="" nextLabel="">
+        </pagination-controls>
       </div>
     </section>
 
@@ -36,8 +44,8 @@
     </mat-selection-list>
     <section *ngIf="completedOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
       <div id="pagination" class="row-md-center">
-        <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel=""
-          nextLabel=""></pagination-controls>
+        <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel="" nextLabel="">
+        </pagination-controls>
       </div>
     </section>
   </mat-tab>

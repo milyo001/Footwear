@@ -18,12 +18,17 @@ export class OrdersComponent implements OnInit {
   pageIndex: number = 1;
   ordersPerPage: number = 10;
 
+  // Order statuses recieved from API
+  cashPayment: string = 'DeliveryCash';
+  cardPayment: string = 'DeliveryPaid';
+
   // Icons
   faCalendarDay = faCalendarDay;
   faBox = faBox;
+  // Icons are declared here to render the icons returned as RAW HTML from order-status pipe
   faCreditCard = faCreditCard;
   faMoneyBill = faMoneyBill;
-  
+
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
