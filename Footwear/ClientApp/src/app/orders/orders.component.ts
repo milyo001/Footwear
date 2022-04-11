@@ -22,10 +22,12 @@ export class OrdersComponent implements OnInit {
       [this.currentOrders, this.completedOrders] =
         orders
           .reduce((result, element) => {
-            result[element.status == "Completed" ? 1 : 0].push(element); // Determine and push to current/completed orders array
+            // Determine and push to current/completed orders array
+            result[element.status == "Completed" ? 1 : 0].push(element);
             return result;
           },
-            [[], []]); // By default return empty array, can be further chained with map() or other functions.
+          // By default return empty array, can be further chained with map() or other functions.
+            [[], []]); 
     });
   };
 }
