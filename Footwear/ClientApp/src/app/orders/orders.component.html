@@ -9,8 +9,8 @@
           with status: <span [innerHtml]="order.status | orderStatus| bold "></span> -->
           <ol class="mat-list-content">
             <li> <fa-icon [icon]="faCalendarDay"></fa-icon> Created: <span [innerHtml]="order.createdOn | bold"></span></li>
-            <li>Items: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
-            <li><span [innerHtml]="order.status | orderStatus| bold "></span></li>
+            <li><fa-icon [icon]="faBox"></fa-icon> Items: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
+            <li><fa-icon [icon]="faCreditCard"></fa-icon> <span [innerHtml]="order.status | orderStatus| bold "></span></li>
           </ol>
         </div>
       </mat-list-option>

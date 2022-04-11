@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
-import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
+import { 
+  faCalendarDay, faBox, 
+  faCreditCard, faMoneyBill }
+from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-orders',
@@ -17,7 +20,10 @@ export class OrdersComponent implements OnInit {
 
   // Icons
   faCalendarDay = faCalendarDay;
-
+  faBox = faBox;
+  faCreditCard = faCreditCard;
+  faMoneyBill = faMoneyBill;
+  
   constructor(private orderService: OrderService) { }
 
   ngOnInit(): void {
