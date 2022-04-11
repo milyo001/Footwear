@@ -18,12 +18,12 @@ export class OrderStatusPipe implements PipeTransform {
       }
       case "DeliveryPaid": {
         // When order is created and paid with card
-        result = "Paid with card";
+        result = "Card";
         break;
       }
       case "DeliveryCash": {
         // When order is created and customer will pay for it upon arrival
-        result = "Cash on delivery";
+        result = "Cash";
         break;
       }
       case "Completed": {

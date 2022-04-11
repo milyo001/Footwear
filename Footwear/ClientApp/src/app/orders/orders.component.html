@@ -8,8 +8,8 @@
           for <span [innerHtml]="order.cartProducts.length | bold"></span> products
           with status: <span [innerHtml]="order.status | orderStatus| bold "></span> -->
           <ol class="mat-list-content">
-            <li>Made on: <span [innerHtml]="order.createdOn | bold"></span></li>
-            <li>Products: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
+            <li> <fa-icon [icon]="faCalendarDay"></fa-icon> Created: <span [innerHtml]="order.createdOn | bold"></span></li>
+            <li>Items: <span [innerHtml]="order.cartProducts.length | bold"></span></li>
             <li><span [innerHtml]="order.status | orderStatus| bold "></span></li>
           </ol>
         </div>

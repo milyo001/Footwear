@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
+import { faCalendarDay } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-orders',
@@ -13,6 +14,9 @@ export class OrdersComponent implements OnInit {
   completedOrders: ICompletedOrder[];
   pageIndex: number = 1;
   ordersPerPage: number = 10;
+
+  // Icons
+  faCalendarDay = faCalendarDay;
 
   constructor(private orderService: OrderService) { }
 
