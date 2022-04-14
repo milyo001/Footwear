@@ -1,10 +1,10 @@
-﻿using Footwear.Data.Models.Email;
-using Footwear.Settings;
-using Microsoft.Extensions.Options;
-using System.Threading.Tasks;
-
-namespace Footwear.Services.MailService
+﻿namespace Footwear.Services.MailService
 {
+    using Footwear.Data.Models.Email;
+    using Footwear.Settings;
+    using Microsoft.Extensions.Options;
+    using System.Threading.Tasks;
+
     public class MailService : IMailService
     {
         private readonly MailSettings _mailSettings;
