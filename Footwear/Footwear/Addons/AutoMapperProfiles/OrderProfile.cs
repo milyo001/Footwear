@@ -16,6 +16,7 @@
                 .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => DateTime.UtcNow.Date));
 
             CreateMap<Order, OrderViewModel>()
+                .ForMember(dest => dest.OrderId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status.ToString()))
                 .ForMember(dest => dest.CreatedOn, opt => opt.MapFrom(src => src.CreatedOn.ToString("dd/MM/yyyy")))
                 .ForMember(dest => dest.CartProducts, opt => opt.MapFrom(src => src.Products));

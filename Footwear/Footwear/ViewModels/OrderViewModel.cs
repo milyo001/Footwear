@@ -5,6 +5,8 @@
 
     public class OrderViewModel
     {
+        public string OrderId { get; set; }
+
         [Required]
         public string Payment { get; set; }
 

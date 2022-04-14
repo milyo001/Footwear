@@ -19,8 +19,10 @@ namespace Footwear.Controllers
         }
 
         [HttpPost("Send")]
-        public async Task<IActionResult> Send([FromForm] EmailRequest request)
+        public async Task<IActionResult> Send(string orderId)
         {
+            var request = await this.mailService.GetEmailRequestAsync(orderId);
+
             try
             {
                 await mailService.SendEmailAsync(request);

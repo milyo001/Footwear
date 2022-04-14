@@ -184,6 +184,7 @@ export class PlaceOrderComponent implements OnInit {
 
     var today = new Date();
     this.order = {
+      orderId: null,
       createdOn: today.toUTCString(),
       payment: "cash", //Paying with cash by default
       status: "pending",

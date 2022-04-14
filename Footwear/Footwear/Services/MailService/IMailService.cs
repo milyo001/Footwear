@@ -13,9 +13,9 @@
         Task SendEmailAsync(EmailRequest mailRequest);
 
         /// <summary>
-        /// Populates EmailRequest model with data, edit to change the email context
+        /// Populates EmailRequest model with data for selected order
         /// </summary>
         /// <returns></returns>
-        Task<EmailRequest> PopulateEmailRequestAsync(string token);
+        Task<EmailRequest> GetEmailRequestAsync(string orderId);
     }
 }

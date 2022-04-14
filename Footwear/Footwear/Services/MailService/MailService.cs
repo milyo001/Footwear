@@ -1,6 +1,8 @@
 ﻿namespace Footwear.Services.MailService
 {
     using Footwear.Data.Models.Email;
+    using Footwear.Services.OrderService;
+    using Footwear.Services.TokenService;
     using Footwear.Settings;
     using MailKit.Net.Smtp;
     using MailKit.Security;
@@ -12,15 +14,24 @@
     {
         private readonly MailSettings _mailSettings;
 
-        public MailService(IOptions<MailSettings> mailSettings)
+        private readonly IOrderService _orderService;
+
+        public MailService(IOptions<MailSettings> mailSettings, IOrderService orderService)
         {
             _mailSettings = mailSettings.Value;
+            _orderService = orderService;
         }
 
-        public Task<EmailRequest> PopulateEmailRequestAsync(string token)
+
+        /// <summary>
+        /// Populates email request model for given order id
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public Task<EmailRequest> GetEmailRequestAsync(string orderId)
         {
-
-
+            var orders = this._orderService.GetOrderByIdAsync(orderId);
+            
             return null;
         }
 
