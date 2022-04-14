@@ -1,7 +1,7 @@
 ﻿namespace Footwear.Settings
 {
     /// <summary>
-    /// Used to configure the settings before sending the actual email
+    /// Used to configure the email settings before sending the actual email for order
     /// </summary>
     public class MailSettings
     {
