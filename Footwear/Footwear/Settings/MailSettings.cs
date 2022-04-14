@@ -1,5 +1,8 @@
 ﻿namespace Footwear.Settings
 {
+    /// <summary>
+    /// Used to configure the settings before sending the actual email
+    /// </summary>
     public class MailSettings
     {
         public string Mail { get; set; }
