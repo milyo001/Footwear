@@ -6,7 +6,7 @@
     public interface IMailService
     {
         /// <summary>
-        /// Send an email with Simple Mail Transfer Protocol (SMTP) 
+        /// Sends an email with Simple Mail Transfer Protocol (SMTP) 
         /// </summary>
         /// <param name="mailRequest"></param>
         /// <returns></returns>
