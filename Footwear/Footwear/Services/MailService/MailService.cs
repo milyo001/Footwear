@@ -17,6 +17,13 @@
             _mailSettings = mailSettings.Value;
         }
 
+        public Task<EmailRequest> PopulateEmailRequestAsync(string token)
+        {
+
+
+            return null;
+        }
+
         /// <summary>
         /// Sends an email with Simple Mail Transfer Protocol (SMTP) 
         /// </summary>

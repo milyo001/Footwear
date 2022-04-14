@@ -11,5 +11,11 @@
         /// <param name="mailRequest"></param>
         /// <returns></returns>
         Task SendEmailAsync(EmailRequest mailRequest);
+
+        /// <summary>
+        /// Populates EmailRequest model with data, edit to change the email context
+        /// </summary>
+        /// <returns></returns>
+        Task<EmailRequest> PopulateEmailRequestAsync(string token);
     }
 }

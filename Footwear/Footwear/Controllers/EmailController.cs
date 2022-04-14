@@ -21,7 +21,6 @@ namespace Footwear.Controllers
         [HttpPost("Send")]
         public async Task<IActionResult> Send([FromForm] EmailRequest request)
         {
-
             try
             {
                 await mailService.SendEmailAsync(request);
