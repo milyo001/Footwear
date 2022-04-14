@@ -21,6 +21,7 @@ namespace Footwear
     using System;
     using System.Text;
     using Footwear.Services.MailService;
+    using Footwear.Settings;
 
     public class Startup
     {
@@ -42,6 +43,8 @@ namespace Footwear
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
             services.AddControllersWithViews();
             services.AddAutoMapper(typeof(Startup));
 
