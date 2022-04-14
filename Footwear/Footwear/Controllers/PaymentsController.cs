@@ -11,6 +11,8 @@ namespace Footwear.Controllers
     using System.Text.Json;
     using System.Threading.Tasks;
 
+    [ApiController]
+    [Route("[controller]")]
     public class PaymentsController : ControllerBase
     {
 
