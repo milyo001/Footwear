@@ -58,8 +58,8 @@ export class OrdersComponent implements OnInit {
     
   }
 
-  sendEmail(){
-    let id: string;
+  sendEmail(order){
+    let id: string = order.orderId;
 
     this.orderService.sendEmailForOrder(id).subscribe(test => {
       console.log(test);
@@ -67,11 +67,5 @@ export class OrdersComponent implements OnInit {
     err => {
       console.log(err);
     })
-  }
-
-  changeUrl(orderId): void {
-    this.orderId = orderId;
-    // Set diffrent query param every time order is selected
-    this.location.replaceState("orders/id=" + orderId);
   }
 }

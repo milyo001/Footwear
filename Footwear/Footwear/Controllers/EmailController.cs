@@ -17,12 +17,12 @@ namespace Footwear.Controllers
         }
 
         [HttpPost]
-        [Route("send/{id}")]
-        public async Task<IActionResult> Send(string id)
+        [Route("send")]
+        public async Task<IActionResult> Send([FromBody] MailPostModel model)
         {
             try
             {
-                var request = await this.mailService.GetEmailRequestAsync(id);
+                var request = await this.mailService.GetEmailRequestAsync(model.Id);
                 await mailService.SendEmailAsync(request);
                 return Ok();
             }
@@ -32,12 +32,10 @@ namespace Footwear.Controllers
             }
 
         }
-        [HttpGet]
-        [Route("test")]
-        public void Test()
+
+        public class MailPostModel
         {
-            var test = "sadasd";
-            
+            public string Id { get; set; }    
         }
     }
 }

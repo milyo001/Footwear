@@ -44,7 +44,8 @@ export class OrderService {
   }
 
   sendEmailForOrder(id: string) {
-    return this.http.post(this.apiUrl + 'email/send/' + id,
+    const body = { id };
+    return this.http.post(this.apiUrl + 'email/send/', body,
     { headers: { 'Content-Type': 'application/json' }});
   }
 }
