@@ -36,7 +36,7 @@
             {
                 Subject = "Order completed",
                 MailBody = $"<h1>Hello, {order.UserData.FirstName}!</h1>",
-                ToEmail = "ilyovskim@gmail.com"
+                ToEmail = "slaron1992@gmail.com"
             };
 
             return request;
@@ -61,8 +61,10 @@
             builder.HtmlBody = mailRequest.MailBody;
             email.Body = builder.ToMessageBody();
 
+            // I am using sendinblue.com as API, but you can use any SMTP Client provider
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
+
             smtp.Authenticate(_mailSettings.Mail, _mailSettings.Password);
 
             await smtp.SendAsync(email);

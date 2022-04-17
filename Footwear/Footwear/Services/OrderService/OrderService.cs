@@ -93,7 +93,10 @@
         // Gets and returns the order entity
         public async Task<Order> GetOrderByIdAsync(string id)
         {
-            var order = await this._db.Orders.FirstOrDefaultAsync(o => o.Id == id);
+            var order = await this._db.Orders
+                .Include(o => o.UserData)
+                .FirstOrDefaultAsync(o => o.Id == id);
+                
             return order;
         }
 
