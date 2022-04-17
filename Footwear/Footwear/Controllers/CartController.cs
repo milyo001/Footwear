@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Controllers.ErrorHandler;
     using Footwear.Services.CartService;
     using Footwear.Services.TokenService;
@@ -8,9 +9,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Route("[controller]")]
-    [ApiController]
-    public class CartController : ControllerBase
+    public class CartController : ApiController
     {
         private readonly ITokenService _tokenService;
         private readonly ICartService _cartService;

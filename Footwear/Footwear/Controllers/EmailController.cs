@@ -1,14 +1,13 @@
 ﻿
 namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Services.MailService;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
-    [Route("[controller]")]
-    [ApiController]
-    public class EmailController : ControllerBase
+    public class EmailController : ApiController
     {
         private readonly IMailService mailService;
         public EmailController(IMailService mailService)

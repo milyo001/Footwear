@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Footwear.Controllers
+namespace Footwear.Controllers.Base
 {
 
     [Route("[controller]")]

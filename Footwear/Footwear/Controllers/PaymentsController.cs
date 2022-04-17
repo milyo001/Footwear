@@ -1,6 +1,7 @@
 ﻿
 namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Controllers.ErrorHandler;
     using Footwear.Services.OrderService;
     using Microsoft.AspNetCore.Mvc;
@@ -11,9 +12,7 @@ namespace Footwear.Controllers
     using System.Text.Json;
     using System.Threading.Tasks;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class PaymentsController : ControllerBase
+    public class PaymentsController : ApiController
     {
 
         private readonly IOrderService _orderService;

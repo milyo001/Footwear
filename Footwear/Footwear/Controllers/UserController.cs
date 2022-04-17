@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Controllers.ErrorHandler;
     using Footwear.Data.Models;
     using Footwear.Services.CartService;
@@ -10,9 +11,7 @@
     using Microsoft.AspNetCore.Mvc;
     using System.Threading.Tasks;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ApiController
     {
         private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;

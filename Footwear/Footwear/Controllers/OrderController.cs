@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Services.OrderService;
     using Footwear.Services.TokenService;
     using Footwear.ViewModels;
@@ -9,9 +10,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [Route("[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+    public class OrderController : ApiController
     {
         public IConfiguration Configuration { get; }
         private readonly IOrderService _orderService;
