@@ -1,6 +1,5 @@
 ﻿namespace Footwear.Services.MailService
 {
-    using Footwear.Data.Models;
     using Footwear.Data.Models.Email;
     using Footwear.Services.OrderService;
     using Footwear.Settings;
