@@ -1,14 +1,12 @@
 ﻿
 namespace Footwear.Controllers
 {
-    using Footwear.Data.Models.Email;
     using Footwear.Services.MailService;
-    using Microsoft.AspNetCore.Http;
     using Microsoft.AspNetCore.Mvc;
     using System;
     using System.Threading.Tasks;
 
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class EmailController : ControllerBase
     {
@@ -18,13 +16,13 @@ namespace Footwear.Controllers
             this.mailService = mailService;
         }
 
-        [HttpPost("Send")]
-        public async Task<IActionResult> Send(string orderId)
+        [HttpPost]
+        [Route("send/{id}")]
+        public async Task<IActionResult> Send(string id)
         {
-            var request = await this.mailService.GetEmailRequestAsync(orderId);
-
             try
             {
+                var request = await this.mailService.GetEmailRequestAsync(id);
                 await mailService.SendEmailAsync(request);
                 return Ok();
             }
@@ -33,6 +31,13 @@ namespace Footwear.Controllers
                 return BadRequest(ex.Message);
             }
 
+        }
+        [HttpGet]
+        [Route("test")]
+        public void Test()
+        {
+            var test = "sadasd";
+            
         }
     }
 }

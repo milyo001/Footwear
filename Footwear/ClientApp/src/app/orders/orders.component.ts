@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import {Location} from '@angular/common'; 
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
 import { 
@@ -15,12 +17,15 @@ export class OrdersComponent implements OnInit {
 
   currentOrders: ICompletedOrder[];
   completedOrders: ICompletedOrder[];
+  orderId : string;
   pageIndex: number = 1;
   ordersPerPage: number = 10;
+
 
   // Order statuses recieved from API
   cashPayment: string = 'DeliveryCash';
   cardPayment: string = 'DeliveryPaid';
+
 
   // Icons
   faCalendarDay = faCalendarDay;
@@ -29,7 +34,8 @@ export class OrdersComponent implements OnInit {
   faCreditCard = faCreditCard;
   faMoneyBill = faMoneyBill;
 
-  constructor(private orderService: OrderService) { }
+  constructor(private orderService: OrderService, private location: Location,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(orders => {
@@ -50,5 +56,22 @@ export class OrdersComponent implements OnInit {
     console.log(value);
     console.log(value.toString());
     
+  }
+
+  sendEmail(){
+    let id: string;
+
+    this.orderService.sendEmailForOrder(id).subscribe(test => {
+      console.log(test);
+    },
+    err => {
+      console.log(err);
+    })
+  }
+
+  changeUrl(orderId): void {
+    this.orderId = orderId;
+    // Set diffrent query param every time order is selected
+    this.location.replaceState("orders/id=" + orderId);
   }
 }

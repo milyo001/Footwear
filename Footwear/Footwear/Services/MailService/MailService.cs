@@ -1,8 +1,8 @@
 ﻿namespace Footwear.Services.MailService
 {
+    using Footwear.Data.Models;
     using Footwear.Data.Models.Email;
     using Footwear.Services.OrderService;
-    using Footwear.Services.TokenService;
     using Footwear.Settings;
     using MailKit.Net.Smtp;
     using MailKit.Security;
@@ -28,11 +28,18 @@
         /// </summary>
         /// <param name="orderId"></param>
         /// <returns></returns>
-        public Task<EmailRequest> GetEmailRequestAsync(string orderId)
+        public async Task<EmailRequest> GetEmailRequestAsync(string orderId)
         {
-            var orders = this._orderService.GetOrderByIdAsync(orderId);
-            
-            return null;
+            // Get the selected order data
+            var order = await this._orderService.GetOrderByIdAsync(orderId);
+            var request = new EmailRequest
+            {
+                Subject = "Order completed",
+                MailBody = $"<h1>Hello, {order.UserData.FirstName}!</h1>",
+                ToEmail = "ilyovskim@gmail.com"
+            };
+
+            return request;
         }
 
         /// <summary>

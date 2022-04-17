@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { getAPIUrl } from 'src/environments/environment';
@@ -41,5 +41,10 @@ export class OrderService {
   // Get all orders and all products for the orders
   getAllOrders(): Observable<ICompletedOrder[]> {
     return this.http.get<ICompletedOrder[]>(this.apiUrl + 'order/getAllOrders');
+  }
+
+  sendEmailForOrder(id: string) {
+    return this.http.post(this.apiUrl + 'email/send/' + id,
+    { headers: { 'Content-Type': 'application/json' }});
   }
 }
