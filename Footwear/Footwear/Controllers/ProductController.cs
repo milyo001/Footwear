@@ -1,5 +1,6 @@
 ﻿namespace Footwear.Controllers
 {
+    using Footwear.Controllers.Base;
     using Footwear.Services.CartService;
     using Footwear.Services.ProductService;
     using Footwear.ViewModels;
@@ -7,9 +8,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    [ApiController]
-    [Route("[controller]")]
-    public class ProductController : ControllerBase
+    public class ProductController : ApiController
     {
         private readonly ICartService _cartService;
         private readonly IProductService _productService;
