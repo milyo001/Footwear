@@ -9,13 +9,13 @@
         /// Sends an email with Simple Mail Transfer Protocol (SMTP) 
         /// </summary>
         /// <param name="mailRequest"></param>
-        /// <returns></returns>
+        /// <returns>Task</returns>
         Task SendEmailAsync(EmailRequest mailRequest);
 
         /// <summary>
         /// Populates EmailRequest model with data for selected order
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Task of EmailRequest</returns>
         Task<EmailRequest> GetEmailRequestAsync(string orderId);
     }
 }
