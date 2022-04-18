@@ -60,7 +60,9 @@
             builder.HtmlBody = mailRequest.MailBody;
             email.Body = builder.ToMessageBody();
 
-            // I am using sendinblue.com as API, but you can use any SMTP Client provider
+            // I am using https://ethereal.email as fake SMTP client provider, no email will be send but 
+            // the functionallity is working properly, just change appsettings.Production.json Mail settings once you
+            // have real SMTP client provider
             using var smtp = new SmtpClient();
             smtp.Connect(_mailSettings.Host, _mailSettings.Port, SecureSocketOptions.StartTls);
 
