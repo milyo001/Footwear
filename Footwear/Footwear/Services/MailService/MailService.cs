@@ -18,16 +18,15 @@
 
         private readonly IOrderService _orderService;
 
-        private readonly IUserService _userService;
+        private readonly UserManager<User> _userManager;
 
-
-        public MailService(IOptions<MailSettings> mailSettings, IOrderService orderService, IUserService userService)
+        public MailService(IOptions<MailSettings> mailSettings, IOrderService orderService, 
+            UserManager<User> userManager)
         {
             this._mailSettings = mailSettings.Value;
             this._orderService = orderService;
-            this._userService = userService;
+            this._userManager = userManager;
         }
-
 
         /// <summary>
         /// Populates email request model for given order id
@@ -38,12 +37,19 @@
         {
             // Get the selected order data
             var order = await this._orderService.GetOrderByIdAsync(orderId);
+            var userEmail = (await this._userManager.FindByIdAsync(order.UserId)).Email;
+            var totalPrice = _orderService.GetTotalPrice(order);
 
             var request = new EmailRequest
             {
                 Subject = "Order completed",
-                MailBody = $"<h1>Hello, {order.UserData.FirstName}!</h1>",
-                ToEmail = "user-Email-here"
+                MailBody = 
+                     $"<h1>Hello, {order.UserData.FirstName}!</h1>" +
+                     $"<p>Your order was completed successfully. " +
+                     $"<p>Total products: <strong>{order.Products.Count}</strong></p>" +
+                     $"<p>Total price for order: <strong>{totalPrice}</strong></p>" +
+                     $"<h4>Thank you for ordering!</h4>",
+                ToEmail = $"{userEmail}"
             };
 
             return request;
