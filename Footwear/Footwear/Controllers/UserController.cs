@@ -19,7 +19,8 @@
         private readonly ICartService _cartService;
         private string AuthToken => HttpContext.Items["Authorization"].ToString();
 
-        public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, ICartService cartService)
+        public UserController(UserManager<User> userManager, ITokenService tokenService, IUserService userService, 
+            ICartService cartService)
         {
             this._userManager = userManager;
             this._userService = userService;

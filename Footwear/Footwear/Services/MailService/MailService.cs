@@ -1,10 +1,13 @@
 ﻿namespace Footwear.Services.MailService
 {
+    using Footwear.Data.Models;
     using Footwear.Data.Models.Email;
     using Footwear.Services.OrderService;
+    using Footwear.Services.UserService;
     using Footwear.Settings;
     using MailKit.Net.Smtp;
     using MailKit.Security;
+    using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.Options;
     using MimeKit;
     using System.Threading.Tasks;
@@ -15,10 +18,14 @@
 
         private readonly IOrderService _orderService;
 
-        public MailService(IOptions<MailSettings> mailSettings, IOrderService orderService)
+        private readonly IUserService _userService;
+
+
+        public MailService(IOptions<MailSettings> mailSettings, IOrderService orderService, IUserService userService)
         {
-            _mailSettings = mailSettings.Value;
-            _orderService = orderService;
+            this._mailSettings = mailSettings.Value;
+            this._orderService = orderService;
+            this._userService = userService;
         }
 
 
@@ -31,11 +38,12 @@
         {
             // Get the selected order data
             var order = await this._orderService.GetOrderByIdAsync(orderId);
+
             var request = new EmailRequest
             {
                 Subject = "Order completed",
                 MailBody = $"<h1>Hello, {order.UserData.FirstName}!</h1>",
-                ToEmail = "slaron1992@gmail.com"
+                ToEmail = "user-Email-here"
             };
 
             return request;
