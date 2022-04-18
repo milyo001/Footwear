@@ -63,10 +63,10 @@ export class OrdersComponent implements OnInit {
     this.orderService.sendEmailForOrder(id).subscribe((response: any) => {
       if(response.sent){
         this.toastr.info("Email sent!");
-        // Disable send button for 30 sec to prevent spammy behavior
+        // Disable send button for 5 sec to prevent spammy behavior
         setInterval(() => {
           sendEmailBtn.disabled = false;
-        }, 30000);
+        }, 5000);
       }
     },
     err => {
