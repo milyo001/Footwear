@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import {Location} from '@angular/common'; 
+import { ToastrService } from 'ngx-toastr';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
 import { 
@@ -34,8 +33,7 @@ export class OrdersComponent implements OnInit {
   faCreditCard = faCreditCard;
   faMoneyBill = faMoneyBill;
 
-  constructor(private orderService: OrderService, private location: Location,
-    private route: ActivatedRoute) { }
+  constructor(private orderService: OrderService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(orders => {
@@ -58,14 +56,23 @@ export class OrdersComponent implements OnInit {
     
   }
 
-  sendEmail(order){
+  sendEmail(order, sendEmailBtn) {
     let id: string = order.orderId;
+    sendEmailBtn.disabled = true;
 
-    this.orderService.sendEmailForOrder(id).subscribe(test => {
-      console.log(test);
+    this.orderService.sendEmailForOrder(id).subscribe((response: any) => {
+      if(response.sent){
+        this.toastr.info("Email sent!");
+        // Disable send button for 30 sec to prevent spammy behavior
+        setInterval(() => {
+          sendEmailBtn.disabled = false;
+        }, 30000);
+      }
     },
     err => {
+      this.toastr.info("Something went wrong", err.error.message);
       console.log(err);
+      sendEmailBtn.disabled = false;
     })
   }
 }

@@ -20,13 +20,13 @@ namespace Footwear.Controllers
         public async Task<IActionResult> Send([FromBody] MailPostModel model)
         {
             if (!ModelState.IsValid || model.Id == null)
-                return BadRequest("Invalid Id!");
+                return BadRequest("Invalid order id!");
 
             try
             {
                 var request = await this.mailService.GetEmailRequestAsync(model.Id);
                 await mailService.SendEmailAsync(request);
-                return Ok();
+                return Ok( new { sent = true });
             }
             catch (Exception ex)
             {
