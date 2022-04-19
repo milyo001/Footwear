@@ -1,0 +1,65 @@
+<form class="example-form" [formGroup]="form" (ngSubmit)="updateProfile(form)">
+    <div class="row mt-1 full-width">
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>First name</mat-label>
+        <input matInput formControlName="firstName" type="text" name="firstName" id="firstName">
+        <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.required">* First name is required!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('firstName').touched && form.get('firstName').errors?.maxlength">* First name cannot be more than 100 symbols!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input matInput formControlName="lastName" type="text" name="lastName" id="lastName">
+        <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.required">* Last name is required!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('lastName').touched && form.get('lastName').errors?.maxlength">* Last name cannot be more than 100 symbols!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Phone</mat-label>
+        <input matInput formControlName="phone" name="phone">
+        <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.required">* Phone is required!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.maxlength">* Phone cannot be more than 20 symbols!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('phone').touched && form.get('phone').errors?.pattern">* Phone is invalid!</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label>Street</mat-label>
+        <textarea matInput formControlName="street" placeholder="Enter street and house number"></textarea>
+        <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.required">* Street is required!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.maxlength">* Street cannot be more than 100 symbols!</mat-error>
+        <mat-error class="validation-error" *ngIf="form.get('street').touched && form.get('street').errors?.minlength">* Street cannot be less than 2 symbols!</mat-error>
+      </mat-form-field>
+      <div class="mb-3 separated-fields">
+        <mat-form-field class="half-width" appearance="fill">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="example Berlin" formControlName="city">
+          <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.required">* City is required!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.maxlength">* City cannot be more than 20 symbols!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('city').touched && form.get('city').errors?.minlength">* City cannot be less than 2 symbols!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width" appearance="fill">
+          <mat-label>State</mat-label>
+          <input matInput placeholder="ex. California" formControlName="state">
+          <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.required">* State is required!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.maxlength">* State cannot be more than 20 symbols!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('state').touched && form.get('state').errors?.minlength">* State cannot be less than 2 symbols!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mb-3 separated-fields">
+        <mat-form-field class="half-width" appearance="fill">
+          <mat-label>Country</mat-label>
+          <input matInput placeholder="ex. Spain" formControlName="country">
+          <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.required">* Country is required!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.maxlength">* Country cannot be more than 20 symbols!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('country').touched && form.get('country').errors?.minlength">* Country cannot be less than 2 symbols!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="half-width" appearance="fill">
+          <mat-label>Zip/Postal Code</mat-label>
+          <input matInput placeholder="ex. 10001" formControlName="zipCode">
+          <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.required">* Zip/Postal code is required!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.maxlength">* Zip/Postal code cannot be more than 20 symbols!</mat-error>
+          <mat-error class="validation-error" *ngIf="form.get('zipCode').touched && form.get('zipCode').errors?.minlength">* Zip/Postal cannot be less than 2 symbols!</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="mt-4 text-center save-btn">
+        <button mat-stroked-button [disabled]="form.invalid" class="action-button-custom" type="submit" color="config-black-wheat">Update</button>
+      </div>
+    </div>
+  </form>

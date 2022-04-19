@@ -32,7 +32,6 @@ namespace Footwear.Controllers
             {
                 return BadRequest(ex.Message);
             }
-
         }
 
         public class MailPostModel
