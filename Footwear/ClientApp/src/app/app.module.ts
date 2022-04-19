@@ -32,7 +32,7 @@ import { SharedModule } from './modules/shared.module';
     FooterComponent,
     ModalComponent,
     PaymentSuccessComponent,
-    PaymentCancelComponent,
+    PaymentCancelComponent
   ],
   imports: [
     BrowserModule,

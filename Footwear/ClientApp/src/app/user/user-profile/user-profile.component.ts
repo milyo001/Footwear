@@ -27,7 +27,8 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   public emailSectionToggle: boolean = false;
   public passSectionToggle: boolean = false;
 
-  constructor(private userService: UserService, private fb: FormBuilder, private toastr: ToastrService) { }
+  constructor(private userService: UserService, private fb: FormBuilder, 
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     //Initialize user data form validators
