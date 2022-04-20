@@ -63,7 +63,7 @@ export class OrdersComponent implements OnInit {
     });
   };
 
-  viewOrder(value: any) {
+  viewOrder() {
     this.detailsToggle = true;
     setTimeout(()=> { 
     this.detailsDiv.nativeElement.scrollIntoView({ behavior: "smooth" });
@@ -71,8 +71,8 @@ export class OrdersComponent implements OnInit {
 
   }
 
-  sendEmail(order: ICompletedOrder, sendEmailBtn: any) {
-    let id: string = order.orderId;
+  sendEmail(sendEmailBtn: any) {
+    const id = this.selectedOrder.orderId;
     sendEmailBtn.disabled = true;
 
     this.orderService.sendEmailForOrder(id).subscribe((response: any) => {
@@ -98,7 +98,7 @@ export class OrdersComponent implements OnInit {
     return date;
   }
 
-  // Set the component property selectedOrder on change
+  // Set the component property selectedOrder on change (click)
   onOrderChange(event: any) {
     this.selectedOrder = event.option.value;
     this.detailsToggle = false;

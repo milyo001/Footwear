@@ -2,7 +2,7 @@
   <mat-tab id="current-orders" label="Current Orders">
     <mat-selection-list class="custom-height" #ordersList [multiple]="false" 
     (selectionChange)="onOrderChange($event)" >
-      <mat-list-option #selected *ngFor="let order of currentOrders | paginate: 
+      <mat-list-option *ngFor="let order of currentOrders | paginate: 
       { itemsPerPage: ordersPerPage, currentPage: pageIndex }" [value]="order">
         <div class="mat-list-row">
           <ul class="mat-list-content">
@@ -24,10 +24,10 @@
       </mat-list-option>
     </mat-selection-list>
     <section>
-      <div class="mt-3 d-flex justify-content-between" *ngIf="ordersList.selectedOptions.selected[0]?.value">
+      <div class="mt-3 d-flex justify-content-between" *ngIf="selectedOrder">
         <button mat-stroked-button #sendEmailBtn
-          (click)="sendEmail(selectedOrder, sendEmailBtn)">Resend Email</button>
-        <button mat-stroked-button (click)="viewOrder(selectedOrder)">View
+          (click)="sendEmail(sendEmailBtn)">Resend Email</button>
+        <button mat-stroked-button (click)="viewOrder()">View
           Details</button>
       </div>
     </section>
@@ -63,10 +63,10 @@
         </div>
       </mat-list-option>
       <section>
-        <div class="mt-3 d-flex justify-content-between" *ngIf="pastOrdersId.selectedOptions.selected[0]?.value">
+        <div class="mt-3 d-flex justify-content-between" *ngIf="selectedOrder">
           <button mat-stroked-button #sendEmailBtn
-            (click)="sendEmail(pastOrdersId.selectedOptions.selected[0]?.value, sendEmailBtn)">Resend Email</button>
-          <button mat-stroked-button (click)="viewOrder(pastOrdersId.selectedOptions.selected[0]?.value)">View
+            (click)="sendEmail(sendEmailBtn)">Resend Email</button>
+          <button mat-stroked-button (click)="viewOrder()">View
             Details</button>
         </div>
       </section>
