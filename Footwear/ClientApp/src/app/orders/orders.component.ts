@@ -17,8 +17,8 @@ export class OrdersComponent implements OnInit {
   currentOrders: ICompletedOrder[];
   pastOrders: ICompletedOrder[];
   maxDeliveryDays: number = 0;
-  orderId: string;
   pageIndex: number = 1;
+  pageIndexPastOrders: number = 1;
   ordersPerPage: number = 10;
 
   // Order statuses recieved from API
@@ -58,8 +58,8 @@ export class OrdersComponent implements OnInit {
   };
 
   viewOrder(value: any) {
-    console.log(value);
-    console.log(value.toString());
+    console.log(this.currentOrders);
+    console.log(this.pastOrders);
 
   }
 
