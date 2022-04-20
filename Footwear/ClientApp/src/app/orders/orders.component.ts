@@ -19,6 +19,7 @@ export class OrdersComponent implements OnInit {
   pastOrders: ICompletedOrder[];
   maxDeliveryDays: number = 0;
   selectedOrder: ICompletedOrder;
+  detailsToggle: boolean = false;
 
   // Pagination options
   pageIndex: number = 1;
@@ -62,8 +63,8 @@ export class OrdersComponent implements OnInit {
   };
 
   viewOrder(value: any) {
-    console.log(value);
-    
+    this.detailsToggle = true;
+
   }
 
   sendEmail(order, sendEmailBtn) {
@@ -96,5 +97,6 @@ export class OrdersComponent implements OnInit {
   // Set the component property selectedOrder on change
   onOrderChange(event: any) {
     this.selectedOrder = event.option.value;
+    this.detailsToggle = false;
   }
 }
