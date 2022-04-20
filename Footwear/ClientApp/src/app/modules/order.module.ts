@@ -8,6 +8,7 @@ import { PlaceOrderComponent } from "../orders/place-order/place-order.component
 import { BoldPipe } from "../pipes/bold.pipe";
 import { OrderStatusPipe } from "../pipes/order-status.pipe";
 import { SharedModule } from "./shared.module";
+import { OrderDetailsComponent } from "../orders/order-details/order-details.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
   declarations: [
     PlaceOrderComponent,
     OrdersComponent,
+    OrderDetailsComponent,
     BoldPipe,
     OrderStatusPipe
   ],
