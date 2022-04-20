@@ -22,6 +22,7 @@ import { PaymentSuccessComponent } from './payment/payment-success/payment-succe
 import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.component';
 import { OrderService } from './services/order.service';
 import { SharedModule } from './modules/shared.module';
+import { OrderDetailsComponent } from './orders/order-details/order-details.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SharedModule } from './modules/shared.module';
     FooterComponent,
     ModalComponent,
     PaymentSuccessComponent,
-    PaymentCancelComponent
+    PaymentCancelComponent,
+    OrderDetailsComponent
   ],
   imports: [
     BrowserModule,
