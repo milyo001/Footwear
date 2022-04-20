@@ -41,6 +41,8 @@ export class OrdersComponent implements OnInit {
       [this.currentOrders, this.completedOrders] =
         orders
           .reduce((result, element) => {
+            console.log(element.createdOn);
+            var test = new Date(element.createdOn);
             // Determine and push to current/completed orders array
             result[element.status == "Completed" ? 1 : 0].push(element);
             return result;
