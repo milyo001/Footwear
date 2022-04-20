@@ -80,4 +80,6 @@
     </section>
   </mat-tab>
 </mat-tab-group>
-<app-order-details [hidden]="!detailsToggle" [order]="selectedOrder"></app-order-details>
+<div #details>
+  <app-order-details  [hidden]="!detailsToggle" [order]="selectedOrder"></app-order-details>
+</div>

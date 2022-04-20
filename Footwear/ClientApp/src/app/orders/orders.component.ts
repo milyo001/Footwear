@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
@@ -6,7 +6,6 @@ import {
   faCalendarDay, faBox,
   faCreditCard, faMoneyBill
 } from '@fortawesome/free-solid-svg-icons';
-import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-orders',
@@ -20,6 +19,8 @@ export class OrdersComponent implements OnInit {
   maxDeliveryDays: number = 0;
   selectedOrder: ICompletedOrder;
   detailsToggle: boolean = false;
+  @ViewChild("details") detailsDiv: ElementRef;
+
 
   // Pagination options
   pageIndex: number = 1;
@@ -64,10 +65,13 @@ export class OrdersComponent implements OnInit {
 
   viewOrder(value: any) {
     this.detailsToggle = true;
+    setTimeout(()=> { 
+    this.detailsDiv.nativeElement.scrollIntoView({ behavior: "smooth" });
+    }, 100)
 
   }
 
-  sendEmail(order, sendEmailBtn) {
+  sendEmail(order: ICompletedOrder, sendEmailBtn: any) {
     let id: string = order.orderId;
     sendEmailBtn.disabled = true;
 
