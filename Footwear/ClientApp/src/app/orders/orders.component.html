@@ -1,7 +1,8 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab id="current-orders" label="Current Orders">
-    <mat-selection-list class="custom-height" #ordersList [multiple]="false">
-      <mat-list-option *ngFor="let order of currentOrders | paginate: 
+    <mat-selection-list class="custom-height" #ordersList [multiple]="false" 
+    (selectionChange)="onOrderChange($event)" >
+      <mat-list-option #selected *ngFor="let order of currentOrders | paginate: 
       { itemsPerPage: ordersPerPage, currentPage: pageIndex }" [value]="order">
         <div class="mat-list-row">
           <ul class="mat-list-content">
@@ -26,8 +27,8 @@
     <section>
       <div class="mt-3 d-flex justify-content-between" *ngIf="ordersList.selectedOptions.selected[0]?.value">
         <button mat-stroked-button #sendEmailBtn
-          (click)="sendEmail(ordersList.selectedOptions.selected[0]?.value, sendEmailBtn)">Resend Email</button>
-        <button mat-stroked-button (click)="viewOrder(ordersList.selectedOptions.selected[0]?.value)">View
+          (click)="sendEmail(selectedOrder, sendEmailBtn)">Resend Email</button>
+        <button mat-stroked-button (click)="viewOrder(selectedOrder)">View
           Details</button>
       </div>
     </section>
@@ -41,7 +42,8 @@
 
   </mat-tab>
   <mat-tab class="past-orders" label="Past Orders">
-    <mat-selection-list class="custom-height" #pastOrdersId [multiple]="false">
+    <mat-selection-list class="custom-height" #pastOrdersId [multiple]="false"
+    (selectionChange)="onOrderChange($event)">
       <mat-list-option *ngFor="let order of pastOrders | paginate: 
       { itemsPerPage: ordersPerPage, currentPage: pageIndexPastOrders }" [value]="order">
         <div class="mat-list-row">
@@ -80,3 +82,4 @@
     </section>
   </mat-tab>
 </mat-tab-group>
+<app-order-details [order]="selectedOrder"></app-order-details>

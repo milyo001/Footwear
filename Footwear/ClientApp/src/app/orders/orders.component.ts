@@ -6,6 +6,7 @@ import {
   faCalendarDay, faBox,
   faCreditCard, faMoneyBill
 } from '@fortawesome/free-solid-svg-icons';
+import { MatSelectionListChange } from '@angular/material/list';
 
 @Component({
   selector: 'app-orders',
@@ -17,6 +18,9 @@ export class OrdersComponent implements OnInit {
   currentOrders: ICompletedOrder[];
   pastOrders: ICompletedOrder[];
   maxDeliveryDays: number = 0;
+  selectedOrder: ICompletedOrder;
+
+  // Pagination options
   pageIndex: number = 1;
   pageIndexPastOrders: number = 1;
   ordersPerPage: number = 10;
@@ -58,14 +62,14 @@ export class OrdersComponent implements OnInit {
   };
 
   viewOrder(value: any) {
-    console.log(this.currentOrders);
-    console.log(this.pastOrders);
-
+    console.log(value);
+    
   }
 
   sendEmail(order, sendEmailBtn) {
     let id: string = order.orderId;
     sendEmailBtn.disabled = true;
+
     this.orderService.sendEmailForOrder(id).subscribe((response: any) => {
       if (response.sent) {
         this.toastr.info("Email sent!");
@@ -87,5 +91,10 @@ export class OrdersComponent implements OnInit {
     var date = new Date(orderDate);
     date.setDate(date.getDate() + days);
     return date;
+  }
+
+  // Set the component property selectedOrder on change
+  onOrderChange(event: any) {
+    this.selectedOrder = event.option.value;
   }
 }
