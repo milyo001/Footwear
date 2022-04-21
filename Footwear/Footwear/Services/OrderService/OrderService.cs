@@ -78,6 +78,7 @@
         }
 
         // Get the latest added order from the database and return it
+        // Created on property MUST be with time(hours and minutes) in order to find it
         public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
             var user = await this._tokenService.GetUserByTokenAsync(token);
