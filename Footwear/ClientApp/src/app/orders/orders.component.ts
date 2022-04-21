@@ -66,10 +66,9 @@ export class OrdersComponent implements OnInit {
 
   viewOrder() {
     this.detailsToggle = true;
-    setTimeout(()=> { 
-    this.detailsDiv.nativeElement.scrollIntoView({ behavior: "smooth" });
+    setTimeout(() => {
+      this.detailsDiv.nativeElement.scrollIntoView({ behavior: "smooth" });
     }, 100)
-
   }
 
   sendEmail(sendEmailBtn: any) {

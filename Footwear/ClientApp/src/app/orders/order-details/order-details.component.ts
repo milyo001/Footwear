@@ -11,7 +11,7 @@ export class OrderDetailsComponent implements OnInit {
 
   @Input() order: ICompletedOrder;
   @Input() deliveryInfo: IDeliveryInfo;
-  
+
   constructor() { }
 
   ngOnInit(): void {
@@ -19,6 +19,7 @@ export class OrderDetailsComponent implements OnInit {
 
   test(){
     console.log(this.order.createdOn);
+    console.log(this.deliveryInfo);
   }
   
 
