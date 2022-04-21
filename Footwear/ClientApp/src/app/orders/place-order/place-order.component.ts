@@ -193,7 +193,7 @@ export class PlaceOrderComponent implements OnInit {
     }
 
     // Set the payment type and send the order to the API, 
-    // default payment type is cash
+    // default API payment is cash
     if (form.value.payment == "card") {
       this.order.payment = "card";
     }
