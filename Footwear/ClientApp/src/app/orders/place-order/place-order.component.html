@@ -71,11 +71,11 @@
           <div class="row mt-2">
             <div class="col-md-4 text-center shipping-info-box">
               <span><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping:</span><br />
-              <span>{{deliveryInfo.minDelivery}} - {{deliveryInfo.maxDelivery}} days.</span>
+              <span>{{deliveryInfo?.minDelivery}} - {{deliveryInfo?.maxDelivery}} days.</span>
             </div>
             <div class="col-md-4 text-center shipping-info-box">
               <span><fa-icon class="cash-icon" [icon]="faDollarSign"></fa-icon> Delivery Price:</span><br />
-              <span>{{deliveryInfo.deliveryPrice | currency}}</span>
+              <span>{{deliveryInfo?.deliveryPrice | currency}}</span>
             </div>
             <div class="col-md-4 text-center shipping-info-box">
               <span><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</span><br />
