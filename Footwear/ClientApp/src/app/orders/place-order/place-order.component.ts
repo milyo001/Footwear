@@ -181,11 +181,10 @@ export class PlaceOrderComponent implements OnInit {
   submitData(form) {
     // Disable form submit button to prevent dupplicate orders when double clicking
     this.waitForRedirect = true;
-
-    var today = new Date();
+    
     this.order = {
       orderId: null,
-      createdOn: today.toUTCString(),
+      createdOn: '',
       payment: "cash", //Paying with cash by default
       status: "pending",
       // User data is the information about the delivery address, which can be diffrent

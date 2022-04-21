@@ -10,7 +10,6 @@
         [Required]
         public string Payment { get; set; }
 
-        [Required]
         public string CreatedOn { get; set; }
 
         [Required]
