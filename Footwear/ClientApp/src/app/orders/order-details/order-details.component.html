@@ -1,6 +1,19 @@
 <h2 class="title">Order details</h2>
 <div class="container">
-  
-Test
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores et iste itaque, ab praesentium veritatis consequuntur voluptatum doloribus. Vel excepturi nulla atque animi quod nemo unde tempora magnam voluptates ex.
+    <div class="delivery">
+
+    </div>
+    <ul>
+        <li>Created on: {{order?.createdOn}}</li>
+         <li>Payment: {{order?.payment}}</li>
+         <li>Order Status: {{order?.status }}</li>
+         <li>
+             Delivery Address: {{order?.userData.street}}, 
+             {{order?.userData.city}}, {{order?.userData.state}}, 
+             {{order?.userData.country}}, {{order?.userData.zipCode}}
+         </li>
+         <li>Customer name: {{ order?.userData.firstName }} {{ order?.userData.lastName }}</li>
+         <li>Phone for contact: {{ order?.userData.phone }}</li>
+    </ul>
+    
 </div>

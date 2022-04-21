@@ -6,6 +6,7 @@ import {
   faCalendarDay, faBox,
   faCreditCard, faMoneyBill
 } from '@fortawesome/free-solid-svg-icons';
+import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
 
 @Component({
   selector: 'app-orders',
@@ -16,7 +17,7 @@ export class OrdersComponent implements OnInit {
 
   currentOrders: ICompletedOrder[];
   pastOrders: ICompletedOrder[];
-  maxDeliveryDays: number = 0;
+  deliveryInfo: IDeliveryInfo;
   selectedOrder: ICompletedOrder;
   detailsToggle: boolean = false;
   @ViewChild("details") detailsDiv: ElementRef;
@@ -42,7 +43,7 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     // Get max delivery days
     this.orderService.getDeliveryPricingData().subscribe(data => {
-      this.maxDeliveryDays = data.maxDelivery;
+      this.deliveryInfo = data;
     });
 
     this.orderService.getAllOrders().subscribe(orders => {
@@ -52,7 +53,7 @@ export class OrdersComponent implements OnInit {
           .reduce((result, element) => {
             const today = new Date();
             const orderDate = new Date(element.createdOn);
-            const maxDeliveryDate = this.calculateDeliveryDate(orderDate, this.maxDeliveryDays);
+            const maxDeliveryDate = this.calculateDeliveryDate(orderDate, this.deliveryInfo.maxDelivery);
 
             // If the max delivery date is less than today's date push element to the first array
             result[maxDeliveryDate < today ? 1 : 0].push(element);
