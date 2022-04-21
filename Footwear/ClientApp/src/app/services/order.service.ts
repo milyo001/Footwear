@@ -18,7 +18,7 @@ export class OrderService {
 
   //Redirect user to the stripe payment page 
   checkOut() {
-    return this.http.get(this.apiUrl + "create-checkout-session");
+    return this.http.get(this.apiUrl + "payments/create-checkout-session");
   }
 
   //Send the order to the server in the body
@@ -30,7 +30,7 @@ export class OrderService {
 
   // Send request to the API to validate if the payment was successfull
   validatePayment(sessionId: string) {
-    return this.http.get(this.apiUrl + 'order/payment-success/?session_id=' + sessionId);
+    return this.http.get(this.apiUrl + 'payments/payment-success/?session_id=' + sessionId);
   }
 
   // Get the delivery data, example: delivery price and delivery time

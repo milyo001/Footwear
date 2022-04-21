@@ -91,7 +91,7 @@ namespace Footwear.Controllers
         /// </summary>
         /// <param name="session_id"></param>
         /// <returns></returns>
-        [HttpGet("order/payment-success")]
+        [HttpGet("payment-success")]
         public async Task<ActionResult> PaymentSuccess([FromQuery] string session_id)
         {
             if (session_id == null) return BadRequest(PaymentErrors.InvalidSession);
