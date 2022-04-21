@@ -1,7 +1,7 @@
 .container{
     display: flex;
-    min-height: 67vh;
-    margin: 20px;
+    min-height: 15vh;
+    flex-wrap: wrap;
 }
 .title{
     border-top: 5px solid wheat;
@@ -9,3 +9,15 @@
     margin-top: 24px;
     padding-top: 12px;
 }
+.details-column {
+    flex-direction: column;
+    width: 49%;
+    text-align: center;
+}
+
+.simple-card{
+ border-bottom: 1px solid wheat;
+ text-align: center;
+ padding: 15px;
+}
+

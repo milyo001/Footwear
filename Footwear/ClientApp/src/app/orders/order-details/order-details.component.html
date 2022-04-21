@@ -1,22 +1,47 @@
-<h2 class="title">Order details</h2>
+<h1 class="title">Order details</h1>
 <div class="container">
-    <div class="delivery">
-
+    <div class="details-column">
+        <section class="simple-card">
+            <div>Min delivery days: {{ deliveryInfo?.minDelivery }}</div>
+            <div>Max delivery days: {{ deliveryInfo?.maxDelivery }}</div>
+            <div>Delivery price: {{ deliveryInfo?.deliveryPrice }}</div>    
+        </section>
+        <section class="simple-card">
+            <div><span class="font-weight-bold">Order made on: </span>{{order?.createdOn}}</div>
+            <div><span class="font-weight-bold">Payment: </span>
+                {{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
+            <div><span class="font-weight-bold">Order Status: </span>{{order?.status | orderStatus }}</div>
+            
+        </section>
     </div>
-    <ul>
-        <li>Created on: {{order?.createdOn}}</li>
-         <li>Payment: {{order?.payment}}</li>
-         <li>Order Status: {{order?.status }}</li>
-         <li>
-             Delivery Address: {{order?.userData.street}}, 
-             {{order?.userData.city}}, {{order?.userData.state}}, 
-             {{order?.userData.country}}, {{order?.userData.zipCode}}
-         </li>
-         <li>Customer name: {{ order?.userData.firstName }} {{ order?.userData.lastName }}</li>
-         <li>Phone for contact: {{ order?.userData.phone }}</li>
-         <li>Min delivery days: {{ deliveryInfo?.minDelivery }}</li>
-         <li>Max delivery days: {{ deliveryInfo?.maxDelivery }}</li>
-         <li>Delivery price: {{ deliveryInfo?.deliveryPrice }}</li>
-    </ul>
+    <div class="details-column">
+        <section class="simple-card">
+            <div>
+                <div class="font-weight-bold">Deliver to: </div>
+                <div>
+                {{order?.userData.street}}, 
+                {{order?.userData.city}}, {{order?.userData.state}}, 
+                {{order?.userData.country}}, {{order?.userData.zipCode}}
+                </div>
+            </div>
+            <div><span class="font-weight-bold">Customer name: </span>{{ order?.userData.firstName }} {{ order?.userData.lastName }}</div>
+            <div><span class="font-weight-bold">Phone for contact: </span>{{ order?.userData.phone }}</div>
+        </section>
+    </div>
     
+    
+    
+    <!-- <section class="simple-card details-price-summary">
+        Order status here!!!
+    </section> -->
+    <!-- <ul>
+        Order status
+        
+         
+         Delivery
+         
+         Products
+         <li>TO DO</li>
+    </ul> -->
+
 </div>
