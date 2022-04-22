@@ -1,3 +1,8 @@
+@media only screen and (max-device-width: 450px) {
+  .product-image{
+    width: 100px;
+  }
+}
 /*form responsive table elements*/
 @media only screen and (max-width: 760px), (min-device-width: 768px) and (max-device-width: 1024px) {
   .size-td {
@@ -12,6 +17,19 @@
     justify-content: center;
   }
 
+  .products-title{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .product-title{
+    width: 100%;
+  }
+
+  .products-title-info{
+    margin-bottom: 10px;
+  }
+
   .user-information {
     display: flex;
     width: 50%;
@@ -20,9 +38,8 @@
 
   .product-image {
     height: 85px;
-    width: auto;
+    width: 125px;
     object-fit: cover;
-    margin: 10px;
   }
 
   .delivery-info {
@@ -54,17 +71,30 @@
   }
 
   .content-fixed-min-height {
-    min-height: 45vh;
+    min-height: 50vh;
   }
 
   .price-card {
     min-height: 450px;
   }
 
+  .confirm-section{
+    display: flex;
+    justify-content: center; 
+    border-top: 4px dotted wheat;
+    margin-top: 15px;
+    padding-top: 15px;
+  }
+
   .conf-div-centered {
     display: flex;
-    align-items: center;
-    justify-content: center;
+    justify-content: center; 
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
   }
 
   .card-icon {

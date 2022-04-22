@@ -9,10 +9,15 @@
   <mat-step>
     <ng-template matStepLabel>Products</ng-template>
     <mat-card class="all-products-card">
-      <label class="text-center">
-        All Products:
-      </label>
-      <p><small>Please, reconfirm all products before ordering.</small></p>
+      <div class="products-title">
+        <div class="product-title">
+          All Products:
+        </div>
+      <div class="products-title-info">
+        <small>Please, reconfirm all products before ordering.</small>
+      </div>
+      </div>
+      
       <mat-card-content class="content-fixed-min-height">
         <div class="d-flex flex-column justify-content-between">
           <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
@@ -28,11 +33,9 @@
           </mat-card>
         </div>
       </mat-card-content>
-      <mat-card-footer class="card-footer-without-margin mb-1">
         <div class="conf-div-centered">
           <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
-      </mat-card-footer>
     </mat-card>
   </mat-step>
   <!--Price details step(2)-->
@@ -81,15 +84,18 @@
               <span><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</span><br />
               <span >{{totalPrice | currency}}</span>
             </div>
+            
           </div>
+          <section class="confirm-section">
+            <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
+            <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
+          </section>
         </mat-card>
-        <div class="conf-div-centered mt-2">
-          <button mat-button matStepperPrevious>Go back <fa-icon class="ml-1" [icon]="faArrowCircleLeft"></fa-icon></button>
-          <button mat-button matStepperNext>Confirm products <fa-icon class="ml-1" [icon]="faArrowCircleRight"></fa-icon></button>
-        </div>
+        
       </mat-card-content>
-
+      
     </mat-card>
+    
 
   </mat-step>
   <mat-step [stepControl]="form">
