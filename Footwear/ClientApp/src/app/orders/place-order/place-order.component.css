@@ -21,6 +21,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    text-align: center;
   }
   .product-title{
     width: 100%;
@@ -52,8 +53,9 @@
     margin-top: 5px;
   }
 
-  .example-section {
+  .import-section {
     margin-bottom: 8px;
+    text-align: center;
   }
 
   .mat-button-toggle-group {
@@ -63,6 +65,12 @@
   .payment-options {
     align-content: center;
     justify-content: center;
+  }
+ 
+  /* Icons */
+
+  fa-icon{
+    font-size: 18px;
   }
 
   .cash-icon {
@@ -81,20 +89,9 @@
   .confirm-section{
     display: flex;
     justify-content: center; 
-    border-top: 4px dotted wheat;
+    border-top: 3px dotted wheat;
     margin-top: 15px;
     padding-top: 15px;
-  }
-
-  .conf-div-centered {
-    display: flex;
-    justify-content: center; 
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    bottom: 0;
   }
 
   .card-icon {

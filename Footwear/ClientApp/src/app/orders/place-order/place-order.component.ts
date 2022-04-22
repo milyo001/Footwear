@@ -12,7 +12,8 @@ import {
   faEdit,
   faHandHoldingUsd,
   faMoneyBillWave,
-  faShippingFast
+  faShippingFast,
+  faCartArrowDown
 }
   from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
@@ -59,7 +60,7 @@ export class PlaceOrderComponent implements OnInit {
   faArrowCircleRight = faArrowCircleRight;
   faArrowCircleLeft = faArrowCircleLeft;
   faEdit = faEdit;
-
+  faCartArrowDown = faCartArrowDown;
   // HTTP operations properties
   cartProducts: ICartProduct[];
   order: IOrder;

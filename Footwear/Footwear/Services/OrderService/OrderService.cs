@@ -77,11 +77,12 @@
             return orderId;
         }
 
-        // Get the latest added order from the database and return it
-        // Created on property MUST be with time(hours and minutes) in order to find it
+        // Get the latest added order for user from the database and return it
+        // CreatedOn property MUST be with time inluded(hours and minutes) in order to find it the accurate information
         public async Task<Order> GetLatestAddedOrderAsync(string token)
         {
             var user = await this._tokenService.GetUserByTokenAsync(token);
+
             var order = await this._db.Orders
                 .Where(x => x.UserId == user.Id)
                 .Include(x => x.Products)
