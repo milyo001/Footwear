@@ -8,7 +8,6 @@
     using Footwear.Services.TokenService;
     using Footwear.ViewModels;
     using Microsoft.EntityFrameworkCore;
-    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -132,13 +131,14 @@
             return viewModel;
         }
 
-        // Returns a collection of order entity by given user id
+        // Returns a collection of order entity by given user id, sorted by latest added
         public async Task<List<Order>> GetAllOrderProductsByUserIdAsync(string userId)
         {
             var orders = await this._db.Orders
                 .Where(o => o.UserId == userId)
                 .Include(o => o.UserData)
                 .Include(o => o.Products)
+                .OrderByDescending(o => o.CreatedOn)
                 .ToListAsync();
             return orders;
         }
