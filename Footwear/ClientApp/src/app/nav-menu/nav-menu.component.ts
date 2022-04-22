@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import {
-  faShoppingCart, faSignOutAlt, faSignInAlt, faAddressCard,
-  faDatabase, 
-  faUser} from '@fortawesome/free-solid-svg-icons';
+  faShoppingCart, faSignOutAlt,
+  faSignInAlt, faAddressCard,
+  faBoxOpen,faUser, faCubes,
+  faInfoCircle }
+from '@fortawesome/free-solid-svg-icons';
 import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -15,15 +17,16 @@ import { CookieService } from 'ngx-cookie-service';
 export class NavMenuComponent {
 
   isExpanded = false;
-  userDetails;
 
   //FontAwesomeIcons:
   faShoppingCart = faShoppingCart;
   faSignOutAlt = faSignOutAlt;
   faSignInAlt = faSignInAlt;
   faAddressCard = faAddressCard;
-  faDatabase = faDatabase;
+  faBoxOpen = faBoxOpen;
   faUser = faUser;
+  faCubes = faCubes;
+  faInfoCircle = faInfoCircle;
 
   constructor(
     private router: Router,
