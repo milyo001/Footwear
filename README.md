@@ -1,10 +1,12 @@
 <img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
-An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (returning only data, not views). 
-The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system and CSS Flexbox). 
-The application contains few products manually seeded in the database, which users can select, pick a size and add to a cart. Then the user can check out the products in the cart,select delivery address and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API).
-The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or some code. I've started with ASP .NET Core 3.1 (started to building it on .NET Core 3.1 and upgraded to .Net 5 later) and Angular 11 (started to building it on Angular 8).
+<p>An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (returning only data, not views).
+The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system and CSS Flexbox).</p>
+<p>
+ The application contains few products manually seeded in the database(I will build admin panel soon), which users can select, pick a size and add to a cart. Then the user can review the products in the cart  and increase/decrease product quiantity or delete the product from cart. Then next step is to select delivery address(or import the data from your account's address) and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). After order is made, the user can see all(current/past or delivered) orders, send an sample invoice email and view order details.
+</p>
+<p>The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or get some sample code.</p>
 
 # Guide / How to run locally on your machine
 1.Download/Clone the repository <br/>
@@ -91,7 +93,6 @@ Example below (replace <<>> with your value):
 | Check/Modify User Information | &#10004; | Check or modify user information, invoice address, first, last name etc. |
 | Remember me option  | &#10060; | Remember user details |
 | Facebook/Google login  | &#10060; | Log in with social network API |
-| Add forget password option | &#10060; | Add forget password option, send email or text message on the phone to reset |
 | Add user token id interceptor | &#10004; | Validate if user token data is valid |
 | Implement lazy loading | &#10004; | Lazy-load the user module |
 ## Product Features 
