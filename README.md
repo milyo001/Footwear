@@ -8,8 +8,8 @@ The application is made mostly for fun and it's usage is not commercial, feel fr
 
 # Guide / How to run locally on your machine
 1.Download/Clone the repository <br/>
-2.Create appsettings.development.json and appsettings.production.json  (present in .gitignore file so you have to create them manually) 
-Example below (replace <<>> with empty value):
+2.Open the API folder and create appsettings.development.json and appsettings.production.json(optional) (present in .gitignore file so you have to create them manually) 
+Example below (replace <<>> with your value):
 ```
 {
   "Logging": {
@@ -20,7 +20,7 @@ Example below (replace <<>> with empty value):
     }
   },
   "ConnectionStrings": {
-    "DefaultConnection": "DATABASE CONNECTION STRING"
+    "DefaultConnection": "<<DATABASE CONNECTION STRING>>"
   },
   "AllowedHosts": "*",
   "AllowedOrigins": {
@@ -32,8 +32,8 @@ Example below (replace <<>> with empty value):
     "ApiUrl": "https://testfootwearapp3.azurewebsites.net",
     "ClientUrl": "https://localhost:4200",
     "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ",
-    "JWT_Secret": "YOUR JWT SECRET KEY HERE",
-    "Stripe_Secret": "YOUR STRIPE SECRET KEY HERE"
+    "JWT_Secret": "<<YOUR JWT SECRET KEY HERE>>",
+    "Stripe_Secret": "<<YOUR STRIPE SECRET KEY HERE>>"
   },
   "MailSettings": {
     "Mail": "assunta.kohler67@ethereal.email",
@@ -59,12 +59,15 @@ Example below (replace <<>> with empty value):
 *You can put random information but the card number should be the one from above
 
 
-# Addons and Libiries
+# Dependencies
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
 * AutoMapper 8.1.1
 * JwtBearer 5.0.13
 * EntityFrameworkCore 5.0.0
 * Stripe.net 39.77.0
+* NETCore.MailKit 2.0.3
+* Moq 4.16.1
+* XUnit 2.4.3
 ## [Angular Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/ClientApp/package.json)
 * Bootstrap 4.5.3
 * Ngx-toastr 11.3.3
@@ -72,6 +75,8 @@ Example below (replace <<>> with empty value):
 * Fontawesome Icons 5.15
 * Angular Animations 11.0.1
 * Angular Material 11.0.1
+* Karma 5.1.1
+* Jasmine 3.6.0
 
 # Functionality
 ## User Features
