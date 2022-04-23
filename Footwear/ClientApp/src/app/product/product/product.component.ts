@@ -16,6 +16,7 @@ export class ProductComponent implements OnInit {
 
   // All products in their original state, fetched from the API
   untouchedProducts: IProduct[] = [];
+  
   showContent: boolean = false;
 
   pageIndex: number = 1;

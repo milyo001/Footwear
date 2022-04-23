@@ -172,16 +172,21 @@ label {
   align-items: center;
 }
 
-
-@media ( max-width: 920px ) {
+@media screen and (max-width: 576px) {
+  .product-image img{
+    height: 18vh;
+  }
+}
+@media ( max-width: 576px ) {
   .product-card {
     flex: 1 21%;
   }
-
+  
   .products .product-card:first-child,
   .products .product-card:nth-child(2) {
     flex: 2 46%;
   }
+ 
 }
 
 @media ( max-width: 600px ) {
