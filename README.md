@@ -2,9 +2,9 @@
 
 # Footwear - Brief Information 
 <p>An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (returning only data, not views).
-The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system and CSS Flexbox).</p>
+The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system, Angular Material UI and Flexbox).</p>
 <p>
- The application contains few products manually seeded in the database(I will build admin panel soon), which users can select, pick a size and add to a cart. Then the user can review the products in the cart  and increase/decrease product quiantity or delete the product from cart. Then next step is to select delivery address(or import the data from your account's address) and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). After order is made, the user can see all(current/past or delivered) orders, send an sample invoice email and view order details.
+The application contains few products manually seeded in the database(I will build admin panel soon), which users can select, pick a size and add to a cart. Then the user can review the products in the cart  and increase/decrease product quiantity or delete the product from cart. Then next step is to select delivery address(or import the data from your account's address) and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). After order is made, the user can see all(current/past or delivered) orders, send an sample invoice email and view order details.
 </p>
 <p>The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or get some sample code.</p>
 
@@ -76,6 +76,7 @@ Example below (replace <<>> with your value):
 * Rxjs 6.6.0 
 * Fontawesome Icons 5.15
 * Angular Animations 11.0.1
+* Ngx Pagination 5.0.0
 * Angular Material 11.0.1
 * Karma 5.1.1
 * Jasmine 3.6.0
@@ -95,6 +96,7 @@ Example below (replace <<>> with your value):
 | Facebook/Google login  | &#10060; | Log in with social network API |
 | Add user token id interceptor | &#10004; | Validate if user token data is valid |
 | Implement lazy loading | &#10004; | Lazy-load the user module |
+
 ## Product Features 
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
