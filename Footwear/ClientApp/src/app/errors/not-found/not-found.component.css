@@ -1,8 +1,9 @@
 .wrapper{
 text-align: center;
+background-color: #F7F7F7;
+min-height: 84vh;
 }
 .image-gif{
     width: 100%;
-
 }
 
