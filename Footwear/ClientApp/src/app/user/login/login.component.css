@@ -276,3 +276,22 @@ input[type=text], input[type=password] {
 #icon {
   width: 60%;
 }
+
+.checkbox-container{
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.checkbox{
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  accent-color: #56baed;
+}
+
+.checkbox-content{
+  opacity: 0.5;
+}
