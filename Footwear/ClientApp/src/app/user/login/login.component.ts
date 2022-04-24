@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { CookieService } from 'ngx-cookie-service';
-import { LoadingService } from '../../services/loading.service';
 import { ILoginData } from '../../interfaces/user/loginData';
 
 @Component({
@@ -18,10 +17,10 @@ export class LoginComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private toastr: ToastrService,
-    private cookieService: CookieService,
-    public loader: LoadingService) { }
+    private cookieService: CookieService) { }
 
-  //The method will prevent any user from accessing the login view, who is already authenticated
+  // The method will prevent any user from accessing the login view from the URL address,
+  // who is already authenticated
   ngOnInit(): void {
     if (this.cookieService.get('token') != '') {
       this.router.navigate(['/']);
