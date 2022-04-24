@@ -1,4 +1,3 @@
-<img src="https://cdn.pixabay.com/photo/2014/04/02/10/53/shopping-cart-304843_1280.png" width=20% height=20%>
 
 # Footwear - Brief Information 
 <p>An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API (returning only data, not views).
@@ -92,7 +91,7 @@ Example below (replace <<>> with your value):
 | Add User Information | &#10004; | Add default user billing information |
 | Import User Information | &#10004; | Import user information functionality when finalizing order |
 | Check/Modify User Information | &#10004; | Check or modify user information, invoice address, first, last name etc. |
-| Remember me option  | &#10060; | Remember user details |
+| Remember me option  | &#10004; | Remember user details |
 | Facebook/Google login  | &#10060; | Log in with social network API |
 | Add user token id interceptor | &#10004; | Validate if user token data is valid |
 | Implement lazy loading | &#10004; | Lazy-load the user module |
