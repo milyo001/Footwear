@@ -19,6 +19,14 @@
               <fa-icon [icon]="faShoppingCart"></fa-icon>Cart
             </a>
           </li>
+          <li *ngIf="isAuthenticated()" class="nav-item">
+            <a class="nav-link" [routerLink]="['orders']" (click)="toggle()">
+              <fa-icon [icon]="faBoxOpen"></fa-icon>My Orders
+            </a>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link" [routerLink]="['/about']" (click)="toggle()">
+              <fa-icon [icon]="faInfoCircle"></fa-icon>About</a>
+          </li>
           <li *ngIf="!isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link" [routerLink]="['user/register']" (click)="toggle()">
               <fa-icon [icon]="faAddressCard"></fa-icon>Register
@@ -29,18 +37,12 @@
               <fa-icon [icon]="faSignInAlt"></fa-icon>Login
             </a>
           </li>
-          <li *ngIf="isAuthenticated()" class="nav-item">
-            <a class="nav-link" [routerLink]="['orders']" (click)="toggle()">
-              <fa-icon [icon]="faBoxOpen"></fa-icon>My Orders
-            </a>
+
           <li *ngIf="isAuthenticated()" class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link " [routerLink]="['user/userProfile']" (click)="toggle()">
               <fa-icon [icon]="faUser"></fa-icon>Account
             </a>
-            <li class="nav-item" [routerLinkActive]="['link-active']">
-              <a class="nav-link" [routerLink]="['/about']" (click)="toggle()">
-                <fa-icon [icon]="faInfoCircle"></fa-icon>About</a>
-            </li>
+
           <li *ngIf="isAuthenticated()" class="nav-item">
             <a class="logout-link nav-link" (click)="onLogout(); toggle();">
               <fa-icon [icon]="faSignOutAlt"></fa-icon>Logout
