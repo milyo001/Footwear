@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { LoadingService } from '../../services/loading.service';
 import { IRegisterData } from '../../interfaces/user/registerData';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class RegisterComponent implements OnInit {
     public userService: UserService,
     private toastr: ToastrService,
     private router: Router,
-    public loader: LoadingService) {
+    private cookieService: CookieService) {
 
     this.form = fb.group({
       email: ['', [Validators.required, Validators.pattern(this.emailRegex), Validators.maxLength(30)], []],
@@ -40,7 +41,10 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form.reset();
-    };
+    if (this.cookieService.get('token') != '') {
+      this.router.navigate(['/']);
+    }
+  };
 
   onSubmit(formData) {
     const registerData: IRegisterData = {
@@ -78,5 +82,5 @@ export class RegisterComponent implements OnInit {
       }
     }
   }
- 
+
 }
