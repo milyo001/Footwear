@@ -22,6 +22,7 @@ import { PaymentSuccessComponent } from './payment/payment-success/payment-succe
 import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.component';
 import { OrderService } from './services/order.service';
 import { SharedModule } from './modules/shared.module';
+import { NotFoundComponent } from './errors/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SharedModule } from './modules/shared.module';
     ModalComponent,
     PaymentSuccessComponent,
     PaymentCancelComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
