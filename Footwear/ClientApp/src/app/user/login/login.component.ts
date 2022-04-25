@@ -13,6 +13,8 @@ import { ILoginData } from '../../interfaces/user/loginData';
 })
 export class LoginComponent implements OnInit {
 
+  isChecked = true;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -27,12 +29,18 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  //Send the token to the Web API to authenticate
+  // Send a request the API to authenticate, generate, encrypt and return token
   onSubmit(form: NgForm) {
     const loginData: ILoginData = form.value;
     this.userService.login(loginData).subscribe(
       (response: any) => {
-        this.cookieService.set('token', response.token)
+        if(this.isChecked){
+          this.cookieService.set('token', response.token, { expires: 30} );
+        }
+        else {
+          this.cookieService.set('token', response.token, { expires: 1} );
+        }
+        // this.cookieService.set('token', response.token)
         this.router.navigateByUrl('/');
       },
       error => {

@@ -10,7 +10,7 @@
       <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.required">* Password is required!</div>
       <div class="validation-error" *ngIf="passwordInput.touched && passwordInput.errors?.minlength">* Password cannot be less than 6 symbols!</div>
       <label class="checkbox-container fadeIn third">
-        <input class="checkbox" type="checkbox" id="html" checked>
+        <input [(ngModel)]="isChecked" name="isChecked" class="checkbox" type="checkbox" checked>
         <div class="checkbox-content">Remember me</div>
       </label>
       <input [disabled]="form.invalid" type="submit" class="fadeIn fourth" value="Log In">
