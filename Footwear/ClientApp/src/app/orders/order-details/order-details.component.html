@@ -70,12 +70,10 @@
             Order products
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <p>I'm visible because I am open</p>
-        <p>I'm visible because I am open</p>
-        <p>I'm visible because I am open</p>
-        <p>I'm visible because I am open</p>
-        <p>I'm visible because I am open</p>
-        <p>I'm visible because I am open</p>
+        <app-order-details-product *ngFor="let product of order?.cartProducts">
+          
+        </app-order-details-product>
+
       </mat-expansion-panel>
     </mat-accordion>
   </section>

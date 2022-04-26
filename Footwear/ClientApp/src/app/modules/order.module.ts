@@ -9,6 +9,7 @@ import { BoldPipe } from "../pipes/bold.pipe";
 import { OrderStatusPipe } from "../pipes/order-status.pipe";
 import { SharedModule } from "./shared.module";
 import { OrderDetailsComponent } from "../orders/order-details/order-details.component";
+import { OrderDetailsProductComponent } from "../orders/order-details-product/order-details-product.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
     PlaceOrderComponent,
     OrdersComponent,
     OrderDetailsComponent,
+    OrderDetailsProductComponent,
     BoldPipe,
     OrderStatusPipe
   ],
