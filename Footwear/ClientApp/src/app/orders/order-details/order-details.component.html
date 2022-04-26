@@ -28,6 +28,22 @@
         <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
       </div>
     </section>
+
+
+    <section class="delivery-section">
+      <div class="grid-content">
+        <div>Phone for contact</div>
+        <fa-icon class="calendar-icon" [icon]="faPhoneSquare"></fa-icon>
+        <div>{{ order?.userData.phone }}</div>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div class="grid-content">
+        <div>Name on invoice</div>
+        <fa-icon class="calendar-icon" [icon]="faUser"></fa-icon>
+        <div>{{ order?.userData.firstName }} {{ order?.userData.lastName }}</div>
+      </div>
+    </section>
     <section class="delivery-section">
       <div class="grid-content">
         <div>Payment with</div>
@@ -35,21 +51,16 @@
         <div>{{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
       </div>
     </section>
+    <section class="delivery-section">
+      <div class="grid-content">
+        <div>Deliver to</div>
+        <fa-icon class="calendar-icon" [icon]="faAddress"></fa-icon>
+        <div>{{order?.userData.street}},
+          {{order?.userData.city}}, {{order?.userData.state}},
+          {{order?.userData.country}}, {{order?.userData.zipCode}}</div>
+      </div>
+    </section>
 
-    <section class="delivery-section">
-      <div class="grid-content">
-        <div>Payment</div>
-        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
-        <div>{{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
-      </div>
-    </section>
-    <section class="delivery-section">
-      <div class="grid-content">
-        <div>Payment with</div>
-        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
-        <div>{{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
-      </div>
-    </section>
 
   </div>
   <!-- <h1 class="title">Order details</h1>

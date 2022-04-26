@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ICompletedOrder } from 'src/app/interfaces/order/completedOrder';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { faTruckLoading, faBarcode, faCalendarAlt,
-  faWallet, faCompass, faMoneyCheckAlt
+  faWallet, faCompass, faMoneyCheckAlt, faUser, faPhoneSquare, faAddressCard
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -25,6 +25,9 @@ export class OrderDetailsComponent implements AfterViewInit {
   faWallet = faWallet;
   faCompass = faCompass;
   faMoneyCheckAlt = faMoneyCheckAlt;
+  faUser = faUser;
+  faPhoneSquare = faPhoneSquare;
+  faAddress = faAddressCard;
 
   constructor() {
 
