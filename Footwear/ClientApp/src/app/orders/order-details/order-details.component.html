@@ -2,16 +2,16 @@
   <div class="container-grid">
     <section class="delivery-section">
       <div class="grid-content">
-        <div>Delivery time</div>
-        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
-        <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
+        <div>Delivery price</div>
+        <fa-icon class="calendar-icon" [icon]="faBarcode"></fa-icon>
+        <div>{{ deliveryInfo?.deliveryPrice | currency }}</div>
       </div>
     </section>
     <section class="delivery-section">
       <div class="grid-content">
-        <div>Delivery price</div>
-        <fa-icon class="calendar-icon" [icon]="faBarcode"></fa-icon>
-        <div>{{ deliveryInfo?.deliveryPrice | currency }}</div>
+        <div>Total Price</div>
+        <fa-icon class="calendar-icon" [icon]="faMoneyCheckAlt"></fa-icon>
+        <div>{{ totalPrice | currency }}</div>
       </div>
     </section>
     <section class="delivery-section">
@@ -23,18 +23,19 @@
     </section>
     <section class="delivery-section">
       <div class="grid-content">
+        <div>Delivery time</div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+        <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div class="grid-content">
         <div>Payment with</div>
         <fa-icon class="calendar-icon" [icon]="faWallet"></fa-icon>
         <div>{{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
       </div>
     </section>
-    <section class="delivery-section">
-      <div class="grid-content">
-        <div>Total Price</div>
-        <fa-icon class="calendar-icon" [icon]="faMoneyCheckAlt"></fa-icon>
-        <div>{{ totalPrice | currency }}</div>
-      </div>
-    </section>
+
     <section class="delivery-section">
       <div class="grid-content">
         <div>Payment</div>
