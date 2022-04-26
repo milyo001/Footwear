@@ -1,14 +1,44 @@
 <mat-card>
-  <div class="section-content">
+  <div class="container-grid">
     <section class="delivery-section">
-    <div>
-      <fa-icon class="calendar-icon" [icon]="faTruckLoading">Test</fa-icon>
-    </div>
-
+      <div class="grid-content">
+        <div>Delivery time</div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+        <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div class="grid-content">
+        <div>Delivery price</div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+        <div>{{ deliveryInfo?.deliveryPrice | currency }}</div>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div class="grid-content">
+        <div>Order made on</div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+        <div>{{order?.createdOn}}</div>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+      </div>
+    </section>
+    <section class="delivery-section">
+      <div>
+        <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
+      </div>
     </section>
 
   </div>
-  <h1 class="title">Order details</h1>
+  <!-- <h1 class="title">Order details</h1>
   <div class="container">
       <div class="details-column">
           <section class="simple-card">
@@ -38,6 +68,6 @@
               <div><span class="font-weight-bold">Phone for contact: </span>{{ order?.userData.phone }}</div>
           </section>
       </div>
-  </div>
+  </div> -->
 
 </mat-card>

@@ -3,6 +3,20 @@
     min-height: 15vh;
     flex-wrap: wrap;
 }
+
+.container-grid{
+  display: grid;
+  grid-template-columns: 120px 120px;
+  grid-template-rows: 141px 141px;
+  column-gap: 10px;
+  row-gap: 15px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.grid-content{
+  text-align: center;
+}
 .section-content{
   display: flex;
   min-height: 15vh;
