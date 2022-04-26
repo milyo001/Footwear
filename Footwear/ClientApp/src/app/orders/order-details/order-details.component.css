@@ -18,6 +18,9 @@
   text-align: center;
   font-weight: 500;
 }
+.products-grid-section{
+  width: 100%;
+}
 .section-content{
   display: flex;
   min-height: 15vh;
