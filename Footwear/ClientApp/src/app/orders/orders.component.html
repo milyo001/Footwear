@@ -1,8 +1,8 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab id="current-orders" label="Current Orders">
-    <mat-selection-list class="custom-height" #ordersList [multiple]="false" 
+    <mat-selection-list class="custom-height" #ordersList [multiple]="false"
     (selectionChange)="onOrderChange($event)" >
-      <mat-list-option *ngFor="let order of currentOrders | paginate: 
+      <mat-list-option *ngFor="let order of currentOrders | paginate:
       { itemsPerPage: ordersPerPage, currentPage: pageIndex }" [value]="order">
         <div class="mat-list-row">
           <ul class="mat-list-content">
@@ -42,7 +42,7 @@
   <mat-tab class="past-orders" label="Past Orders">
     <mat-selection-list class="custom-height" #pastOrdersId [multiple]="false"
     (selectionChange)="onOrderChange($event)">
-      <mat-list-option *ngFor="let order of pastOrders | paginate: 
+      <mat-list-option *ngFor="let order of pastOrders | paginate:
       { itemsPerPage: ordersPerPage, currentPage: pageIndexPastOrders }" [value]="order">
         <div class="mat-list-row">
           <ul class="mat-list-content">
@@ -81,6 +81,6 @@
   </mat-tab>
 </mat-tab-group>
 <div #details>
-  <app-order-details  [hidden]="!detailsToggle" [order]="selectedOrder"
-  [deliveryInfo]="deliveryInfo"></app-order-details>
+  <app-order-details [hidden]="!detailsToggle" [order]="selectedOrder"
+  [deliveryInfo]="deliveryInfo" [totalPrice]="totalOrderPrice"></app-order-details>
 </div>

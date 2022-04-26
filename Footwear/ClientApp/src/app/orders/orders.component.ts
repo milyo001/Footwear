@@ -20,7 +20,8 @@ export class OrdersComponent implements OnInit {
   deliveryInfo: IDeliveryInfo;
   selectedOrder: ICompletedOrder;
   detailsToggle: boolean = false;
-  @ViewChild("details") detailsDiv: ElementRef;
+  @ViewChild("details") detailsEl: ElementRef;
+  totalOrderPrice: number = 0;
 
 
   // Pagination options
@@ -66,8 +67,9 @@ export class OrdersComponent implements OnInit {
 
   viewOrder() {
     this.detailsToggle = true;
+    this.calculateTotalPrice();
     setTimeout(() => {
-      this.detailsDiv.nativeElement.scrollIntoView({ behavior: "smooth" });
+      this.detailsEl.nativeElement.scrollIntoView({ behavior: "smooth" });
     }, 100)
   }
 
@@ -102,5 +104,13 @@ export class OrdersComponent implements OnInit {
   onOrderChange(event: any) {
     this.selectedOrder = event.option.value;
     this.detailsToggle = false;
+  }
+
+  // Returns the total order price with the delivery fee
+  calculateTotalPrice(){
+    this.totalOrderPrice = this.selectedOrder.cartProducts.reduce((acc, obj) => {
+      return acc + obj.price;
+    }, 0);
+    this.totalOrderPrice += this.deliveryInfo.deliveryPrice;
   }
 }

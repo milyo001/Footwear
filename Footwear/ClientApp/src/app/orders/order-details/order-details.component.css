@@ -16,6 +16,7 @@
 
 .grid-content{
   text-align: center;
+  font-weight: 500;
 }
 .section-content{
   display: flex;
