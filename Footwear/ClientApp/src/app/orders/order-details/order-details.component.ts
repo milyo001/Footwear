@@ -2,7 +2,7 @@ import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
 import { ICompletedOrder } from 'src/app/interfaces/order/completedOrder';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { faTruckLoading, faBarcode, faCalendarAlt,
-  faWallet, faCompass, faMoneyCheckAlt, faUser, faPhoneSquare, faAddressCard
+  faWallet, faCompass, faMoneyCheckAlt, faUser, faPhoneSquare, faAddressCard, faHandHolding, faHandHoldingUsd
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -17,6 +17,8 @@ export class OrderDetailsComponent implements AfterViewInit {
   @Input() totalPrice: number;
 
   orderTotPrice: number = 0;
+  // Used in mat-accordion
+  panelOpenState = false;
 
   // Icons
   faTruckLoading = faTruckLoading;
@@ -28,6 +30,7 @@ export class OrderDetailsComponent implements AfterViewInit {
   faUser = faUser;
   faPhoneSquare = faPhoneSquare;
   faAddress = faAddressCard;
+  faHandHoldingUsd = faHandHoldingUsd;
 
   constructor() {
 

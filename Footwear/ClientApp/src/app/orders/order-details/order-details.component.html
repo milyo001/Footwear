@@ -3,7 +3,7 @@
     <section class="delivery-section">
       <div class="grid-content">
         <div>Delivery price</div>
-        <fa-icon class="calendar-icon" [icon]="faBarcode"></fa-icon>
+        <fa-icon class="calendar-icon" [icon]="faHandHoldingUsd"></fa-icon>
         <div>{{ deliveryInfo?.deliveryPrice | currency }}</div>
       </div>
     </section>
@@ -61,5 +61,22 @@
       </div>
     </section>
   </div>
-  <div>Test !</div>
+  <section class="products-section">
+    <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Order products
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+        <p>I'm visible because I am open</p>
+        <p>I'm visible because I am open</p>
+        <p>I'm visible because I am open</p>
+        <p>I'm visible because I am open</p>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </section>
 </mat-card>
