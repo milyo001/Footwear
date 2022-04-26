@@ -3,6 +3,22 @@
     min-height: 15vh;
     flex-wrap: wrap;
 }
+.section-content{
+  display: flex;
+  min-height: 15vh;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+fa-icon{
+  font-size: 45px;
+}
+.mat-card {
+  margin-top: 10px;
+  background-color: #F5F5F5;
+}
+
 .title{
     border-top: 5px solid wheat;
     text-align: center;

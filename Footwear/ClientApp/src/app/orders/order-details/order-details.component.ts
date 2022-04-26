@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ICompletedOrder } from 'src/app/interfaces/order/completedOrder';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
+import { faTruckLoading,
+} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-order-details',
@@ -12,6 +14,9 @@ export class OrderDetailsComponent implements OnInit {
   @Input() order: ICompletedOrder;
   @Input() deliveryInfo: IDeliveryInfo;
 
+  // Icons
+  faTruckLoading = faTruckLoading;
+
   constructor() { }
 
   ngOnInit(): void {
@@ -21,6 +26,6 @@ export class OrderDetailsComponent implements OnInit {
     console.log(this.order.createdOn);
     console.log(this.deliveryInfo);
   }
-  
+
 
 }
