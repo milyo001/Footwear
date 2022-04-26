@@ -70,8 +70,8 @@
             Order products
           </mat-panel-title>
         </mat-expansion-panel-header>
-        <app-order-details-product *ngFor="let product of order?.cartProducts">
-          
+        <app-order-details-product *ngFor="let item of order?.cartProducts" [product]="item">
+
         </app-order-details-product>
 
       </mat-expansion-panel>
