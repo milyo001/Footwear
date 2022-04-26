@@ -15,8 +15,5 @@ export class OrderDetailsProductComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  test(){
-    console.log(this.product);
-  }
-  
+
 }
