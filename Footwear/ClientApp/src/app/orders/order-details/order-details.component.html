@@ -1,59 +1,59 @@
 <mat-card>
   <div class="container-grid">
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Delivery price</div>
         <fa-icon class="calendar-icon" [icon]="faHandHoldingUsd"></fa-icon>
-        <div>{{ deliveryInfo?.deliveryPrice | currency }}</div>
+        <div class="grid-content-data">{{ deliveryInfo?.deliveryPrice | currency }}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Total Price</div>
         <fa-icon class="calendar-icon" [icon]="faMoneyCheckAlt"></fa-icon>
-        <div>{{ totalPrice | currency }}</div>
+        <div class="grid-content-data">{{ totalPrice | currency }}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Order made on</div>
         <fa-icon class="calendar-icon" [icon]="faCalendarAlt"></fa-icon>
-        <div>{{order?.createdOn}}</div>
+        <div class="grid-content-data">{{order?.createdOn}}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Delivery time</div>
         <fa-icon class="calendar-icon" [icon]="faTruckLoading"></fa-icon>
-        <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
+        <div class="grid-content-data">{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Phone for contact</div>
         <fa-icon class="calendar-icon" [icon]="faPhoneSquare"></fa-icon>
-        <div>{{ order?.userData.phone }}</div>
+        <div class="grid-content-data">{{ order?.userData.phone }}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Name on invoice</div>
         <fa-icon class="calendar-icon" [icon]="faUser"></fa-icon>
-        <div>{{ order?.userData.firstName }} {{ order?.userData.lastName }}</div>
+        <div class="grid-content-data">{{ order?.userData.firstName }} {{ order?.userData.lastName }}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Payment with</div>
         <fa-icon class="calendar-icon" [icon]="faWallet"></fa-icon>
         <div>{{order?.payment == 'card' ? 'Paid with card' : 'Payment on delivery'}}</div>
       </div>
     </section>
-    <section class="delivery-section">
+    <section>
       <div class="grid-content">
         <div>Deliver to</div>
         <fa-icon class="calendar-icon" [icon]="faAddress"></fa-icon>
-        <div>{{order?.userData.street}},
+        <div class="grid-content-data">{{order?.userData.street}},
           {{order?.userData.city}}, {{order?.userData.state}},
           {{order?.userData.country}}, {{order?.userData.zipCode}}</div>
       </div>

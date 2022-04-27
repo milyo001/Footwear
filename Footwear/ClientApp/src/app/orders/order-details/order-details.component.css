@@ -16,9 +16,11 @@
 
 .grid-content{
   text-align: center;
-  font-weight: 500;
 }
 
+.grid-content-data{
+  font-weight: 500;
+}
 .products-grid-section{
   width: 100%;
 }
