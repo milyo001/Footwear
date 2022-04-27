@@ -3,26 +3,28 @@ import { ToastrService } from 'ngx-toastr';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { OrderService } from '../services/order.service';
 import {
-  faCalendarDay, faBox,
-  faCreditCard, faMoneyBill
+  faCalendarDay,
+  faBox,
+  faCreditCard,
+  faMoneyBill,
 } from '@fortawesome/free-solid-svg-icons';
 import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
-  styleUrls: ['./orders.component.css']
+  styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent implements OnInit {
-
   currentOrders: ICompletedOrder[];
   pastOrders: ICompletedOrder[];
   deliveryInfo: IDeliveryInfo;
   selectedOrder: ICompletedOrder;
-  detailsToggle: boolean = false;
-  @ViewChild("details") detailsEl: ElementRef;
   totalOrderPrice: number = 0;
 
+  // Document properties
+  detailsToggle: boolean = false;
+  @ViewChild('details') detailsEl: ElementRef;
 
   // Pagination options
   pageIndex: number = 1;
@@ -39,58 +41,66 @@ export class OrdersComponent implements OnInit {
   faCreditCard = faCreditCard;
   faMoneyBill = faMoneyBill;
 
-  constructor(private orderService: OrderService, private toastr: ToastrService) { }
+  constructor(
+    private orderService: OrderService,
+    private toastr: ToastrService
+  ) {}
 
   ngOnInit(): void {
     // Get max delivery days
-    this.orderService.getDeliveryPricingData().subscribe(data => {
+    this.orderService.getDeliveryPricingData().subscribe((data) => {
       this.deliveryInfo = data;
     });
 
-    this.orderService.getAllOrders().subscribe(orders => {
+    this.orderService.getAllOrders().subscribe((orders) => {
       // Use "deconstruction" style assignment
-      [this.currentOrders, this.pastOrders] =
-        orders
-          .reduce((result, element) => {
-            const today = new Date();
-            const orderDate = new Date(element.createdOn);
-            const maxDeliveryDate = this.calculateDeliveryDate(orderDate, this.deliveryInfo.maxDelivery);
+      [this.currentOrders, this.pastOrders] = orders.reduce(
+        (result, element) => {
+          const today = new Date();
+          const orderDate = new Date(element.createdOn);
+          const maxDeliveryDate = this.calculateDeliveryDate(
+            orderDate,
+            this.deliveryInfo.maxDelivery
+          );
 
-            // If the max delivery date is less than today's date push element to the first array
-            result[maxDeliveryDate < today ? 1 : 0].push(element);
-            return result;
-          },
-            // By default return empty array, can be further chained with map() or other functions.
-            [[], []]);
+          // If the max delivery date is less than today's date push element to the first array
+          result[maxDeliveryDate < today ? 1 : 0].push(element);
+          return result;
+        },
+        // By default return empty array, can be further chained with map() or other functions.
+        [[], []]
+      );
     });
-  };
+  }
 
   viewOrder() {
     this.detailsToggle = true;
     this.calculateTotalPrice();
     setTimeout(() => {
-      this.detailsEl.nativeElement.scrollIntoView({ behavior: "smooth" });
-    }, 100)
+      this.detailsEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   }
 
   sendEmail(sendEmailBtn: any) {
     const id = this.selectedOrder.orderId;
     sendEmailBtn.disabled = true;
 
-    this.orderService.sendEmailForOrder(id).subscribe((response: any) => {
-      if (response.sent) {
-        this.toastr.info("Email sent!");
-        // Disable send button for 5 sec to prevent spammy/unsolicited behavior
-        setInterval(() => {
-          sendEmailBtn.disabled = false;
-        }, 5000);
-      }
-    },
-      err => {
-        this.toastr.info("Something went wrong", err.error.message);
+    this.orderService.sendEmailForOrder(id).subscribe(
+      (response: any) => {
+        if (response.sent) {
+          this.toastr.info('Email sent!');
+          // Disable send button for 5 sec to prevent spammy/unsolicited behavior
+          setInterval(() => {
+            sendEmailBtn.disabled = false;
+          }, 5000);
+        }
+      },
+      (err) => {
+        this.toastr.info('Something went wrong', err.error.message);
         console.log(err);
         sendEmailBtn.disabled = false;
-      })
+      }
+    );
   }
 
   // Returns the actual delivery date by given max delivery days
@@ -98,7 +108,7 @@ export class OrdersComponent implements OnInit {
     var date = new Date(orderDate);
     date.setDate(date.getDate() + days);
     return date;
-  }
+  };
 
   // Set the property selectedOrder when order is changed in mat-list-option list of elements
   onOrderChange(event: any) {
@@ -107,10 +117,13 @@ export class OrdersComponent implements OnInit {
   }
 
   // Returns the total order price with the delivery fee
-  calculateTotalPrice(){
-    this.totalOrderPrice = this.selectedOrder.cartProducts.reduce((acc, obj) => {
-      return acc + obj.price;
-    }, 0);
+  calculateTotalPrice() {
+    this.totalOrderPrice = this.selectedOrder.cartProducts.reduce(
+      (acc, obj) => {
+        return acc + obj.price;
+      },
+      0
+    );
     this.totalOrderPrice += this.deliveryInfo.deliveryPrice;
   }
 }

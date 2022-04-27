@@ -1,7 +1,6 @@
 <mat-tab-group mat-align-tabs="center">
   <mat-tab id="current-orders" label="Current Orders">
-    <mat-selection-list class="custom-height" #ordersList [multiple]="false"
-    (selectionChange)="onOrderChange($event)" >
+    <mat-selection-list class="custom-height" #ordersList [multiple]="false" (selectionChange)="onOrderChange($event)">
       <mat-list-option *ngFor="let order of currentOrders | paginate:
       { itemsPerPage: ordersPerPage, currentPage: pageIndex }" [value]="order">
         <div class="mat-list-row">
@@ -25,8 +24,7 @@
     </mat-selection-list>
     <section>
       <div class="mt-3 d-flex justify-content-between" *ngIf="selectedOrder">
-        <button mat-stroked-button #sendEmailBtn
-          (click)="sendEmail(sendEmailBtn)">Resend Email</button>
+        <button mat-stroked-button #sendEmailBtn (click)="sendEmail(sendEmailBtn)">Resend Email</button>
         <button mat-stroked-button (click)="viewOrder()">View
           Details</button>
       </div>
@@ -38,10 +36,9 @@
       </div>
     </section>
   </mat-tab>
-
   <mat-tab class="past-orders" label="Past Orders">
     <mat-selection-list class="custom-height" #pastOrdersId [multiple]="false"
-    (selectionChange)="onOrderChange($event)">
+      (selectionChange)="onOrderChange($event)">
       <mat-list-option *ngFor="let order of pastOrders | paginate:
       { itemsPerPage: ordersPerPage, currentPage: pageIndexPastOrders }" [value]="order">
         <div class="mat-list-row">
@@ -64,8 +61,7 @@
       </mat-list-option>
       <section>
         <div class="mt-3 d-flex justify-content-between" *ngIf="selectedOrder">
-          <button mat-stroked-button #sendEmailBtn
-            (click)="sendEmail(sendEmailBtn)">Resend Email</button>
+          <button mat-stroked-button #sendEmailBtn (click)="sendEmail(sendEmailBtn)">Resend Email</button>
           <button mat-stroked-button (click)="viewOrder()">View
             Details</button>
         </div>
@@ -81,6 +77,8 @@
   </mat-tab>
 </mat-tab-group>
 <div #details>
-  <app-order-details [hidden]="!detailsToggle" [order]="selectedOrder"
-  [deliveryInfo]="deliveryInfo" [totalPrice]="totalOrderPrice"></app-order-details>
+  <app-order-details [hidden]="!detailsToggle"
+  [order]="selectedOrder"
+  [deliveryInfo]="deliveryInfo"
+  [totalPrice]="totalOrderPrice"></app-order-details>
 </div>
