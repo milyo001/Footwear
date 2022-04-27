@@ -65,7 +65,7 @@
                            (closed)="panelOpenState = false">
         <mat-expansion-panel-header>
           <mat-panel-title>
-            Order products
+            Order products ({{order?.cartProducts.length}})
           </mat-panel-title>
         </mat-expansion-panel-header>
         <app-order-details-product *ngFor="let item of order?.cartProducts" [product]="item">
