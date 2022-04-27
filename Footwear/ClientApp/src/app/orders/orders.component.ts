@@ -25,6 +25,7 @@ export class OrdersComponent implements OnInit {
   // Document properties
   detailsToggle: boolean = false;
   @ViewChild('details') detailsEl: ElementRef;
+  @ViewChild('ordersContainer') ordersEl: ElementRef;
 
   // Pagination options
   pageIndex: number = 1;
@@ -73,6 +74,7 @@ export class OrdersComponent implements OnInit {
     });
   }
 
+  // View the selected order
   viewOrder() {
     this.detailsToggle = true;
     this.calculateTotalPrice();
@@ -125,5 +127,13 @@ export class OrdersComponent implements OnInit {
       0
     );
     this.totalOrderPrice += this.deliveryInfo.deliveryPrice;
+  }
+
+  // Close the details section when the close button is clicked in child component
+  closeDetailsSection(value: boolean){
+    this.ordersEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
+    setTimeout(()=> {
+      this.detailsToggle = value;
+    }, 400)
   }
 }

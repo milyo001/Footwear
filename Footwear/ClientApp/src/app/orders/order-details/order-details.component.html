@@ -28,8 +28,6 @@
         <div>{{deliveryInfo?.minDelivery }}-{{ deliveryInfo?.maxDelivery}} days</div>
       </div>
     </section>
-
-
     <section class="delivery-section">
       <div class="grid-content">
         <div>Phone for contact</div>
@@ -76,5 +74,8 @@
 
       </mat-expansion-panel>
     </mat-accordion>
+  </section>
+  <section class="details-close-section">
+    <button mat-stroked-button (click)="closeDetailsSection()">Close details</button>
   </section>
 </mat-card>

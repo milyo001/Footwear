@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { ICompletedOrder } from 'src/app/interfaces/order/completedOrder';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { faTruckLoading, faBarcode, faCalendarAlt,
-  faWallet, faCompass, faMoneyCheckAlt, faUser, faPhoneSquare, faAddressCard, faHandHolding, faHandHoldingUsd
+  faWallet, faCompass, faMoneyCheckAlt, faUser, faPhoneSquare,
+  faAddressCard, faHandHoldingUsd
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,11 +11,14 @@ import { faTruckLoading, faBarcode, faCalendarAlt,
   templateUrl: './order-details.component.html',
   styleUrls: ['./order-details.component.css']
 })
-export class OrderDetailsComponent implements AfterViewInit {
+export class OrderDetailsComponent {
 
   @Input() order: ICompletedOrder;
   @Input() deliveryInfo: IDeliveryInfo;
   @Input() totalPrice: number;
+
+  // An event always emiting false boolean value to close the entire details section
+  @Output() detailsToggleEvent = new EventEmitter<boolean>();;
 
   orderTotPrice: number = 0;
   // Used in mat-accordion
@@ -32,24 +36,11 @@ export class OrderDetailsComponent implements AfterViewInit {
   faAddress = faAddressCard;
   faHandHoldingUsd = faHandHoldingUsd;
 
-  constructor() {
+  constructor() { }
 
-
-    // const sum = this.order.cartProducts.reduce((accumulator, object) => {
-    //   return accumulator + object.price;
-    // }, 0);
-    // this.orderTotPrice = sum;
+  // Close the details section in parent component
+  closeDetailsSection() {
+    this.detailsToggleEvent.emit(false);
   }
-  ngAfterViewInit(): void {
-    console.log(this.order?.cartProducts);
-  }
-
-
-  test(){
-    console.log(this.deliveryInfo);
-    console.log(this.order);
-    console.log(this.orderTotPrice);
-  }
-
 
 }

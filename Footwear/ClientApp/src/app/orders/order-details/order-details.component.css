@@ -46,22 +46,7 @@ fa-icon{
   margin-bottom: 20px;
 }
 
-.title{
-  border-top: 5px solid wheat;
-  text-align: center;
-  margin-top: 24px;
-  padding-top: 12px;
+.details-close-section{
+  display: flex;
+    justify-content: center;
 }
-
-.details-column {
-    flex-direction: column;
-    width: 49%;
-    text-align: center;
-}
-
-.simple-card{
- border-bottom: 1px solid wheat;
- text-align: center;
- padding: 15px;
-}
-
