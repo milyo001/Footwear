@@ -93,11 +93,10 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
         this.email = data.email;
   }
 
-  updateProfile(form: any) {
+   updateProfile(form: any) {
     const userData: IUserData = form.value;
-    this.userService.updateUserProfile(userData).subscribe(
+     this.userService.updateUserProfile(userData).subscribe(
       (response: any) => {
-        console.log(response);
         if (response.succeeded) {
           this.toastr.success("Successfully updated user information!");
           this.userData = userData;
