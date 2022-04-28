@@ -15,6 +15,7 @@ import { IUserData } from '../../interfaces/user/userData';
 import { Observable } from 'rxjs';
 import { IEmailData } from 'src/app/interfaces/user/emailData';
 import { FormBuilder } from '@angular/forms';
+import { IPasswordData } from 'src/app/interfaces/user/passwordData';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -143,8 +144,31 @@ describe('UserProfileComponent', () => {
     component.changeEmail(emailData);
     tick(300);
     const email = component.email;
+
+
     expect(email).toEqual(emailData.email);
+    expect(component.emailForm.reset).toHaveBeenCalledTimes(1);
+
     flush();
   }));
+
+  it('#changePassword is changing the password of the user as expected', fakeAsync(() => {
+    spyOn(userService, 'updatePassword').and.returnValue(
+      Observable.of({succeeded:true})
+    );
+    spyOn(component.passwordForm, 'reset').and.callThrough();
+
+    const passwordData: IPasswordData = {
+      password: "UNcrakableeepazzword2244$##$%",
+      newPassword: "easierToRemember123",
+      confirmPassword: "easierToRemember123"
+    }
+
+    component.changePassword(passwordData);
+    tick(300);
+    expect(component.passwordForm.reset).toHaveBeenCalledTimes(1);
+    flush();
+  }));
+
 
 });
