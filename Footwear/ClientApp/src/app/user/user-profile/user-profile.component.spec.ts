@@ -14,7 +14,7 @@ import { UserProfileComponent } from './user-profile.component';
 import { IUserData } from '../../interfaces/user/userData';
 import { Observable } from 'rxjs';
 import { IEmailData } from 'src/app/interfaces/user/emailData';
-import { FormControlDirective, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -33,7 +33,6 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
   let userService: UserService;
-  let formGroupDirective: FormControlDirective;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -44,11 +43,9 @@ describe('UserProfileComponent', () => {
         SharedModule,
         ToastrModule.forRoot(),
       ],
-      providers: [UserService, ToastrService],
+      providers: [UserService, ToastrService, FormBuilder],
     }).compileComponents();
 
-    // Dummy formgroupDirective to avoid undefined addControl function
-    const formGroupDirective: FormGroupDirective = new FormGroupDirective([], []);
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     userService = fixture.debugElement.injector.get(UserService);
@@ -131,20 +128,23 @@ describe('UserProfileComponent', () => {
     flush();
   }));
 
-  it('load user data when #loadDataAsync() is called in ngAfterViewInit', fakeAsync(() => {
+  it('#changeEmail is changing the email of the user as expected', fakeAsync(() => {
     spyOn(userService, 'updateEmail').and.returnValue(
       Observable.of({succeeded:true})
     );
+    spyOn(component.emailForm, 'reset').and.callThrough();
 
     const emailData: IEmailData = {
       email: "test@abv.abv",
       confirmEmail: "test@abv.abv"
     }
-    const formGpDirective = new FormGroupDirective(Validators: null);
-    component.changeEmail(emailData, );
-    tick(300);
-    const userData = component.userData;
-    expect(userData).toEqual(fakeUserData);
+
+    component.ngOnInit();
+    component.changeEmail(emailData);
+    const email = component.email;
+    expect(email).toEqual(emailData.email);
+
+    flush();
   }));
 
 });

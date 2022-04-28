@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormGroupDirective, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { validateNewAndConfPass, validateOldAndNewPass, validateEmails } from '../../../shared/validators/user-profile.validators';
 import { IEmailData } from '../../interfaces/user/emailData';
@@ -109,14 +109,11 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     );
   }
 
-  changePassword(passwordData: IPasswordData, passFormDirective: FormGroupDirective): void {
+  changePassword(passwordData: IPasswordData): void {
     this.userService.updatePassword(passwordData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your password!");
         this.passwordForm.reset();
-        //<mat-error> check the validity of FormGroupDirective,
-        //not FormGroup and resetting FormGroup does not reset FormGroupDirective.
-        passFormDirective.resetForm();
       }
     },
       error => {
@@ -124,15 +121,12 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
       });
   }
 
-  changeEmail(emailData: IEmailData, emailFormDirective: FormGroupDirective) {
+  changeEmail(emailData: IEmailData) {
     this.userService.updateEmail(emailData).subscribe((response: any) => {
       if (response.succeeded) {
         this.toastr.success("Successfully updated your email!");
         this.email = emailData.email;
         this.emailForm.reset();
-        //<mat-error> check the validity of FormGroupDirective,
-        //not FormGroup and resetting FormGroup does not reset FormGroupDirective.
-        emailFormDirective.resetForm();
       }
     },
       err => {

@@ -43,7 +43,7 @@
                       </mat-form-field>
                     </div>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm.value, passFormDirective)">Update</button>
+                      <button mat-stroked-button [disabled]="passwordForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat"(click)="changePassword(passwordForm.value); passFormDirective.resetForm()">Update</button>
                     </div>
                   </div>
                 </form>
@@ -66,7 +66,7 @@
                       <mat-error class="validation-error" *ngIf="emailForm.get('confirmEmail').touched && emailForm.get('confirmEmail').errors?.pattern">* Email is invalid!</mat-error>
                     </mat-form-field>
                     <div class="mt-1 text-center save-btn">
-                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value, emailFormDirective)">Update</button>
+                      <button mat-stroked-button [disabled]="emailForm.invalid" class="action-button-custom" type="submit" color="config-black-wheat" (click)="changeEmail(emailForm.value); emailFormDirective.resetForm()">Update</button>
                     </div>
                   </div>
                 </form>
