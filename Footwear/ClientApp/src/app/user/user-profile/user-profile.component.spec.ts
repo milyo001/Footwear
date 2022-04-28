@@ -141,9 +141,9 @@ describe('UserProfileComponent', () => {
 
     component.ngOnInit();
     component.changeEmail(emailData);
+    tick(300);
     const email = component.email;
     expect(email).toEqual(emailData.email);
-
     flush();
   }));
 
