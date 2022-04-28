@@ -1,6 +1,5 @@
 import {
   ComponentFixture,
-  discardPeriodicTasks,
   fakeAsync,
   flush,
   TestBed,
@@ -14,6 +13,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { IUserData } from '../../interfaces/user/userData';
 import { Observable } from 'rxjs';
+import { IEmailData } from 'src/app/interfaces/user/emailData';
+import { FormControlDirective, FormGroupDirective, Validators } from '@angular/forms';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -32,6 +33,7 @@ describe('UserProfileComponent', () => {
   let component: UserProfileComponent;
   let fixture: ComponentFixture<UserProfileComponent>;
   let userService: UserService;
+  let formGroupDirective: FormControlDirective;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -45,6 +47,8 @@ describe('UserProfileComponent', () => {
       providers: [UserService, ToastrService],
     }).compileComponents();
 
+    // Dummy formgroupDirective to avoid undefined addControl function
+    const formGroupDirective: FormGroupDirective = new FormGroupDirective([], []);
     fixture = TestBed.createComponent(UserProfileComponent);
     component = fixture.componentInstance;
     userService = fixture.debugElement.injector.get(UserService);
@@ -126,4 +130,21 @@ describe('UserProfileComponent', () => {
     expect(userData).toEqual(updatedFakeDataForm);
     flush();
   }));
+
+  it('load user data when #loadDataAsync() is called in ngAfterViewInit', fakeAsync(() => {
+    spyOn(userService, 'updateEmail').and.returnValue(
+      Observable.of({succeeded:true})
+    );
+
+    const emailData: IEmailData = {
+      email: "test@abv.abv",
+      confirmEmail: "test@abv.abv"
+    }
+    const formGpDirective = new FormGroupDirective(Validators: null);
+    component.changeEmail(emailData, );
+    tick(300);
+    const userData = component.userData;
+    expect(userData).toEqual(fakeUserData);
+  }));
+
 });
