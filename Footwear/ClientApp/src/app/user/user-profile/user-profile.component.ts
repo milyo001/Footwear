@@ -27,7 +27,7 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
   public emailSectionToggle: boolean = false;
   public passSectionToggle: boolean = false;
 
-  constructor(private userService: UserService, private fb: FormBuilder, 
+  constructor(private userService: UserService, private fb: FormBuilder,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -74,12 +74,11 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
     });
   };
 
-  //Loads already filled data from user if any, otherwise form fields will remain blank
+  // Loads already filled data from user if any, otherwise form fields will remain blank
   async loadDataAsync(): Promise<void> {
-    await this.userService.getUserProfile()
-      .then(data => {
-        this.userData = data as IUserData;
-        this.form.patchValue({
+    const data = await this.userService.getUserProfile();
+    this.userData = data;
+    this.form.patchValue({
           firstName: data.firstName,
           lastName: data.lastName,
           phone: data.phone,
@@ -89,11 +88,9 @@ export class UserProfileComponent implements AfterViewInit, OnInit {
           city: data.city,
           zipCode: data.zipCode
         });
-        //Set first name and email properties in component to visualize the currently logged in user
+        // Set first name and email properties in component to visualize the currently logged in user
         this.firstName = this.form.get("firstName").value;
         this.email = data.email;
-      });
-
   }
 
   updateProfile(form: any) {

@@ -1,5 +1,4 @@
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { getBaseUrl } from '../../../environments/environment.test';
@@ -8,7 +7,8 @@ import { UserService } from '../../services/user.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { IUserData } from '../../interfaces/user/userData';
-import { HttpRequestUserInterceptor } from '../../testing/MockInterceptors/mock-user-interceptor';
+import { of } from 'rxjs';
+import { $ } from 'protractor';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -28,14 +28,10 @@ describe('UserProfileComponent', () => {
 
     let component: UserProfileComponent;
     let fixture: ComponentFixture<UserProfileComponent>;
-    let testService: UserService;
-    let testHttpClient = jasmine.createSpyObj('HttpClient', ['get', 'post', 'delete', 'put']);
     // Mock User service properties
-    const baseUrl = getBaseUrl();
-    let mockUserService;
 
     beforeEach(async () => {
-        testService = new UserService(testHttpClient);
+        // testService = new UserService(testHttpClient);
         /*mockUserService = jasmine.createSpyObj(['updateProfile', 'changeEmail']);*/
 
         await TestBed.configureTestingModule({
@@ -43,19 +39,12 @@ describe('UserProfileComponent', () => {
             imports: [BrowserAnimationsModule, HttpClientTestingModule, SharedModule, ToastrModule.forRoot()],
             providers: [
                 {
-                    provide: 'BASE_URL',
-                    useValue: baseUrl
+                  provide: UserService,
+                  useValue: {
+                  getUserProfile: () => of([fakeUserData])
+                  }
                 },
                 ToastrService,
-                {
-                    provide: UserService,
-                    userValue: mockUserService
-                },
-                {
-                    provide: HTTP_INTERCEPTORS,
-                    useClass: HttpRequestUserInterceptor,
-                    multi: true
-                }
             ]
         }).compileComponents();
 
@@ -100,11 +89,14 @@ describe('UserProfileComponent', () => {
         expect(component.updateProfile).toBeTruthy();
     });
 
-    it('should #loadDataAsync() in ngAfterViewInit', async () => {
-        component.ngAfterViewInit();
+    it('should #loadDataAsync() in ngAfterViewInit', fakeAsync( () => {
+        const userService = fixture.debugElement.injector.get(UserService);
+        spyOn(userService, 'getUserProfile').and.returnValue(Promise.resolve(fakeUserData));
+        component.loadDataAsync();
+        tick(300);
         const userData = component.userData;
         expect(userData).toEqual(fakeUserData);
-    });
+    }));
 
 
 });
