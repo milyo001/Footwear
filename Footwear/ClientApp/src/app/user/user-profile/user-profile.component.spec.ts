@@ -9,8 +9,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { UserProfileComponent } from './user-profile.component';
 import { IUserData } from '../../interfaces/user/userData';
 import { HttpRequestUserInterceptor } from '../../testing/MockInterceptors/mock-user-interceptor';
-import { IEmailData } from '../../interfaces/user/emailData';
-import { FormGroupDirective } from '@angular/forms';
 
 // Export the data to use it in a mock interceptor
 export const fakeUserData: IUserData = {
@@ -37,7 +35,7 @@ describe('UserProfileComponent', () => {
     let mockUserService;
 
     beforeEach(async () => {
-        testService = new UserService(testHttpClient, baseUrl);
+        testService = new UserService(testHttpClient);
         /*mockUserService = jasmine.createSpyObj(['updateProfile', 'changeEmail']);*/
 
         await TestBed.configureTestingModule({
@@ -102,10 +100,11 @@ describe('UserProfileComponent', () => {
         expect(component.updateProfile).toBeTruthy();
     });
 
-    it('should #loadDataAsync() on init', async () => {
+    it('should #loadDataAsync() in ngAfterViewInit', async () => {
+        component.ngAfterViewInit();
         const userData = component.userData;
         expect(userData).toEqual(fakeUserData);
     });
 
-    
+
 });

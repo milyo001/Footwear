@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable, of } from 'rxjs';
-import { getBaseUrl } from '../../../environments/environment.test';
 import { IProduct } from '../../interfaces/product/product';
 import { CartService } from '../../services/cart.service';
 import { ProductService } from '../../services/product.service';
@@ -35,8 +34,8 @@ describe('ProductSelectComponent', () => {
 
   beforeEach(async(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post']);
-    productServiceSpy = new ProductService(httpClientSpy, getBaseUrl());
-    cartServiceSpy = new CartService(httpClientSpy, getBaseUrl());
+    productServiceSpy = new ProductService(httpClientSpy);
+    cartServiceSpy = new CartService(httpClientSpy);
 
     spyOn(productServiceSpy, 'getProductById').and.returnValue(Observable.of(testProduct));
     spyOn(cartServiceSpy, 'addToCart').and.returnValue(Observable.of(expectedResponse));

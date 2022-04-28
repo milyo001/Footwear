@@ -1,7 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { getBaseUrl } from '../../environments/environment.test';
-import { ICartProduct } from '../interfaces/cart/cartProduct';
 import { asyncData } from '../testing/async-observable-helpers';
 
 import { CartService } from './cart.service';
@@ -58,7 +57,7 @@ describe('CartService', () => {
 
   beforeEach(() => {
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get', 'post', 'put', 'delete']);
-    service = new CartService(httpClientSpy, getBaseUrl());
+    service = new CartService(httpClientSpy);
   });
 
   it('#addToCart should return succeeded property(HttpClient called just once)', (done: DoneFn) => {

@@ -54,6 +54,7 @@ describe('OrderService', () => {
       email: "miroslavilyoooovski@gmail.net", phone: "089422123565", zipCode: "1022"
     };
     const order: IOrder = {
+      orderId: "testid231312312313",
       status: 'pending',
       createdOn: "02/02/2022",
       payment: 'card',
