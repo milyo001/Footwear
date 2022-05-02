@@ -1,7 +1,6 @@
-
 <section class="product-section">
-  <div>{{product.quantity}}x</div>
-  <div>{{product.name.slice(0, 17)}}</div>
-  <div>{{product.price | currency }}</div>
-  <div>Size: {{product.size}}</div>
+  <div>{{product?.quantity}}x</div>
+  <div>{{product?.name.slice(0, 17)}}</div>
+  <div>{{product?.price | currency }}</div>
+  <div>Size: {{product?.size}}</div>
 </section>
