@@ -1,4 +1,3 @@
-import { NgxPaginationModule } from "ngx-pagination";
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
@@ -28,7 +27,6 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    NgxPaginationModule,
     SharedModule,
     RouterModule.forChild(routes),
   ],

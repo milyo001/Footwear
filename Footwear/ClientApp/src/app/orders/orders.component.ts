@@ -16,6 +16,7 @@ import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
   styleUrls: ['./orders.component.css'],
 })
 export class OrdersComponent implements OnInit {
+
   currentOrders: ICompletedOrder[];
   pastOrders: ICompletedOrder[];
   deliveryInfo: IDeliveryInfo;
@@ -121,16 +122,15 @@ export class OrdersComponent implements OnInit {
     this.totalOrderPrice = this.selectedOrder.cartProducts.reduce(
       (acc, obj) => {
         return acc + obj.price;
-      },
-      0
-    );
+      }, 0);
+    // Add the delivery price to the total price
     this.totalOrderPrice += this.deliveryInfo.deliveryPrice;
   }
 
   // Close the details section when the close button is clicked in child component
   closeDetailsSection(value: boolean){
     this.ordersEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
-    // First to all orders then close the details section with small delay
+    // Scroll to all orders then close the details section with small delay
     // for better user experience
     setTimeout(()=> {
       this.detailsToggle = value;

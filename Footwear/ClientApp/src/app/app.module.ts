@@ -23,7 +23,6 @@ import { PaymentCancelComponent } from './payment/payment-cancel/payment-cancel.
 import { OrderService } from './services/order.service';
 import { SharedModule } from './modules/shared.module';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
-import { OrderDetailsProductComponent } from './orders/order-details-product/order-details-product.component';
 
 @NgModule({
   declarations: [
