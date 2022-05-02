@@ -8,6 +8,7 @@ import { Observable, of } from 'rxjs';
 import { SharedModule } from 'src/app/modules/shared.module';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
+import { PaymentCancelComponent } from '../payment-cancel/payment-cancel.component';
 
 import { PaymentSuccessComponent } from './payment-success.component';
 
@@ -25,15 +26,16 @@ describe('PaymentSuccessComponent', () => {
         SharedModule,
         ToastrModule.forRoot(),
         HttpClientTestingModule,
-        RouterTestingModule.withRoutes([])
+        RouterTestingModule.withRoutes([
+          { path: 'payment-cancel', component: PaymentCancelComponent }
+        ])
        ],
       providers: [
         OrderService,
         CartService,
         { provide: { ToastrService }, useValue: { toastrService }},
         { provide: ActivatedRoute, useValue: {
-          queryParams: of({ session_id: 'klokkookok' })
-          }
+          queryParams: of({ session_id: 'session23131231' })}
         },
       ]
     })
@@ -69,15 +71,32 @@ describe('PaymentSuccessComponent', () => {
   }));
 
   it('should show notification when paid with cash', fakeAsync(() => {
-    spyOn(orderService, 'validatePayment').and.returnValue(
-    Observable.of( { paymentStatus:'cash' } ));
+    const route = fixture.debugElement.injector.get(ActivatedRoute);
     toastrService = fixture.debugElement.injector.get(ToastrService);
 
+    spyOn(orderService, 'validatePayment').and.returnValue(
+    Observable.of( { paymentStatus:'cash' } ));
+
+    route.queryParams = of({ session_id: null });
     spyOn(toastrService, 'success').and.callThrough();
+
+    component.ngOnInit();
+    tick(300);
+    expect(toastrService.success).toHaveBeenCalledTimes(1);
+    flush();
+  }));
+
+  it('should show notification error when server error/payment declined', fakeAsync(() => {
+    toastrService = fixture.debugElement.injector.get(ToastrService);
+
+    spyOn(orderService, 'validatePayment').and.returnValue(
+      Observable.of( { paymentStatus:'ERROR' } ));
+    spyOn(toastrService, 'error').and.callThrough();
+
     component.ngOnInit();
     tick(300);
     // expect(toastrServiceSpy.success).toHaveBeenCalledTimes(1);
-    expect(toastrService.success).toHaveBeenCalledTimes(1);
+    expect(toastrService.error).toHaveBeenCalledTimes(1);
     flush();
   }));
 
