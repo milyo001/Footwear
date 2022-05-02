@@ -17,7 +17,7 @@
         <small>Please, reconfirm all products before ordering.</small>
       </div>
       </div>
-      
+
       <mat-card-content class="content-fixed-min-height">
         <div class="d-flex flex-column justify-content-between">
           <mat-card class="p-2 d-flex justify-content-between" *ngFor="let item of cartProducts">
@@ -34,7 +34,7 @@
         </div>
       </mat-card-content>
         <div class="confirm-section">
-          <button mat-button><fa-icon [icon]="faArrowCircleLeft"></fa-icon> Back to cart</button>
+          <button mat-button (click)="backToCart()"><fa-icon [icon]="faArrowCircleLeft"></fa-icon> Back to cart</button>
           <button mat-button matStepperNext>Confirm products <fa-icon [icon]="faArrowCircleRight"></fa-icon></button>
         </div>
     </mat-card>
@@ -71,7 +71,7 @@
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
           </div>
-          
+
           <div class="row mt-2">
             <div class="col-md-4 text-center shipping-info-box">
               <span><fa-icon class="cash-icon" [icon]="faShippingFast"></fa-icon> Shipping:</span><br />
@@ -85,18 +85,18 @@
               <span><fa-icon class="cash-icon" [icon]="faHandFoldingUsd"></fa-icon> Total price:</span><br />
               <span >{{totalPrice | currency}}</span>
             </div>
-            
+
           </div>
           <section class="confirm-section">
             <button mat-button matStepperPrevious><fa-icon [icon]="faArrowCircleLeft"></fa-icon> Go back</button>
             <button mat-button matStepperNext>Confirm products <fa-icon [icon]="faArrowCircleRight"></fa-icon></button>
           </section>
         </mat-card>
-        
+
       </mat-card-content>
-      
+
     </mat-card>
-    
+
 
   </mat-step>
   <mat-step [stepControl]="form">
@@ -191,4 +191,4 @@
   </mat-step>
 
 </mat-horizontal-stepper>
-  
+

@@ -1,5 +1,6 @@
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -42,7 +43,7 @@ export class PlaceOrderComponent implements OnInit {
   form: FormGroup;
   private phoneRegex: string = '[- +()0-9]+';
   totalPrice: number;
- 
+
   // Document properties
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
@@ -71,15 +72,14 @@ export class PlaceOrderComponent implements OnInit {
     private userService: UserService,
     private cartService: CartService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
 
  // Will populate data into component properties from the database using the services
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
-
       this.deliveryInfo = info;
-
       this.cartService.getAllCartProducts().subscribe(products => {
         this.cartProducts = products;
         this.initDataSort(products);
@@ -182,23 +182,27 @@ export class PlaceOrderComponent implements OnInit {
   submitData(form) {
     // Disable form submit button to prevent dupplicate orders when double clicking
     this.waitForRedirect = true;
-    
+
     this.order = {
       orderId: null,
       createdOn: '',
       payment: "cash", //Paying with cash by default
       status: "pending",
       // User data is the information about the delivery address, which can be diffrent
-      // from the user data in Account/UserData 
+      // from the user data in Account/UserData
       userData: form.value
     }
 
-    // Set the payment type and send the order to the API, 
+    // Set the payment type and send the order to the API,
     // default API payment is cash
     if (form.value.payment == "card") {
       this.order.payment = "card";
     }
     this.createOrder();
+  }
+
+  backToCart(){
+    this.location.back();
   }
 }
 
