@@ -15,7 +15,7 @@ describe('OrderDetailsProductComponent', () => {
     id: 44,
     productType: 'running',
   };
-
+  
   let component: OrderDetailsProductComponent;
   let fixture: ComponentFixture<OrderDetailsProductComponent>;
 
