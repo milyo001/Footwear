@@ -1,24 +1,18 @@
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { SharedModule } from 'src/app/modules/shared.module';
-
 import { OrderDetailsComponent } from './order-details.component';
 
 describe('OrderDetailsComponent', () => {
-
   let component: OrderDetailsComponent;
   let fixture: ComponentFixture<OrderDetailsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderDetailsComponent ],
-      imports: [
-        BrowserAnimationsModule,
-        SharedModule
-      ]
-    })
-    .compileComponents();
+      declarations: [OrderDetailsComponent],
+      imports: [BrowserAnimationsModule, SharedModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -36,12 +30,11 @@ describe('OrderDetailsComponent', () => {
   });
 
   it('should define @Input #deliveryInfo', () => {
-
     const deliveryInfo: IDeliveryInfo = {
       deliveryPrice: 5.5,
       maxDelivery: 3,
-      minDelivery: 1
-    }
+      minDelivery: 1,
+    };
 
     component.deliveryInfo = deliveryInfo;
 
@@ -54,7 +47,7 @@ describe('OrderDetailsComponent', () => {
   });
 
   it('should define @Input #totalPrice', () => {
-    const totalPrice : number = 225.55;
+    const totalPrice: number = 225.55;
     component.totalPrice = totalPrice;
 
     expect(component.totalPrice).toBeTruthy();
@@ -77,5 +70,4 @@ describe('OrderDetailsComponent', () => {
   it('#panelOpenState should be false', () => {
     expect(component.panelOpenState).toBeFalse();
   });
-
 });
