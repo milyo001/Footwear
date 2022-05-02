@@ -16,7 +16,7 @@ import { ICartProduct } from '../interfaces/cart/cartProduct';
 
 export class CartComponent implements OnInit {
 
-  cartProducts: ICartProduct[];
+  cartProducts: ICartProduct[] = new Array();
 
   //FontAwesome Icons:
   faTrashAlt = faTrashAlt;
