@@ -1,5 +1,11 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -17,35 +23,40 @@ describe('PaymentSuccessComponent', () => {
   let fixture: ComponentFixture<PaymentSuccessComponent>;
   let orderService: OrderService;
   let toastrService: ToastrService;
+  let route: ActivatedRoute;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PaymentSuccessComponent ],
+      declarations: [PaymentSuccessComponent],
       imports: [
         BrowserAnimationsModule,
         SharedModule,
         ToastrModule.forRoot(),
         HttpClientTestingModule,
         RouterTestingModule.withRoutes([
-          { path: 'payment-cancel', component: PaymentCancelComponent }
-        ])
-       ],
+          { path: 'payment-cancel', component: PaymentCancelComponent },
+        ]),
+      ],
       providers: [
         OrderService,
         CartService,
-        { provide: { ToastrService }, useValue: { toastrService }},
-        { provide: ActivatedRoute, useValue: {
-          queryParams: of({ session_id: 'session23131231' })}
+        { provide: { ToastrService }, useValue: { toastrService } },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParams: of({ session_id: 'session23131231' }),
+          },
         },
-      ]
-    })
-    .compileComponents();
+      ],
+    }).compileComponents();
   });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(PaymentSuccessComponent);
     component = fixture.componentInstance;
     orderService = fixture.debugElement.injector.get(OrderService);
+    toastrService = fixture.debugElement.injector.get(ToastrService);
+    route = fixture.debugElement.injector.get(ActivatedRoute);
     fixture.detectChanges();
   });
 
@@ -59,23 +70,21 @@ describe('PaymentSuccessComponent', () => {
 
   it('should show notification when paid with card', fakeAsync(() => {
     spyOn(orderService, 'validatePayment').and.returnValue(
-    Observable.of( { paymentStatus:'paid' } ));
+      Observable.of({ paymentStatus: 'paid' })
+    );
     toastrService = fixture.debugElement.injector.get(ToastrService);
 
     spyOn(toastrService, 'success').and.callThrough();
     component.ngOnInit();
     tick(300);
-    // expect(toastrServiceSpy.success).toHaveBeenCalledTimes(1);
     expect(toastrService.success).toHaveBeenCalledTimes(1);
     flush();
   }));
 
   it('should show notification when paid with cash', fakeAsync(() => {
-    const route = fixture.debugElement.injector.get(ActivatedRoute);
-    toastrService = fixture.debugElement.injector.get(ToastrService);
-
     spyOn(orderService, 'validatePayment').and.returnValue(
-    Observable.of( { paymentStatus:'cash' } ));
+      Observable.of({ paymentStatus: 'cash' })
+    );
 
     route.queryParams = of({ session_id: null });
     spyOn(toastrService, 'success').and.callThrough();
@@ -87,18 +96,14 @@ describe('PaymentSuccessComponent', () => {
   }));
 
   it('should show notification error when server error/payment declined', fakeAsync(() => {
-    toastrService = fixture.debugElement.injector.get(ToastrService);
-
     spyOn(orderService, 'validatePayment').and.returnValue(
-      Observable.of( { paymentStatus:'ERROR' } ));
+      Observable.of({ paymentStatus: 'ERROR' })
+    );
     spyOn(toastrService, 'error').and.callThrough();
 
     component.ngOnInit();
     tick(300);
-    // expect(toastrServiceSpy.success).toHaveBeenCalledTimes(1);
     expect(toastrService.error).toHaveBeenCalledTimes(1);
     flush();
   }));
-
-
 });
