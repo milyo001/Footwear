@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { LoadingService } from '../../services/loading.service';
 import { IRegisterData } from '../../interfaces/user/registerData';
 import { CookieService } from 'ngx-cookie-service';
 

@@ -13,8 +13,12 @@ export class PaymentSuccessComponent implements OnInit {
 
   sessionId: string;
 
-  constructor(private orderService: OrderService, private cartService: CartService, private toastr: ToastrService,
-    private route: ActivatedRoute, private router: Router) { }
+  constructor(
+    private orderService: OrderService,
+    private cartService: CartService,
+    private toastr: ToastrService,
+    private route: ActivatedRoute,
+    private router: Router) { }
 
   ngOnInit(): void {
     // Check if session exists in the URL, if present return session id, if not return undefined
@@ -33,7 +37,7 @@ export class PaymentSuccessComponent implements OnInit {
       });
     }
     else {
-      // Handle cash payment 
+      // Handle cash payment
       this.toastr.success("Order status: paid on arrival, expect delivery!", "Thank you!");
     }
     // Change cart products isOrdered property to true, cart products won't be visible in cart component anymore

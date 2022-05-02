@@ -154,21 +154,19 @@ describe('UserProfileComponent', () => {
 
   it('#changePassword is changing the password of the user as expected', fakeAsync(() => {
     spyOn(userService, 'updatePassword').and.returnValue(
-      Observable.of({succeeded:true})
+      Observable.of( { succeeded:true } )
     );
     spyOn(component.passwordForm, 'reset').and.callThrough();
-
     const passwordData: IPasswordData = {
       password: "UNcrakableeepazzword2244$##$%",
       newPassword: "easierToRemember123",
       confirmPassword: "easierToRemember123"
     }
-
     component.changePassword(passwordData);
     tick(300);
     expect(component.passwordForm.reset).toHaveBeenCalledTimes(1);
+
     flush();
   }));
-
 
 });

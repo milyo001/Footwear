@@ -59,10 +59,7 @@ export class OrdersComponent implements OnInit {
         (result, element) => {
           const today = new Date();
           const orderDate = new Date(element.createdOn);
-          const maxDeliveryDate = this.calculateDeliveryDate(
-            orderDate,
-            this.deliveryInfo.maxDelivery
-          );
+          const maxDeliveryDate = this.calculateDeliveryDate(orderDate,this.deliveryInfo.maxDelivery);
 
           // If the max delivery date is less than today's date push element to the first array
           result[maxDeliveryDate < today ? 1 : 0].push(element);
@@ -76,6 +73,7 @@ export class OrdersComponent implements OnInit {
 
   // View the selected order
   viewOrder() {
+     console.log(this.selectedOrder);
     this.detailsToggle = true;
     this.calculateTotalPrice();
     setTimeout(() => {
