@@ -33,7 +33,7 @@
         </div>
       </section>
       <section *ngIf="currentOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
-        <div id="pagination" class="row-md-center">
+        <div class="row-md-center">
           <pagination-controls class="custom-pagination" (pageChange)="pageIndex = $event" previousLabel=""
             nextLabel="">
           </pagination-controls>
@@ -73,7 +73,7 @@
         </section>
       </mat-selection-list>
       <section *ngIf="pastOrders?.length > ordersPerPage" class="row justify-content-md-center pagination-section">
-        <div id="pagination" class="row-md-center">
+        <div class="row-md-center">
           <pagination-controls class="custom-pagination" (pageChange)="pageIndexPastOrders = $event" previousLabel=""
             nextLabel="">
           </pagination-controls>

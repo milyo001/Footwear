@@ -31,7 +31,7 @@ export class OrdersComponent implements OnInit {
   // Pagination options
   pageIndex: number = 1;
   pageIndexPastOrders: number = 1;
-  ordersPerPage: number = 10;
+  ordersPerPage: number = 8;
 
   // Order statuses recieved from API
   cashPayment: string = 'DeliveryCash';
