@@ -1,4 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from 'src/app/modules/shared.module';
 
 import { OrderDetailsComponent } from './order-details.component';
 
@@ -8,7 +10,11 @@ describe('OrderDetailsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrderDetailsComponent ]
+      declarations: [ OrderDetailsComponent ],
+      imports: [
+        BrowserAnimationsModule,
+        SharedModule
+      ]
     })
     .compileComponents();
   });
@@ -23,27 +29,25 @@ describe('OrderDetailsComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should declare', () => {
-    expect(component.closeDetailsSection).toBeTruthy();
+  it('should define #closeDetailsSection', () => {
+    expect(component.closeDetailsSection).toBeDefined();
   });
 
-  it('should declare', () => {
-    expect(component.deliveryInfo).toBeTruthy();
+  it('should define #deliveryInfo', () => {
+    let  test = component.deliveryInfo;
+
+    expect(component.deliveryInfo).toBeDefined();
   });
 
-  it('should declare', () => {
+  it('should define #detailsToggleEvent', () => {
     expect(component.detailsToggleEvent).toBeTruthy();
   });
 
-  it('should declare', () => {
+  it('should define #totalPrice', () => {
     expect(component.totalPrice).toBeTruthy();
   });
 
-  it('should declare', () => {
-    expect(component.totalPrice).toBeTruthy();
-  });
-
-  it('should declare icons', () => {
+  it('should define icons', () => {
     expect(component.faAddress).toBeTruthy();
     expect(component.faBarcode).toBeTruthy();
     expect(component.faCalendarAlt).toBeTruthy();
@@ -56,8 +60,8 @@ describe('OrderDetailsComponent', () => {
     expect(component.faWallet).toBeTruthy();
   });
 
-  it('should declare', () => {
-    expect(component.panelOpenState).toBeTruthy();
+  it('#panelOpenState should be false', () => {
+    expect(component.panelOpenState).toBeFalse();
   });
 
 });

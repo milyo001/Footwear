@@ -21,8 +21,9 @@ export class OrderDetailsComponent {
   @Output() detailsToggleEvent = new EventEmitter<boolean>();;
 
   orderTotPrice: number = 0;
+
   // Used in mat-accordion
-  panelOpenState = false;
+  panelOpenState: boolean = false;
 
   // Icons
   faTruckLoading = faTruckLoading;

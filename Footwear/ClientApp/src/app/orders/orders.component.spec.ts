@@ -1,14 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { OrderService } from '../services/order.service';
 
 import { OrdersComponent } from './orders.component';
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
   let fixture: ComponentFixture<OrdersComponent>;
+  let orderService: OrderService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrdersComponent ]
+      declarations: [ OrdersComponent ],
+      imports: [],
+      providers: [ OrderService ]
     })
     .compileComponents();
   });
