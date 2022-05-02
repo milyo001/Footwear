@@ -29,11 +29,11 @@
           <img class="accordion-picture-frame-img" src="{{item?.imageUrl}}" />
         </div>
         <div class="accordion-product-details">
-          <p>{{item.name}}</p>
+          <p>{{item?.name}}</p>
           <p class="quantity-paragraph">Quantity:</p>
-          <p style="display:inline-block"> {{item.quantity}}</p>
-          <p>Price: {{item.price | currency}}</p>
-          <p>Size: {{item.size}}</p>
+          <p style="display:inline-block"> {{item?.quantity}}</p>
+          <p>Price: {{item?.price | currency}}</p>
+          <p>Size: {{item?.size}}</p>
         </div>
       </div>
       <div class="accordion-product-details-handler">
@@ -48,13 +48,13 @@
            [attr.aria-labelledby]="'accordion-header-' + index">
         <section class="accordion-details-section">
           <div class=".accordion-description">
-            <p>Description: {{item.details}}</p>
-            <p>Good for: {{item.productType}} </p>
+            <p>Description: {{item?.details}}</p>
+            <p>Good for: {{item?.productType}} </p>
             <p class="quantity-paragraph">Total price:</p>
-            <p style="display:inline">{{(item.price * item.quantity) | currency}}</p>
+            <p style="display:inline">{{(item?.price * item?.quantity) | currency}}</p>
           </div>
           <div class=".accordion-actions-menu">
-            <button class="action-button btn btn-light" (click)="viewProduct(item.productId)">View product</button>
+            <button class="action-button btn btn-light" (click)="viewProduct(item?.productId)">View product</button>
             <button class="action-button btn btn-light" (click)="incrementQuantity(item)">Add</button>
             <button class="action-button btn btn btn-light" (click)="decrementQuantity(item)">Remove one</button>
             <button class="action-button btn btn-danger" (click)="deleteProduct(item, index)">Remove from cart</button>
