@@ -131,11 +131,11 @@ Example below (replace <<>> with your value):
 ## Order Features
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| View Orders | &#10004; | View all orders |
-| Send email for order | &#10004; | Functionality to send email for order details, currently using fake SMTP |
-| Orders pagination if orders are more than 10 | &#10004; | Shows pagination only when orders are more than a specific number (currently 10 per page) |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
+| View Orders | &#10004; | View all orders |
+| Send email for order | &#10004; | Functionality to send email for order details, currently using fake SMTP |
+| Orders pagination condition | &#10004; | Shows pagination only when orders are more than a specific number (currently 10 per page) |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
 | View current and delivered orders | &#10004; | View current and delivered orders by changing sections Current/Past Orders |
 | View selected order component | &#10004; | View the selected order full details and implement close details toggler button |
