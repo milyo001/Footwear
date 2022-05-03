@@ -30,13 +30,18 @@ Example below (replace <<>> with your value):
     "ClientUrl": "http://localhost:4200"
   },
   "ApplicationSettings": {
-    "ApiUrl": "https://testfootwearapp3.azurewebsites.net",
-    "ClientUrl": "https://localhost:4200",
-    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ <<Or generate one [here](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)>>",
+    "ApiUrl": "https://api.testfootwearapp3.azurewebsites.net",
+    "ClientUrl": "https://testfootwearapp3.azurewebsites.net",
+    /* Change the api and client url to localhost:<<your port>> */
+    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ,
+    /* Or generate one here(select 256-bit key): https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx */
     "JWT_Secret": "<<YOUR JWT SECRET KEY HERE>>",
+    /* You can get your unique key here: https://jwt.io/introduction */
     "Stripe_Secret": "<<YOUR STRIPE SECRET KEY HERE>>"
+    /* You can get your unique key here: https://stripe.com/docs/keys */
   },
   "MailSettings": {
+     /* I am using ethereal fake SMTP, you can generate your own fake account here: https://ethereal.email/create */
     "Mail": "assunta.kohler67@ethereal.email",
     "DisplayName": "Assunta Kohler",
     "Password": "TuYAVeQbKGZmqEbsMM",
@@ -47,9 +52,9 @@ Example below (replace <<>> with your value):
 
 ```
 
-3.Type command 'dotnet restore' to install all missing packages
+3.Type command 'dotnet restore' to install all missing packages or do it manually
 
-4.For demo payments use this demo card INFO:</br>
+4.For demo payments use this demo card info provided from Stripe API:</br>
  Email: Any*</br>
  Card Number: 4242 4242 4242 4242</br>
  Expiration: Any* / Any*</br>
