@@ -57,13 +57,14 @@ export class OrdersComponent implements OnInit {
     this.orderService.getAllOrders().subscribe((orders) => {
       // Use "deconstruction" style assignment
       [this.currentOrders, this.pastOrders] = orders.reduce(
-        (result, element) => {
+        (result, order) => {
           const today = new Date();
-          const orderDate = new Date(element.createdOn);
+          const orderDate = new Date(order.createdOn);
           const maxDeliveryDate = this.calculateDeliveryDate(orderDate,this.deliveryInfo.maxDelivery);
 
           // If the max delivery date is less than today's date push element to the first array
-          result[maxDeliveryDate < today ? 1 : 0].push(element);
+          // (current orders)
+          result[maxDeliveryDate < today ? 1 : 0].push(order);
           return result;
         },
         // By default return empty array, can be further chained with map() or other functions.
