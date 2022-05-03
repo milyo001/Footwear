@@ -8,8 +8,8 @@ The application contains few products manually seeded in the database(I will bui
 <p>The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or get some sample code.</p>
 
 # Guide / How to run locally on your machine
-1.Download/Clone the repository <br/>
-2.Open the API folder and create appsettings.development.json and appsettings.production.json(optional) (present in .gitignore file so you have to create them manually) 
+1. Download/Clone the repository <br/>
+2. Open the API folder and create appsettings.development.json and appsettings.production.json(optional) (present in .gitignore file so you have to create them manually) 
 Example below (replace <<>> with your value):
 ```
 {
@@ -52,18 +52,19 @@ Example below (replace <<>> with your value):
 
 ```
 
-3.Type command 'dotnet restore' to install all missing packages or do it manually
+3. Type command 'dotnet restore' to install all missing packages or do it manually
 
-4.For demo payments use this demo card info provided from Stripe API:</br>
- Email: Any*</br>
- Card Number: 4242 4242 4242 4242</br>
- Expiration: Any* / Any*</br>
- CVV: Any*</br>
- Name: Any*</br>
+4. For demo payments use this demo card info provided from Stripe API:</br>
+    Email: Any*</br>
+    Card Number: 4242 4242 4242 4242</br>
+    Expiration: Any* / Any*</br>
+    CVV: Any*</br>
+    Name: Any*</br>
  </br>
 
 *You can put random information but the card number should be the one from above
 
+5. Run with IIS Express or host the application
 
 # Dependencies
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
