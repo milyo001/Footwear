@@ -2,6 +2,7 @@
 # Footwear - Brief Information 
 <p>An open source e-commerce web application build with Angular 11 and ASP .NET Core (using .NET 5) RESTful Web API.
 The applicaiton is build with desktop first aproach, but it's fully responsive (with the help of bootstrap 4 grid system, Angular Material UI and CSS Flexbox and Grid).</p>
+<p>The architecture is a simple "all-in-one" monolith application (entire application is deployed as a single unit). That means as the project's size and complexity grows, the number of files and folders will continue to grow as well. I will develop diffrent architecture to solve that problem, once I am done with the client(Angular) side. </p>
 <p>
 The application contains few products manually seeded in the database(I will build admin panel soon), which users can select, pick a size and add to a cart. Then the user can review the products in the cart  and increase/decrease product quiantity or delete the product from cart. Then next step is to select delivery address(or import the data from your account's address) and choose payment. The Payment type is cash on delivery or with a credit/debit card (using the Stripe API). After order is made, the user can see all(current/past or delivered) orders, send an sample invoice email and view order details.
 </p>
