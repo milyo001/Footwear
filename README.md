@@ -8,8 +8,8 @@ The application contains few products manually seeded in the database(I will bui
 <p>The application is made mostly for fun and it's usage is not commercial, feel free to copy, download or clone the repo or get some sample code.</p>
 
 # Guide / How to run locally on your machine
-1.Download/Clone the repository <br/>
-2.Open the API folder and create appsettings.development.json and appsettings.production.json(optional) (present in .gitignore file so you have to create them manually) 
+1. Download/Clone the repository <br/>
+2. Open the API folder and create appsettings.development.json and appsettings.production.json(optional) (present in .gitignore file so you have to create them manually) 
 Example below (replace <<>> with your value):
 ```
 {
@@ -30,13 +30,18 @@ Example below (replace <<>> with your value):
     "ClientUrl": "http://localhost:4200"
   },
   "ApplicationSettings": {
-    "ApiUrl": "https://testfootwearapp3.azurewebsites.net",
-    "ClientUrl": "https://localhost:4200",
-    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ",
+    "ApiUrl": "https://api.testfootwearapp3.azurewebsites.net",
+    "ClientUrl": "https://testfootwearapp3.azurewebsites.net",
+    /* Change the api and client url to localhost:<<your port>> */
+    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ,
+    /* Or generate one here(select 256-bit key): https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx */
     "JWT_Secret": "<<YOUR JWT SECRET KEY HERE>>",
+    /* You can get your unique key here: https://jwt.io/introduction */
     "Stripe_Secret": "<<YOUR STRIPE SECRET KEY HERE>>"
+    /* You can get your unique key here: https://stripe.com/docs/keys */
   },
   "MailSettings": {
+     /* I am using ethereal fake SMTP, you can generate your own fake account here: https://ethereal.email/create */
     "Mail": "assunta.kohler67@ethereal.email",
     "DisplayName": "Assunta Kohler",
     "Password": "TuYAVeQbKGZmqEbsMM",
@@ -47,18 +52,19 @@ Example below (replace <<>> with your value):
 
 ```
 
-3.Type command 'dotnet restore' to install all missing packages
+3. Type command 'dotnet restore' to install all missing packages or do it manually
 
-4.For demo payments use this demo card INFO:</br>
- Email: Any*</br>
- Card Number: 4242 4242 4242 4242</br>
- Expiration: Any* / Any*</br>
- CVV: Any*</br>
- Name: Any*</br>
+4. For demo payments use this demo card info provided from Stripe API:</br>
+    Email: Any*</br>
+    Card Number: 4242 4242 4242 4242</br>
+    Expiration: Any* / Any*</br>
+    CVV: Any*</br>
+    Name: Any*</br>
  </br>
 
 *You can put random information but the card number should be the one from above
 
+5. Run with IIS Express or host the application
 
 # Dependencies
 ## [ASP .NET CORE Packages](https://github.com/milyo001/Footwear/blob/main/Footwear/Footwear/Footwear.csproj) 
@@ -125,10 +131,15 @@ Example below (replace <<>> with your value):
 ## Order Features
 | Feature  | Coded? | Description |
 |----------|:-------------:|:-------------|
-| View Orders | &#10004; | View all orders |
 | Create cash order | &#10004; | Create pay on delivery order |
 | Create paid order | &#10004; | Pay for order with a credit card |
+| View Orders | &#10004; | View all orders |
+| Send email for order | &#10004; | Functionality to send email for order details, currently using fake SMTP |
+| Orders pagination condition | &#10004; | Shows pagination only when orders are more than a specific number (currently 10 per page) |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
+| View current and delivered orders | &#10004; | View current and delivered orders by changing sections Current/Past Orders |
+| View selected order component details | &#10004; | View the selected order full details and implement close details toggler button |
+| View ordered products for order | &#10004; | View selected order ordered list of products with accordion functionality |
 | Implement Lazy loading | &#10004; | Lazy-load the orders module |
 
 ## Tests
