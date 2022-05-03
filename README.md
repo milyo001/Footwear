@@ -32,7 +32,7 @@ Example below (replace <<>> with your value):
   "ApplicationSettings": {
     "ApiUrl": "https://testfootwearapp3.azurewebsites.net",
     "ClientUrl": "https://localhost:4200",
-    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ",
+    "EncryptionKey": "MbQeShVmYq3t6w9z$C&F)J@NcRfUjWnZ <<Or generate one [here](https://www.allkeysgenerator.com/Random/Security-Encryption-Key-Generator.aspx)>>",
     "JWT_Secret": "<<YOUR JWT SECRET KEY HERE>>",
     "Stripe_Secret": "<<YOUR STRIPE SECRET KEY HERE>>"
   },
