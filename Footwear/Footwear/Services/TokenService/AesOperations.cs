@@ -13,7 +13,9 @@
         private static readonly string Key = Startup.StaticConfig["ApplicationSettings:EncryptionKey"].ToString();
 
         ///<summary>
-        ///A simple symmetric algorithm to encrypt an encoded authorization token.By default the key is stored in appsettings.json with name: EncryptionKey. You can use any 256-bit key, you can generate one online
+        /// A simple symmetric algorithm to encrypt an encoded authorization token.By default the key is stored in 
+        /// appsettings.json with name: EncryptionKey. 
+        /// You can use any 256-bit key, you can generate one online
         ///</summary>
         public static string EncryptToken(string token)
         {
