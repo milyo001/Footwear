@@ -138,7 +138,8 @@ Example below (replace <<>> with your value):
 | Orders pagination condition | &#10004; | Shows pagination only when orders are more than a specific number (currently 10 per page) |
 | Reconfirm order | &#10004; | Reconfirm orders before ordering with a stepper |
 | View current and delivered orders | &#10004; | View current and delivered orders by changing sections Current/Past Orders |
-| View selected order component | &#10004; | View the selected order full details and implement close details toggler button |
+| View selected order component details | &#10004; | View the selected order full details and implement close details toggler button |
+| View ordered products for order | &#10004; | View selected order ordered list of products with accordion functionality |
 | Implement Lazy loading | &#10004; | Lazy-load the orders module |
 
 ## Tests
