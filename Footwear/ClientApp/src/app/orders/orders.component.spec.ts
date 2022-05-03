@@ -1,5 +1,8 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { SharedModule } from '../modules/shared.module';
 import { OrderService } from '../services/order.service';
 
 import { OrdersComponent } from './orders.component';
@@ -12,9 +15,15 @@ describe('OrdersComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ OrdersComponent ],
-      imports: [ToastrModule.forRoot()],
+      imports: [
+        BrowserAnimationsModule,
+        ToastrModule.forRoot(),
+        SharedModule,
+        HttpClientTestingModule
+      ],
       providers: [
-        { provide: OrderService, useValue: { orderService }},
+
+        OrderService,
         ToastrService ]
     })
     .compileComponents();
@@ -22,6 +31,7 @@ describe('OrdersComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(OrdersComponent);
+    orderService = fixture.debugElement.injector.get(OrderService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
