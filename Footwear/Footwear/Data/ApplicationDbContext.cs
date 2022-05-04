@@ -19,9 +19,12 @@
 
         public DbSet<CartProduct> CartProducts { get; set; }
 
+        public DbSet<Address> Addresses { get; set; }
+
+#pragma warning disable CS0114 // Member hides inherited member;
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Address> Addresses { get; set; }
+#pragma warning restore CS0114 // Member hides inherited member;
 
         public DbSet<ProductImage> ProductsImage { get; set; }
 
@@ -52,8 +55,6 @@
             {
                 builder.Seed();
             }
-            
-            
         }
 
     }
