@@ -21,6 +21,11 @@
 
         public DbSet<Address> Addresses { get; set; }
 
+#pragma warning disable CS0114 // Member hides inherited member;
+        public DbSet<User> Users { get; set; }
+
+#pragma warning restore CS0114 // Member hides inherited member;
+
         public DbSet<ProductImage> ProductsImage { get; set; }
 
         private IWebHostEnvironment CurrentEnvironment { get; }
@@ -50,8 +55,6 @@
             {
                 builder.Seed();
             }
-            
-            
         }
 
     }
