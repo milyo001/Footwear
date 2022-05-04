@@ -3,6 +3,7 @@ import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
+import { ICartProduct } from '../interfaces/cart/cartProduct';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
 import { SharedModule } from '../modules/shared.module';
@@ -18,7 +19,7 @@ const fakeOrders: ICompletedOrder[] = [
 ];
 
 const fakeDeliveryInfo: IDeliveryInfo = {
-  deliveryPrice: 2.99,
+  deliveryPrice: 3,
   minDelivery: 1,
   maxDelivery: 5
 }
@@ -123,4 +124,19 @@ describe('OrdersComponent', () => {
     expect(component.pastOrders[0]).toEqual(fakeOrders[1]);
     flush();
   }));
+
+  it('#view order should work as expected', () => {
+    const fakeProducts: ICartProduct[] = [
+      {id: 1, details: "tase", gender: "sda", name:"test", imageUrl: "www.test.com",
+       price: 22.40, quantity: 3, size: 44, productType: "hiking", productId: 3},
+       {id: 2, details: "tase", gender: "dda", name:"test", imageUrl: "www.test.com",
+       price: 22.40, quantity: 1, size: 33, productType: "hiking", productId: 25}
+    ];
+    const fakeSelectedOrder = fakeOrders[0];
+    fakeSelectedOrder.cartProducts = fakeProducts;
+    component.selectedOrder = fakeSelectedOrder;
+    component.deliveryInfo = fakeDeliveryInfo;
+    component.viewOrder()
+    expect(component.totalOrderPrice).toEqual(47.8);
+  });
 });

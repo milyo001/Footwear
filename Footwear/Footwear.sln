@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Footwear", "Footwear\Footwe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Footwear Tests", "Footwear Tests\Footwear Tests.csproj", "{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{80C01A91-43EE-4FD8-B51B-1DD585D115CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E9AD268-ED69-4C9B-8A04-89BAF8F68A21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80C01A91-43EE-4FD8-B51B-1DD585D115CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80C01A91-43EE-4FD8-B51B-1DD585D115CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80C01A91-43EE-4FD8-B51B-1DD585D115CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80C01A91-43EE-4FD8-B51B-1DD585D115CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

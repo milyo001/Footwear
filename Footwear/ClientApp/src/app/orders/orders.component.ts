@@ -75,7 +75,6 @@ export class OrdersComponent implements OnInit {
 
   // View the selected order
   viewOrder() {
-     console.log(this.selectedOrder);
     this.detailsToggle = true;
     this.calculateTotalPrice();
     setTimeout(() => {
