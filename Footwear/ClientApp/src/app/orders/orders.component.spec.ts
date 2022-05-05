@@ -1,5 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { of } from 'rxjs';
@@ -142,14 +142,17 @@ describe('OrdersComponent', () => {
   });
 
   it('#sendEmail should work as expected', fakeAsync(() => {
-    const emailBtnEl = { disabled: false };
+    const emailBtnEl = { disabled: true };
     component.selectedOrder = fakeOrders[0];
+
     spyOn(orderService, 'sendEmailForOrder').and.returnValue(of({ sent: true }));
-    spyOn(toastrService, 'success').and.callThrough();
+    spyOn(toastrService, 'info').and.callThrough();
 
     component.sendEmail(emailBtnEl);
-    tick(5500);
-    expect(emailBtnEl.disabled).toEqual(true);
-    expect(toastrService.success).toHaveBeenCalledTimes(1);
+    expect(toastrService.info).toHaveBeenCalledTimes(1);
+    tick(5000);
+    discardPeriodicTasks();
+    expect(emailBtnEl.disabled).toEqual(false);
+    flush()
   }));
 });

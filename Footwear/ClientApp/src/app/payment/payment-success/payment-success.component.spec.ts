@@ -72,8 +72,6 @@ describe('PaymentSuccessComponent', () => {
     spyOn(orderService, 'validatePayment').and.returnValue(
       Observable.of({ paymentStatus: 'paid' })
     );
-    toastrService = fixture.debugElement.injector.get(ToastrService);
-
     spyOn(toastrService, 'success').and.callThrough();
     component.ngOnInit();
     tick(300);
