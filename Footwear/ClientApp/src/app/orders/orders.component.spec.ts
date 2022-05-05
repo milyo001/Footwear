@@ -18,10 +18,16 @@ import { OrderService } from '../services/order.service';
 
 import { OrdersComponent } from './orders.component';
 
+const fakeProducts: ICartProduct[] = [
+  { id: 1, size: 1, details: "sadasda", name: '23213', gender: 'woman', price: 20,
+  imageUrl:'weawe', quantity: 1, productType: 'tasda', productId: 1 },
+  { id: 2, size: 1, details: "sadasda", name: '23213', gender: 'woman', price: 20,
+  imageUrl:'weawe', quantity: 1, productType: 'tasda', productId: 2 }
+]
 const fakeOrders: ICompletedOrder[] = [
   {
     userData: null,
-    cartProducts: [null],
+    cartProducts: fakeProducts,
     createdOn: '12/2/2022',
     orderId: '213asd123z22xd',
     payment: 'card',
@@ -29,7 +35,7 @@ const fakeOrders: ICompletedOrder[] = [
   },
   {
     userData: null,
-    cartProducts: [null],
+    cartProducts: fakeProducts,
     createdOn: '12/09/2021',
     orderId: '213asd123zxd',
     payment: 'cash',
@@ -229,6 +235,15 @@ describe('OrdersComponent', () => {
     component.onOrderChange(fakeEvent);
     expect(component.selectedOrder).toEqual(fakeOrders[0]);
     expect(component.detailsToggle).toEqual(false);
+  });
+
+  it('#calculateTotalPrice works as expected', () => {
+    const selectedOrder = fakeOrders[0];
+    const delInfo = fakeDeliveryInfo;
+    component.selectedOrder = selectedOrder;
+    component.deliveryInfo = delInfo;
+    component.calculateTotalPrice();
+    expect(component.totalOrderPrice).toEqual(43);
   });
 
 });
