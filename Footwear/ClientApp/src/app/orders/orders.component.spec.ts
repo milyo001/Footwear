@@ -216,13 +216,19 @@ describe('OrdersComponent', () => {
     flush();
   }));
 
-  it('#calculateDeliveryDate works as expected', fakeAsync(() => {
+  it('#calculateDeliveryDate works as expected', () => {
     const date: Date = new Date('2024-01-01');
     const days = 3;
     const expectedDate = new Date('2024-01-04');
     const result = component.calculateDeliveryDate(date, days);
     expect(result).toEqual(expectedDate);
-  }));
+  });
 
+  it('#onOrderChange works as expected', () => {
+    const fakeEvent = { option: { value: fakeOrders[0]}};
+    component.onOrderChange(fakeEvent);
+    expect(component.selectedOrder).toEqual(fakeOrders[0]);
+    expect(component.detailsToggle).toEqual(false);
+  });
 
 });
