@@ -23,11 +23,12 @@ const fakeDeliveryInfo: IDeliveryInfo = {
   minDelivery: 1,
   maxDelivery: 5
 }
+
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
   let fixture: ComponentFixture<OrdersComponent>;
   let orderService: OrderService;
-
+  let toastrService: ToastrService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -39,7 +40,6 @@ describe('OrdersComponent', () => {
         HttpClientTestingModule
       ],
       providers: [
-
         OrderService,
         ToastrService ]
     })
@@ -49,6 +49,7 @@ describe('OrdersComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(OrdersComponent);
     orderService = fixture.debugElement.injector.get(OrderService);
+    toastrService = fixture.debugElement.injector.get(ToastrService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -125,7 +126,7 @@ describe('OrdersComponent', () => {
     flush();
   }));
 
-  it('#view order should work as expected', () => {
+  it('#viewOrder should work as expected', () => {
     const fakeProducts: ICartProduct[] = [
       {id: 1, details: "tase", gender: "sda", name:"test", imageUrl: "www.test.com",
        price: 22.40, quantity: 3, size: 44, productType: "hiking", productId: 3},
@@ -139,4 +140,16 @@ describe('OrdersComponent', () => {
     component.viewOrder()
     expect(component.totalOrderPrice).toEqual(47.8);
   });
+
+  it('#sendEmail should work as expected', fakeAsync(() => {
+    const emailBtnEl = { disabled: false };
+    component.selectedOrder = fakeOrders[0];
+    spyOn(orderService, 'sendEmailForOrder').and.returnValue(of({ sent: true }));
+    spyOn(toastrService, 'success').and.callThrough();
+
+    component.sendEmail(emailBtnEl);
+    tick(5500);
+    expect(emailBtnEl.disabled).toEqual(true);
+    expect(toastrService.success).toHaveBeenCalledTimes(1);
+  }));
 });
