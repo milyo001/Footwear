@@ -1,4 +1,5 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ElementRef, ViewChild } from '@angular/core';
 import {
   ComponentFixture,
   discardPeriodicTasks,
@@ -245,5 +246,17 @@ describe('OrdersComponent', () => {
     component.calculateTotalPrice();
     expect(component.totalOrderPrice).toEqual(43);
   });
+
+  it('#closeDetailsSection closes section as expected', fakeAsync(() => {
+    const value = false;
+    spyOn(component.ordersEl.nativeElement, 'scrollIntoView').and.callThrough();
+
+    component.closeDetailsSection(value);
+    expect(component.ordersEl.nativeElement.scrollIntoView).toHaveBeenCalled();
+    tick(500);
+    expect(component.detailsToggle = value);
+    flush();
+  }));
+
 
 });
