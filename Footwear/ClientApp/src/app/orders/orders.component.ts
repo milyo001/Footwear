@@ -96,8 +96,8 @@ export class OrdersComponent implements OnInit {
           }, 5000);
         }
       },
-      (err) => {
-        this.toastr.info('Something went wrong', err.error.message);
+      (err): any => {
+        this.toastr.error('Something went wrong', err.error.message);
         console.log(err);
         sendEmailBtn.disabled = false;
       }

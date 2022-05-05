@@ -2,7 +2,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { of } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { ICartProduct } from '../interfaces/cart/cartProduct';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
@@ -153,6 +153,21 @@ describe('OrdersComponent', () => {
     tick(5000);
     discardPeriodicTasks();
     expect(emailBtnEl.disabled).toEqual(false);
-    flush()
+    flush();
+  }));
+
+  it('#sendEmail show error message when email not sent', fakeAsync(() => {
+    const emailBtnEl = { disabled: true };
+    component.selectedOrder = fakeOrders[0];
+    const error :any = { error: { message: 'testError!' } };
+
+    spyOn(orderService, 'sendEmailForOrder').and.returnValue(throwError(error));
+    spyOn(toastrService, 'error').and.callThrough();
+
+    component.sendEmail(emailBtnEl);
+    tick(500);
+    // expect(toastrService.error).toHaveBeenCalledTimes(1);
+    expect(emailBtnEl.disabled).toEqual(false);
+    flush();
   }));
 });
