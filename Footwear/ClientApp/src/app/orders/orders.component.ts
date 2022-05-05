@@ -106,9 +106,8 @@ export class OrdersComponent implements OnInit {
 
   // Returns the actual delivery date by given max delivery days
   calculateDeliveryDate = (orderDate: Date, days: number) => {
-    var date = new Date(orderDate);
-    date.setDate(date.getDate() + days);
-    return date;
+    orderDate.setDate(orderDate.getDate() + days);
+    return orderDate;
   };
 
   // Set the property selectedOrder when order is changed in mat-list-option list of elements

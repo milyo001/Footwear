@@ -212,8 +212,17 @@ describe('OrdersComponent', () => {
 
     component.sendEmail(emailBtnEl);
     tick(500);
-    // expect(toastrService.error).toHaveBeenCalledTimes(1);
     expect(emailBtnEl.disabled).toEqual(false);
     flush();
   }));
+
+  it('#calculateDeliveryDate works as expected', fakeAsync(() => {
+    const date: Date = new Date('2024-01-01');
+    const days = 3;
+    const expectedDate = new Date('2024-01-04');
+    const result = component.calculateDeliveryDate(date, days);
+    expect(result).toEqual(expectedDate);
+  }));
+
+
 });
