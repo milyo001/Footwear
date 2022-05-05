@@ -1,8 +1,15 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, discardPeriodicTasks, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  discardPeriodicTasks,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Observable, of, throwError } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ICartProduct } from '../interfaces/cart/cartProduct';
 import { ICompletedOrder } from '../interfaces/order/completedOrder';
 import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
@@ -12,17 +19,29 @@ import { OrderService } from '../services/order.service';
 import { OrdersComponent } from './orders.component';
 
 const fakeOrders: ICompletedOrder[] = [
-  { userData: null, cartProducts: [null], createdOn: "12/2/2022",
-    orderId:'213asd123z22xd', payment: 'card', status: "completed" },
-  { userData: null, cartProducts: [null], createdOn: "12/09/2021",
-    orderId:'213asd123zxd', payment: 'cash', status: "completed" },
+  {
+    userData: null,
+    cartProducts: [null],
+    createdOn: '12/2/2022',
+    orderId: '213asd123z22xd',
+    payment: 'card',
+    status: 'completed',
+  },
+  {
+    userData: null,
+    cartProducts: [null],
+    createdOn: '12/09/2021',
+    orderId: '213asd123zxd',
+    payment: 'cash',
+    status: 'completed',
+  },
 ];
 
 const fakeDeliveryInfo: IDeliveryInfo = {
   deliveryPrice: 3,
   minDelivery: 1,
-  maxDelivery: 5
-}
+  maxDelivery: 5,
+};
 
 describe('OrdersComponent', () => {
   let component: OrdersComponent;
@@ -32,18 +51,15 @@ describe('OrdersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ OrdersComponent ],
+      declarations: [OrdersComponent],
       imports: [
         BrowserAnimationsModule,
         ToastrModule.forRoot(),
         SharedModule,
-        HttpClientTestingModule
+        HttpClientTestingModule,
       ],
-      providers: [
-        OrderService,
-        ToastrService ]
-    })
-    .compileComponents();
+      providers: [OrderService, ToastrService],
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -91,7 +107,11 @@ describe('OrdersComponent', () => {
   });
 
   it('should create #deliveryInfo', () => {
-    const testInfo: IDeliveryInfo = { deliveryPrice: 22, maxDelivery: 2, minDelivery:1 }
+    const testInfo: IDeliveryInfo = {
+      deliveryPrice: 22,
+      maxDelivery: 2,
+      minDelivery: 1,
+    };
     component.deliveryInfo = testInfo;
     expect(component.deliveryInfo).toBeDefined();
     expect(component.deliveryInfo).toEqual(testInfo);
@@ -109,8 +129,10 @@ describe('OrdersComponent', () => {
   });
 
   it('#ngOnInit should detroy all orders array into current orders array', fakeAsync(() => {
-    spyOn(orderService, 'getDeliveryPricingData').and.returnValue( of(fakeDeliveryInfo));
-    spyOn(orderService, 'getAllOrders').and.returnValue( of(fakeOrders));
+    spyOn(orderService, 'getDeliveryPricingData').and.returnValue(
+      of(fakeDeliveryInfo)
+    );
+    spyOn(orderService, 'getAllOrders').and.returnValue(of(fakeOrders));
     component.ngOnInit();
     tick(300);
     expect(component.currentOrders[0]).toEqual(fakeOrders[0]);
@@ -118,8 +140,10 @@ describe('OrdersComponent', () => {
   }));
 
   it('#ngOnInit should detroy all orders array into past orders array', fakeAsync(() => {
-    spyOn(orderService, 'getDeliveryPricingData').and.returnValue( of(fakeDeliveryInfo));
-    spyOn(orderService, 'getAllOrders').and.returnValue( of(fakeOrders));
+    spyOn(orderService, 'getDeliveryPricingData').and.returnValue(
+      of(fakeDeliveryInfo)
+    );
+    spyOn(orderService, 'getAllOrders').and.returnValue(of(fakeOrders));
     component.ngOnInit();
     tick(300);
     expect(component.pastOrders[0]).toEqual(fakeOrders[1]);
@@ -128,16 +152,36 @@ describe('OrdersComponent', () => {
 
   it('#viewOrder should work as expected', () => {
     const fakeProducts: ICartProduct[] = [
-      {id: 1, details: "tase", gender: "sda", name:"test", imageUrl: "www.test.com",
-       price: 22.40, quantity: 3, size: 44, productType: "hiking", productId: 3},
-       {id: 2, details: "tase", gender: "dda", name:"test", imageUrl: "www.test.com",
-       price: 22.40, quantity: 1, size: 33, productType: "hiking", productId: 25}
+      {
+        id: 1,
+        details: 'tase',
+        gender: 'sda',
+        name: 'test',
+        imageUrl: 'www.test.com',
+        price: 22.4,
+        quantity: 3,
+        size: 44,
+        productType: 'hiking',
+        productId: 3,
+      },
+      {
+        id: 2,
+        details: 'tase',
+        gender: 'dda',
+        name: 'test',
+        imageUrl: 'www.test.com',
+        price: 22.4,
+        quantity: 1,
+        size: 33,
+        productType: 'hiking',
+        productId: 25,
+      },
     ];
     const fakeSelectedOrder = fakeOrders[0];
     fakeSelectedOrder.cartProducts = fakeProducts;
     component.selectedOrder = fakeSelectedOrder;
     component.deliveryInfo = fakeDeliveryInfo;
-    component.viewOrder()
+    component.viewOrder();
     expect(component.totalOrderPrice).toEqual(47.8);
   });
 
@@ -145,7 +189,9 @@ describe('OrdersComponent', () => {
     const emailBtnEl = { disabled: true };
     component.selectedOrder = fakeOrders[0];
 
-    spyOn(orderService, 'sendEmailForOrder').and.returnValue(of({ sent: true }));
+    spyOn(orderService, 'sendEmailForOrder').and.returnValue(
+      of({ sent: true })
+    );
     spyOn(toastrService, 'info').and.callThrough();
 
     component.sendEmail(emailBtnEl);
@@ -159,7 +205,7 @@ describe('OrdersComponent', () => {
   it('#sendEmail show error message when email not sent', fakeAsync(() => {
     const emailBtnEl = { disabled: true };
     component.selectedOrder = fakeOrders[0];
-    const error :any = { error: { message: 'testError!' } };
+    const error: any = { error: { message: 'testError!' } };
 
     spyOn(orderService, 'sendEmailForOrder').and.returnValue(throwError(error));
     spyOn(toastrService, 'error').and.callThrough();
