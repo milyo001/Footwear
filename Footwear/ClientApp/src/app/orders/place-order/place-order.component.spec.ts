@@ -2,9 +2,11 @@ import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
+import { ICartProduct } from 'src/app/interfaces/cart/cartProduct';
 import { SharedModule } from 'src/app/modules/shared.module';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -60,7 +62,7 @@ describe('PlaceOrderComponent', () => {
   });
 
   // Component Properties
-  
+
   it('should define #userData', () => {
     expect(component.userData).toBeDefined();
   });
@@ -96,12 +98,15 @@ describe('PlaceOrderComponent', () => {
     expect(component.displayedColumns).toBeDefined();
   });
 
+  it('should define #dataSource', () => {
+    component.dataSource = new MatTableDataSource<ICartProduct>();
+    expect(component.dataSource).toBeDefined();
+  });
+
   it('should define #waitForRedirect', () => {
     expect(component.waitForRedirect).toBeDefined();
   });
 
-  it('should define #dataSource', () => {
-    expect(component.dataSource).toBeDefined();
-  });
+
 
 });

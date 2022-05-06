@@ -19,11 +19,16 @@ import { OrderService } from '../services/order.service';
 import { OrdersComponent } from './orders.component';
 
 const fakeProducts: ICartProduct[] = [
-  { id: 1, size: 1, details: "sadasda", name: '23213', gender: 'woman', price: 20,
-  imageUrl:'weawe', quantity: 1, productType: 'tasda', productId: 1 },
-  { id: 2, size: 1, details: "sadasda", name: '23213', gender: 'woman', price: 20,
-  imageUrl:'weawe', quantity: 1, productType: 'tasda', productId: 2 }
-]
+  {
+    id: 1, details: 'tase', gender: 'sda', name: 'test', imageUrl: 'www.test.com', price: 22.4,
+    quantity: 3, size: 44, productType: 'hiking', productId: 3,
+  },
+  {
+    id: 2, details: 'tase', gender: 'dda', name: 'test', imageUrl: 'www.test.com',
+    price: 22.4, quantity: 1, size: 33, productType: 'hiking', productId: 25,
+  },
+];
+
 const fakeOrders: ICompletedOrder[] = [
   {
     userData: null,
@@ -157,32 +162,7 @@ describe('OrdersComponent', () => {
   }));
 
   it('#viewOrder should work as expected', () => {
-    const fakeProducts: ICartProduct[] = [
-      {
-        id: 1,
-        details: 'tase',
-        gender: 'sda',
-        name: 'test',
-        imageUrl: 'www.test.com',
-        price: 22.4,
-        quantity: 3,
-        size: 44,
-        productType: 'hiking',
-        productId: 3,
-      },
-      {
-        id: 2,
-        details: 'tase',
-        gender: 'dda',
-        name: 'test',
-        imageUrl: 'www.test.com',
-        price: 22.4,
-        quantity: 1,
-        size: 33,
-        productType: 'hiking',
-        productId: 25,
-      },
-    ];
+
     const fakeSelectedOrder = fakeOrders[0];
     fakeSelectedOrder.cartProducts = fakeProducts;
     component.selectedOrder = fakeSelectedOrder;
@@ -243,7 +223,7 @@ describe('OrdersComponent', () => {
     component.selectedOrder = selectedOrder;
     component.deliveryInfo = delInfo;
     component.calculateTotalPrice();
-    expect(component.totalOrderPrice).toEqual(43);
+    expect(component.totalOrderPrice).toEqual(47.8);
   });
 
   it('#closeDetailsSection closes section as expected', fakeAsync(() => {
