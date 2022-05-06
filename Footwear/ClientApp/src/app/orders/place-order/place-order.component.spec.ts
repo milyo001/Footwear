@@ -59,6 +59,8 @@ describe('PlaceOrderComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  // Component Properties
+  
   it('should define #userData', () => {
     expect(component.userData).toBeDefined();
   });
@@ -75,4 +77,31 @@ describe('PlaceOrderComponent', () => {
     component.totalPrice = 199.99;
     expect(component.totalPrice).toBeDefined();
   });
+
+  // Document properties
+
+  it('should define #labelPosition', () => {
+    expect(component.labelPosition).toBeDefined();
+  });
+
+  it('should define #paymentOptions', () => {
+    expect(component.paymentOptions).toBeDefined();
+  });
+
+  it('should define #sort', () => {
+    expect(component.sort).toBeDefined();
+  });
+
+  it('should define #displayedColumns', () => {
+    expect(component.displayedColumns).toBeDefined();
+  });
+
+  it('should define #waitForRedirect', () => {
+    expect(component.waitForRedirect).toBeDefined();
+  });
+
+  it('should define #dataSource', () => {
+    expect(component.dataSource).toBeDefined();
+  });
+
 });
