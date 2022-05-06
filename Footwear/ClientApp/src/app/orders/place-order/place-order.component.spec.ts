@@ -3,7 +3,6 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { SharedModule } from 'src/app/modules/shared.module';
@@ -58,5 +57,22 @@ describe('PlaceOrderComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should define #userData', () => {
+    expect(component.userData).toBeDefined();
+  });
+
+  it('should define #deliveryInfo', () => {
+    expect(component.deliveryInfo).toBeDefined();
+  });
+
+  it('should define #form', () => {
+    expect(component.form).toBeDefined();
+  });
+
+  it('should define #totalPrice', () => {
+    component.totalPrice = 199.99;
+    expect(component.totalPrice).toBeDefined();
   });
 });
