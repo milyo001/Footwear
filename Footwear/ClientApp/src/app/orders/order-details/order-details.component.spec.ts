@@ -2,11 +2,13 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { SharedModule } from 'src/app/modules/shared.module';
+import { OrderService } from 'src/app/services/order.service';
 import { OrderDetailsComponent } from './order-details.component';
 
 describe('OrderDetailsComponent', () => {
   let component: OrderDetailsComponent;
   let fixture: ComponentFixture<OrderDetailsComponent>;
+  let orderService: OrderService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({

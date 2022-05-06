@@ -1,5 +1,4 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ElementRef, ViewChild } from '@angular/core';
 import {
   ComponentFixture,
   discardPeriodicTasks,
