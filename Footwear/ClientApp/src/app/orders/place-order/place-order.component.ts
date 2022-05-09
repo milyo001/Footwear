@@ -62,6 +62,7 @@ export class PlaceOrderComponent implements OnInit {
   faArrowCircleLeft = faArrowCircleLeft;
   faEdit = faEdit;
   faCartArrowDown = faCartArrowDown;
+  
   // HTTP operations properties
   cartProducts: ICartProduct[];
   order: IOrder;
@@ -80,7 +81,9 @@ export class PlaceOrderComponent implements OnInit {
   ngOnInit(): void {
     this.orderService.getDeliveryPricingData().subscribe(info => {
       this.deliveryInfo = info;
-      this.cartService.getAllCartProducts().subscribe(products => {
+        this.cartService
+        .getAllCartProducts()
+        .subscribe(products => {
         this.cartProducts = products;
         this.initDataSort(products);
         this.GetTotalPrice(products);
