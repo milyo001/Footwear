@@ -74,13 +74,13 @@ export class OrdersComponent implements OnInit {
     });
   }
 
-  // View the selected order
-  viewOrder() {
+  // View the selected order full details
+  viewOrderDetails() {
     const products: ICartProduct[] = this.selectedOrder.cartProducts;
     this.detailsToggle = true;
     this.totalOrderPrice = this.orderService
       .calculateTotalPrice(products, this.deliveryInfo.deliveryPrice);
-      
+
     setTimeout(() => {
       this.detailsEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }, 100);
