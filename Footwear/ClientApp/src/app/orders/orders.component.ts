@@ -9,6 +9,7 @@ import {
   faMoneyBill,
 } from '@fortawesome/free-solid-svg-icons';
 import { IDeliveryInfo } from '../interfaces/order/deliveryInfo';
+import { ICartProduct } from '../interfaces/cart/cartProduct';
 
 @Component({
   selector: 'app-orders',
@@ -75,8 +76,11 @@ export class OrdersComponent implements OnInit {
 
   // View the selected order
   viewOrder() {
+    const products: ICartProduct[] = this.selectedOrder.cartProducts;
     this.detailsToggle = true;
-    this.calculateTotalPrice();
+    this.totalOrderPrice = this.orderService
+      .calculateTotalPrice(products, this.deliveryInfo.deliveryPrice);
+      
     setTimeout(() => {
       this.detailsEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
     }, 100);
@@ -114,16 +118,6 @@ export class OrdersComponent implements OnInit {
   onOrderChange(event: any) {
     this.selectedOrder = event.option.value;
     this.detailsToggle = false;
-  }
-
-  // Returns the total order price with the delivery fee
-  calculateTotalPrice() {
-    this.totalOrderPrice = this.selectedOrder.cartProducts.reduce(
-      (acc, obj) => {
-        return acc + obj.price;
-      }, 0);
-    // Add the delivery price to the total price
-    this.totalOrderPrice += this.deliveryInfo.deliveryPrice;
   }
 
   // Close the details section when the close button is clicked in child component
