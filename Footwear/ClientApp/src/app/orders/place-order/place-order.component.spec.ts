@@ -128,15 +128,18 @@ describe('PlaceOrderComponent', () => {
 
   it('#ngOnInit should work as expected', fakeAsync(() => {
     spyOn(orderService, 'getDeliveryPricingData')
-      .and.returnValue(Observable.of(fakeDeliveryInfo));
+      .and
+      .returnValue(Observable.of(fakeDeliveryInfo));
     spyOn(cartService, 'getAllCartProducts')
-      .and.returnValue(Observable.of(fakeProducts));
+      .and
+      .returnValue(Observable.of(fakeProducts));
+
     component.ngOnInit();
+
     tick(300);
     expect(component.deliveryInfo).toEqual(fakeDeliveryInfo);
     expect(component.cartProducts).toEqual(fakeProducts);
-
-
+    expect(component.totalPrice).toEqual(205);
   }));
 
 });
