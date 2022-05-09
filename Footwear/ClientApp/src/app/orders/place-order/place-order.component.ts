@@ -163,14 +163,14 @@ export class PlaceOrderComponent implements OnInit {
       },
       (error) => {
         if (error.status == 400) {
-          //bad request from the api
+          // Bad request from the api
           this.toastr.error(
             error.error.message,
-            'Error,unable to create order!'
+            'Error, unable to create order!'
           );
           console.log(error);
         } else {
-          this.toastr.error('Error, unable to create order!');
+          this.toastr.error('Error, unable to create order!', 'Something went wrong!');
         }
       }
     );
