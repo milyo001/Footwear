@@ -20,12 +20,12 @@ import { OrdersComponent } from './orders.component';
 
 const fakeProducts: ICartProduct[] = [
   {
-    id: 1, details: 'tase', gender: 'sda', name: 'test', imageUrl: 'www.test.com', price: 22.4,
-    quantity: 3, size: 44, productType: 'hiking', productId: 3,
+    id: 1, details: 'tase', gender: 'sda', name: 'test', imageUrl: 'www.test.com', price: 20,
+    quantity: 2, size: 44, productType: 'hiking', productId: 3,
   },
   {
     id: 2, details: 'tase', gender: 'dda', name: 'test', imageUrl: 'www.test.com',
-    price: 22.4, quantity: 1, size: 33, productType: 'hiking', productId: 25,
+    price: 20, quantity: 1, size: 33, productType: 'hiking', productId: 25,
   },
 ];
 
@@ -49,7 +49,7 @@ const fakeOrders: ICompletedOrder[] = [
 ];
 
 const fakeDeliveryInfo: IDeliveryInfo = {
-  deliveryPrice: 3,
+  deliveryPrice: 5,
   minDelivery: 1,
   maxDelivery: 5,
 };
@@ -87,10 +87,6 @@ describe('OrdersComponent', () => {
 
   it('should create #calculateDeliveryDate', () => {
     expect(component.calculateDeliveryDate).toBeDefined();
-  });
-
-  it('should create #calculateTotalPrice', () => {
-    expect(component.calculateTotalPrice).toBeDefined();
   });
 
   it('should create #cardPayment', () => {
@@ -162,13 +158,13 @@ describe('OrdersComponent', () => {
   }));
 
   it('#viewOrder should work as expected', () => {
-
     const fakeSelectedOrder = fakeOrders[0];
     fakeSelectedOrder.cartProducts = fakeProducts;
+
     component.selectedOrder = fakeSelectedOrder;
     component.deliveryInfo = fakeDeliveryInfo;
-    component.viewOrder();
-    expect(component.totalOrderPrice).toEqual(47.8);
+    component.viewOrderDetails();
+    expect(component.totalOrderPrice).toEqual(65);
   });
 
   it('#sendEmail should work as expected', fakeAsync(() => {
@@ -217,14 +213,6 @@ describe('OrdersComponent', () => {
     expect(component.detailsToggle).toEqual(false);
   });
 
-  it('#calculateTotalPrice works as expected', () => {
-    const selectedOrder = fakeOrders[0];
-    const delInfo = fakeDeliveryInfo;
-    component.selectedOrder = selectedOrder;
-    component.deliveryInfo = delInfo;
-    component.calculateTotalPrice();
-    expect(component.totalOrderPrice).toEqual(47.8);
-  });
 
   it('#closeDetailsSection closes section as expected', fakeAsync(() => {
     const value = false;

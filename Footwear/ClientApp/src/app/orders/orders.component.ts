@@ -123,7 +123,7 @@ export class OrdersComponent implements OnInit {
   // Close the details section when the close button is clicked in child component
   closeDetailsSection(value: boolean){
     this.ordersEl.nativeElement.scrollIntoView({ behavior: 'smooth' });
-    // Scroll to all orders then close the details section with small delay
+    // Scroll to all orders element then close the details section with small delay
     // for better user experience
     setTimeout(()=> {
       this.detailsToggle = value;
