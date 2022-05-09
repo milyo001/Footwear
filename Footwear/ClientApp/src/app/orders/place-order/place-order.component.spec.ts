@@ -142,4 +142,8 @@ describe('PlaceOrderComponent', () => {
     expect(component.totalPrice).toEqual(205);
   }));
 
+  it('#ngOnInit should work as expected', fakeAsync(() => {
+   
+  }));
+
 });

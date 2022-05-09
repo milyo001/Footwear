@@ -14,9 +14,8 @@ import {
   faHandHoldingUsd,
   faMoneyBillWave,
   faShippingFast,
-  faCartArrowDown
-}
-  from '@fortawesome/free-solid-svg-icons';
+  faCartArrowDown,
+} from '@fortawesome/free-solid-svg-icons';
 import { ToastrService } from 'ngx-toastr';
 import { ICartProduct } from '../../interfaces/Cart/cartProduct';
 import { IDeliveryInfo } from '../../interfaces/order/deliveryInfo';
@@ -30,13 +29,15 @@ import { UserService } from '../../services/user.service';
   selector: 'app-place-order',
   templateUrl: './place-order.component.html',
   styleUrls: ['./place-order.component.css'],
-  providers: [{
-    // Used for overriding mat stepper default icons
-    provide: STEPPER_GLOBAL_OPTIONS, useValue: { displayDefaultIndicatorType: false }
-  }]
+  providers: [
+    {
+      // Used for overriding mat stepper default icons
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { displayDefaultIndicatorType: false },
+    },
+  ],
 })
 export class PlaceOrderComponent implements OnInit {
-
   // Component Properties
   userData: IUserData = null;
   deliveryInfo: IDeliveryInfo = null;
@@ -48,7 +49,13 @@ export class PlaceOrderComponent implements OnInit {
   labelPosition: 'import' | 'notImport' = 'notImport';
   paymentOptions: 'card' | 'cash' = 'cash';
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns: string[] = ['name', 'size', 'price', 'quantity', 'totalPerItem'];
+  displayedColumns: string[] = [
+    'name',
+    'size',
+    'price',
+    'quantity',
+    'totalPerItem',
+  ];
   waitForRedirect: boolean = false;
   dataSource: MatTableDataSource<ICartProduct>;
 
@@ -62,7 +69,7 @@ export class PlaceOrderComponent implements OnInit {
   faArrowCircleLeft = faArrowCircleLeft;
   faEdit = faEdit;
   faCartArrowDown = faCartArrowDown;
-  
+
   // HTTP operations properties
   cartProducts: ICartProduct[];
   order: IOrder;
@@ -75,27 +82,25 @@ export class PlaceOrderComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private location: Location
-  ) { }
+  ) {}
 
- // Will populate data into component properties from the database using the services
+  // Will populate data into component properties from the database using the services
   ngOnInit(): void {
-    this.orderService.getDeliveryPricingData().subscribe(info => {
+    this.orderService.getDeliveryPricingData().subscribe((info) => {
       this.deliveryInfo = info;
-        this.cartService
-        .getAllCartProducts()
-        .subscribe(products => {
+      this.cartService.getAllCartProducts().subscribe((products) => {
         this.cartProducts = products;
+
         this.initDataSort(products);
-        this.GetTotalPrice(products);
+
+        this.totalPrice = this.orderService.calculateTotalPrice(
+          products,
+          this.deliveryInfo.deliveryPrice
+        );
       });
     });
-    this.initForm();
-  }
 
-  // Init data source and apply sorting directive to it, used for table sorting
-  initDataSort(products: ICartProduct[]): void {
-    this.dataSource = new MatTableDataSource<ICartProduct>(products);
-    this.dataSource.sort = this.sort;
+    this.initForm();
   }
 
   // Init the form and set validators
@@ -103,7 +108,8 @@ export class PlaceOrderComponent implements OnInit {
     this.form = this.fb.group({
       firstName: ["", [Validators.required, Validators.maxLength(100)], []],
       lastName: ["", [Validators.required, Validators.maxLength(100)], []],
-      phone: ["", [Validators.required, Validators.maxLength(20), Validators.pattern(this.phoneRegex)], []],
+      phone: ["", [Validators.required, Validators.maxLength(20),
+        Validators.pattern(this.phoneRegex)], []],
       street: ["", [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
       state: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
       country: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
@@ -113,58 +119,68 @@ export class PlaceOrderComponent implements OnInit {
     });
   }
 
-  // Sum products total price for all products and the delivery price and store it in the component property
-  GetTotalPrice(products: ICartProduct[]) {
-    let price = products.reduce
-      ((total: number, product: ICartProduct) => total + (product.price * product.quantity), 0);
-    price += this.deliveryInfo.deliveryPrice;
-    this.totalPrice = price;
-    };
 
+  // Init data source and apply sorting directive to it, used for table sorting
+  initDataSort(products: ICartProduct[]): void {
+    this.dataSource = new MatTableDataSource<ICartProduct>(products);
+    this.dataSource.sort = this.sort;
+  }
 
   // Finalize order and redirect to stripe API for card payment
-  onCheckOut(): void{
-    this.orderService.checkOut().subscribe((response: any) => {
-      // Show success message and then redirect user to the pre-build payment page
-      this.toastr.success("Redirecting, please wait!");
+  onCheckOut(): void {
+    this.orderService.checkOut().subscribe(
+      (response: any) => {
+        // Show success message and then redirect user to the pre-build payment page
+        this.toastr.success('Redirecting, please wait!');
 
-      // Wait few seconds then redirect
-      setTimeout(() => { window.location.href = response.Url }, 1000);
-    },
-      error => {
-        if (error.status == 400) { //bad request from the api
-          this.toastr.error(error.error.message, 'An unexpected error occured!');
+        // Wait few seconds then redirect
+        setTimeout(() => {
+          window.location.href = response.Url;
+        }, 1000);
+      },
+      (error) => {
+        if (error.status == 400) {
+          //bad request from the api
+          this.toastr.error(
+            error.error.message,
+            'An unexpected error occured!'
+          );
           console.log(error);
         }
-      })
+      }
+    );
   }
 
   // Creates an order with diffrent payment options
   createOrder(): void {
-    this.orderService.createOrder(this.order).subscribe((response: any) => {
-      if (response.cardPayment) {
-        this.onCheckOut();
-      }
-      else {
-        this.router.navigate(['/', 'payment-success'])
-      }
-    },
-      error => {
-        if (error.status == 400) { //bad request from the api
-          this.toastr.error(error.error.message, 'Error,unable to create order!');
-          console.log(error);
+    this.orderService.createOrder(this.order).subscribe(
+      (response: any) => {
+        if (response.cardPayment) {
+          this.onCheckOut();
+        } else {
+          this.router.navigate(['/', 'payment-success']);
         }
-        else {
+      },
+      (error) => {
+        if (error.status == 400) {
+          //bad request from the api
+          this.toastr.error(
+            error.error.message,
+            'Error,unable to create order!'
+          );
+          console.log(error);
+        } else {
           this.toastr.error('Error, unable to create order!');
         }
-      })
+      }
+    );
   }
 
   // The methid will handle form values if user decides to import user information from account/userData
-  handleImports(event)  {
+  handleImports(event) {
     if (event.value == 'import') {
       // Patch value will set the form fields without validating them
-      this.userService.getUserProfile().then(response => {
+      this.userService.getUserProfile().then((response) => {
         this.form.patchValue({
           firstName: response.firstName,
           lastName: response.lastName,
@@ -173,9 +189,9 @@ export class PlaceOrderComponent implements OnInit {
           city: response.city,
           state: response.state,
           country: response.country,
-          zipCode: response.zipCode
-        })
-      })
+          zipCode: response.zipCode,
+        });
+      });
     } else {
       // Optional: You can add this.form.clear() if you want to clear the form when Do not import is clicked
     }
@@ -189,26 +205,22 @@ export class PlaceOrderComponent implements OnInit {
     this.order = {
       orderId: null,
       createdOn: '',
-      payment: "cash", //Paying with cash by default
-      status: "pending",
+      payment: 'cash', //Paying with cash by default
+      status: 'pending',
       // User data is the information about the delivery address, which can be diffrent
       // from the user data in Account/UserData
-      userData: form.value
-    }
+      userData: form.value,
+    };
 
     // Set the payment type and send the order to the API,
     // default API payment is cash
-    if (form.value.payment == "card") {
-      this.order.payment = "card";
+    if (form.value.payment == 'card') {
+      this.order.payment = 'card';
     }
     this.createOrder();
   }
 
-  backToCart(){
+  backToCart() {
     this.location.back();
   }
 }
-
-
-
-
