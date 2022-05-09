@@ -1,12 +1,12 @@
 import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { ICartProduct } from 'src/app/interfaces/cart/cartProduct';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
 import { SharedModule } from 'src/app/modules/shared.module';
@@ -28,6 +28,9 @@ const fakeProducts: ICartProduct[] = [
   { id: 2, details: 'tase', gender: 'dda', name: 'test', imageUrl: 'www.test.com',
     price: 50, quantity: 1, size: 33, productType: 'hiking', productId: 25 },
 ];
+
+// Used for window object mocking
+let mockWindow = { location: { href: '' } };
 
 describe('PlaceOrderComponent', () => {
   let component: PlaceOrderComponent;
@@ -56,6 +59,7 @@ describe('PlaceOrderComponent', () => {
         CartService,
         FormBuilder,
         Location,
+        { provide: 'Window', useValue: mockWindow }
       ],
     }).compileComponents();
   });
@@ -142,8 +146,19 @@ describe('PlaceOrderComponent', () => {
     expect(component.totalPrice).toEqual(205);
   }));
 
-  it('#ngOnInit should work as expected', fakeAsync(() => {
-   
+  // Not testing the expected result, because you cannot spy on the browser window object,
+  // That's why the test is only for the error response
+  it('#onCheckOut throws error, when order is not created', fakeAsync(() => {
+    const error: any = { error: { message: 'testError!' } };
+
+    spyOn(orderService, 'checkOut').and.returnValues(throwError(error));
+    spyOn(toastrService, 'error').and.callThrough();
+    component.onCheckOut();
+    tick(100);
+    expect(toastrService.error).toHaveBeenCalledTimes(1);
+    flush();
   }));
 
 });
+
+

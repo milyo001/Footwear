@@ -104,21 +104,67 @@ export class PlaceOrderComponent implements OnInit {
   }
 
   // Init the form and set validators
-  initForm(): void  {
+  initForm(): void {
     this.form = this.fb.group({
-      firstName: ["", [Validators.required, Validators.maxLength(100)], []],
-      lastName: ["", [Validators.required, Validators.maxLength(100)], []],
-      phone: ["", [Validators.required, Validators.maxLength(20),
-        Validators.pattern(this.phoneRegex)], []],
-      street: ["", [Validators.required, Validators.maxLength(100), Validators.minLength(2)], []],
-      state: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-      country: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-      city: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-      zipCode: ["", [Validators.required, Validators.maxLength(20), Validators.minLength(2)], []],
-      payment: ["", [Validators.required], []]
+      firstName: ['', [Validators.required, Validators.maxLength(100)], []],
+      lastName: ['', [Validators.required, Validators.maxLength(100)], []],
+      phone: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.pattern(this.phoneRegex),
+        ],
+        [],
+      ],
+      street: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(100),
+          Validators.minLength(2),
+        ],
+        [],
+      ],
+      state: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(2),
+        ],
+        [],
+      ],
+      country: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(2),
+        ],
+        [],
+      ],
+      city: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(2),
+        ],
+        [],
+      ],
+      zipCode: [
+        '',
+        [
+          Validators.required,
+          Validators.maxLength(20),
+          Validators.minLength(2),
+        ],
+        [],
+      ],
+      payment: ['', [Validators.required], []],
     });
   }
-
 
   // Init data source and apply sorting directive to it, used for table sorting
   initDataSort(products: ICartProduct[]): void {
@@ -130,23 +176,19 @@ export class PlaceOrderComponent implements OnInit {
   onCheckOut(): void {
     this.orderService.checkOut().subscribe(
       (response: any) => {
-        // Show success message and then redirect user to the pre-build payment page
-        this.toastr.success('Redirecting, please wait!');
+        if (response.Url != null) {
+          // Show success message and then redirect user to the pre-build payment page
+          this.toastr.success('Redirecting, please wait!');
 
-        // Wait few seconds then redirect
-        setTimeout(() => {
-          window.location.href = response.Url;
-        }, 1000);
+          // Wait few seconds then redirect
+          setTimeout(() => {
+            window.location.href = response.Url;
+          }, 1000);
+        }
       },
       (error) => {
-        if (error.status == 400) {
-          //bad request from the api
-          this.toastr.error(
-            error.error.message,
-            'An unexpected error occured!'
-          );
-          console.log(error);
-        }
+        this.toastr.error(error.error.message, 'An unexpected error occured!');
+        console.log(error);
       }
     );
   }
@@ -170,7 +212,10 @@ export class PlaceOrderComponent implements OnInit {
           );
           console.log(error);
         } else {
-          this.toastr.error('Error, unable to create order!', 'Something went wrong!');
+          this.toastr.error(
+            'Error, unable to create order!',
+            'Something went wrong!'
+          );
         }
       }
     );
