@@ -9,6 +9,7 @@ import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { ICartProduct } from 'src/app/interfaces/cart/cartProduct';
 import { IDeliveryInfo } from 'src/app/interfaces/order/deliveryInfo';
+import { IUserData } from 'src/app/interfaces/user/userData';
 import { SharedModule } from 'src/app/modules/shared.module';
 import { CartService } from 'src/app/services/cart.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -157,6 +158,26 @@ describe('PlaceOrderComponent', () => {
     tick(100);
     expect(toastrService.error).toHaveBeenCalledTimes(1);
     flush();
+  }));
+
+  it('#handleImports works as expected', fakeAsync(() => {
+    const fakeEvent: any = { value: 'import' };
+    const fakeChangedData: = {
+      state: 'Sofia',
+      street: 'koritarova 22',
+      city: 'Toronto',
+      country: 'Buglaria',
+      email: 'test@test.test',
+      firstName: 'Bat Georgi',
+      lastName: 'Tomahawka',
+      phone: '2231312321',
+      zipCode: '22311',
+    };
+
+    spyOn(userService, 'getUserProfile')
+    .and
+    .returnValue(Promise.resolve({ succeeded:true }))
+
   }));
 
 });

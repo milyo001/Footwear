@@ -221,11 +221,12 @@ export class PlaceOrderComponent implements OnInit {
     );
   }
 
-  // The methid will handle form values if user decides to import user information from account/userData
-  handleImports(event) {
+  // The methid will handle form values if user decides to import user information from
+  // account/userData
+  async handleImports(event) {
     if (event.value == 'import') {
-      // Patch value will set the form fields without validating them
-      this.userService.getUserProfile().then((response) => {
+      // Get user data from account information and patch/change values in the form
+      await this.userService.getUserProfile().then((response) => {
         this.form.patchValue({
           firstName: response.firstName,
           lastName: response.lastName,
@@ -238,12 +239,13 @@ export class PlaceOrderComponent implements OnInit {
         });
       });
     } else {
-      // Optional: You can add this.form.clear() if you want to clear the form when Do not import is clicked
+      // Optional: You can add this.form.clear() if you want to clear the form
+      // when 'Do not import' option is clicked
     }
   }
 
   // Submit the data from the form sent form the html template
-  submitData(form) {
+  submitData(form: any) {
     // Disable form submit button to prevent dupplicate orders when double clicking
     this.waitForRedirect = true;
 
