@@ -1,6 +1,12 @@
 import { Location } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, flush, TestBed, tick } from '@angular/core/testing';
+import {
+  ComponentFixture,
+  fakeAsync,
+  flush,
+  TestBed,
+  tick,
+} from '@angular/core/testing';
 import { FormBuilder } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -20,14 +26,34 @@ import { PlaceOrderComponent } from './place-order.component';
 const fakeDeliveryInfo: IDeliveryInfo = {
   deliveryPrice: 5,
   maxDelivery: 3,
-  minDelivery: 1
+  minDelivery: 1,
 };
 
 const fakeProducts: ICartProduct[] = [
-  { id: 1, details: 'tase', gender: 'sda', name: 'test', imageUrl: 'www.test.com', price: 50,
-    quantity: 3, size: 44, productType: 'hiking', productId: 3,},
-  { id: 2, details: 'tase', gender: 'dda', name: 'test', imageUrl: 'www.test.com',
-    price: 50, quantity: 1, size: 33, productType: 'hiking', productId: 25 },
+  {
+    id: 1,
+    details: 'tase',
+    gender: 'sda',
+    name: 'test',
+    imageUrl: 'www.test.com',
+    price: 50,
+    quantity: 3,
+    size: 44,
+    productType: 'hiking',
+    productId: 3,
+  },
+  {
+    id: 2,
+    details: 'tase',
+    gender: 'dda',
+    name: 'test',
+    imageUrl: 'www.test.com',
+    price: 50,
+    quantity: 1,
+    size: 33,
+    productType: 'hiking',
+    productId: 25,
+  },
 ];
 
 // Used for window object mocking
@@ -60,7 +86,7 @@ describe('PlaceOrderComponent', () => {
         CartService,
         FormBuilder,
         Location,
-        { provide: 'Window', useValue: mockWindow }
+        { provide: 'Window', useValue: mockWindow },
       ],
     }).compileComponents();
   });
@@ -132,12 +158,12 @@ describe('PlaceOrderComponent', () => {
   });
 
   it('#ngOnInit should work as expected', fakeAsync(() => {
-    spyOn(orderService, 'getDeliveryPricingData')
-      .and
-      .returnValue(Observable.of(fakeDeliveryInfo));
-    spyOn(cartService, 'getAllCartProducts')
-      .and
-      .returnValue(Observable.of(fakeProducts));
+    spyOn(orderService, 'getDeliveryPricingData').and.returnValue(
+      Observable.of(fakeDeliveryInfo)
+    );
+    spyOn(cartService, 'getAllCartProducts').and.returnValue(
+      Observable.of(fakeProducts)
+    );
 
     component.ngOnInit();
 
@@ -162,7 +188,7 @@ describe('PlaceOrderComponent', () => {
 
   it('#handleImports works as expected', fakeAsync(() => {
     const fakeEvent: any = { value: 'import' };
-    const fakeChangedData: = {
+    const fakeUserData: IUserData = {
       state: 'Sofia',
       street: 'koritarova 22',
       city: 'Toronto',
@@ -174,12 +200,12 @@ describe('PlaceOrderComponent', () => {
       zipCode: '22311',
     };
 
-    spyOn(userService, 'getUserProfile')
-    .and
-    .returnValue(Promise.resolve({ succeeded:true }))
-
+    spyOn(userService, 'getUserProfile').and.returnValue(
+      Promise.resolve(fakeUserData)
+    );
+    component.handleImports(fakeEvent);
+    tick(500);
+    expect(component.userData).toEqual(fakeUserData);
+    flush();
   }));
-
 });
-
-
