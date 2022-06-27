@@ -31,7 +31,7 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./place-order.component.css'],
   providers: [
     {
-      // Used for overriding mat stepper default icons
+      // Used to override mat stepper default icons
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false },
     },
