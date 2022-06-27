@@ -134,5 +134,152 @@ namespace Footwear_Tests.Models
             var errors = ValidateModel(appData);
             Assert.True(errors.Count == 0);
         }
+
+        // Billing information
+
+        [Fact]
+        public void Test_With_Correct_Data_BillingInfo_Model()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "Sofia",
+                Street = "Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 0);
+        }
+
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_State_IsNull()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = null,
+                City = "Sofia",
+                Street = "Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_State_Is_More_Than_50_Chars()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "SofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofia" +
+                "SofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofia",
+                City = "Sofia",
+                Street = "Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_City_IsNull()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = null,
+                Street = "Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_City_Is_More_Than_50_Chars()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "SofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofia" +
+                "SofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofiaSofia",
+                Street = "Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_Street_IsNull()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "Sofia",
+                Street = null,
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_Street_Is_More_Than_50_Chars()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "Sofia",
+                Street = "Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street " +
+                "22Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22" +
+                "Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22Salmon Sushi Street 22",
+                Country = "Bolivia",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
     }
 }
