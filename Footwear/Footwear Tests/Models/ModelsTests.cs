@@ -281,5 +281,46 @@ namespace Footwear_Tests.Models
             var errors = ValidateModel(billingInformation);
             Assert.True(errors.Count == 1);
         }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_Country_IsNull()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "Sofia",
+                Street = "Bolivia",
+                Country = null,
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_BillingInfo_Model_When_Country_Is_More_Than_50_Chars()
+        {
+            var billingInformation = new BillingInformation
+            {
+                Id = 1,
+                State = "Sofia",
+                City = "Sofia",
+                Street = "Boncho Str 11",
+                Country = "BulgariaBulgariaBulgariaBulgariaBulgariaBulgariaBulgariaBulgariaBulgariaBu" +
+                "lgariaBulgariaBulgariaBulgariaBulgariaBulgariaBulgaria",
+                ZipCode = "1000",
+                FirstName = "Miro",
+                LastName = "Ilyovski",
+                Phone = "08942213132"
+            };
+
+            var errors = ValidateModel(billingInformation);
+            Assert.True(errors.Count == 1);
+        }
     }
 }
