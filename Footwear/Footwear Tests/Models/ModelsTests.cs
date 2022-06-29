@@ -640,7 +640,7 @@ namespace Footwear_Tests.Models
         }
 
         [Fact]
-        public void Test_CartProduct_Details_Property_Throw_Error_When_Value_Is_Too_Longl()
+        public void Test_CartProduct_Details_Property_Throw_Error_When_Value_Is_Too_Long()
         {
             var cartProduct = new CartProduct
             {
@@ -674,5 +674,44 @@ namespace Footwear_Tests.Models
             var errors = ValidateModel(cartProduct);
             Assert.True(errors.Count == 1);
         }
+
+        // Order model
+        
+        [Fact]
+        public void Test_Order_Model_Works_As_Expected()
+        {
+            var order = new Order
+            {
+                Id = "sad213lxkdlk912ika",
+                UserId = "2askdj92qekzlxk",
+                UserData = new BillingInformation(),
+                Status = Footwear.Data.Models.Enums.Status.DeliveryPaid,
+                CreatedOn = System.DateTime.Today,
+                Payment = "card",
+                Products = new List<CartProduct>()
+            };
+
+            var errors = ValidateModel(order);
+            Assert.True(errors.Count == 0);
+        }
+
+        [Fact]
+        public void Test_Order_Model_Payment_Property_Throw_Error_When_Value_Is_Null()
+        {
+            var order = new Order
+            {
+                Id = "sad213lxkdlk912ika",
+                UserId = "2askdj92qekzlxk",
+                UserData = new BillingInformation(),
+                Status = Footwear.Data.Models.Enums.Status.DeliveryPaid,
+                CreatedOn = System.DateTime.Today,
+                Payment = null,
+                Products = new List<CartProduct>()
+            };
+
+            var errors = ValidateModel(order);
+            Assert.True(errors.Count == 1);
+        }
+
     }
 }
