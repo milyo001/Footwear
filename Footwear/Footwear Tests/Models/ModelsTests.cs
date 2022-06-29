@@ -9,14 +9,7 @@ namespace Footwear_Tests.Models
 
     public class ModelsTests
     {
-        // Unit Test DataAnnotations method
-        private IList<ValidationResult> ValidateModel(object model)
-        {
-            var validationResults = new List<ValidationResult>();
-            var ctx = new ValidationContext(model, null, null);
-            Validator.TryValidateObject(model, ctx, validationResults, true);
-            return validationResults;
-        }
+       
 
         [Fact]
         public void Test_Correct_Address_Model_Validations()
@@ -31,7 +24,7 @@ namespace Footwear_Tests.Models
                 ZipCode = "1000"
             };
 
-            var errors = ValidateModel(correctAddress);
+            var errors = DataAnnotationsValidators.ValidateModel(correctAddress);
             Assert.True(errors.Count == 0);
         }
 
