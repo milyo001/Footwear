@@ -1,11 +1,8 @@
 namespace Footwear
 {
-    using Footwear.Data;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
-
+    
     public class Program
     {
         public static void Main(string[] args)

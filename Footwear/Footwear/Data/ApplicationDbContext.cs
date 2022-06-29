@@ -49,7 +49,9 @@
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<AppData>().HasNoKey();
+            
+            builder.Entity<AppData>()
+                .HasNoKey();
 
             if (this.CurrentEnvironment.IsDevelopment())
             {
