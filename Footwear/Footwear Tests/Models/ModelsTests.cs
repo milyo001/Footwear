@@ -713,5 +713,59 @@ namespace Footwear_Tests.Models
             Assert.True(errors.Count == 1);
         }
 
+        [Fact]
+        public void Test_Order_Model_UserId_Property_Throw_Error_When_Value_Is_Null()
+        {
+            var order = new Order
+            {
+                Id = "sad213lxkdlk912ika",
+                UserId = null,
+                UserData = new BillingInformation(),
+                Status = Footwear.Data.Models.Enums.Status.DeliveryPaid,
+                CreatedOn = System.DateTime.Today,
+                Payment = "card",
+                Products = new List<CartProduct>()
+            };
+
+            var errors = ValidateModel(order);
+            Assert.True(errors.Count == 1);
+        }
+
+
+        [Fact]
+        public void Test_Order_Model_UserData_Property_Throw_Error_When_Value_Is_Null()
+        {
+            var order = new Order
+            {
+                Id = "sad213lxkdlk912ika",
+                UserId = "sadoi129u3kzjxkd",
+                UserData = null,
+                Status = Footwear.Data.Models.Enums.Status.DeliveryPaid,
+                CreatedOn = System.DateTime.Today,
+                Payment = "card",
+                Products = new List<CartProduct>()
+            };
+
+            var errors = ValidateModel(order);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_Order_Model_Products_Property_Throw_Error_When_Value_Is_Null()
+        {
+            var order = new Order
+            {
+                Id = "sad213lxkdlk912ika",
+                UserId = "sadoi129u3kzjxkd",
+                UserData = new BillingInformation(),
+                Status = Footwear.Data.Models.Enums.Status.DeliveryPaid,
+                CreatedOn = System.DateTime.Today,
+                Payment = "card",
+                Products = null
+            };
+
+            var errors = ValidateModel(order);
+            Assert.True(errors.Count == 1);
+        }
     }
 }
