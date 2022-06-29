@@ -1,10 +1,12 @@
-﻿namespace Footwear.Data.Models
+﻿
+
+namespace Footwear.Data.Models
 {
     using Footwear.Data.Models.Enums;
-    using System;
     using System.ComponentModel.DataAnnotations;
-
-    public class CartProduct
+    using System.ComponentModel.DataAnnotations.Schema;
+    
+    public class CartProduct 
     {
         [Key]
         public int Id { get; set; }
@@ -18,15 +20,17 @@
         [Required, MaxLength(500)]
         public string Details { get; set; }
 
+        [ForeignKey("ProductImage")]
+        public int ImageId { get; set; }
+
+        public virtual ProductImage ProductImage { get; set; }
+
+        public Gender Gender { get; set; }
+
+        public ProductType ProductType { get; set; }
         public string ImageUrl { get; set; }
 
         public int? Size { get; set; }
-
-        //Used to filter results by type
-        public Gender Gender { get; set; }
-
-        //Used to filter results by product type
-        public ProductType ProductType { get; set; }
 
         public int Quantity { get; set; }
 
