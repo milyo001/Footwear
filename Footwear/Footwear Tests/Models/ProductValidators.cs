@@ -82,5 +82,52 @@ namespace Footwear_Tests.Models
             var errors = DataAnnotationsValidators.ValidateModel(product);
             Assert.True(errors.Count == 1);
         }
+
+        [Fact]
+        public void Test_Product_Model_Details_Property_Throw_Error_When_Null()
+        {
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Waksjdk",
+                Details = null,
+                Gender = Footwear.Data.Models.Enums.Gender.Men,
+                ImageId = 1,
+                Price = 222.11,
+                ProductImage = new ProductImage(),
+                ProductType = Footwear.Data.Models.Enums.ProductType.Running
+            };
+
+            var errors = DataAnnotationsValidators.ValidateModel(product);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_Product_Model_Details_Property_Throw_Error_When_Value_Too_Long()
+        {
+            var loopedDetails = string.Empty;
+            var sb = new System.Text.StringBuilder();
+            
+            for (int i = 0; i < 100; i++)
+            {
+                sb.Append("lorem");
+                sb.Append(' ');
+            }
+            
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Waksjdk",
+                Details = loopedDetails.ToString(),
+                Gender = Footwear.Data.Models.Enums.Gender.Men,
+                ImageId = 1,
+                Price = 231.22,
+                ProductImage = new ProductImage(),
+                ProductType = Footwear.Data.Models.Enums.ProductType.Running
+            };
+
+            var errors = DataAnnotationsValidators.ValidateModel(product);
+            Assert.True(errors.Count == 1);
+        }
     }
 }
