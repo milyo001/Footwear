@@ -27,7 +27,7 @@ namespace Footwear_Tests.Models
         }
 
         [Fact]
-        public void Test_Product_Model__Name_Property_Throw_Error_When_Null()
+        public void Test_Product_Model_Name_Property_Throw_Error_When_Null()
         {
             var product = new Product
             {
@@ -37,6 +37,44 @@ namespace Footwear_Tests.Models
                 Gender = Footwear.Data.Models.Enums.Gender.Men,
                 ImageId = 1,
                 Price = 231.22,
+                ProductImage = new ProductImage(),
+                ProductType = Footwear.Data.Models.Enums.ProductType.Running
+            };
+
+            var errors = DataAnnotationsValidators.ValidateModel(product);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_Product_Model_Price_Property_Throw_Error_When_OutOf_Min_Range()
+        {
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Waksjdk",
+                Details = "Runn as fast as bullet",
+                Gender = Footwear.Data.Models.Enums.Gender.Men,
+                ImageId = 1,
+                Price = -22.22,
+                ProductImage = new ProductImage(),
+                ProductType = Footwear.Data.Models.Enums.ProductType.Running
+            };
+
+            var errors = DataAnnotationsValidators.ValidateModel(product);
+            Assert.True(errors.Count == 1);
+        }
+
+        [Fact]
+        public void Test_Product_Model_Price_Property_Throw_Error_When_OutOf_Max_Range()
+        {
+            var product = new Product
+            {
+                Id = 1,
+                Name = "Waksjdk",
+                Details = "Runn as fast as bullet",
+                Gender = Footwear.Data.Models.Enums.Gender.Men,
+                ImageId = 1,
+                Price = 2312222222222.22,
                 ProductImage = new ProductImage(),
                 ProductType = Footwear.Data.Models.Enums.ProductType.Running
             };
