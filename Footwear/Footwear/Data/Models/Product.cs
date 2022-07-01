@@ -24,10 +24,10 @@
 
         public virtual ProductImage ProductImage { get; set; }
 
-        //Used to filter results by type
+        // Used to filter results by type
         public Gender Gender { get; set; }
 
-        //Used to filter results by product type
+        // Used to filter results by product type
         public ProductType ProductType { get; set; }
     }
 }
